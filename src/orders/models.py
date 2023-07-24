@@ -10,3 +10,12 @@ class Order(models.Model):
 
     def __str__(self) -> str:
         return self.items
+    
+class OrderItem(models.Model):
+    quantity = models.IntegerFields()
+    price = models.FloatFields()
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=CASCADE)
+
+    def __str__(self) -> str:
+        return self.quantity
