@@ -10,9 +10,9 @@
     <title>CafeGorupOne</title>
 </head>
 <body> 
-{% block content %}
-{% endblock %}
-  
-</body>
-
+    {% include 'base/navbar.html' %}
+    {% include 'base/footer.html' %}
+    {% block content %}
+    {% endblock %}
+    </body>
 </html>
