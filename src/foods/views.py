@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 # Create your views here.
 
@@ -12,3 +12,6 @@ def food_details(request):
 def search(request):
     if request.method == 'GET':
         return render(request,'search.html')
+    elif not request.method == "GET":
+        raise Http404
+        
