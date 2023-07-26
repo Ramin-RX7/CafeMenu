@@ -11,6 +11,6 @@ def food_details(request):
 
 def search(request):
     if request.method == 'GET':
-        return render(request,'search.html')
+        return render(request,'foods/search.html')
     elif not request.method == "GET":
         raise Http404
