@@ -10,7 +10,7 @@ class Category(models.Model):
 class Food(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatFields()
+    price = models.FloatField()
     quantity = models.IntegerField()
     discount = models.FloatField(default=0.0)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
