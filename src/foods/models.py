@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self) -> str:
@@ -11,7 +11,7 @@ class Category(models.Model):
 
 
 class Food(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, null=True)
     available_quantity = models.IntegerField()
     price = models.FloatField()

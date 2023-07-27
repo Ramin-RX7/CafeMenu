@@ -13,7 +13,7 @@ class Table(models.Model):
 
 class Order(models.Model):
     customer = models.IntegerField()
-    table = models.OneToOneField(Table, on_delete=models.SET_NULL)
+    table = models.ForeignKey(Table, on_delete=models.SET_NULL)
     price = models.FloatField()
     discount = models.FloatField(default=0.0)
     date_submit = models.DateTimeField(auto_now_add=True)
