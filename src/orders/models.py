@@ -1,6 +1,10 @@
 from django.db import models
 from foods.models import Food
 
+class Table(models.Model):
+    number = models.IntegerField()
+    is_reserved = models.BooleanField()
+    
 class Order(models.Model):
     items = models.IntegerField()
     price = models.FloatField()
