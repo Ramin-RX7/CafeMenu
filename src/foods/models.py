@@ -10,8 +10,8 @@ class Category(models.Model):
 class Food(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatFields()
-    quantity = models.IntegerField()
+    price = models.FloatField()
+    available_quantity = models.IntegerField()
     discount = models.FloatField(default=0.0)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # I use protect because we can't delete this table easy and its importent table for our site

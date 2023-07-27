@@ -1,20 +1,25 @@
 from django.db import models
 from foods.models import Food
 
+class Table(models.Model):
+    number = models.IntegerField()
+    is_reserved = models.BooleanField()
+    
 class Order(models.Model):
-    items = models.IntegerField()
+    customer = models.IntegerField()
     price = models.FloatField()
-    discount = models.FloatField(blank=True, null=True)
-    date = models.DateTimeField(auto_now_add=True)
-    # customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    # TODO customer model
+    discount = models.FloatField(default=0.0)
+    date_submit = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField()
+    table=models.ForeignKey(Table,on_delete=models.SET_NULL)
 
     def __str__(self) -> str:
-        return self.items
+        return self.customer
     
 class OrderItem(models.Model):
     quantity = models.IntegerField()
-    price = models.FloatField()
+    unit_price = models.FloatField()
+    discount = models.FloatField(default=0.0)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
