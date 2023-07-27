@@ -13,22 +13,22 @@ class Table(models.Model):
 
 class Order(models.Model):
     customer = models.IntegerField()
+    table = models.OneToOneField(Table, on_delete=models.SET_NULL)
     price = models.FloatField()
     discount = models.FloatField(default=0.0)
     date_submit = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField()
-    table = models.OneToOneField(Table, on_delete=models.SET_NULL)
 
     def __str__(self) -> str:
         return self.customer
 
 
 class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     unit_price = models.FloatField()
     discount = models.FloatField(default=0.0)
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.quantity
