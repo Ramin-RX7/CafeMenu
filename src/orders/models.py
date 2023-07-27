@@ -17,7 +17,7 @@ class Order(models.Model):
     discount = models.FloatField(default=0.0)
     date_submit = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField()
-    table=models.ForeignKey(Table,on_delete=models.SET_NULL)
+    table = models.OneToOneField(Table, on_delete=models.SET_NULL)
 
     def __str__(self) -> str:
         return self.customer
