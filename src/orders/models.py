@@ -7,6 +7,9 @@ class Table(models.Model):
     number = models.IntegerField()
     is_reserved = models.BooleanField()
 
+    def __str__(self) -> str:
+        return f"{self.number} ({'reserved' if self.is_reserved else 'empty'})"
+
 
 class Order(models.Model):
     customer = models.IntegerField()
