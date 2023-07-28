@@ -3,7 +3,7 @@
 <h2>Category list: </h2>
 
     {% for category in list_of_category_objects %}
-        <a href="{% url food_details category.id %}">{{category.title}}</a>
+        <a href="{% url category_details category.id %}">{{category.title}}</a>
         {{ category.description|truncatewords:50 }}
 
     {% endfor %}
