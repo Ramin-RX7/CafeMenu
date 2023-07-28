@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% block content %}
 <h2>Category list: </h2>
 
     {% for category in list_of_category_objects %}
@@ -7,11 +8,7 @@
         {{ category.description|truncatewords:50 }}
 
     {% endfor %}
+{% endblock %}
 
 
-<!-- category_list
-
-context given to this template: {"categories": list_of_category_objects}
-Print out all categories to the template with short description of them.
-each category must be shown like Our Culinary Journey section in the template file attached to this issue
-(Obviously link them to the category_details url) -->
+    
