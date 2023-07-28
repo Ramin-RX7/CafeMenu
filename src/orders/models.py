@@ -13,14 +13,14 @@ class Table(models.Model):
 
 class Order(models.Model):
     customer = models.IntegerField()
-    table = models.ForeignKey(Table, on_delete=models.SET_NULL)
+    table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
     price = models.FloatField()
     discount = models.FloatField(default=0.0)
     date_submit = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField()
 
     def __str__(self) -> str:
-        return self.customer
+        return f"{self.customer}"
 
 
 class OrderItem(models.Model):
@@ -31,4 +31,4 @@ class OrderItem(models.Model):
     discount = models.FloatField(default=0.0)
 
     def __str__(self) -> str:
-        return self.quantity
+        return f"{self.quantity}"
