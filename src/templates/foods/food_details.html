@@ -1,1 +1,22 @@
 {% extends 'base.html' %}
+{% block content %}
+
+<div class="flex-container" >
+    {% for food in food_model_instance %}
+    <img class="card-img-top" src="..." alt="food image">
+    <div class="card-body">
+      <h5 class="card-title">{{food.title}}<span class="badge badge-secondary">{{food.price}}</span></h5>
+      <p class="card-text">{{food.description}}</p>
+      <footer class="blockquote-footer">{{food.category}}</footer>
+
+      <a href="#" class="btn btn-primary">Add to Cart</a>
+      <!-- counter?? -->
+    </div>
+  </div>
+  {% endfor %}
+  
+
+</div>
+{% endblock %}
+
+
