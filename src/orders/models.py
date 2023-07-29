@@ -21,7 +21,15 @@ class Order(models.Model):
 
     def __str__(self) -> str:
         return f"{self.customer}"
-
+    
+    def approve(self):
+        self.is_approved =True
+        for item in self.orderitem_set.all():
+            if item.food.available_quantity >= item.quantity :
+                item.food.available_quantity -= item.quantity
+                super().save()
+            else:
+                raise SystemError
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
