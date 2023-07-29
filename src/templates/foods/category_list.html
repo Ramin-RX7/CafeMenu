@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Category list: </h2>
 
-    {% for category in list_of_category_objects %}
-        <a href="{% url category_details category.id %}">{{category.title}}</a>
-        {{ category.description|truncatewords:50 }}
+  
+    <div class="flex-container" >
+        {% for category in list_of_category_objects %}
+        <div class="card">
+          <h5 class="card-title"><a href="{% url category_details category.id %}">{{category.title}}</a></h5>
+          <p class="card-text">{{ category.description|truncatewords:50 }}</p>
+          
+        </div>
+      {% endfor %}
+      
 
-    {% endfor %}
+    </div>
+    
+  
+
+
 {% endblock %}
+
+
+
 
 
     
