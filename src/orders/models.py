@@ -4,11 +4,11 @@ from foods.models import Food
 
 
 class Table(models.Model):
-    number = models.IntegerField()
+    name = models.CharField(unique=True, max_length=25)
     is_reserved = models.BooleanField()
 
     def __str__(self) -> str:
-        return f"{self.number} ({'reserved' if self.is_reserved else 'empty'})"
+        return f"{self.name} ({'reserved' if self.is_reserved else 'empty'})"
 
 
 class Order(models.Model):
