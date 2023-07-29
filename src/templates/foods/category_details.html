@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <section id="service" class="pattern-style-4 has-overlay">
     <div class="container raise-2">
         <h6 class="section-subtitle text-center">{{category.title}}</h6>
@@ -9,26 +8,21 @@
         <div class="row">
           {% for food in category.food_set.all %}
 
-            <div class="col-md-6 mb-4">
-                <a href="javascrip:void(0)" class="custom-list">
-                    <div class="img-holder">
-                        <img src="{{ food.image.url }}" alt="food in dishes">
-                    </div>
-                    <div class="info">
-                        <div class="head clearfix">
-                            <h5 class="title float-left"><a href="{% url 'food_details' food.id %}">{{food.title}}</a></h5>
-                        </div>
-                        <div class="purchase">
-                          <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add to Cart</a>
-                          <input type="number" id="quantity" name="quantity" min="1" max="5">
-
-                        </div>
-                    </div>
-                </a>
-            </div>
-          {% endfor %}
+    <div class="flex-container" >
+        {% for category in category_model_instance %}
+        <div class="card">
+            <img src="" alt="foods in Special Dishes">
+          <h5 class="card-title"><a href="{% url 'food_details' category.id %}">{{food.title}}</a></h5>
+          <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add to Cart</a>
+          <!-- counter??? -->
         </div>
+      {% endfor %}
+
+
     </div>
 </section>
 
-{% endblock %}
+
+
+
+
