@@ -1,23 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h3>{{category.title}}</h3>
 <p>{{category.description}}</p>
 
-    <div class="flex-container" >
-        {% for category in category_model_instance %}
-        <div class="card">
-            <img src="" alt="foods in Special Dishes">
-          <h5 class="card-title"><a href="{% url 'food_details' category.id %}">{{food.title}}</a></h5>
-          <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add to Cart</a>
-          <!-- counter??? -->
-        </div>
-      {% endfor %}
-      
-
+<div class="flex-container" >
+  {% for category in category_model_instance %}
+    <div class="card">
+        <img src="" alt="foods in Special Dishes">
+      <h5 class="card-title"><a href="{% url 'food_details' category.id %}">{{food.title}}</a></h5>
+      <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add to Cart</a>
+      <!-- counter??? -->
     </div>
-    
-  
-
+  {% endfor %}
+</div>
 
 {% endblock %}
