@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Cafe Group One</title>
+        <link rel="stylesheet" href="{% static 'styles/pigga.css' %}">
+    </head>
+<body>
+	{% include 'base/navbar.html' %}
+    {% block content %}
+    {% endblock %}
+    {% include 'base/footer.html' %}
+
+    <!-- End of Page Footer -->
+
+    <!-- core  -->
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+
+    <!-- bootstrap affix -->
+    <script src="{% static 'js/bootstrap.affix.js' %}"></script>
+
+    <!-- Pigga js -->
+    <script src="{% static 'js/pigga.js' %}"></script>
+</body>
+</html>
+
+
