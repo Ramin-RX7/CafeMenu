@@ -5,8 +5,12 @@ from .models import Category,Food
 # Create your views here.
 
 def category_list(request):
-    plural = Category.objects.all()
-    return render(request,'CafeMenu/src/templates/foods/category_list.html',{"plural":plural})
+    categories = Category.objects.all()
+    return render(request,'CafeMenu/src/templates/foods/category_list.html',{"categories":categories})
+
+def category_details(request,pk):
+    category = Category.objects.get(id=pk)
+    return render(request,'CafeMenu/src/templates/foods/category_details.html',{"category":category})
 
 def food_details(request, pk):
     food = Food.objects.get(id=pk)
