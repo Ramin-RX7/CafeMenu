@@ -8,10 +8,12 @@ def order_list(request):
     context = {"orders": orders }
     return render(request,'orders/order_list.html',context)
 
+
 def order_details(request,id):
     order = Order.objects.get(id=id)
     context = {"order": order}
     return render(request,'orders/order_details.html',context)
+
 
 def cart(request):
     c_rt = None
