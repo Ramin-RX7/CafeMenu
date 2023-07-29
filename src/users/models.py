@@ -1,7 +1,9 @@
+import re
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.validators import RegexValidator
-
+from django.core.exceptions import ValidationError
 
 
 class UserManager(BaseUserManager):
@@ -29,9 +31,28 @@ class UserManager(BaseUserManager):
 
 
 
+class PhoneNumberField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+    def get_prep_value(self, value):
+        if value is None:
+            return value
+
+        pattern = r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?P<middle3>\d{3})-?(?P<last4>\d{4})"
+        if not (regex := re.fullmatch(pattern, value)):
+            raise ValidationError("Invalid ")
+
+        phone_parts = regex.groupdict()
+        phone = phone_parts["operator"]+phone_parts["middle3"]+phone_parts["last4"]
+        return phone
+
+
+
+phone_validator = RegexValidator(r"(((\+|00)(98))|0)?9\d{2}-?\d{3}-?\d{4}")
 class User(AbstractBaseUser, PermissionsMixin):
-    phone_validator = RegexValidator(r"(((+|00)(98))|0)9\d{2}-?\d{3}-?\d{4}")
-    phone = models.CharField(validators=[phone_validator], unique=True, max_length=20)
+    phone = PhoneNumberField(validators=[phone_validator], unique=True, max_length=20)
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
