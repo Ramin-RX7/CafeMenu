@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 
 from .models import Order
+from foods.models import Food
 
 
 def index(request):
@@ -18,6 +19,12 @@ def order_details(request,id):
 
 
 def cart(request):
-    c_rt = None
-    context = {"c_rt": c_rt}
-    return render(request,'orders/cart.html',context)
+    if request.method == "GET":
+        data = request.COOKIES.get("cart")
+        cart = eval(data)
+        new_cart = {}
+        for key,value in cart.items():
+            food = Food.objects.get(id=key)
+            new_cart[food] = value
+        context = {"cart": new_cart}
+        return render(request,'orders/cart.html',context)
