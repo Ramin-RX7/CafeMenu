@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from .models import Order
 
 
-def order_list(request):
+def index(request):
     orders  = Order.objects.all()
     context = {"orders": orders }
     return render(request,'orders/order_list.html',context)
+def order_list(request):
+    return redirect("index")
 
 
 def order_details(request,id):

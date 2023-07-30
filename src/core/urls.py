@@ -22,8 +22,11 @@ from . import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
     path("foods/", include("foods.urls")),
     path("orders/", include("orders.urls")),
+
+    path("", include("main.urls")),
 ]
 
 if settings.DEBUG:
