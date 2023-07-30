@@ -25,3 +25,7 @@ def search(request):
     if request.method != "GET":
         raise Http404
     return render(request,'foods/search.html')
+
+
+def menu(request):
+    return render(request, "foods/menu.html")

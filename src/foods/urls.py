@@ -11,4 +11,5 @@ urlpatterns = [
     path("categories/<int:id>/", category_details, name="category_details"),
     path("food_details/<int:id>/", food_details, name="food_details"),
     path("search/", search, name="search"),
+    path("", menu, name="menu")
 ]
