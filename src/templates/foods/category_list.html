@@ -3,12 +3,14 @@
 {% block content %}
 
 <section id="about2">
+  <h6 class="section-subtitle text-center">Menu</h6>
+  <h3 class="section-title mb-6 pb-3 text-center">Categories</h3>
   {% for category in categories %}
   <div class="container">
       <div class="section-devider my-6 transparent"></div>
       <div class="row align-items-center">
           <div class="col-md-6">
-              <h6 class="section-subtitle">The Great Story</h6>
+              <h6 class="section-subtitle">Category</h6>
               <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
               <p>{{ category.description|truncatewords:50 }}</p>
           </div>
