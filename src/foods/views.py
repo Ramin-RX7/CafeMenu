@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
+from django.db.models import Q
 from .models import Category,Food
 
 
@@ -29,3 +30,12 @@ def search(request):
 
 def menu(request):
     return render(request, "foods/menu.html")
+
+def search_details(request):
+    if request.method == "GET":
+        searched = request.GET.get('searched')
+        FOODS_QUERYSET = Food.objects.filter(
+        Q(title__contains=searched).distinct())
+        return render(request, "", {'searched':searched, "foods":FOODS_QUERYSET})
+    else:
+            return render(request, "", {})
