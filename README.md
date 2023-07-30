@@ -20,7 +20,18 @@ Install required packages
 
     $ python -m pip install -r requirements.txt
 
-Run the server
+
+Navigate to the project directory
 
     $ cd ./src/
+
+
+Make/Apply migrations
+
+    $ python manage.py makemigrations
+    $ python manage.py migrate
+
+
+Run the server
+
     $ python manage.py runserver
