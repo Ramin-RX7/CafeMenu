@@ -1,12 +1,14 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Order,OrderItem
-# Create your views here.
+from django.shortcuts import render,redirect
 
-def order_list(request):
+from .models import Order
+
+
+def index(request):
     orders  = Order.objects.all()
     context = {"orders": orders }
     return render(request,'orders/order_list.html',context)
+def order_list(request):
+    return redirect("index")
 
 
 def order_details(request,id):

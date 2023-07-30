@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from .models import Category,Food
 
-# Create your views here.
 
 def category_list(request):
     categories = Category.objects.all()
@@ -26,3 +25,7 @@ def search(request):
     if request.method != "GET":
         raise Http404
     return render(request,'foods/search.html')
+
+
+def menu(request):
+    return render(request, "foods/menu.html")
