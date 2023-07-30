@@ -11,17 +11,17 @@
        </button>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-             <li class="nav-item">
+             <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
              </li>
-             <li class="nav-item">
+             <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a>
              </li>
-             <li class="nav-item">
-                <a class="nav-link" href="https://github.com/Ramin-RX7/CafeMenu">Our Team</a>
+             <li class="nav-item mx-2">
+                <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
              </li>
-             <li class="nav-item">
-                <a href="{% url 'foods:menu' %}" class="ml-4 mt-1 btn btn-primary btn-sm">Menu</a>
+             <li class="nav-item mx-2">
+                <a href="{% url 'orders:cart' %}" class="ml-4 mt-1 btn btn-primary btn-sm w-100">Cart</a>
              </li>
           </ul>
        </div>
