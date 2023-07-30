@@ -2,21 +2,27 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
+<section id="about2">
   {% for category in categories %}
-
-  <div class="section-devider my-6 transparent"></div>
-  <div class="row align-items-center">
-    <div class="col-md-6">
-          <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
-          <p class="card-text">{{ category.description|truncatewords:50 }}</p>
-    </div>
-    <div class="col-md-6 order-1 order-sm-first">
-          <img alt="" src="{{ category.image.url }}" class="w-100 rounded shadow">
-     </div>
+  <div class="container">
+      <div class="section-devider my-6 transparent"></div>
+      <div class="row align-items-center">
+          <div class="col-md-6">
+              <h6 class="section-subtitle">The Great Story</h6>
+              <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
+              <p>{{ category.description|truncatewords:50 }}</p>
+          </div>
+          <div class="col-md-6 order-1 order-sm-first">
+              <div class="row">
+                  <div class="col">
+                      <img alt="" src="{{ category.image.url }}" class="w-100 rounded shadow">
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-</div>
   {% endfor %}
-</div>
+</section>
+
 
 {% endblock %}
