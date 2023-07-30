@@ -1,5 +1,10 @@
 from django.urls import path
-from .views import category_list, food_details , search , category_details
+
+from .views import *
+
+
+app_name = "foods"
+
 
 urlpatterns = [
     path("categories/", category_list, name="category_list"),
