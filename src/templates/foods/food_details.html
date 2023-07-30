@@ -1,32 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
 <section id="service" class="pattern-style-4 has-overlay">
   <div class="container raise-2">
       <div class="row">
-          <div class="col-md-6 mb-4">
-              <a href="javascrip:void(0)" class="custom-list">
-                  <div class="img-holder">
-                      <img src="{{ food.image.url }}" alt="food in dishese">
-                  </div>
-                  <div class="info">
-                      <div class="head clearfix">
-                          <h5 class="title float-left">{{food.title}}</h5>
-                          <p class="float-right text-primary">{{food.price}}</p>
-                      </div>
-                      <div class="body">
-                          <p>{{food.description}}</p>
-                          <footer class="blockquote-footer">{{f.category}}</footer>
+        <div class="img-holder">
+            <img src="{{ food.image.url }}" alt="">
+        </div>
+        <div class="col-md-6 mb-4">
+            <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
+                <div class="info">
+                    <div class="head clearfix">
+                        <h3 class="float-left">{{ food.title }}</h3>
+                        <h3 class="float-right text-primary">${{ food.price }}</h3>
+                    </div>
+                </div>
+            </a>
+            <div style="display: flex;">
+              <a href="#" class="btn btn-primary btn-sm active btn-block" role="button" aria-pressed="true" style="align-items: center;margin-right: 1rem;display: grid;">Add to Cart</a>
+              <input type="number" name="" id="" class="form-control" style="width: 20%;" value="1" max="{{ food.available_quantity }}" min="1">
+            </div>
 
-                      </div>
-                      <div class="purchase">
-                        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add to Cart</a>
-                        <input type="number" id="quantity" name="quantity" min="1" max="5">
-                      </div>
-                  </div>
-              </a>
-          </div>
+            <div class="body mt-4">
+                <p>{{ food.description }}</p>
+            </div>
+        </div>
       </div>
   </div>
 </section>
-{% eendblock %}
+
+
+{% endblock %}
