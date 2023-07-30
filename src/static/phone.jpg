@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v20.10 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment - Silverbug Ltd</title>
+	<link rel="canonical" href="https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment - Silverbug Ltd" />
+	<meta property="og:description" content="The global pandemic has sparked a change in working practices like no other. Arguably, the move to hybrid working, where employees split their working schedule between home and their workplace, was already on its way. However, until February 2020, those ‘in the know&#8217; were predicting that the change would be evolutionary, taking place over several [&hellip;]" />
+	<meta property="og:url" content="https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/" />
+	<meta property="og:site_name" content="Silverbug Ltd" />
+	<meta property="article:publisher" content="https://www.facebook.com/SilverbugUK" />
+	<meta property="article:published_time" content="2021-09-14T08:21:00+00:00" />
+	<meta property="article:modified_time" content="2023-02-23T16:04:49+00:00" />
+	<meta property="og:image" content="https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-scaled.jpg" />
+	<meta property="og:image:width" content="2560" />
+	<meta property="og:image:height" content="1707" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Aimee Beckwith-Hills" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@Silverbug_ltd" />
+	<meta name="twitter:site" content="@Silverbug_ltd" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#article","isPartOf":{"@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/"},"author":{"name":"Aimee Beckwith-Hills","@id":"https://www.silverbug.it/#/schema/person/bbbb64daccdc65457e9bef283e5e7432"},"headline":"Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment","datePublished":"2021-09-14T08:21:00+00:00","dateModified":"2023-02-23T16:04:49+00:00","mainEntityOfPage":{"@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/"},"wordCount":859,"publisher":{"@id":"https://www.silverbug.it/#organization"},"image":{"@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#primaryimage"},"thumbnailUrl":"https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-scaled.jpg","keywords":["Cyber Security"],"articleSection":["Blog","Cyber Security"],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/","url":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/","name":"Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment - Silverbug Ltd","isPartOf":{"@id":"https://www.silverbug.it/#website"},"primaryImageOfPage":{"@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#primaryimage"},"image":{"@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#primaryimage"},"thumbnailUrl":"https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-scaled.jpg","datePublished":"2021-09-14T08:21:00+00:00","dateModified":"2023-02-23T16:04:49+00:00","breadcrumb":{"@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#primaryimage","url":"https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-scaled.jpg","contentUrl":"https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-scaled.jpg","width":2560,"height":1707,"caption":"Cropped image of happy business man sitting by the table in cafe and using smartphone"},{"@type":"BreadcrumbList","@id":"https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silverbug.it/"},{"@type":"ListItem","position":2,"name":"Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment"}]},{"@type":"WebSite","@id":"https://www.silverbug.it/#website","url":"https://www.silverbug.it/","name":"Silverbug Ltd","description":"Managed IT Solutions &amp; IT Support","publisher":{"@id":"https://www.silverbug.it/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.silverbug.it/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.silverbug.it/#organization","name":"Silverbug Limited","url":"https://www.silverbug.it/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.silverbug.it/#/schema/logo/image/","url":"https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour.png","contentUrl":"https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour.png","width":1618,"height":391,"caption":"Silverbug Limited"},"image":{"@id":"https://www.silverbug.it/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/SilverbugUK","https://twitter.com/Silverbug_ltd","https://www.linkedin.com/company/silverbug/"]},{"@type":"Person","@id":"https://www.silverbug.it/#/schema/person/bbbb64daccdc65457e9bef283e5e7432","name":"Aimee Beckwith-Hills","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.silverbug.it/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/fde39719edab2fcd91f2a3d58566704c?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/fde39719edab2fcd91f2a3d58566704c?s=96&d=mm&r=g","caption":"Aimee Beckwith-Hills"},"url":"https://www.silverbug.it/author/aimee-beckwith-hillssilverbug-it/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//js.hs-scripts.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.silverbug.it/wp-includes/css/dist/block-library/style.min.css?ver=6.2.2' media='all' />
+<style id='wp-block-library-theme-inline-css'>
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<link rel='stylesheet' id='classic-theme-styles-css' href='https://www.silverbug.it/wp-includes/css/classic-themes.min.css?ver=6.2.2' media='all' />
+<style id='global-styles-inline-css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--primary: #bd202f;--wp--preset--color--orange: #ef4a11;--wp--preset--color--light: #f5f5f5;--wp--preset--color--dark: #444444;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='contact-form-7-css' href='https://www.silverbug.it/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.7.7' media='all' />
+<link rel='stylesheet' id='theme-fonts-google-css' href='https://fonts.googleapis.com/css2?family=Assistant%3Awght%40400%3B600%3B700&#038;display=swap&#038;ver=1' media='all' />
+<link rel='stylesheet' id='theme-styles-css' href='https://www.silverbug.it/wp-content/themes/odin/assets/build/main.css?ver=1662994441' media='all' />
+<script src='https://www.silverbug.it/wp-includes/js/jquery/jquery.min.js?ver=3.6.4' id='jquery-core-js'></script>
+<script src='https://www.silverbug.it/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.0' id='jquery-migrate-js'></script>
+<link rel="https://api.w.org/" href="https://www.silverbug.it/wp-json/" /><link rel="alternate" type="application/json" href="https://www.silverbug.it/wp-json/wp/v2/posts/238" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.silverbug.it/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.silverbug.it/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 6.2.2" />
+<link rel='shortlink' href='https://www.silverbug.it/?p=238' />
+<link rel="alternate" type="application/json+oembed" href="https://www.silverbug.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.silverbug.it%2F2021%2F09%2F14%2Fwhy-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.silverbug.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.silverbug.it%2F2021%2F09%2F14%2Fwhy-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment%2F&#038;format=xml" />
+			<!-- DO NOT COPY THIS SNIPPET! Start of Page Analytics Tracking for HubSpot WordPress plugin v10.1.30-->
+			<script type="text/javascript" class="hsq-set-content-id" data-content-id="blog-post">
+				var _hsq = _hsq || [];
+				_hsq.push(["setContentType", "blog-post"]);
+			</script>
+			<!-- DO NOT COPY THIS SNIPPET! End of Page Analytics Tracking for HubSpot WordPress plugin -->
+			<link rel="icon" href="https://www.silverbug.it/wp-content/uploads/2022/07/cropped-favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.silverbug.it/wp-content/uploads/2022/07/cropped-favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.silverbug.it/wp-content/uploads/2022/07/cropped-favicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.silverbug.it/wp-content/uploads/2022/07/cropped-favicon-270x270.png" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7SEK7PY3VM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7SEK7PY3VM');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-91654821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-91654821-1');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TP4KDDL');</script>
+<!-- End Google Tag Manager -->
+
+<script type="text/javascript" src="https://secure.hook6vein.com/js/218758.js"></script>
+<noscript><img src="https://secure.hook6vein.com/218758.png" style="display:none;" /></noscript></head>
+<body class="post-template-default single single-post postid-238 single-format-standard wp-embed-responsive">
+
+	<!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/2847527.js"></script>
+<!-- End of HubSpot Embed Code -->
+
+<script type="text/javascript" src="https://secure.hook6vein.com/js/218758.js"></script>
+<noscript><img src="https://secure.hook6vein.com/218758.png" style="display:none;" /></noscript>
+
+
+	<header id="site-header">
+	<div class="container-fluid">
+		<div class="row align-items-center justify-content-between">
+			<div class="col-8 col-sm-4 col-lg-auto">
+				<a href="https://www.silverbug.it" class="logo">
+	<img width="180" height="43" src="https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-180x43.png" class="attachment-odin_small size-odin_small" alt="Silverbug Ltd" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-180x43.png 180w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-300x72.png 300w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-1024x247.png 1024w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-768x186.png 768w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-1536x371.png 1536w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour.png 1618w" sizes="(max-width: 180px) 100vw, 180px" /></a>			</div>
+			<div class="col-menu col-lg">
+				<ul id="primary" class="odin-menu odin-menu-dropdowns"><li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-68"><a href="https://www.silverbug.it/it-support-services/">IT Support Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-709" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-709"><a href="https://www.silverbug.it/it-support-services/managed-it-support/">Managed IT Support</a></li>
+	<li id="menu-item-793" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-793"><a href="https://www.silverbug.it/it-support-services/mysilverbug/">MySilverbug</a></li>
+	<li id="menu-item-710" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-710"><a href="https://www.silverbug.it/it-support-services/network-operations/">Network Operations</a></li>
+	<li id="menu-item-711" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-711"><a href="https://www.silverbug.it/it-support-services/business-continuity/">Business Continuity</a></li>
+</ul>
+</li>
+<li id="menu-item-73" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-73"><a href="https://www.silverbug.it/managed-cyber-security/">Managed Cyber Security</a>
+<ul class="sub-menu">
+	<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-713"><a href="https://www.silverbug.it/managed-cyber-security/managed-detection-response/">Managed Detection &#038; Response</a></li>
+	<li id="menu-item-714" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-714"><a href="https://www.silverbug.it/managed-cyber-security/threat-vulnerability-management/">Threat &#038; Vulnerability Management</a></li>
+	<li id="menu-item-715" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-715"><a href="https://www.silverbug.it/managed-cyber-security/cloud-posture-management/">Cloud Posture Management</a></li>
+	<li id="menu-item-716" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-716"><a href="https://www.silverbug.it/managed-cyber-security/endpoint-detection-response/">Endpoint Detection &#038; Response</a></li>
+	<li id="menu-item-2913" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2913"><a href="https://www.silverbug.it/managed-cyber-security/brand-email-protection/">Brand &#038; Email Protection</a></li>
+	<li id="menu-item-717" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-717"><a href="https://www.silverbug.it/managed-cyber-security/cyber-essentials/">Cyber Essentials</a></li>
+	<li id="menu-item-718" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-718"><a href="https://www.silverbug.it/managed-cyber-security/essential-cyber-security/">Essential Cyber Security</a></li>
+</ul>
+</li>
+<li id="menu-item-77" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-77"><a href="https://www.silverbug.it/it-services/">IT Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-719" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-719"><a href="https://www.silverbug.it/it-services/cloud-services/">Cloud Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a href="https://www.silverbug.it/it-services/cloud-services/microsoft-365/">Microsoft 365</a></li>
+		<li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a href="https://www.silverbug.it/it-services/cloud-services/microsoft-azure/">Microsoft Azure</a></li>
+		<li id="menu-item-724" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-724"><a href="https://www.silverbug.it/it-services/cloud-services/sharepoint/">SharePoint</a></li>
+		<li id="menu-item-725" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-725"><a href="https://www.silverbug.it/it-services/cloud-services/modern-workplace/">Modern Workplace</a></li>
+	</ul>
+</li>
+	<li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-720"><a href="https://www.silverbug.it/it-services/business-services/">Business Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-726" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-726"><a href="https://www.silverbug.it/it-services/business-services/business-communication/">Business Communication</a></li>
+		<li id="menu-item-727" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-727"><a href="https://www.silverbug.it/it-services/business-services/business-connectivity/">Business Connectivity</a></li>
+		<li id="menu-item-728" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-728"><a href="https://www.silverbug.it/it-services/business-services/managed-print/">Managed Print</a></li>
+		<li id="menu-item-729" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-729"><a href="https://www.silverbug.it/it-services/business-services/audio-visual-solutions/">Audio Visual Solutions</a></li>
+	</ul>
+</li>
+	<li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-721"><a href="https://www.silverbug.it/it-services/consultancy-services/">Consultancy Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-730" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-730"><a href="https://www.silverbug.it/it-services/consultancy-services/it-consultancy/">IT Consultancy</a></li>
+		<li id="menu-item-731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-731"><a href="https://www.silverbug.it/it-services/consultancy-services/virtual-it-director/">Virtual IT Director</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2322" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2322"><a href="https://www.silverbug.it/it-services/it-recycling-services/">IT Recycling Services</a></li>
+</ul>
+</li>
+<li id="menu-item-82" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-82"><a href="https://www.silverbug.it/about-us/">About Us</a>
+<ul class="sub-menu">
+	<li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83"><a href="https://www.silverbug.it/about-us/our-history/">Our History</a></li>
+	<li id="menu-item-84" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84"><a href="https://www.silverbug.it/about-us/awards-accreditations/">Awards &#038; Accreditations</a></li>
+	<li id="menu-item-85" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85"><a href="https://www.silverbug.it/about-us/meet-the-team/">Meet the Team</a></li>
+	<li id="menu-item-2351" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2351"><a href="https://www.silverbug.it/about-us/sustainability/">Sustainability and Community</a></li>
+	<li id="menu-item-86" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-86"><a href="https://www.silverbug.it/about-us/sponsorships/">Sponsorships</a></li>
+	<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87"><a href="https://www.silverbug.it/about-us/careers/">Careers</a></li>
+</ul>
+</li>
+<li id="menu-item-471" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-471"><a href="https://www.silverbug.it/resources/">Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-468" class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-468"><a href="https://www.silverbug.it/resource_type/case-studies/">Case Studies</a></li>
+	<li id="menu-item-469" class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-469"><a href="https://www.silverbug.it/resource_type/information-sheets/">Information Sheets</a></li>
+	<li id="menu-item-470" class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-470"><a href="https://www.silverbug.it/resource_type/whitepapers/">Whitepapers</a></li>
+</ul>
+</li>
+<li id="menu-item-90" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-90"><a href="https://www.silverbug.it/category/blog/">Blog</a></li>
+</ul>			</div>
+			<div class="col-actions col-auto">
+				<div class="actions-wrapper">
+					<div class="odin-buttons d-none d-sm-flex">
+						<a class="button-item  odin-button-link" href="https://www.silverbug.it/contact-us/">
+	<span>
+		<span class="button-label">Contact Us</span>
+			</span>
+</a>
+						<a class="button-item  odin-button-primary" href="https://www.silverbug.it/client-it-support/">
+	<span>
+		<span class="button-label">Client Area</span>
+			</span>
+</a>
+					</div>
+					<div class="d-inline-flex d-xxl-none">
+						<button 
+	role="button" 
+	class="button--offcanvas-trigger" 
+	data-bs-toggle="offcanvas" 
+	href="#offcanvas" 
+	aria-controls="offcanvas"
+	data-menu-trigger>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg></span>		<span class="visually-hidden">Menu</span>
+</button>					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="banner banner--simple">
+	<div class="banner--content">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8 col-xl-7">
+					<div class="odin-breadcrumb text-truncate"><!-- Breadcrumb NavXT 7.2.0 -->
+<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Silverbug Ltd." href="https://www.silverbug.it" class="home" ><span property="name">Home</span></a><meta property="position" content="1"></span><span class="sep">/</span><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the Blog Category archives." href="https://www.silverbug.it/category/blog/" class="taxonomy category" ><span property="name">Blog</span></a><meta property="position" content="2"></span><span class="sep">/</span><span property="itemListElement" typeof="ListItem"><span property="name" class="post post-post current-item">Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment</span><meta property="url" content="https://www.silverbug.it/2021/09/14/why-a-byod-policy-is-crucial-for-securing-a-hybrid-working-environment/"><meta property="position" content="3"></span></div>				</div>
+			</div>
+		</div>
+	</div>
+</div><main id="main-content" class="pt-4 pt-lg-5 pb-4 pb-lg-5" itemscope itemprop="mainContentOfPage">
+	<div class="container">
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-9">
+			<div class="odin-heading">
+		<h2>
+		Why a BYOD Policy is Crucial for Securing a Hybrid Working Environment	</h2>
+</div>			<div class="post-meta hstack gap-4 mb-4">
+				<div class="d-flex gap-2">
+					<span class="text-muted">Date</span>
+					<span>September 14, 2021</span>
+				</div>
+				<div class="d-flex gap-2">
+					<span class="text-muted">Posted in</span>
+					<a href="https://www.silverbug.it/category/blog/" rel="tag">Blog</a><a href="https://www.silverbug.it/category/security/" rel="tag">Cyber Security</a>				</div>
+			</div>
+						<div class="featured-image mb-4">
+				<div class="bg-image">
+					<img width="1024" height="683" src="https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-1024x683.jpg" class="rounded wp-post-image" alt="Businessman using his phone for work" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-1024x683.jpg 1024w, https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-300x200.jpg 300w, https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-768x512.jpg 768w, https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-1536x1024.jpg 1536w, https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-2048x1365.jpg 2048w, https://www.silverbug.it/wp-content/uploads/2021/09/cropped-image-happy-businessman-sitting-by-table-cafe-using-smartphone-180x120.jpg 180w" sizes="(max-width: 1024px) 100vw, 1024px" />				</div>
+			</div>
+						<div class="rte">
+				
+<p>The global pandemic has sparked a change in working practices like no other.</p>
+
+
+
+<p>Arguably, the move to hybrid working, where employees split their working schedule between home and their workplace, was already on its way.</p>
+
+
+
+<p>However, until February 2020, those ‘in the know&#8217; were predicting that the change would be evolutionary, taking place over several years. Instead, the practice of hybrid working is here now … and it’s here to stay. It brings sharply into focus numerous benefits and challenges – not least the principle of BYOD, Bring Your Own Device.</p>
+
+
+
+<p>The challenges revolve chiefly around the issue of security risk. Is your company encouraging a BYOD policy? Will your people be bringing their own smartphones, tablets, or laptops into the workplace? Then you need a BYOD security policy. Almost every employee comes to work with their own internet-connected device. This means a high potential than ever before for security risks to your company. For risks that you need to account for and protect against, having a&nbsp;cybersecurity strategy&nbsp;is key.&nbsp;</p>
+
+
+
+<h3 class="has-primary-color has-text-color wp-block-heading">Your BYOD Policy is crucial for securing a hybrid working environment</h3>
+
+
+
+<p>BYOD has been far more prevalent than a few years ago. A<a href="http://www.zdnet.com/article/research-74-percent-using-or-adopting-byod/">&nbsp;2014 survey from Tech Pro Research</a>&nbsp;found that 74 per cent of organisations allowed employees to bring their own devices to work. By 2016, the figure had jumped to<a href="https://www.ezcomputersolutions.com/blog/the-pros-cons-of-byod/">&nbsp;87%</a>. In many cases, they were relying on employees to use their personal smartphones to access mobile business applications. In fact, 45% of U.S. employees were required by their employers to use their personal smartphones for business purposes.</p>
+
+
+
+<p><strong>As an employer, you have two options:</strong></p>
+
+
+
+<ol>
+<li>Embrace BYOD by enacting BYOD policies and security measures to make the practice a safer one.</li>
+
+
+
+<li>Ban BYOD entirely and find a way to enforce the ban.</li>
+</ol>
+
+
+
+<p><strong>The benefits to your company of a BYOD approach are clear:</strong></p>
+
+
+<div class="odin-list odin-list-stacked" style="--icon-color: #bd202f; --text-color: inherit">
+	<ul class="list-unstyled">
+								<li>
+				<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"></path></svg></span>				<span class="label">Reduced hardware and software costs</span>
+			</li>
+										<li>
+				<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"></path></svg></span>				<span class="label">Improved employee productivity</span>
+			</li>
+										<li>
+				<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"></path></svg></span>				<span class="label">Greater employee enjoyment</span>
+			</li>
+					</ul>
+</div>
+
+
+<p>However, the practice will place extra responsibilities on your IT department. They will have to occasionally maintain the devices as well as ensure that your BYOD strategy doesn’t result in risks to either your network or your data.</p>
+
+
+
+<h3 class="has-primary-color has-text-color wp-block-heading">What is a BYOD policy?</h3>
+
+
+
+<p><strong>12 BYOD elements that your policy should cover:</strong></p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="https://2847527.fs1.hubspotusercontent-na1.net/hubfs/2847527/BYOD%20policy%20infographic-Facebook+linkedin-1200x630-png.png" alt=""/></figure>
+
+
+
+<ol>
+<li><strong>Acceptable use</strong>&nbsp;&#8211; what applications and assets will you permit employees to access from their personal devices?</li>
+
+
+
+<li>Minimum required&nbsp;<strong>security controls</strong>&nbsp;for devices</li>
+
+
+
+<li><strong>Company-provided components</strong>, such as SSL certificates for device authentication</li>
+
+
+
+<li><strong>Company rights</strong>&nbsp;for altering the device, such as remote wiping for lost or stolen devices.</li>
+
+
+
+<li><strong>Your service policy</strong>&nbsp;for BYOD devices &#8211; what IT support is available for employees connecting to your company network and support for applications installed on personal devices.</li>
+
+
+
+<li>The&nbsp;<strong>ownership of apps and data</strong>, as well as the applications that are permitted or prohibited and reimbursement (e.g., will your company reimburse employees a standard use fee, pay for certain applications or a portion of monthly bills?).</li>
+
+
+
+<li>It should also outline&nbsp;<strong>security requirements</strong>&nbsp;for BYOD devices (e.g., will your company provide a mobile device security application or will your employees be allowed to choose their own security solutions provided they meet your criteria?).</li>
+
+
+
+<li><strong>Password provision</strong>&nbsp;– Your organisation will demand strong passwords. You might insist on regular password changes every 30 or 90 days, for example. What about 2-factor authentication? All these password considerations need thinking about.</li>
+
+
+
+<li><strong>Data transfer provision&nbsp;</strong>&#8211; Data should be encrypted, password protected and only transferred on company mandated applications.</li>
+
+
+
+<li><strong>Common sense provisions</strong>&nbsp;– such as restricting personal use when at work and banning use while driving.</li>
+
+
+
+<li>When an employee leaves your company,&nbsp;<strong>what will happen to your company data</strong>&nbsp;stored on their device?</li>
+
+
+
+<li><strong>Risks, liabilities and disclaimers</strong>. Supposing company data is lost or leaked from your employee’s device, who will be liable?</li>
+</ol>
+
+
+
+<h3 class="has-primary-color has-text-color wp-block-heading">How to set up a BYOD policy that works for everyone in the company</h3>
+
+
+
+<p>The first step, as with any change to any aspect of company policy, is to communicate – to ensure stakeholder and employee buy-in. Otherwise, you risk disenchantment and disengagement.</p>
+
+
+
+<p>Your stakeholders will be key to the policy planning process, providing a variety of perspectives from various departments and interests within your organisation. Executives, HR, finance, IT and the security team – all need to be involved in the development of your BYOD policy.</p>
+
+
+
+<h3 class="has-primary-color has-text-color wp-block-heading">Employee input matters</h3>
+
+
+
+<p>Employee input is vital for generating a BYOD policy that works. Only consider the needs of your company, and you’ll be asking for trouble.&nbsp;</p>
+
+
+
+<p>Begin with an employee survey – an efficient way to gain data on the devices your employees use. Find out about what your employees see as advantages and disadvantages of BYOD. Do they harbour concerns about their privacy?</p>
+
+
+
+<h3 class="has-primary-color has-text-color wp-block-heading">Consider your technology capabilities</h3>
+
+
+
+<p>It’s critical to ensure that you have the appropriate technology. An evaluation of your current capabilities will help to identify and fill these gaps to ensure a successful BYOD policy.</p>
+
+
+
+<p>We’ve covered here just a handful of the factors you need to consider when developing your BYOD policy. You need to take on a multi-faceted approach that addresses the potential risks while minimising intrusions on employee privacy and usability.</p>
+
+
+<div class="odin-buttons odin-mb-1">
+			<a class="button-item  odin-button-primary" href="https://meetings.hubspot.com/dilbagh-singh/it-security-consultation">
+	<span>
+		<span class="button-label">Book a Security Consultation</span>
+			</span>
+</a>
+	</div>
+
+			</div>
+			<div class="pt-5 mt-5 border-top">
+				<div class="share-button b d-flex gap-3 align-items-center">
+	<span>Share this post</span>
+	<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+		<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+		<a class="a2a_button_facebook"></a>
+		<a class="a2a_button_twitter"></a>
+		<a class="a2a_button_linkedin"></a>
+		<a class="a2a_button_pinterest"></a>
+	</div>
+	<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+</div>			</div>
+			<div class="pt-5 mt-5 border-top">
+				<div id="silverbug-blog-comments">
+					
+<!-- You can start editing here. -->
+
+
+			<!-- If comments are closed. -->
+		<p class="nocomments">Comments are closed.</p>
+
+	
+				</div>
+			</div>
+									<div class="pt-5 mt-5 border-top rte">
+				<h3 class="mb-4">Related Posts</h3>
+				<div class="row">
+											<div class="col-12 col-md-6 col-lg-4 mb-5">
+							<div class="odin-card odin-card-minimal">
+	<div class="odin-card-image ratio ratio-16x9">
+		<div>
+			<img width="360" height="360" src="https://www.silverbug.it/wp-content/uploads/2023/05/tim-gouw-1K9T5YiZ2WU-unsplash-360x360.jpg" class="attachment-odin_square size-odin_square wp-post-image" alt="Overcoming the Common IT Challenges as a Growing Business" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2023/05/tim-gouw-1K9T5YiZ2WU-unsplash-360x360.jpg 360w, https://www.silverbug.it/wp-content/uploads/2023/05/tim-gouw-1K9T5YiZ2WU-unsplash-150x150.jpg 150w, https://www.silverbug.it/wp-content/uploads/2023/05/tim-gouw-1K9T5YiZ2WU-unsplash-550x550.jpg 550w" sizes="(max-width: 360px) 100vw, 360px" />		</div>
+	</div>
+	<div class="odin-card-content">
+				<div class="post-meta hstack gap-4 mb-1">
+			<span>May 2, 2023</span>
+		</div>
+				<h2>
+			<a href="https://www.silverbug.it/2023/05/02/overcoming-common-it-challenges-as-a-growing-business/" class="stretched-link">
+				Overcoming Common IT Challenges as a Growing Business			</a>
+		</h2>
+			</div>
+</div>						</div>
+											<div class="col-12 col-md-6 col-lg-4 mb-5">
+							<div class="odin-card odin-card-minimal">
+	<div class="odin-card-image ratio ratio-16x9">
+		<div>
+			<img width="360" height="360" src="https://www.silverbug.it/wp-content/uploads/2023/02/brett-jordan-LPZy4da9aRo-unsplash-360x360.jpg" class="attachment-odin_square size-odin_square wp-post-image" alt="Further Prevent Spoofing and Spam" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2023/02/brett-jordan-LPZy4da9aRo-unsplash-360x360.jpg 360w, https://www.silverbug.it/wp-content/uploads/2023/02/brett-jordan-LPZy4da9aRo-unsplash-150x150.jpg 150w, https://www.silverbug.it/wp-content/uploads/2023/02/brett-jordan-LPZy4da9aRo-unsplash-550x550.jpg 550w" sizes="(max-width: 360px) 100vw, 360px" />		</div>
+	</div>
+	<div class="odin-card-content">
+				<div class="post-meta hstack gap-4 mb-1">
+			<span>April 3, 2023</span>
+		</div>
+				<h2>
+			<a href="https://www.silverbug.it/2023/04/03/protect-your-brand-against-spoofing-and-spam-with-dmarc/" class="stretched-link">
+				Protect Your Brand Against Spoofing and Spam with DMARC			</a>
+		</h2>
+			</div>
+</div>						</div>
+											<div class="col-12 col-md-6 col-lg-4 mb-5">
+							<div class="odin-card odin-card-minimal">
+	<div class="odin-card-image ratio ratio-16x9">
+		<div>
+			<img width="360" height="360" src="https://www.silverbug.it/wp-content/uploads/2023/03/Image-7-Partner-Awards-LinkedIn-Facebook-1536x864-1-360x360.png" class="attachment-odin_square size-odin_square wp-post-image" alt="Silverbug Earns 2023 SonicWall Partner Award" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2023/03/Image-7-Partner-Awards-LinkedIn-Facebook-1536x864-1-360x360.png 360w, https://www.silverbug.it/wp-content/uploads/2023/03/Image-7-Partner-Awards-LinkedIn-Facebook-1536x864-1-150x150.png 150w, https://www.silverbug.it/wp-content/uploads/2023/03/Image-7-Partner-Awards-LinkedIn-Facebook-1536x864-1-550x550.png 550w" sizes="(max-width: 360px) 100vw, 360px" />		</div>
+	</div>
+	<div class="odin-card-content">
+				<div class="post-meta hstack gap-4 mb-1">
+			<span>March 13, 2023</span>
+		</div>
+				<h2>
+			<a href="https://www.silverbug.it/2023/03/13/silverbug-part-of-the-air-it-group-earns-2023-sonicwall-partner-award/" class="stretched-link">
+				Silverbug Earns 2023 SonicWall Partner Award			</a>
+		</h2>
+			</div>
+</div>						</div>
+									</div>
+			</div>
+					</div>
+		<div class="col-12 col-lg-3">
+			<div id="sidebar" role="complementary">
+	<div class="widget widget-categories">
+	<h4 class="widget-title">Categories</h4>
+	<div class="widget-body">
+		<nav role="navigation" class="menu">
+			<ul class="list-unstyled">
+					<li class="cat-item cat-item-1"><a href="https://www.silverbug.it/category/blog/">Blog</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="https://www.silverbug.it/category/cloud/">Cloud</a>
+</li>
+	<li class="cat-item cat-item-39"><a href="https://www.silverbug.it/category/connectivity/">Connectivity</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="https://www.silverbug.it/category/security/">Cyber Security</a>
+</li>
+	<li class="cat-item cat-item-38"><a href="https://www.silverbug.it/category/disaster-recovery/">Disaster Recovery</a>
+</li>
+	<li class="cat-item cat-item-37"><a href="https://www.silverbug.it/category/it-support/">IT Support</a>
+</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+	<div class="widget widget-archives">
+	<h4 class="widget-title">Archives</h4>
+	<div class="widget-body">
+		<nav role="navigation" class="menu">
+			<ul class="list-unstyled">
+					<li><a href='https://www.silverbug.it/2023/05/'>May 2023</a></li>
+	<li><a href='https://www.silverbug.it/2023/04/'>April 2023</a></li>
+	<li><a href='https://www.silverbug.it/2023/03/'>March 2023</a></li>
+	<li><a href='https://www.silverbug.it/2023/02/'>February 2023</a></li>
+	<li><a href='https://www.silverbug.it/2023/01/'>January 2023</a></li>
+	<li><a href='https://www.silverbug.it/2022/12/'>December 2022</a></li>
+	<li><a href='https://www.silverbug.it/2022/05/'>May 2022</a></li>
+	<li><a href='https://www.silverbug.it/2022/04/'>April 2022</a></li>
+	<li><a href='https://www.silverbug.it/2022/03/'>March 2022</a></li>
+	<li><a href='https://www.silverbug.it/2022/02/'>February 2022</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+</div>		</div>
+	</div>
+	</div>
+</main>
+
+	<div class="mt-auto">
+		<footer id="site-footer">
+	<div class="footer-c2a">
+		<div class="container">
+			<div class="footer-c2a-bg rounded-block">
+				<div>
+					<div class="d-lg-flex justify-content-between align-items-center">
+						<div class="mb-4 mb-lg-0">
+							<p>Ready to get started?</p>
+							<p>Let’s discuss your IT challenges.</p>
+						</div>
+						<div>
+							<a class="button-item  odin-button-white" href="https://www.silverbug.it/contact-us/">
+	<span>
+		<span class="button-label">Contact Us</span>
+			</span>
+</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-main">
+		<div class="container-wide">
+			<div class="bg-dark rounded-block">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-lg-4">
+							<div class="footer-left">
+								<div class="logo-wrapper">
+									<a href="https://www.silverbug.it" class="logo">
+	<img width="180" height="43" src="https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white-180x43.png" class="attachment-odin_small size-odin_small" alt="Silverbug Ltd" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white-180x43.png 180w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white-300x72.png 300w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white-1024x247.png 1024w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white-768x186.png 768w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white-1536x371.png 1536w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_white.png 1618w" sizes="(max-width: 180px) 100vw, 180px" /></a>								</div>
+								<div class="contact-wrapper">
+									<strong class="odin-footer-menu-heading">Contact</strong>
+									<a class="odin-contact-link " href="tel:+443455651953"><span>+44 345 565 1953</span><span class="visually-hidden">Phone</span></a> <br>
+									<a class="odin-contact-link " href="mailto:enquiries@silverbug.it"><span>enquiries@silverbug.it</span><span class="visually-hidden">Email Us</span></a>								</div>
+								<ul class="odin-menu-social "><li><a href="https://www.facebook.com/SilverbugUK" rel="noopener" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"/></svg><span class="visually-hidden">Facebook</span></a></li><li><a href="https://twitter.com/Silverbug_ltd" rel="noopener" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z"/></svg><span class="visually-hidden">Twitter</span></a></li><li><a href="https://www.linkedin.com/company/silverbug/" rel="noopener" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg><span class="visually-hidden">Linkedin</span></a></li></ul>																<div class="accreditation">
+									<img width="257" height="68" src="https://www.silverbug.it/wp-content/uploads/2022/06/microsoft-gold-partner-white.png" class="attachment-full size-full" alt="Microsoft Gold Partner" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2022/06/microsoft-gold-partner-white.png 257w, https://www.silverbug.it/wp-content/uploads/2022/06/microsoft-gold-partner-white-180x48.png 180w" sizes="(max-width: 257px) 100vw, 257px" />								</div>
+															</div>
+						</div>
+						<div class="col-12 col-lg-8">
+							<div class="menus-wrapper">
+																																			<div class="odin-footer-menu">
+	<strong class="odin-footer-menu-heading">
+		<span class="label">IT Support</span>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg></span>	</strong>
+	<ul id="footer_1" class="odin-menu odin-menu-stacked"><li id="menu-item-988" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-988"><a href="https://www.silverbug.it/it-support-services/mysilverbug/">MySilverbug</a></li>
+<li id="menu-item-989" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-989"><a href="https://www.silverbug.it/it-support-services/managed-it-support/">Managed IT Support</a></li>
+<li id="menu-item-990" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-990"><a href="https://www.silverbug.it/it-support-services/network-operations/">Network Operations</a></li>
+<li id="menu-item-991" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-991"><a href="https://www.silverbug.it/it-support-services/business-continuity/">Business Continuity</a></li>
+</ul></div>
+																																												<div class="odin-footer-menu">
+	<strong class="odin-footer-menu-heading">
+		<span class="label">IT Services</span>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg></span>	</strong>
+	<ul id="footer_2" class="odin-menu odin-menu-stacked"><li id="menu-item-992" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-992"><a href="https://www.silverbug.it/it-services/cloud-services/">Cloud Services</a></li>
+<li id="menu-item-993" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-993"><a href="https://www.silverbug.it/it-services/business-services/">Business Services</a></li>
+<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://www.silverbug.it/it-services/consultancy-services/">Consultancy Services</a></li>
+<li id="menu-item-2321" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2321"><a href="https://www.silverbug.it/it-services/it-recycling-services/">IT Recycling Services</a></li>
+</ul></div>
+																																												<div class="odin-footer-menu">
+	<strong class="odin-footer-menu-heading">
+		<span class="label">Cyber Security</span>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg></span>	</strong>
+	<ul id="footer_3" class="odin-menu odin-menu-stacked"><li id="menu-item-995" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-995"><a href="https://www.silverbug.it/managed-cyber-security/managed-detection-response/">Managed Detection &#038; Response</a></li>
+<li id="menu-item-996" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-996"><a href="https://www.silverbug.it/managed-cyber-security/threat-vulnerability-management/">Threat &#038; Vulnerability Management</a></li>
+<li id="menu-item-997" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-997"><a href="https://www.silverbug.it/managed-cyber-security/cloud-posture-management/">Cloud Posture Management</a></li>
+<li id="menu-item-998" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-998"><a href="https://www.silverbug.it/managed-cyber-security/endpoint-detection-response/">Endpoint Detection &#038; Response</a></li>
+<li id="menu-item-2914" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2914"><a href="https://www.silverbug.it/managed-cyber-security/brand-email-protection/">Brand &#038; Email Protection</a></li>
+<li id="menu-item-999" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-999"><a href="https://www.silverbug.it/managed-cyber-security/cyber-essentials/">Cyber Essentials</a></li>
+<li id="menu-item-1000" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1000"><a href="https://www.silverbug.it/managed-cyber-security/essential-cyber-security/">Essential Cyber Security</a></li>
+</ul></div>
+																																												<div class="odin-footer-menu">
+	<strong class="odin-footer-menu-heading">
+		<span class="label">Resources</span>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg></span>	</strong>
+	<ul id="footer_4" class="odin-menu odin-menu-stacked"><li id="menu-item-617" class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-617"><a href="https://www.silverbug.it/resource_type/information-sheets/">Information Sheets</a></li>
+<li id="menu-item-618" class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-618"><a href="https://www.silverbug.it/resource_type/whitepapers/">Whitepapers</a></li>
+<li id="menu-item-619" class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-619"><a href="https://www.silverbug.it/resource_type/case-studies/">Case Studies</a></li>
+<li id="menu-item-64" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-64"><a href="https://www.silverbug.it/category/blog/">Blog</a></li>
+<li id="menu-item-616" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-616"><a href="https://www.silverbug.it/client-it-support/">Client Area</a></li>
+</ul></div>
+																																												<div class="odin-footer-menu">
+	<strong class="odin-footer-menu-heading">
+		<span class="label">Our Company</span>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg></span>	</strong>
+	<ul id="footer_5" class="odin-menu odin-menu-stacked"><li id="menu-item-607" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-607"><a href="https://www.silverbug.it/about-us/">About Us</a></li>
+<li id="menu-item-50" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50"><a href="https://www.silverbug.it/about-us/our-history/">Our History</a></li>
+<li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51"><a href="https://www.silverbug.it/about-us/awards-accreditations/">Awards &#038; Accreditations</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="https://www.silverbug.it/about-us/meet-the-team/">Meet the Team</a></li>
+<li id="menu-item-2352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2352"><a href="https://www.silverbug.it/about-us/sustainability/">Sustainability and Community</a></li>
+<li id="menu-item-53" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-53"><a href="https://www.silverbug.it/about-us/sponsorships/">Sponsorships</a></li>
+<li id="menu-item-54" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-54"><a href="https://www.silverbug.it/about-us/careers/">Careers</a></li>
+</ul></div>
+																																												<div class="odin-footer-menu">
+	<strong class="odin-footer-menu-heading">
+		<span class="label">Our Offices</span>
+		<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg></span>	</strong>
+	<ul id="footer_6" class="odin-menu odin-menu-stacked"><li id="menu-item-608" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-608"><a href="https://www.silverbug.it/it-support-services/managed-it-support-milton-keynes/">Milton Keynes</a></li>
+<li id="menu-item-611" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-611"><a href="https://www.silverbug.it/managed-it-support-houston-tx/">Houston, Texas</a></li>
+<li id="menu-item-612" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-612"><a href="https://www.silverbug.it/managed-it-support-malaysia/">Malaysia</a></li>
+</ul></div>
+																								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-final">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12 col-lg-4 text-center order-lg-2">
+					<ul id="legal" class="odin-menu"><li id="menu-item-67" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"><a href="https://www.silverbug.it/legal/terms-conditions/">Terms &#038; Conditions</a></li>
+<li id="menu-item-66" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-66"><a rel="privacy-policy" href="https://www.silverbug.it/legal/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-2411" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2411"><a href="https://www.silverbug.it/legal/anti-slavery-policy/">Anti-slavery Policy</a></li>
+</ul>				</div>
+				<div class="col-12 col-lg-4 text-center text-lg-start order-lg-1">
+					<p class="copyright">© Silverbug IT 2023. All rights reserved.</p>				</div>
+				<div class="col-12 col-lg-4 text-center text-lg-end order-lg-3">
+					<p class="site-credits">Website Design &amp; SEO by <a rel="nofollow noopener" href="https://www.logicdesign.co.uk" target="_blank">Logic Design</a></p>				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+	</div>
+
+	<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvas">
+	<div class="offcanvas-header">
+		<span>
+			<a href="https://www.silverbug.it" class="logo">
+				<img width="180" height="43" src="https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-180x43.png" class="attachment-odin_small size-odin_small" alt="Silverbug Ltd" decoding="async" loading="lazy" srcset="https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-180x43.png 180w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-300x72.png 300w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-1024x247.png 1024w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-768x186.png 768w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour-1536x371.png 1536w, https://www.silverbug.it/wp-content/uploads/2022/12/Silverbug_Air-IT-group-logo_CMYK_colour.png 1618w" sizes="(max-width: 180px) 100vw, 180px" />			</a>
+		</span>
+		<button type="button" data-bs-dismiss="offcanvas" aria-label="Close" class="p-0">
+			<span class="odin-icon odin-icon--remix"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg></span>		</button>
+	</div>
+	<div class="offcanvas-body">
+		<nav>
+			<ul id="mobile" class="odin-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-68"><a href="https://www.silverbug.it/it-support-services/">IT Support Services</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-709"><a href="https://www.silverbug.it/it-support-services/managed-it-support/">Managed IT Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-793"><a href="https://www.silverbug.it/it-support-services/mysilverbug/">MySilverbug</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-710"><a href="https://www.silverbug.it/it-support-services/network-operations/">Network Operations</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-711"><a href="https://www.silverbug.it/it-support-services/business-continuity/">Business Continuity</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-73"><a href="https://www.silverbug.it/managed-cyber-security/">Managed Cyber Security</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-713"><a href="https://www.silverbug.it/managed-cyber-security/managed-detection-response/">Managed Detection &#038; Response</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-714"><a href="https://www.silverbug.it/managed-cyber-security/threat-vulnerability-management/">Threat &#038; Vulnerability Management</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-715"><a href="https://www.silverbug.it/managed-cyber-security/cloud-posture-management/">Cloud Posture Management</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-716"><a href="https://www.silverbug.it/managed-cyber-security/endpoint-detection-response/">Endpoint Detection &#038; Response</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2913"><a href="https://www.silverbug.it/managed-cyber-security/brand-email-protection/">Brand &#038; Email Protection</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-717"><a href="https://www.silverbug.it/managed-cyber-security/cyber-essentials/">Cyber Essentials</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-718"><a href="https://www.silverbug.it/managed-cyber-security/essential-cyber-security/">Essential Cyber Security</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-77"><a href="https://www.silverbug.it/it-services/">IT Services</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-719"><a href="https://www.silverbug.it/it-services/cloud-services/">Cloud Services</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a href="https://www.silverbug.it/it-services/cloud-services/microsoft-365/">Microsoft 365</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a href="https://www.silverbug.it/it-services/cloud-services/microsoft-azure/">Microsoft Azure</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-724"><a href="https://www.silverbug.it/it-services/cloud-services/sharepoint/">SharePoint</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-725"><a href="https://www.silverbug.it/it-services/cloud-services/modern-workplace/">Modern Workplace</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-720"><a href="https://www.silverbug.it/it-services/business-services/">Business Services</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-726"><a href="https://www.silverbug.it/it-services/business-services/business-communication/">Business Communication</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-727"><a href="https://www.silverbug.it/it-services/business-services/business-connectivity/">Business Connectivity</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-728"><a href="https://www.silverbug.it/it-services/business-services/managed-print/">Managed Print</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-729"><a href="https://www.silverbug.it/it-services/business-services/audio-visual-solutions/">Audio Visual Solutions</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-721"><a href="https://www.silverbug.it/it-services/consultancy-services/">Consultancy Services</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-730"><a href="https://www.silverbug.it/it-services/consultancy-services/it-consultancy/">IT Consultancy</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-731"><a href="https://www.silverbug.it/it-services/consultancy-services/virtual-it-director/">Virtual IT Director</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2322"><a href="https://www.silverbug.it/it-services/it-recycling-services/">IT Recycling Services</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-82"><a href="https://www.silverbug.it/about-us/">About Us</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83"><a href="https://www.silverbug.it/about-us/our-history/">Our History</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84"><a href="https://www.silverbug.it/about-us/awards-accreditations/">Awards &#038; Accreditations</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85"><a href="https://www.silverbug.it/about-us/meet-the-team/">Meet the Team</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2351"><a href="https://www.silverbug.it/about-us/sustainability/">Sustainability and Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-86"><a href="https://www.silverbug.it/about-us/sponsorships/">Sponsorships</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87"><a href="https://www.silverbug.it/about-us/careers/">Careers</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-471"><a href="https://www.silverbug.it/resources/">Resources</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-468"><a href="https://www.silverbug.it/resource_type/case-studies/">Case Studies</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-469"><a href="https://www.silverbug.it/resource_type/information-sheets/">Information Sheets</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-resource_type menu-item-470"><a href="https://www.silverbug.it/resource_type/whitepapers/">Whitepapers</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-90"><a href="https://www.silverbug.it/category/blog/">Blog</a></li>
+</ul>		</nav>
+		<div class="odin-buttons flex-column justify-content-center p-4">
+			<a class="button-item  odin-button-primary" href="https://www.silverbug.it/contact-us/">
+	<span>
+		<span class="button-label">Contact Us</span>
+			</span>
+</a>
+			<a class="button-item  odin-button-link" href="https://www.silverbug.it/client-it-support/">
+	<span>
+		<span class="button-label">Client Area</span>
+			</span>
+</a>
+		</div>
+	</div>
+</div>
+	
+	<script src='https://www.silverbug.it/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.7.7' id='swv-js'></script>
+<script id='contact-form-7-js-extra'>
+var wpcf7 = {"api":{"root":"https:\/\/www.silverbug.it\/wp-json\/","namespace":"contact-form-7\/v1"}};
+</script>
+<script src='https://www.silverbug.it/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.7.7' id='contact-form-7-js'></script>
+<script id='leadin-script-loader-js-js-extra'>
+var leadin_wordpress = {"userRole":"visitor","pageType":"post","leadinPluginVersion":"10.1.30"};
+</script>
+<script src='https://js.hs-scripts.com/2847527.js?integration=WordPress&#038;ver=10.1.30' async defer id='hs-script-loader'></script>
+<script src='https://www.silverbug.it/wp-content/themes/odin/assets/js/library.js?ver=1658146250' id='odin-library-js'></script>
+<script src='https://www.silverbug.it/wp-content/themes/odin/assets/js/main.js?ver=1658147175' id='theme-main-js'></script>
+<script type="module" src="https://www.silverbug.it/wp-content/themes/odin/assets/js/block-editor.js?ver=1658145834"></script>
+	
+</body>
+</html>
+<!-- plugin=object-cache-pro client=phpredis metric#hits=9024 metric#misses=4 metric#hit-ratio=100.0 metric#bytes=2207535 metric#prefetches=268 metric#store-reads=28 metric#store-writes=5 metric#store-hits=424 metric#store-misses=0 metric#sql-queries=9 metric#ms-total=145.01 metric#ms-cache=13.35 metric#ms-cache-avg=0.4172 metric#ms-cache-ratio=9.2 sample#redis-hits=6468283 sample#redis-misses=324184 sample#redis-hit-ratio=95.2 sample#redis-ops-per-sec=13 sample#redis-evicted-keys=0 sample#redis-used-memory=43378784 sample#redis-used-memory-rss=39903232 sample#redis-memory-fragmentation-ratio=0.9 sample#redis-connected-clients=1 sample#redis-tracking-clients=0 sample#redis-rejected-connections=0 sample#redis-keys=2052 -->
