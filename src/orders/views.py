@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Order,OrderItem
-# Create your views here.
+
+from .models import Order
+
 
 def order_list(request):
     orders  = Order.objects.all()
