@@ -6,16 +6,17 @@
         <h6 class="section-subtitle text-center">{{category.title}}</h6>
         <h3 class="section-title mb-6 pb-3 text-center">{{category.description}}</h3>
         <div class="row">
-          {% for food in category.food_set.all %}
+
 
     <div class="flex-container" >
-        {% for category in category_model_instance %}
+      {% for food in category.food_set.all %}
         <div class="card">
-            <img src="" alt="foods in Special Dishes">
-          <h5 class="card-title"><a href="{% url 'food_details' category.id %}">{{food.title}}</a></h5>
+            <img src="{{ food.image.url }}" alt="foods in Special Dishes">
+          <h5 class="card-title"><a href="{% url 'foods:food_details' food.id %}">{{food.title}}</a></h5>
           <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add to Cart</a>
           <!-- counter??? -->
         </div>
       {% endfor %}
     </div>
 </section>
+{% endblock %}
