@@ -1,16 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Your Cart</h1>
-  <ul>
-    {% for food, quantity in cart.items %}
-      <li>
-        <a href="{% url 'food_details' food.id %}">{{ food }}</a> - Quantity: {{ quantity }}
-        <form method="post" action="{% url 'cart_delete' %}">
-          {% csrf_token %}
-          <button type="submit" name="food" value="{{ food.id }}">Delete</button>
-        </form>
-      </li>
+<section id="service" class="pattern-style-4 has-overlay">
+  <div class="container raise-2">
+      <h6 class="section-subtitle text-center">Your Cart</h6>
+      <h3 class="section-title mb-6 pb-3 text-center">Special Dishes</h3>
+      {% for food, quantity in cart.items %}
+
+      <div class="row">
+          <div class="col-md-6 mb-4">
+              <a href="javascrip:void(0)" class="custom-list">
+                <div class="col">
+                  <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+                </div>
+                  <div class="info">
+                      <div class="head clearfix">
+                          <h5 class="title float-left"><a href="{% url 'food:food_details' food.id %}">{{ food }}</a> </h5>
+                          <p class="float-right text-primary">Quantity: {{ quantity }}</p>
+                      </div>
+                      <div class="body">
+                        <form method="post" action="{% url 'cart_delete' %}">
+                          {% csrf_token %}
+                          <button type="submit" name="food" value="{{ food.id }}">Delete</button>
+                          
+                        </form>
+                      </div>
+                  </div>
+              </a>
+          </div>
+
     {% endfor %}
-  </ul>
 {% endblock %}
