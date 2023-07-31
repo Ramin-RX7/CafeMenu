@@ -67,7 +67,7 @@ def cart(request):
         return render(request,'orders/cart.html',context)
 
     elif request.method == "POST":
-        food_id = request.POST.get('food_id')
+        food_id = request.POST.get('food')
         quantity = request.POST.get('quantity')
         cart_cookie = request.COOKIES.get('cart')
 
