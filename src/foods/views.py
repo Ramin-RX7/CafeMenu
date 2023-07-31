@@ -26,7 +26,7 @@ def search(request):
     if request.method == "GET":
         searched = request.GET.get('searched')
         FOODS_QUERYSET = Food.objects.filter(
-        Q(title__contains=searched).distinct())
+        Q(title__contains=searched)).distinct()
         return render(request, 'foods/search.html', {'searched':searched, "foods":FOODS_QUERYSET})
     else:
         raise Http404
