@@ -2,11 +2,13 @@ from datetime import datetime
 
 from django.shortcuts import render,redirect
 from django.db import transaction
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import Order,Table,OrderItem
+from .forms import CustomerLoginForm
 from foods.models import Food
 
-
+# Create your views here.
 
 def index(request):
     orders  = Order.objects.all()
@@ -76,3 +78,12 @@ def cart_delete(request):
         response.set_cookie('cart', str_cart)
         return response
     return redirect('cart')
+
+
+def customer_login(request):
+    if request.method == "POST":
+        form = CustomerLoginForm(request.POST)
+        if form.is_valid():
+            phone=form.cleaned_data['phone']
+            request.session['phone']=phone
+    return redirect('menu.html')
