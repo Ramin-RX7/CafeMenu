@@ -23,19 +23,15 @@ def food_details(request, id):
 
 
 def search(request):
-    if request.method != "GET":
+    if request.method == "GET":
+        searched = request.GET.get('searched')
+        FOODS_QUERYSET = Food.objects.filter(
+        Q(title__contains=searched).distinct())
+        return render(request, 'foods/search.html', {'searched':searched, "foods":FOODS_QUERYSET})
+    else:
         raise Http404
-    return render(request,'foods/search.html')
 
 
 def menu(request):
     return render(request, "foods/menu.html")
 
-def search_details(request):
-    if request.method == "GET":
-        searched = request.GET.get('searched')
-        FOODS_QUERYSET = Food.objects.filter(
-        Q(title__contains=searched).distinct())
-        return render(request, "", {'searched':searched, "foods":FOODS_QUERYSET})
-    else:
-            return render(request, "", {})
