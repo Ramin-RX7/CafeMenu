@@ -1,1 +1,42 @@
 {% extands 'base.html' %}
+
+    {% block content %}        
+    <head>
+        <link rel="stylesheet" href="{% static 'styles/pigga.css' %}">
+    </head>
+        {% for food in foods %}
+
+        <br>
+        <section id="service" class="pattern-style-4 has-overlay">
+            <div class="container raise-2">
+                <h6 class="section-subtitle text-center">Featured Food</h6>
+                <h3 class="section-title mb-6 pb-3 text-center">Special Dishes</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <a href="javascrip:void(0)" class="custom-list">
+                            <div class="img-holder">
+                                <img src="{{ food.image.url }}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="head clearfix">
+                                    <h5 class="title float-left">{{ food.title }}</h5>
+                                    <p class="float-right text-primary">{{ food.price }}</p>
+                                </div>
+                                <div class="body">
+                                    <p>{{ food.description }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    </div>
+                    </div>
+        <br/>
+        {% endfor %}
+        
+        {% else %}
+        <h1>
+            you forget search for foods!!
+        </h1>
+        {% endif %}
+    </section>
+    {% endblock content %}
