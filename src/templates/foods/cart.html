@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>Your Cart</h1>
+  <ul>
+    {% for food, quantity in cart.items %}
+      <li>
+        <a href="{% url 'food_details' food.id %}">{{ food }}</a> - Quantity: {{ quantity }}
+        <form method="post" action="{% url 'cart_delete' %}">
+          {% csrf_token %}
+          <button type="submit" name="food" value="{{ food.id }}">Delete</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+Create the cart template which has to show the customer what items they have chosen to order.
+This templates receives a context like this:
+
+context = {
+  "cart" : {
+        FOOD_OBJECT: QUANTITY
+   }
+}
+You have to display their cart showing what items (and how many of it) they have chosen.
+You also need to link all the foods to their own url
+
+All items must have a button to delete from the cart.
+This means you have to make form for each food that only contains a button to delete it from the cart.
+The action and method of the form: POST to cart_delete url
+This button must have the "food" as it's html tag name and food.id as the html tag value so the view can handle the deletion.
