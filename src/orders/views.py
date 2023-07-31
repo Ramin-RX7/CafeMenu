@@ -28,3 +28,18 @@ def cart(request):
             new_cart[food] = value
         context = {"cart": new_cart}
         return render(request,'orders/cart.html',context)
+    
+    elif request.method == "POST":
+        food_id = request.POST.get('food_id')
+        quantity = request.POST.get('quantity')
+        cart_cookie = request.COOKIES.get('cart')
+        
+        if cart_cookie:
+            cart_dict = eval(cart_cookie)
+        else:
+            cart_dict= {}
+            
+        cart_dict[food_id] = quantity
+        response = redirect('menu')
+        response.set_cookie('cart', str(cart_dict))
+        return response
