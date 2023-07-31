@@ -4,7 +4,7 @@
 
 <section id="about2">
   <h6 class="section-subtitle text-center">Menu</h6>
-  {% category in categories %}
+  {% for category in categories %}
   <h3 class="section-title mb-6 pb-3 text-center">{{category.title}}</h3>
   {% for food in category.food_set.all %}
   <div class="container">
@@ -12,6 +12,9 @@
       <div class="row align-items-center">
           <div class="col-md-6">
               <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{food.title}}</a></h3>
+              <p>{{ food.description|truncatewords:50 }}</p>
+              <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block" style="align-items: center;margin-right: 1rem;display: grid;">Add to Cart</button>
+              <input type="number" name="quantity" id="" class="form-control" value="1" min="1" max="{{ food.available_quantity }}" style="width: 20%;">
           </div>
           <div class="col-md-6 order-1 order-sm-first">
               <div class="row">
@@ -22,6 +25,7 @@
           </div>
       </div>
   </div>
+  {% endfor %}
   {% endfor %}
 </section>
 
