@@ -15,13 +15,14 @@
                 </div>
                   <div class="info">
                       <div class="head clearfix">
-                          <h5 class="title float-left"><a href="{% url 'food_details' food.id %}">{{ food }}</a> </h5>
+                          <h5 class="title float-left"><a href="{% url 'food:food_details' food.id %}">{{ food }}</a> </h5>
                           <p class="float-right text-primary">Quantity: {{ quantity }}</p>
                       </div>
                       <div class="body">
                         <form method="post" action="{% url 'cart_delete' %}">
                           {% csrf_token %}
                           <button type="submit" name="food" value="{{ food.id }}">Delete</button>
+                          
                         </form>
                       </div>
                   </div>
