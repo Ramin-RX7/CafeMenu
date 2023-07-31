@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import RegexValidator
+
 from foods.models import Food
 
 
@@ -18,13 +20,14 @@ class Table(models.Model):
                 return table
 
 
+customer_validator = RegexValidator(r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?P<middle3>\d{3})-?(?P<last4>\d{4})")
 class Order(models.Model):
-    customer = models.IntegerField()
+    customer = models.CharField(max_length=15, validators=[customer_validator])
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
     price = models.FloatField()
     discount = models.FloatField(default=0.0)
     date_submit = models.DateTimeField(auto_now_add=True)
-    is_approved = models.BooleanField()
+    is_approved = models.BooleanField(null=True)
 
     def __str__(self) -> str:
         return f"{self.customer}"
