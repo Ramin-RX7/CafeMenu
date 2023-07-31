@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cafe Group One</title>
+    <link rel="stylesheet" href="{% static 'styles/pigga.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
+</head>
+
+
+<body>
+	{% include 'base/navbar.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% include 'base/footer.html' %}
+
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/bootstrap.affix.js' %}"></script>
+    <script src="{% static 'js/pigga.js' %}"></script>
+</body>
+
+</html>
