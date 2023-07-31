@@ -28,3 +28,17 @@ def cart(request):
             new_cart[food] = value
         context = {"cart": new_cart}
         return render(request,'orders/cart.html',context)
+
+
+
+def cart_delete(request):
+    if request.method =="POST":
+        data = request.COOKIES.get("cart")
+        food_id = request.POST["food"]
+        cart = eval(data)
+        del cart[food_id]
+        str_cart = str(cart)
+        response = redirect('cart')
+        response.set_cookie('cart', str_cart)
+        return response
+    return redirect('cart') 
