@@ -1,7 +1,11 @@
-from django.shortcuts import render,redirect
+from datetime import datetime
 
-from .models import Order
+from django.shortcuts import render,redirect
+from django.db import transaction
+
+from .models import Order,Table,OrderItem
 from foods.models import Food
+
 
 
 def index(request):
@@ -18,6 +22,37 @@ def order_details(request,id):
     return render(request,'orders/order_details.html',context)
 
 
+def set_order(request):
+    if request.method == "POST":
+        if not (data := request.COOKIES.get("cart")):
+            redirect("cart")
+        cart = eval(data)
+        customer = request.session.get("phone")
+
+        discount = 0.0
+        date_submit = datetime.now()
+        table = Table.get_available_table()
+
+        order = Order(customer=customer, table=table, discount=discount, date_submit=date_submit)
+        items = []
+
+        with transaction.atomic():
+            order.save(check_price=False)
+            for food_id,quantity in cart.items():
+                food = Food.objects.get(id=food_id)
+                orderitem = OrderItem(
+                    order = order,
+                    food = food,
+                    quantity = quantity,
+                    unit_price = food.price,
+                    discount = food.discount
+                )
+                orderitem.save()
+                items.append(orderitem)
+
+    return redirect("orders:index")
+
+
 def cart(request):
     if request.method == "GET":
         data = request.COOKIES.get("cart")
@@ -30,7 +65,6 @@ def cart(request):
         return render(request,'orders/cart.html',context)
 
 
-
 def cart_delete(request):
     if request.method =="POST":
         data = request.COOKIES.get("cart")
@@ -41,4 +75,4 @@ def cart_delete(request):
         response = redirect('cart')
         response.set_cookie('cart', str_cart)
         return response
-    return redirect('cart') 
+    return redirect('cart')
