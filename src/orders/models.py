@@ -5,10 +5,17 @@ from foods.models import Food
 
 class Table(models.Model):
     name = models.CharField(unique=True, max_length=25)
-    is_reserved = models.BooleanField()
+    is_reserved = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"{self.name} ({'reserved' if self.is_reserved else 'empty'})"
+
+    @classmethod
+    def get_available_table(cls):
+        tables = cls.objects.all()
+        for table in tables:
+            if table.is_reserved == False:
+                return table
 
 
 class Order(models.Model):
