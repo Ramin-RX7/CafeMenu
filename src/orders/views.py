@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render,redirect
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
@@ -63,7 +63,10 @@ def cart(request):
         for key,value in cart.items():
             food = Food.objects.get(id=key)
             new_cart[food] = value
-        context = {"cart": new_cart}
+        if new_cart == {}:
+            context = {}
+        else:
+            context = {"cart": new_cart}
         return render(request,'orders/cart.html',context)
 
     elif request.method == "POST":
@@ -77,7 +80,7 @@ def cart(request):
             cart_dict= {}
 
         cart_dict[food_id] = quantity
-        response = redirect('menu')
+        response = redirect('foods:menu')
         response.set_cookie('cart', str(cart_dict))
         return response
 
@@ -89,16 +92,20 @@ def cart_delete(request):
         cart = eval(data)
         del cart[food_id]
         str_cart = str(cart)
-        response = redirect('cart')
+        response = redirect('orders:cart')
         response.set_cookie('cart', str_cart)
         return response
-    return redirect('cart')
+    return redirect('orders:cart')
 
 
 def customer_login(request):
     if request.method == "POST":
         form = CustomerLoginForm(request.POST)
         if form.is_valid():
-            phone=form.cleaned_data['phone']
-            request.session['phone']=phone
-    return redirect('menu.html')
+            phone = form.cleaned_data['phone']
+            request.session['phone'] = phone
+        else:
+            import main.utils
+            main.utils.EditableContexts.form_login_error = "Invalid phone number"
+
+    return redirect(request.META.get('HTTP_REFERER', reverse('index')))

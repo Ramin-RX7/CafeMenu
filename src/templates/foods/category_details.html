@@ -31,6 +31,10 @@
                 <input type="number" name="quantity" id="" class="form-control" value="1" min="1" max="{{ food.available_quantity }}" style="width: 20%;">
               </form>
           </div>
+        {% empty %}
+        <h3 class="text-center">Unfortunately this category is still empty.</h3>
+        <br>
+        <h3 class="text-center">Check out later to see foods here</h3>
         {% endfor %}
       </div>
   </div>
