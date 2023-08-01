@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render,redirect
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
@@ -102,6 +102,10 @@ def customer_login(request):
     if request.method == "POST":
         form = CustomerLoginForm(request.POST)
         if form.is_valid():
-            phone=form.cleaned_data['phone']
-            request.session['phone']=phone
-    return redirect('menu.html')
+            phone = form.cleaned_data['phone']
+            request.session['phone'] = phone
+        else:
+            import main.utils
+            main.utils.EditableContexts.form_login_error = "Invalid phone number"
+
+    return redirect(request.META.get('HTTP_REFERER', reverse('index')))
