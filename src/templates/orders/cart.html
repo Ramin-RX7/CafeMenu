@@ -33,11 +33,29 @@
                 </div>
             </div>
         </div>
-
     </div>
+    {% empty %}
+        <h3 class="text-center">Your cart is empty</h3>
     {% endfor %}
-  </section>
 
+    {% if cart %}
+    <div class="container my-5">
+        {% if is_logged_in %}
+        <form method="post" action="{% url 'orders:cart_delete' %}">
+            {% csrf_token %}
+            <div class="d-flex px-5 mx-5 py-5">
+                <button type="submit" name="food" value="{{ food.id }}" class="btn btn-lg btn-primary btn-block"><h3>Order</h3></button>
+            </div>
+        </form>
+        {% else %}
+        <!-- <h2 class="text-center">Please fill out the form below to continue</h2> -->
+        {% endif %}
+    </div>
+    {% else %}
+        ...
+    {% endif %}
+
+  </section>
 
 
 
