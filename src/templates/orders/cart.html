@@ -1,35 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section id="service" class="pattern-style-4 has-overlay">
-  <div class="container raise-2">
-      <h6 class="section-subtitle text-center">Your Cart</h6>
-      <h3 class="section-title mb-6 pb-3 text-center">Special Dishes</h3>
 
-      {% for food, quantity in cart.items %}
-        <div class="row">
-          <div class="col-md-6 mb-4">
-              <a href="javascrip:void(0)" class="custom-list">
-                <div class="col">
-                  <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+<section id="about2">
+    <h6 class="section-subtitle text-center">Menu</h6>
+    <h3 class="section-title mb-6 pb-3 text-center">Categories</h3>
+    {% for food,quantity in cart.items %}
+    <div class="container">
+        <div class="section-devider my-5 transparent"></div>
+        <div class="row align-items-center">
+
+            <div class="col-4">
+                <a href="{% url 'foods:food_details' food.id %}">
+                <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <!-- <h6 class="section-subtitle">{}}</h6> -->
+                <h3 class="section-title"><a href="{% url 'foods:food_details' food.id %}">{{food.title}}</a></h3>
+                <p>{{ food.description|truncatewords:50 }}</p>
+
+                <div class="mb-4 h4 float-left text-primary">
+                    Quantity: {{ quantity }}
                 </div>
-                  <div class="info">
-                      <div class="head clearfix">
-                          <h5 class="title float-left"><a href="{% url 'foods:food_details' food.id %}">{{ food }}</a> </h5>
-                          <p class="float-right text-primary">Quantity: {{ quantity }}</p>
-                      </div>
-                      <div class="body">
-                        <form method="post" action="{% url 'orders:cart_delete' %}">
-                          {% csrf_token %}
-                          <button type="submit" name="food" value="{{ food.id }}">Delete</button>
 
-                        </form>
-                      </div>
-                  </div>
-              </a>
-          </div>
+                <div class="body">
+                    <form method="post" action="{% url 'orders:cart_delete' %}">
+                      {% csrf_token %}
+                      <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block">Delete</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        {% endfor %}
+
     </div>
-</section>
+    {% endfor %}
+  </section>
+
+
+
+
 {% endblock %}
