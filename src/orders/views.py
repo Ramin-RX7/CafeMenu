@@ -63,7 +63,10 @@ def cart(request):
         for key,value in cart.items():
             food = Food.objects.get(id=key)
             new_cart[food] = value
-        context = {"cart": new_cart}
+        if new_cart == {}:
+            context = {}
+        else:
+            context = {"cart": new_cart}
         return render(request,'orders/cart.html',context)
 
     elif request.method == "POST":
@@ -77,7 +80,7 @@ def cart(request):
             cart_dict= {}
 
         cart_dict[food_id] = quantity
-        response = redirect('menu')
+        response = redirect('foods:menu')
         response.set_cookie('cart', str(cart_dict))
         return response
 
