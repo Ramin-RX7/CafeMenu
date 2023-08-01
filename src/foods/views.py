@@ -31,5 +31,7 @@ def search(request):
 
 
 def menu(request):
-    return render(request, "foods/menu.html")
+    categories = Category.objects.prefetch_related('food_set').all()
+    context = {"categories":categories}
+    return render(request, "foods/menu.html", context)
 
