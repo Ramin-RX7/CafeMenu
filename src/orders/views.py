@@ -92,10 +92,10 @@ def cart_delete(request):
         cart = eval(data)
         del cart[food_id]
         str_cart = str(cart)
-        response = redirect('cart')
+        response = redirect('orders:cart')
         response.set_cookie('cart', str_cart)
         return response
-    return redirect('cart')
+    return redirect('orders:cart')
 
 
 def customer_login(request):
