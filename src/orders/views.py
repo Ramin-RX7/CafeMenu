@@ -42,10 +42,9 @@ def set_order(request):
         cart = eval(data)
         customer = request.session.get("phone")
         discount = 0.0
-        date_submit = datetime.now()
         table = Table.get_available_table()
 
-        order = Order(customer=customer, table=table, discount=discount, date_submit=date_submit)
+        order = Order(customer=customer, table=table, discount=discount)
 
         response = redirect("orders:index")
         with transaction.atomic():
