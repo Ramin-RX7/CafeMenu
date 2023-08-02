@@ -30,14 +30,13 @@ def set_order(request):
             redirect("cart")
         cart = eval(data)
         customer = request.session.get("phone")
-
         discount = 0.0
         date_submit = datetime.now()
         table = Table.get_available_table()
 
         order = Order(customer=customer, table=table, discount=discount, date_submit=date_submit)
-        items = []
 
+        items = []
         with transaction.atomic():
             order.save(check_price=False)
             for food_id,quantity in cart.items():
@@ -45,12 +44,16 @@ def set_order(request):
                 orderitem = OrderItem(
                     order = order,
                     food = food,
-                    quantity = quantity,
+                    quantity = int(quantity),
                     unit_price = food.price,
                     discount = food.discount
                 )
                 orderitem.save()
                 items.append(orderitem)
+
+        response = redirect("orders:index")
+        response.delete_cookie("cart")
+        return response
 
     return redirect("orders:index")
 
@@ -72,6 +75,8 @@ def cart(request):
         return response
 
     data = request.COOKIES.get("cart")
+    if not (data := request.COOKIES.get("cart")):
+        return render(request,'orders/cart.html',{})
     cart = eval(data)
     new_cart = {}
     for key,value in cart.items():
