@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filters %}
 {% block content %}
 
 <section id="about2">
@@ -9,7 +10,7 @@
         <div class="section-devider my-6 transparent"></div>
         <h4 class="float-left title">Order {{forloop.counter}}</h4>
     </div>
-   
+
     <br>
     <hr>
     <div class="container"><h5 class="text-primary">Order details</h5></div>
@@ -21,13 +22,13 @@
                       <div class="info">
                           <div class="head clearfix">
                               <h class="title float-left text-primary " style="font-size: 20px;">{{ item.food }}</h>
-                              <h class="float-right" style="font-size: 20px;">price : {{ item.food.price }}$</h>
+                              <h class="float-right" style="font-size: 20px;">price : {{ item.unit_price }}$</h>
                           </div>
                           <div class="body">
                             <h class="float-right" style="font-size: 18px;">quantity : {{ item.quantity }}</h>
                          </div>
                          <div class="body">
-                            <h class="float-right"style="font-size: 18px;"> total : {{ item.unit_price }}</h>
+                            <h class="float-right"style="font-size: 18px;"> total : {{ item.unit_price|mul:item.quantity }}</h>
                         </div>
                       </div>
                     </div>
