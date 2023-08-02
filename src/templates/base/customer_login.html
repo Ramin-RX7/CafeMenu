@@ -9,7 +9,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                  <!-- <input type="tel" class="form-control" id="" placeholder="Phone number"> -->
-                 {% if login_form_error %}
+                 {% if form_login_error %}
                     <h4>Invalid phone number</h4>
                  {% endif %}
                  {{ login_form.phone.errors }}
