@@ -12,8 +12,8 @@
         {% for food in category.food_set.all %}
           <div class="col-md-6 mb-4">
               <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
-                  <div class="img-holder">
-                      <img src="{{ food.image.url }}" alt="">
+                  <div class="img-holder" style="margin-right: 35px;">
+                      <img src="{{ food.image.url }}" alt="" style="width: 140%;">
                   </div>
                   <div class="info">
                       <div class="head clearfix">
@@ -21,7 +21,7 @@
                           <p class="float-right text-primary">${{ food.price }}</p>
                       </div>
                       <div class="body">
-                          <p>{{ food.description }}</p>
+                          <p>{{ food.description|truncatechars:45 }}</p>
                       </div>
                   </div>
               </a>
