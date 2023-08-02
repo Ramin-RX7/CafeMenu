@@ -11,9 +11,22 @@ from foods.models import Food
 # Create your views here.
 
 def index(request):
-    orders  = Order.objects.all()
-    context = {"orders": orders }
+    order_ids_str = request.session.get('current_session_orders', '')
+    order_ids = [int(order_id) for order_id in order_ids_str.split(',') if order_id ]
+    
+    current_session_orders = []
+    for order_id in order_ids:
+        try:
+            order = Order.objects.get(id=order_id)
+            current_session_orders.append(order)
+        except Order.DoesNotExist:
+            pass
+    context = {
+        'orders' : current_session_orders
+    }
+
     return render(request,'orders/order_list.html',context)
+
 def order_list(request):
     return redirect("index")
 
