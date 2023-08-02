@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import Http404
+from django.db.models import Count
+
 from .models import Category,Food
+
 
 
 def category_list(request):
@@ -31,7 +34,8 @@ def search(request):
 
 
 def menu(request):
-    categories = Category.objects.prefetch_related('food_set').all()
+    categories = Category.objects.annotate(
+            num_foods=Count('food')
+        ).filter(num_foods__gt=0).prefetch_related('food_set')
     context = {"categories":categories}
     return render(request, "foods/menu.html", context)
-
