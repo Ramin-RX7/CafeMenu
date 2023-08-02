@@ -13,4 +13,5 @@ urlpatterns = [
     path("", index, name="index"),
     path("cart/delete/",cart_delete,name="cart_delete"),
     path("customer_login/", customer_login,name="customer_login"),
+    path("set/", set_order, name="set_order")
 ]
