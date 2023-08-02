@@ -16,6 +16,11 @@ Clone the project
     $ git clone https://github.com/Ramin-RX7/CafeMenu.git
 
 
+Navigate to the repo directory
+
+    $ cd CafeMenu
+
+
 Install required packages
 
     $ python -m pip install -r requirements.txt
