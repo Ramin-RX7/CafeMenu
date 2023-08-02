@@ -83,6 +83,21 @@ def cart(request):
         response = redirect('foods:menu')
         response.set_cookie('cart', str(cart_dict))
         return response
+    
+def cart_add(request):
+    if request.method == "POST":
+        food_id = request.POST.get('food')
+        quantity = request.POST.get('quantity')
+        cart_cookie = request.COOKIES.get('cart')
+        if cart_cookie:
+            cart_dict = eval(cart_cookie)
+        else:
+            cart_dict= {}
+
+        cart_dict[food_id] = quantity
+        response = redirect('foods:menu')
+        response.set_cookie('cart', str(cart_dict))
+        return response
 
 
 def cart_delete(request):

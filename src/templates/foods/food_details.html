@@ -18,7 +18,7 @@
                     </div>
             </div>
 
-            <form action="{% url 'orders:cart' %}" method="POST" class="d-flex my-4">
+            <form action="{% url 'orders:cart_add' %}" method="POST" class="d-flex my-4">
                 {% csrf_token %}
                 <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block" style="align-items: center;margin-right: 1rem;display: grid;">Add to Cart</button>
                 <input type="number" name="quantity" id="" class="form-control" value="1" min="1" max="{{ food.available_quantity }}" style="width: 20%;">
