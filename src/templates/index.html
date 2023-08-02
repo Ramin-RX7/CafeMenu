@@ -5,9 +5,9 @@
 
 
 <!-- Page Header -->
-<header class="header" style="background: url({% static 'images/header.jpg' %}) no-repeat center center fixed;">
+<header class="header" style="background: url({% static 'images/header.jpg' %}) no-repeat center center fixed;background-size:cover;">
     <div class="overlay">
-        <img src="{% static 'images/logo.svg' %}" alt="header Image" style="width: 25%;">
+        <img src="{% static 'images/logo.svg' %}" alt="header Image" class="logo">
         <h1 class="subtitle">Welcome To Our Restaurant</h1>
         <h2 class="title">Really Fresh &amp; Tasty</h2>
         <a class="btn btn-primary btn-lg mt-3" href="{% url 'foods:menu' %}">Menu</a>
@@ -17,7 +17,7 @@
 
 
 <!-- About Section- Opening Times -->
-<section class="pattern-style-4 has-overlay ml-5">
+<section class="pattern-style-4 has-overlay ml-5 " style="background-image: url({% static 'images/style-4.png' %});">
 <div class="row align-items-center" style="width: 100%;">
     <div class="col-5 ml-5">
         <h6 class="section-subtitle">Opening Times</h6>
