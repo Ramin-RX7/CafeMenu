@@ -3,8 +3,8 @@
 
 
 <section id="about2">
-    <h6 class="section-subtitle text-center">Menu</h6>
-    <h3 class="section-title mb-6 pb-3 text-center">Categories</h3>
+    <h6 class="section-subtitle text-center">Your</h6>
+    <h3 class="section-title mb-6 pb-3 text-center">Cart</h3>
     {% for food,quantity in cart.items %}
     <div class="container">
         <div class="section-devider my-5 transparent"></div>
@@ -40,8 +40,8 @@
 
     {% if cart %}
     <div class="container my-5">
-        {% if is_logged_in %}
-        <form method="post" action="{% url 'orders:cart_delete' %}">
+        {% if customer_logged_in %}
+        <form method="post" action="{% url 'orders:set_order' %}">
             {% csrf_token %}
             <div class="d-flex px-5 mx-5 py-5">
                 <button type="submit" name="food" value="{{ food.id }}" class="btn btn-lg btn-primary btn-block"><h3>Order</h3></button>
@@ -52,7 +52,7 @@
         {% endif %}
     </div>
     {% else %}
-        ...
+        <!-- ... -->
     {% endif %}
 
   </section>

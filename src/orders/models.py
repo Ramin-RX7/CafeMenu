@@ -58,5 +58,11 @@ class OrderItem(models.Model):
             self.food.available_quantity -= self.quantity
             self.food.save()
             super().save()
+
+            if not self.order.price:
+                self.order.price = 0.0
+            self.order.price += (self.unit_price * self.quantity)
+            self.order.save()
+
         else:
             raise SystemError
