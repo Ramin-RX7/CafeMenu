@@ -27,6 +27,9 @@
                 <a href="{% url 'orders:cart' %}" class="ml-4 mt-1 btn btn-primary btn-sm w-100">Cart</a>
              </li>
           </ul>
+               <form action="{% url 'foods:search' %}" method="get" class="ml-5">
+                  <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
+               </form>
        </div>
     </div>
  </nav>
