@@ -11,11 +11,9 @@ from foods.models import Food
 # Create your views here.
 
 def index(request):
-    order_ids_str = request.session.get('current_session_orders', '')
-    order_ids = [int(order_id) for order_id in order_ids_str.split(',') if order_id ]
-    
+    current_session_orders_ids = request.session.get('orders', [])
     current_session_orders = []
-    for order_id in order_ids:
+    for order_id in current_session_orders_ids:
         try:
             order = Order.objects.get(id=order_id)
             current_session_orders.append(order)
@@ -49,7 +47,7 @@ def set_order(request):
 
         order = Order(customer=customer, table=table, discount=discount, date_submit=date_submit)
 
-        items = []
+        response = redirect("orders:index")
         with transaction.atomic():
             order.save(check_price=False)
             for food_id,quantity in cart.items():
@@ -62,9 +60,10 @@ def set_order(request):
                     discount = food.discount
                 )
                 orderitem.save()
-                items.append(orderitem)
+            session_orders = request.session.get("orders", [])
+            session_orders.append(order.id)
+            request.session["orders"] = session_orders
 
-        response = redirect("orders:index")
         response.delete_cookie("cart")
         return response
 
