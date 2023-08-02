@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <!-- <h6 class="section-subtitle">{}}</h6> -->
                 <h3 class="section-title"><a href="{% url 'foods:food_details' food.id %}">{{food.title}}</a></h3>
-                <p>{{ food.description|truncatewords:50 }}</p>
+                <p>{{ food.description|truncatechars:50 }}</p>
 
                 <div class="mb-4 h4 float-left text-primary">
                     Quantity: {{ quantity }}
