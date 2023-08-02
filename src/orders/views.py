@@ -38,7 +38,7 @@ def order_details(request,id):
 def set_order(request):
     if request.method == "POST":
         if not (data := request.COOKIES.get("cart")):
-            redirect("cart")
+            redirect("orders:cart")
         cart = eval(data)
         customer = request.session.get("phone")
         discount = 0.0
@@ -120,8 +120,8 @@ def cart_add(request):
 def cart_delete(request):
     if request.method =="POST":
         data = request.COOKIES.get("cart")
-        food_id = request.POST["food"]
         cart = eval(data)
+        food_id = request.POST["food"]
         del cart[food_id]
         str_cart = str(cart)
         response = redirect('orders:cart')
