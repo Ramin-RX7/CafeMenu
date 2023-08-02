@@ -59,21 +59,7 @@ def set_order(request):
 
 
 def cart(request):
-    if request.method == "GET":
-        if not (data := request.COOKIES.get("cart")):
-            return render(request,'orders/cart.html',{})
-        cart = eval(data)
-        new_cart = {}
-        for key,value in cart.items():
-            food = Food.objects.get(id=key)
-            new_cart[food] = value
-        if new_cart == {}:
-            context = {}
-        else:
-            context = {"cart": new_cart}
-        return render(request,'orders/cart.html',context)
-
-    elif request.method == "POST":
+    if request.method == "POST":  # moved to cart_add()
         food_id = request.POST.get('food')
         quantity = request.POST.get('quantity')
         cart_cookie = request.COOKIES.get('cart')
@@ -88,6 +74,36 @@ def cart(request):
         response.set_cookie('cart', str(cart_dict))
         return response
 
+    data = request.COOKIES.get("cart")
+    if not (data := request.COOKIES.get("cart")):
+        return render(request,'orders/cart.html',{})
+    cart = eval(data)
+    new_cart = {}
+    for key,value in cart.items():
+        food = Food.objects.get(id=key)
+        new_cart[food] = value
+    if new_cart == {}:
+        context = {}
+    else:
+        context = {"cart": new_cart}
+    return render(request,'orders/cart.html',context)
+
+
+def cart_add(request):
+    if request.method == "POST":
+        food_id = request.POST.get('food')
+        quantity = request.POST.get('quantity')
+        cart_cookie = request.COOKIES.get('cart')
+        if cart_cookie:
+            cart_dict = eval(cart_cookie)
+        else:
+            cart_dict= {}
+
+        cart_dict[food_id] = quantity
+        response = redirect('foods:menu')
+        response.set_cookie('cart', str(cart_dict))
+        return response
+    return redirect("foods:menu")
 
 def cart_delete(request):
     if request.method =="POST":
