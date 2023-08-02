@@ -1,1 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section id="about2" style="background-image: url({% static 'images/style-4.png' %});">
+  <h6 class="section-subtitle text-center">Menu</h6>
+  <h3 class="section-title mb-6 pb-3 text-center">Categories</h3>
+  {% for category in categories %}
+  <div class="container">
+      <div class="section-devider my-6 transparent"></div>
+      <div class="row align-items-center">
+          <div class="col-md-6">
+              <h6 class="section-subtitle">Category</h6>
+              <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
+              <p>{{ category.description|truncatewords:50 }}</p>
+          </div>
+          <div class="col-md-6 order-1 order-sm-first">
+              <div class="row">
+                  <div class="col">
+                      <img alt="" src="{{ category.image.url }}" class="w-100 rounded shadow">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</section>
+
+
+{% endblock %}

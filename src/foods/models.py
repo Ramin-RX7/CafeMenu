@@ -1,20 +1,24 @@
 from django.db import models
 
+
+
 class Category(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to = 'images/categories/', default="/images/categories/default.jpeg")
 
     def __str__(self) -> str:
         return self.title
 
+
 class Food(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatFields()
-    quantity = models.IntegerField()
+    image = models.ImageField(upload_to = 'images/foods/', default="/images/foods/default.jpg")
+    available_quantity = models.IntegerField()
+    price = models.FloatField()
     discount = models.FloatField(default=0.0)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    # I use protect because we can't delete this table easy and its importent table for our site
 
     def __str__(self) -> str:
         return self.title
