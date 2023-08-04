@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "orders",
     "users",
     "main",
+    "panel",
 ]
 
 MIDDLEWARE = [
