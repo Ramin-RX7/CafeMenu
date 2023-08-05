@@ -1,8 +1,9 @@
 from django.db import models
+from main.models import BaseModel
 
 
 
-class Category(models.Model):
+class Category(BaseModel):
     title = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to = 'images/categories/', default="/images/categories/default.jpeg")
@@ -11,7 +12,7 @@ class Category(models.Model):
         return self.title
 
 
-class Food(models.Model):
+class Food(BaseModel):
     title = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to = 'images/foods/', default="/images/foods/default.jpg")
