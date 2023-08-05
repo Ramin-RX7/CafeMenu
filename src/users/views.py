@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserLogInForm
-from auth import UserAuthBackend
+from .auth import UserAuthBackend
 from django.http import HttpResponse
 
 def login(request):
@@ -9,7 +9,7 @@ def login(request):
         if form.is_valid():
             cd=form.changed_data
             phone=cd['phone']
-            user=UserAuthBackend.authenticate(request, phone)
+            user=UserAuthBackend.authenticate(request, phone=phone)
             if user:
                 request.session['user_phone']=phone
                 return redirect('verify')
@@ -18,4 +18,8 @@ def login(request):
     else:
         form=UserLogInForm()
         context={'form':form}
-        return render(request, 'Users/login.html', context)
+        return render(request, 'users/login.html', context)
+    
+
+def verify(request):
+    pass
