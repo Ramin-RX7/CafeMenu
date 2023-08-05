@@ -6,5 +6,7 @@ app_name = "panel"
 
 
 urlpatterns = [
+    path('login', login, name='login'),
+    path('verify/', verify, name='verify')
 
 ]
