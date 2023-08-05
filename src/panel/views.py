@@ -14,7 +14,7 @@ def login(request):
             user=User.objects.filter(phone=phone).first()
             if user:
                 request.session['user_phone']=phone
-                return redirect('verify')
+                return render(request, 'panel/verify.html')
         else:
             return HttpResponse('invalid phone number')
     form=UserLogInForm()
