@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
+from main.models import BaseModel
 
 
 class UserManager(BaseUserManager):
@@ -47,7 +48,7 @@ class PhoneNumberField(models.CharField):
 
 
 phone_validator = RegexValidator(r"(((\+|00)(98))|0)?9\d{2}-?\d{3}-?\d{4}")
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin,BaseModel):
     phone = PhoneNumberField(validators=[phone_validator], unique=True, max_length=20)
 
     first_name = models.CharField(max_length=50)
