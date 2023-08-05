@@ -9,18 +9,17 @@ def login(request):
     if request.method=="POST":
         form=UserLogInForm(request.POST)
         if form.is_valid():
-            cd=form.changed_data
-            phone=cd['phone']
-            user=User.objects.get(phone=phone)
+            cd=form.cleaned_data
+            phone=str(cd['phone'])
+            user=User.objects.filter(phone=phone).first()
             if user:
                 request.session['user_phone']=phone
                 return redirect('verify')
         else:
             return HttpResponse('invalid phone number')
-    else:
-        form=UserLogInForm()
-        context={'form':form}
-        return render(request, 'panel/login.html', context)
+    form=UserLogInForm()
+    context={'form':form}
+    return render(request, 'panel/login.html', context)
     
 
 def verify(request):
