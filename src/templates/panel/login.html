@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <form action="{% url 'panel:user_verify' %}" method="post">
+                <form action="{% url 'panel:login' %}" method="post">
                     {% csrf_token %}
                     {{form.as_p}}
                 
