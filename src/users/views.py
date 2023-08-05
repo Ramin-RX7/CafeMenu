@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserLogInForm
 from auth import UserAuthBackend
-from django import http
+from django.http import HttpResponse
 
 def login(request):
     if request.method=="POST":
@@ -14,7 +14,7 @@ def login(request):
                 request.session['user_phone']=phone
                 return redirect('verify')
         else:
-            return http.HttpResponse('invalid phone number')
+            return HttpResponse('invalid phone number')
     else:
         form=UserLogInForm()
         context={'form':form}
