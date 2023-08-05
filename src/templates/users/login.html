@@ -5,13 +5,11 @@
 <section id="book-table" class="bg-white">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 d-none d-md-block">
-                <img src="assets/imgs/contact.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Pigga Landing page" class="w-100 rounded shadow">
-            </div>
             <div class="col-md-6">
                 <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
                     <div class="form-group">
-                        {{form}}
+                        {{form.as_p}}
                     </div>
                     <button type="submit" value="submit" class="btn btn-primary btn-block">Log In</button>
                 </form>
