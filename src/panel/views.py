@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from .forms import UserLogInForm, UserVerifyForm
 from django.http import HttpResponse
@@ -14,7 +13,7 @@ def login(request):
             user=User.objects.filter(phone=phone).first()
             if user:
                 request.session['user_phone']=phone
-                return render(request, 'panel/user_verify.html')
+                return redirect("user_verify")            
         else:
             return HttpResponse('invalid phone number')
     form=UserLogInForm()
@@ -24,7 +23,10 @@ def login(request):
 
 def user_verify(request):
     user_phone = request.session.get('user_phone')
-
+    generated_otp = random.randint(1000, 9999)
+    request.session['2FA'] = generated_otp
+    print(generated_otp)
+    form = UserVerifyForm()
     if user_phone:
         if request.method == 'POST':
             form = UserVerifyForm(request.POST)
@@ -33,14 +35,10 @@ def user_verify(request):
                 generated_otp = request.session.get('2FA')
                 if entered_otp == str(generated_otp):
                     request.session.pop('2FA') 
-                    return redirect('index')  
-                else:
-                    return redirect('user_verify')
-        else:
-            generated_otp = random.randint(1000, 9999)
-            request.session['2FA'] = generated_otp
-            print(generated_otp)
-            form = UserVerifyForm()
+                    return redirect("index")
+            else:
+                return render(request, 'panel/user_verify.html')
+    
     return render(request, 'panel/user_verify.html', {'form': form})
 
 
