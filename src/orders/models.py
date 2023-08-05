@@ -1,11 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
-
+from main.models import BaseModel
 from foods.models import Food
 
 
 
-class Table(models.Model):
+class Table(BaseModel):
     name = models.CharField(unique=True, max_length=25)
     is_reserved = models.BooleanField(default=False)
 
@@ -21,7 +21,7 @@ class Table(models.Model):
 
 
 customer_validator = RegexValidator(r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?P<middle3>\d{3})-?(?P<last4>\d{4})")
-class Order(models.Model):
+class Order(BaseModel):
     customer = models.CharField(max_length=15, validators=[customer_validator])
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
     price = models.FloatField(null=True)
@@ -43,7 +43,7 @@ class Order(models.Model):
         super().save()
 
 
-class OrderItem(models.Model):
+class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.IntegerField()
