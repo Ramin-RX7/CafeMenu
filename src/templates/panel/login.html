@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section id="book-table" class="bg-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <form action="{% url 'panel:login' %}" method="post">
+                    {% csrf_token %}
+                        {{form.as_p}}
+                
+                    <button type="submit" value="submit" class="btn btn-primary btn-block">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
