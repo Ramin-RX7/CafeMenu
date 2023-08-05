@@ -13,7 +13,7 @@ def login(request):
             user=User.objects.filter(phone=phone).first()
             if user:
                 request.session['user_phone']=phone
-                return redirect("user_verify")            
+                return redirect("panel:user_verify")            
         else:
             return HttpResponse('invalid phone number')
     form=UserLogInForm()
@@ -22,11 +22,12 @@ def login(request):
     
 
 def user_verify(request):
+    form = UserVerifyForm()
     user_phone = request.session.get('user_phone')
     generated_otp = random.randint(1000, 9999)
     request.session['2FA'] = generated_otp
     print(generated_otp)
-    form = UserVerifyForm()
+    
     if user_phone:
         if request.method == 'POST':
             form = UserVerifyForm(request.POST)
@@ -37,8 +38,7 @@ def user_verify(request):
                     request.session.pop('2FA') 
                     return redirect("index")
             else:
-                return render(request, 'panel/user_verify.html')
-    
+                return redirect("panel:user_verify")
     return render(request, 'panel/user_verify.html', {'form': form})
 
 
