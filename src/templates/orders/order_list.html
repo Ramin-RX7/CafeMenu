@@ -13,7 +13,7 @@
 
     <br>
     <hr>
-    <div class="container"><h5 class="text-primary">Order details</h5></div>
+    <div class="container"><h5 class="text-primary"><a href="{% url 'orders:order_details' forloop.counter %}">Order details</a></h5></div>
     <div class="container">
         <div class="row mt-3">
             {% for item in order.orderitem_set.all %}
