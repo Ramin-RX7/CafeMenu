@@ -24,8 +24,8 @@ customer_validator = RegexValidator(r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?
 class Order(BaseModel):
     customer = models.CharField(max_length=15, validators=[customer_validator])
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
-    price = models.FloatField(null=True)
-    discount = models.FloatField(default=0.0)
+    price = models.DecimalField(decimal_places=2, max_digits=6, null=True)
+    discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
     status_field = models.TextChoices("Status","Pending Rejected Approved Delivered Paid")
     status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
 
@@ -52,12 +52,12 @@ class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    unit_price = models.FloatField()
-    discount = models.FloatField(default=0.0)
+    unit_price = models.DecimalField(decimal_places=2, max_digits=5)
+    discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
 
     def __str__(self) -> str:
         return f"{self.quantity}"
-    
+
     def total_price(self):
         if not self.order.price:
             self.order.price = 0.0
