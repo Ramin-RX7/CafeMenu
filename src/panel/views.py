@@ -5,6 +5,7 @@ import random
 from users.models import User
 
 def login(request):
+    form=UserLogInForm()
     if request.method=="POST":
         form=UserLogInForm(request.POST)
         if form.is_valid():
@@ -13,10 +14,12 @@ def login(request):
             user=User.objects.filter(phone=phone).first()
             if user:
                 request.session['user_phone']=phone
-                return redirect("panel:user_verify")            
+                return redirect("panel:user_verify")
+            else:
+                form.add_error("phone", "Phone number not found")
         else:
-            return HttpResponse('invalid phone number')
-    form=UserLogInForm()
+            # form.add_error("phone", "Invalid phone number")
+            pass
     context={'form':form}
     return render(request, 'panel/login.html', context)
     
