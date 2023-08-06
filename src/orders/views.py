@@ -31,9 +31,7 @@ def order_list(request):
 
 
 def order_details(request,id):
-    # order = Order.objects.get(id=id)
     session_id=request.session['orders']
-    # for id in session_id:
     try:
         order =Order.objects.get(id=session_id[id-1])
     except:
