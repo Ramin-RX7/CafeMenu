@@ -25,6 +25,7 @@ class Migration(migrations.Migration):
                 ('discount', models.FloatField(default=0.0)),
                 ('date_submit', models.DateTimeField(auto_now_add=True)),
                 ('is_approved', models.BooleanField(null=True)),
+                ('medal', models.CharField(blank=True, choices=[('GOLD', 'Gold'), ('SILVER', 'Silver'), ('BRONZE', 'Bronze')], max_length=10)),
             ],
             options={
                 'abstract': False,

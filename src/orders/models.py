@@ -26,15 +26,20 @@ class Order(BaseModel):
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
     price = models.FloatField(null=True)
     discount = models.FloatField(default=0.0)
-    date_submit = models.DateTimeField(auto_now_add=True)
-    is_approved = models.BooleanField(null=True)
+    status_field = models.TextChoices("Status","Pending Rejected Approved Delivered Paid")
+    status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
 
     def __str__(self) -> str:
         return f"{self.customer}"
 
 
     def approve(self):
-        self.is_approved =True
+        self.status = "Approved"
+        self.save()
+
+    def pay(self):
+        self.status = "Paid"
+        self.save()
 
     def save(self, check_price=True):
         if (check_price)  and  (self.price is None):
@@ -52,17 +57,11 @@ class OrderItem(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.quantity}"
-
-    def save(self):
-        if self.food.available_quantity >= self.quantity :
-            self.food.available_quantity -= self.quantity
-            self.food.save()
-            super().save()
-
-            if not self.order.price:
-                self.order.price = 0.0
+    
+    def total_price(self):
+        if not self.order.price:
+            self.order.price = 0.0
             self.order.price += (self.unit_price * self.quantity)
             self.order.save()
-
         else:
             raise SystemError

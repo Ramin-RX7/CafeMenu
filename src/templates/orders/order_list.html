@@ -20,6 +20,10 @@
               <div class="col-md-6 mb-4">
                   <div class="custom-list">
                       <div class="info">
+                        <div class="head clearfix">
+                            <h class="title float-left text-primary " style="font-size: 20px;">Status</h>
+                            <h class="float-right" style="font-size: 20px;">{{ order.status }}</h>
+                        </div>
                           <div class="head clearfix">
                               <h class="title float-left text-primary " style="font-size: 20px;">{{ item.food }}</h>
                               <h class="float-right" style="font-size: 20px;">price : {{ item.unit_price }}$</h>
@@ -38,7 +42,6 @@
         <div class="info">
             <div class="head clearfix">
                 <h5 class="title float-left">Total Price &nbsp:<h5 class="text-primary">&nbsp {{order.price}}</h5></h5>
-                <p class="float-left"> This order is submit at &nbsp {{order.date_submit}}</p>
             </div>
         </div>
     </div>
