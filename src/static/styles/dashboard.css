@@ -1,0 +1,121 @@
+/* start section
+      /* Card-like container styles */
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        width: 400px;
+        margin: 50px auto;
+    }
+
+    /* Hide radio buttons */
+    input[type="radio"] {
+        display: none;
+    }
+
+    /* Show custom-styled labels as a bar */
+    label {
+        padding: 10px 20px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    /* Show the corresponding section when the radio button is checked */
+    #section1:checked ~ #section1-content,
+    #section2:checked ~ #section2-content {
+        display: block;
+    }
+
+    /* Hide all sections by default */
+    .section {
+        display: none;
+    }
+
+    /* Show the selected section */
+    .section.active {
+        display: block;
+    }
+/* end section
+
+/* Add your own CSS styling here to match your template */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
+
+.order {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.order.approved {
+  background-color: #e6ffe6;
+}
+
+.order.pending {
+  background-color: #ffffcc;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+}
+
+.button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.edit {
+  background-color: #ffc107;
+}
+
+.delivered,
+.paid {
+  background-color: #28a745;
+}
+
+.table-filter {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.table-filter input[type="number"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.table-filter .filter-button {
+  margin-left: 10px;
+}
+
+/* Additional styling for table number */
+.order span.table-number {
+  margin-left: 10px;
+}
+
+/* Hide orders when the filter button is clicked */
+.hide {
+  display: none;
+}
