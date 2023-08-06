@@ -28,6 +28,8 @@ class Order(BaseModel):
     discount = models.FloatField(default=0.0)
     date_submit = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(null=True)
+    status_field = models.TextChoices("Status","Pending Approved Delivered Paid")
+    status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
 
     def __str__(self) -> str:
         return f"{self.customer}"
