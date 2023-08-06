@@ -1,8 +1,9 @@
 from datetime import datetime
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
+from django.http import Http404
 
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
@@ -30,7 +31,11 @@ def order_list(request):
 
 
 def order_details(request,id):
-    order = Order.objects.get(id=id)
+    session_id=request.session['orders']
+    try:
+        order =Order.objects.get(id=session_id[id-1])
+    except:
+        raise Http404
     context = {"order": order}
     return render(request,'orders/order_details.html',context)
 
