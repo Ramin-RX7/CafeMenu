@@ -1,6 +1,6 @@
 /* start section
       /* Card-like container styles */
-      .card {
+      .card-dsh {
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 10px;
@@ -9,12 +9,12 @@
     }
 
     /* Hide radio buttons */
-    input[type="radio"] {
+    .radio-dsh input[type="radio"] {
         display: none;
     }
 
     /* Show custom-styled labels as a bar */
-    label {
+    .dsh label {
         padding: 10px 20px;
         background-color: #f0f0f0;
         cursor: pointer;
@@ -28,34 +28,30 @@
     }
 
     /* Hide all sections by default */
-    .section {
+    .section-dsh {
         display: none;
     }
 
     /* Show the selected section */
-    .section.active {
+    .section-dsh.active {
         display: block;
     }
 /* end section
 
 /* Add your own CSS styling here to match your template */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-}
 
-.container {
+.container-dsh {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
 }
 
-h1 {
+.dsh h1 {
   text-align: center;
 }
 
-.order {
+.order-dsh {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,11 +61,11 @@ h1 {
   border: 1px solid #ccc;
 }
 
-.order.approved {
+.order-dsh.approved {
   background-color: #e6ffe6;
 }
 
-.order.pending {
+.order-dsh.pending {
   background-color: #ffffcc;
 }
 
@@ -78,7 +74,7 @@ h1 {
   gap: 5px;
 }
 
-.button {
+.button-dsh {
   padding: 5px 10px;
   background-color: #007bff;
   color: #fff;
@@ -86,7 +82,7 @@ h1 {
   border-radius: 5px;
 }
 
-.edit {
+.edit-dsh {
   background-color: #ffc107;
 }
 
@@ -111,7 +107,7 @@ h1 {
 }
 
 /* Additional styling for table number */
-.order span.table-number {
+.order-dsh span.table-number {
   margin-left: 10px;
 }
 
