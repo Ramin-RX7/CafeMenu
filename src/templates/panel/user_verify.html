@@ -8,7 +8,8 @@
             <div class="col-md-6">
                 <form action="{% url 'panel:user_verify' %}" method="post">
                     {% csrf_token %}
-                    {{form.as_p}}
+                    {{ form.errors }}
+                    {{ form.phone }}
                     <button type="submit" value="submit" class="btn btn-primary btn-block">Verify</button>
                 </form>
             </div>
