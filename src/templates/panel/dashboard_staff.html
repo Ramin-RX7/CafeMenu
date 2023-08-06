@@ -12,23 +12,36 @@
         </div>
     </div>
 
+    {% for order in orders %}
+    
     <div class="row mt-3">
-        <div class="col-md-6 mx-auto" id="contentSection">
+        <div class="col-md-6.1 mx-auto" id="contentSection">
             <!-- All Orders -->
-            <div id="initialContent">
-                <div class="order-dsh">
-                    <div class="row" >
+                <div id="initialContent">
+                    <div class="order-dsh">
+                        <div class="row" >
+                            <div class="col">
+                                Order ID: 001 Table: 1
+                                {% if order.status == 'Pending' or order.status == 'Approved' %}
+                                    <button  type="button" class="btn btn-warning" href="#" name="{{ order.id }}" >Show/Edit</button>
+                                {% elif order.status == 'Delivered' %}
+                                    <button type="button" class="btn btn-success" href="#" name="{{ order.id }}">Pay</button>
+                                {% endif %}
+                                {% if order.status == 'Pending' %}
+                                    <button type="button" class="btn btn-light" href="#" name="{{ order.id }}">Approve</button>
+                                    <button type="button" class="btn btn-danger" href="#" name="{{ order.id }}">Reject</button>
+                                {% elif order.status == 'Approved' %}
+                                    <button type="button" class="btn btn-success" href="#" name="{{ order.id }}">Deliver</button>
+                                {% endif %}
+                            </div>
+                        </div>
                         <div class="col">
-                            Order ID: 001 Table: 1
+                        {% comment %} <button class="button approve">Approve</button> {% endcomment %}
+                        {% comment %} <button class="button edit-dsh">Edit</button> {% endcomment %}
                         </div>
                     </div>
-                    <div class="col">
-                      <button class="button approve">Approve</button>
-                      <button class="button edit-dsh">Edit</button>
-                    </div>
-                </div>
-            </div>
-
+                </div>            
+                
             <!-- By Table -->
             <div id="newContent" style="display: none;">
                 Filter by table
@@ -45,6 +58,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 
 <!-- Add Bootstrap JS and jQuery scripts -->
