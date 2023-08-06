@@ -14,4 +14,9 @@ class UserLogInForm(forms.Form):
 
 
 class UserVerifyForm(forms.Form):
-    otp=forms.CharField(min_length=4, max_length=4)
+    otp=forms.CharField(
+        min_length=4, max_length=4,
+        widget = forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Phone"
+        }))
