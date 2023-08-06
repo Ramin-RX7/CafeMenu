@@ -6,5 +6,5 @@ app_name = "panel"
 
 
 urlpatterns = [
-
+    path("",dashboard_staff, name="dashboard_staff")
 ]
