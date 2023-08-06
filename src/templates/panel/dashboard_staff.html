@@ -3,89 +3,61 @@
 {% load static %}
 {% block content %}
 
-<div class="container-dsh">
-    <h1 class="dsh">Welcome, Ramin Javid</h1>
 
-    <input class="radio-dsh" type="radio" name="section" id="section1" checked>
-    <label for="section1" class="dsh button filter-button" >All Orders</label>
-
-    <input class="radio-dsh" type="radio" name="section" id="section2">
-    <label for="section2" class="dsh button filter-button" >Tables</label>
-
-
-    <div class="section-dsh" id="section1-content">
-        <div class="order-dsh">
-            <div class="row" >
-                <div class="col">
-                    Order ID: 001 Table: 1
-                </div>
-            </div>
-            <div class="col">
-            <button class="button approve">Approve</button>
-            <button class="button edit-dsh">Edit</button>
-            </div>
-        </div>
-        <div class="order-dsh">
-            <div class="row" >
-                <div class="col">
-                    Order ID: 002 Table: 2
-                </div>
-            </div>
-            <div class="col">
-                <button class="button edit-dsh">Edit</button>
-            </div>
-        </div>
-        <div class="order-dsh">
-            <div class="row" >
-                <div class="col">
-                    Order ID: 003 Table: 3
-                </div>
-            </div>
-            <div class="col">
-            <button class="button delivered">Delivered</button>
-            <button class="button paid">Paid</button>
-            <button class="button edit-dsh">Edit</button>
-            </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- Button to toggle content -->
+            <button type="button" class="btn btn-primary" id="toggleButton">Filter by table</button>
         </div>
     </div>
 
-<!-- <div class="container"></div> -->
-    <div class="section" id="section2-content">
-        <div class="order-dsh pending">
-            <div class="row" >
-                <div class="col">
-                    Order ID: 001 Table: 1
+    <div class="row mt-3">
+        <div class="col-md-6 mx-auto" id="contentSection">
+            <!-- All Orders -->
+            <div id="initialContent">
+                <div class="order-dsh">
+                    <div class="row" >
+                        <div class="col">
+                            Order ID: 001 Table: 1
+                        </div>
+                    </div>
+                    <div class="col">
+                      <button class="button approve">Approve</button>
+                      <button class="button edit-dsh">Edit</button>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <button class="button edit-dsh">Edit</button>
-            </div>
-        </div>
-        <div class="order-dsh">
-            <div class="row" >
-                <div class="col">
-                    Order ID: 001 Table: 1
+
+            <!-- By Table -->
+            <div id="newContent" style="display: none;">
+                Filter by table
+                <div class="order-dsh pending">
+                    <div class="row" >
+                        <div class="col">
+                            Order ID: 001 Table: 1
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button class="button edit-dsh">Edit</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-              <button class="button approve">Approve</button>
-              <button class="button edit-dsh">Edit</button>
-            </div>
-        </div>
-        <div class="order-dsh approved">
-            <div class="row" >
-                <div class="col">
-                    Order ID: 003 Table: 3
-                </div>
-            </div>
-            <div class="col">
-                <button class="button-dsh delivered">Delivered</button>
-                <button class="button-dsh paid">Paid</button>
-                <button class="button-dsh edit-dsh">Edit</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    // Function to toggle content on button click
+    $(document).ready(function() {
+        $("#toggleButton").click(function() {
+            $("#initialContent").toggle();
+            $("#newContent").toggle();
+        });
+    });
+</script>
+
 
 
 {% endblock %}
