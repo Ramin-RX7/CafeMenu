@@ -22,7 +22,14 @@ def login(request):
             pass
     context={'form':form}
     return render(request, 'panel/login.html', context)
-    
+
+
+def generate_2fa(request):
+    request.session["2FA"] = random.randint(1000, 9999)
+    request.session["2fa_expire"] = (timezone.now() + timedelta(minutes=1)).strftime("%d/%m/%Y, %H:%M:%S")
+    print(f"generated:{request.session['2FA']}  until:{request.session['2fa_expire']}")
+    return request
+
 
 def user_verify(request):
     user_phone = request.session.get('user_phone')
