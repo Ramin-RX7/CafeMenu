@@ -6,5 +6,6 @@ from . import models
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display=['title','description']
+    ordering = ['title']
 
 admin.site.register(Food)
