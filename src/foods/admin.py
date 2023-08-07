@@ -24,5 +24,5 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category', 'created_at']
-    ordering = ['title','price']
+    ordering = ['title']
     search_fields = ['title','category']
