@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import *
 from . import models
 
 # Register your models here.
@@ -11,4 +10,7 @@ class OrderAdmin(admin.ModelAdmin):
 class OrderItemAdmin(admin.ModelAdmin):
     list_display=['order','food','quantity','unit_price','discount']
 
-admin.site.register(Table)
+
+@admin.register(models.Table)
+class TableAdmin(admin.ModelAdmin):
+    list_display=['name','is_reserved']
