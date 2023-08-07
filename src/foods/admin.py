@@ -11,3 +11,4 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category','description']
+    ordering = ['title','price']
