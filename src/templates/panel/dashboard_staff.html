@@ -33,7 +33,7 @@
                                     <button style="float:right" type="button" class="btn btn-success" href="{% url 'pay_order' order_id=order.id %}" name="{{ order.id }}">Pay</button>
                                 {% endif %}
                                 {% if order.status == 'Pending' %}
-                                    <button style="float:right" type="button" class="btn btn-light" href="#" name="{{ order.id }}">Approve</button>
+                                    <button style="float:right" type="button" class="btn btn-light" href="{% url 'approve_order' order_id=order.id %}" name="{{ order.id }}">Approve</button>
                                     <button style="float:right" type="button" class="btn btn-danger" href="#" name="{{ order.id }}">Reject</button>
                                 {% elif order.status == 'Approved' %}
                                     <button type="button" class="btn btn-success" href="#" name="{{ order.id }}">Deliver</button>
