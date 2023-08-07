@@ -12,6 +12,8 @@ from .forms import UserLogInForm, UserVerifyForm
 
 
 def login(request):
+    if isinstance(request.user, User):
+        redirect("index")
     form=UserLogInForm()
     if request.method=="POST":
         form=UserLogInForm(request.POST)
@@ -39,6 +41,8 @@ def generate_2fa(request):
 
 
 def user_verify(request):
+    if isinstance(request.user, User):
+        redirect("index")
     user_phone = request.session.get('user_phone')
     if not user_phone:
         return redirect("panel:login")
