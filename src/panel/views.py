@@ -3,9 +3,11 @@ from datetime import timedelta
 
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.contrib.auth import login as django_login
 
 from users.models import User
 from .forms import UserLogInForm, UserVerifyForm
+
 
 
 
@@ -68,6 +70,8 @@ def user_verify(request):
                     request.session.pop('2FA')
                     request.session.pop('2fa_expire')
                     request.session["authenticated"] = True
+                    user = User.objects.get(phone=user_phone)
+                    django_login(request, user, "users.auth.UserAuthBackend")
                     return redirect("index")
                 else:
                     form.add_error(None,"Invalid code entered")
