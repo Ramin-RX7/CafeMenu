@@ -13,18 +13,12 @@ from foods.models import Food
 
 def index(request):
     current_session_orders_ids = request.session.get('orders', [])
-    current_session_orders = []
-    for order_id in current_session_orders_ids:
-        try:
-            order = Order.objects.get(id=order_id)
-            current_session_orders.append(order)
-        except Order.DoesNotExist:
-            pass
+    current_session_orders = Order.objects.filter(id__in=current_session_orders_ids)
     context = {
         'orders' : current_session_orders
     }
-
     return render(request,'orders/order_list.html',context)
+
 
 def order_list(request):
     return redirect("index")
