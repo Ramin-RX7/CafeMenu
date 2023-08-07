@@ -8,4 +8,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display=['title','description']
     ordering = ['title']
 
-admin.site.register(Food)
+@admin.register(models.Food)
+class FoodAdmin(admin.ModelAdmin):
+    list_display=['title','price','discount','category','description']
