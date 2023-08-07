@@ -55,11 +55,23 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 
+class FoodFilter(admin.SimpleListFilter):
+    title = 'Active'
+    parameter_name = 'Active'
+
+    def lookups(self, request, model_admin):
+        return[('inactive','inactive')]
+
+    def queryset(self, request, queryset: QuerySet):
+        if self.value() == 'inactive':
+            return queryset.filter(is_active = False)
+        
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category', 'created_at']
     ordering = ['title']
     search_fields = ['title','category']
+    list_filter = [FoodFilter]
 
     form = FoodForm
 
