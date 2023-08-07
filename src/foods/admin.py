@@ -68,6 +68,7 @@ class FoodAdmin(admin.ModelAdmin):
     ordering = ['title']
     search_fields = ['title','category']
     list_filter = [FoodFilter]
+    list_editable = ['price','discount']
 
     form = FoodForm
 
