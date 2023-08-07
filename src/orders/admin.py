@@ -25,7 +25,7 @@ class OrderStatusFilter(admin.SimpleListFilter):
     
     def queryset(self, request, queryset: QuerySet):
         if self.value() == 'not_paid':        
-            return queryset.filter(Q(status = 'Pending') | Q(status = 'Rejected')| Q(status = 'Approved')| Q(status = 'Delivered'))
+            return queryset.filter(~Q(status = 'Paid'))
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
