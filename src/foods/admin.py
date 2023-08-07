@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from . import models
+from .forms import FoodForm, CategoryForm
 
 
 
@@ -47,10 +48,22 @@ class CategoryAdmin(admin.ModelAdmin):
 
     form = CategoryForm
 
+    def save_model(self, request, obj, form, change):
+        if form.cleaned_data.get('delete_image'):
+            obj.image.delete()
+        super().save_model(request, obj, form, change)
+
+
 
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category', 'created_at']
     ordering = ['title']
     search_fields = ['title','category']
+
     form = FoodForm
+
+    def save_model(self, request, obj, form, change):
+        if form.cleaned_data.get('delete_image'):
+            obj.image.delete()
+        super().save_model(request, obj, form, change)
