@@ -8,7 +8,11 @@
   <div class="container raise-2">
       <div class="row">
         <div class="img-holder">
-            <img src="{{ food.image.url }}" alt="" style="width: 75%;">
+            {% if food.image %}
+                <img src="{{ food.image.url }}" alt="" style="width: 75%;">
+            {% else %}
+                <img src="{% static 'images/defaults/food.jpeg' %}" alt="">
+            {% endif %}
         </div>
         <div class="col-md-8 mb-4">
             <div class="info">

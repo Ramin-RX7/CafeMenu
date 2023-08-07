@@ -13,7 +13,11 @@
           <div class="col-md-6 mb-4">
               <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                   <div class="img-holder" style="margin-right: 35px;">
+                    {% if food.image %}
                       <img src="{{ food.image.url }}" alt="" style="width: 140%;">
+                    {% else %}
+                      <img src="{% static 'images/defaults/food.jpeg' %}" alt="">
+                    {% endif %}
                   </div>
                   <div class="info">
                       <div class="head clearfix">
