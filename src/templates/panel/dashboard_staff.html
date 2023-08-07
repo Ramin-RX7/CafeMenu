@@ -28,9 +28,9 @@
                             <div class="col">
                                 
                                 {% if order.status == 'Pending' or order.status == 'Approved' %}
-                                <button style="float:right" type="button" href="{% url 'edit_order' order_id=order.id %}" class="btn btn-warning" name="{{ order.id }}" >Show/Edit</button>
+                                    <button style="float:right" type="button" class="btn btn-warning" href="{% url 'edit_order' order_id=order.id %}" name="{{ order.id }}" >Show/Edit</button>
                                 {% elif order.status == 'Delivered' %}
-                                    <button type="button" class="btn btn-success" href="#" name="{{ order.id }}">Pay</button>
+                                    <button style="float:right" type="button" class="btn btn-success" href="{% url 'pay_order' order_id=order.id %}" name="{{ order.id }}">Pay</button>
                                 {% endif %}
                                 {% if order.status == 'Pending' %}
                                     <button style="float:right" type="button" class="btn btn-light" href="#" name="{{ order.id }}">Approve</button>
