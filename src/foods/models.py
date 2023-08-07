@@ -19,6 +19,7 @@ class Food(BaseModel):
     price = models.DecimalField(decimal_places=2, max_digits=5)
     discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.title
