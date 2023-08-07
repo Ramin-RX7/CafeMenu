@@ -22,14 +22,11 @@ class UserManager(BaseUserManager):
     def create_superuser(self, phone, password=None, **other_fields):
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_granted', True)
 
         if other_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if other_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        if other_fields.get('is_granted') is not True:
-            raise ValueError('Superuser must have is_granted=True.')
 
         return self.create_user(phone, password, **other_fields)
 
@@ -59,7 +56,6 @@ class User(AbstractBaseUser, PermissionsMixin,BaseModel):
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    is_granted = models.BooleanField(default=False)
 
     objects = UserManager()
 
