@@ -11,10 +11,8 @@ from .forms import FoodForm, CategoryForm
 class CategoryFilter(admin.SimpleListFilter):
     title = 'Empty Category'
     parameter_name = 'title'
-
     def lookups(self, request, model_admin):
         return[('title','Categories')]
-
     def queryset(self, request, queryset: QuerySet):
         if self.value() == 'title':
             return queryset.filter(food = None)
@@ -26,6 +24,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_filter = [CategoryFilter]
 
+    form = CategoryForm
 
     def view_foods(self, obj):
         url = reverse(f'admin:{models.Food._meta.app_label}_{models.Food._meta.model_name}_changelist')
@@ -35,18 +34,17 @@ class CategoryAdmin(admin.ModelAdmin):
     readonly_fields = ('view_foods',)
 
     def get_fieldsets(self, request, obj=None):
-        if obj is None:
-            return super().get_fieldsets(request, obj)
-        return  (
+        fieldsets = [
             ('Category Details', {
                 'fields': ('title', 'description', 'image'),
             }),
-            ('Associated Foods', {
-                'fields': ('view_foods',),
-            }),
-        )
-
-    form = CategoryForm
+        ]
+        if obj is not None:
+            fieldsets.extend([
+                ('Associated Foods', {'fields': ('view_foods',),}),
+                (None, {'fields':('delete_image',)})
+            ])
+        return fieldsets
 
     def save_model(self, request, obj, form, change):
         if form.cleaned_data.get('delete_image'):
@@ -58,14 +56,12 @@ class CategoryAdmin(admin.ModelAdmin):
 class FoodFilter(admin.SimpleListFilter):
     title = 'Active'
     parameter_name = 'Active'
-
     def lookups(self, request, model_admin):
         return[('inactive','inactive')]
-
     def queryset(self, request, queryset: QuerySet):
         if self.value() == 'inactive':
             return queryset.filter(is_active = False)
-        
+
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category', 'created_at']
