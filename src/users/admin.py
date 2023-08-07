@@ -29,7 +29,18 @@ class UserActiveFilter(admin.SimpleListFilter):
         if self.value() == 'inactive':
             return queryset.filter(is_active=False)
         
+class SuperUserFilter(admin.SimpleListFilter):
+    title='Superuser'
+    parameter_name = 'Superuser'
+
+    def lookups(self, request, model_admin):
+        return[('superuser','superuser')]
+    
+    def queryset(self, request, queryset: QuerySet):
+        if self.value() == 'superuser':
+            return queryset.filter(is_superuser =True)
+        
 @admin.register(models.User)
 class UserAdmin(admin.ModelAdmin):
     search_fields = ['first_name','last_name','phone']
-    list_filter = [UserStaffFilter,UserActiveFilter]
+    list_filter = [UserStaffFilter,UserActiveFilter,SuperUserFilter]
