@@ -45,6 +45,7 @@ class CategoryAdmin(admin.ModelAdmin):
             }),
         )
 
+    form = CategoryForm
 
 
 @admin.register(models.Food)
@@ -52,3 +53,4 @@ class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category', 'created_at']
     ordering = ['title']
     search_fields = ['title','category']
+    form = FoodForm
