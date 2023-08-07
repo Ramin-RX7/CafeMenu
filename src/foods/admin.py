@@ -6,6 +6,7 @@ from . import models
 class CategoryAdmin(admin.ModelAdmin):
     list_display=['title','created_at','updated_at']
     ordering = ['title']
+    search_fields = ['title']
 
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
