@@ -11,3 +11,4 @@ class CategoryAdmin(admin.ModelAdmin):
 class FoodAdmin(admin.ModelAdmin):
     list_display=['title','price','discount','category', 'created_at']
     ordering = ['title','price']
+    search_fields = ['title','category']
