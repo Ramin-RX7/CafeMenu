@@ -7,22 +7,23 @@
             {% csrf_token %}
             <table>
                 {{ form.as_table }}
-              </table>
-              <br>
+            </table>
+            <br>
             <button type="submit" class="btn btn-primery">changed</button>
-        </form>  
+        </form>
         <div class="container py-5">
             <div class="row">
-                {% for item in orderitems%}
+                {% for itemform in orderitems %}
                 <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex my-4">
                     <table>
-                    {% csrf_token %}
-                    {{ item.as_table }}
+                        {% csrf_token %}
+                        {{ itemform.as_table }}
                     </table>
                     <br>
-                    <button type="submit" class="btn btn-primery" name="{{ item.id }}">changed</button>
-                {%endfor%}
-            </form> 
+                    <button type="submit" class="btn btn-primery" name="orderitem:{{ itemform.id }}">changed</button>
+                    {%endfor%}
+                </form>
+            </div>
         </div>
     </div>
 </div>
