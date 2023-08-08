@@ -7,19 +7,15 @@ from django.contrib.auth import login as django_login
 
 from users.models import User
 from .forms import UserLogInForm, UserVerifyForm
-from django.views import View
 
 
 
-class LoginView(View):
-    def get(self, request):
-        if isinstance(request.user, User):
-            return redirect("index")
-        form=UserLogInForm()
-        context={'form':form}
-        return render(request, 'panel/login.html', context)
-        
-    def post(self, request):
+
+def login(request):
+    if isinstance(request.user, User):
+        return redirect("index")
+    form=UserLogInForm()
+    if request.method=="POST":
         form=UserLogInForm(request.POST)
         if form.is_valid():
             cd=form.cleaned_data
@@ -30,6 +26,11 @@ class LoginView(View):
                 return redirect("panel:user_verify")
             else:
                 form.add_error("phone", "Phone number not found")
+        else:
+            # form.add_error("phone", "Invalid phone number")
+            pass
+    context={'form':form}
+    return render(request, 'panel/login.html', context)
 
 
 def generate_2fa(request):
