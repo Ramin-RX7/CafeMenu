@@ -53,7 +53,7 @@ def set_order(request):
 
         response = redirect("orders:index")
         with transaction.atomic():
-            order.save(check_price=False)
+            order.save(check_items=False)
             for food_id,quantity in cart.items():
                 food = Food.objects.get(id=food_id)
                 orderitem = OrderItem(

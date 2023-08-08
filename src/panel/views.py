@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from orders.models import Order, Table
 from .urls import *
 
@@ -8,19 +8,21 @@ def dashboard_staff(request):
     orders = Order.objects.order_by('status')
     tables = Table.objects.all()
     context = {
-        'orders': orders ,
-        'tables': tables ,
+        'orders': orders,
+        'tables': tables,
     }
     return render(request,'panel/dashboard_staff.html', context)
+
+
+def edit_order(request, order_id):
+    pass
+
 
 def simple_action(view_func):
     def _wrapped_view(request, order_id, *args, **kwargs):
         response = view_func(request, order_id, *args, **kwargs)
-        return redirect('panle:dashboard')
+        return redirect('panel:dashboard')
     return _wrapped_view
-
-def edit_order(request, order_id):
-    pass
 
 @simple_action
 def approve_order(request, order_id):
