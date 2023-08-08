@@ -16,3 +16,12 @@ class MainInfo(BaseModel,SingletonModel):
 
     def __str__(self) -> str:
         return "Main Info"
+
+
+class Social(BaseModel,SingletonModel):
+    instagram =  models.CharField(max_length=150, blank=True)
+    telegram  =  models.CharField(max_length=150, blank=True)
+    whatsapp  =  models.CharField(max_length=150, blank=True)
+    youtube   =  models.CharField(max_length=150, blank=True)
+    facebook  =  models.CharField(max_length=150, blank=True)
+    tweeter   =  models.CharField(max_length=150, blank=True)
