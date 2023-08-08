@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from orders.models import Order
+from orders.models import Order,OrderItem
+from foods.models import Category,Food
 from django.db.models import Sum , Count , Q
 import datetime
 
@@ -41,7 +42,7 @@ def dashboard(request):
     total_price = all_orders.filter(status="Paid").aaggregate(total=Sum('price'))
 
     #----------------------------------------------------------------------------------------
-    
+
     # count of order part
     
     count_order_for_each_hour_of_last_day = {} 
@@ -69,3 +70,46 @@ def dashboard(request):
         count_order_for_each_day_of_month[k['day']]=k['count']
     
     total_count = all_orders.aaggregate(count=Count('id'))
+    
+    #----------------------------------------------------------------------------------------
+    
+    # count of food_items sold part
+    
+    orderitems = OrderItem.objects.all()
+    foods = Food.objects.all()
+    foods = [i['customer'] for i in foods.values('customer')]
+    info = {}
+    for food_name in foods:
+        count_of_fooditem_sold_hour_of_last_day = {}
+        for i in range(7,last_days.hour):
+            hour = f'{i}'
+            data = orderitems.filter(Q(food=food_name) & Q(order__status='paid') & Q(created_at__date=last_days) & Q(created_at__hour__gte=i) & Q(created_at__hour__lt=i+1))\
+            .values('id').annotate(count=Sum('quantity'))
+            if data:
+                count_of_fooditem_sold_hour_of_last_day[hour]=data[0]['count']
+            else:
+                count_of_fooditem_sold_hour_of_last_day[hour]=0
+        info[f'{food_name}-hour']=count_of_fooditem_sold_hour_of_last_day
+    
+        count_of_fooditem_sold_for_each_day_of_week ={}
+        price_week = all_orders.filter(Q(food=food_name) & Q(order__status='paid') & Q(created_at__gte=last_7_days)).\
+        extra({'day':"date(created_at)"}).\
+        values('day').annotate(count=Sum('quantity'))
+        for k in price_week:
+            count_of_fooditem_sold_for_each_day_of_week[k['day']]=k['count']
+        info[f'{food_name}-week']=count_of_fooditem_sold_for_each_day_of_week
+        
+        
+        count_of_fooditem_sold_for_each_day_of_month={}              
+        price_month = all_orders.filter(Q(food=food_name) & Q(order__status='paid') & Q(created_at__gte=last_7_days)).\
+        extra({'day':"date(created_at)"}).\
+        values('day').annotate(count=Sum('quantity'))
+        for k in price_month:
+            count_of_fooditem_sold_for_each_day_of_month[k['day']]=k['count']
+        info[f'{food_name}-month']=count_of_fooditem_sold_for_each_day_of_month
+    
+        info[f'{food_name}_total_count'] = all_orders.aaggregate(count=Sum('quantity'))
+    
+    #----------------------------------------------------------------------------------------
+    
+    # count of category sold part
