@@ -28,18 +28,13 @@ def order_list(request):
 
 def order_details(request,id):
     session_id=request.session['orders']
-    try:
-        order =Order.objects.get(id=session_id[id-1])
-    except:
-        raise Http404
+    order = get_object_or_404(Order, id=session_id[id-1])
     context = {"order": order}
     return render(request,'orders/order_details.html',context)
 
 
 class SetOrderView(View):
-    def get(self,request):
-        return redirect("orders:index")
-    
+
     def post(self, request):
         if not (data := request.COOKIES.get("cart")):
             redirect("orders:cart")
@@ -47,7 +42,9 @@ class SetOrderView(View):
         customer = request.session.get("phone")
         discount = 0.0
         table = Table.get_available_table()
+
         order = Order(customer=customer, table=table, discount=discount)
+
         response = redirect("orders:index")
         with transaction.atomic():
             order.save(check_price=False)
@@ -67,8 +64,8 @@ class SetOrderView(View):
 
         response.delete_cookie("cart")
         return response
-    
-    
+
+
 
 
 def cart(request):
@@ -103,11 +100,10 @@ class CartAddView(View):
         response = redirect('foods:menu')
         response.set_cookie('cart', str(cart_dict))
         return response
-        
+
+
+
 class CartDeleteView(View):
-    def get(self, request):
-        return redirect('orders:cart')
-    
     def post(self, request):
         data = request.COOKIES.get("cart")
         cart = eval(data)
@@ -118,10 +114,9 @@ class CartDeleteView(View):
         response.set_cookie('cart', str_cart)
         return response
 
-class CustomerLoginView(View):
-    def get(self, request):
-        return redirect(request.META.get('HTTP_REFERER', reverse('index')))
 
+
+class CustomerLoginView(View):
     def post(self,request):
         form = CustomerLoginForm(request.POST)
         if form.is_valid():
@@ -130,6 +125,4 @@ class CustomerLoginView(View):
         else:
             import main.utils
             main.utils.EditableContexts.form_login_error = "Invalid phone number"
-
-        
-
+        return redirect(request.META.get('HTTP_REFERER', reverse('index')))
