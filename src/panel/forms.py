@@ -18,5 +18,5 @@ class UserVerifyForm(forms.Form):
         min_length=4, max_length=4,
         widget = forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': "Phone"
+            'placeholder': "Code"
         }))

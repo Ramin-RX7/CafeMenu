@@ -13,7 +13,7 @@ from .forms import UserLogInForm, UserVerifyForm
 
 def login(request):
     if isinstance(request.user, User):
-        redirect("index")
+        return redirect("index")
     form=UserLogInForm()
     if request.method=="POST":
         form=UserLogInForm(request.POST)
@@ -42,7 +42,7 @@ def generate_2fa(request):
 
 def user_verify(request):
     if isinstance(request.user, User):
-        redirect("index")
+        return redirect("index")
     user_phone = request.session.get('user_phone')
     if not user_phone:
         return redirect("panel:login")
@@ -76,6 +76,7 @@ def user_verify(request):
                     request.session["authenticated"] = True
                     user = User.objects.get(phone=user_phone)
                     django_login(request, user, "users.auth.UserAuthBackend")
+                    request.session['phone'] = user.phone
                     return redirect("index")
                 else:
                     form.add_error(None,"Invalid code entered")
