@@ -18,3 +18,6 @@ def simple_action(view_func):
         response = view_func(request, order_id, *args, **kwargs)
         return redirect('dashboard')
     return _wrapped_view
+
+def edit_order(request, order_id):
+    pass
