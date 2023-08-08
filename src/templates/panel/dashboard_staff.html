@@ -28,15 +28,15 @@
                             <div class="col">
                                 
                                 {% if order.status == 'Pending' or order.status == 'Approved' %}
-                                    <button style="float:right" type="button" class="btn btn-warning" href="{% url 'edit_order' order_id=order.id %}" name="{{ order.id }}" >Show/Edit</button>
+                                    <button style="float:right" type="button" class="btn btn-warning" href="{% url 'panel:edit_order' order_id=order.id %}" name="{{ order.id }}" >Show/Edit</button>
                                 {% elif order.status == 'Delivered' %}
-                                    <button style="float:right" type="button" class="btn btn-success" href="{% url 'pay_order' order_id=order.id %}" name="{{ order.id }}">Pay</button>
+                                    <button style="float:right" type="button" class="btn btn-success" href="{% url 'panel:pay_order' order_id=order.id %}" name="{{ order.id }}">Pay</button>
                                 {% endif %}
                                 {% if order.status == 'Pending' %}
-                                    <button style="float:right" type="button" class="btn btn-light" href="{% url 'approve_order' order_id=order.id %}" name="{{ order.id }}">Approve</button>
-                                    <button style="float:right" type="button" class="btn btn-danger" href="{% url 'reject_order' order_id=order.id %}" name="{{ order.id }}">Reject</button>
+                                    <button style="float:right" type="button" class="btn btn-light" href="{% url 'panel:approve_order' order_id=order.id %}" name="{{ order.id }}">Approve</button>
+                                    <button style="float:right" type="button" class="btn btn-danger" href="{% url 'panel:reject_order' order_id=order.id %}" name="{{ order.id }}">Reject</button>
                                 {% elif order.status == 'Approved' %}
-                                    <button style="float:right" type="button" class="btn btn-success" href="{% url 'deliver_order' order_id=order.id %}" name="{{ order.id }}">Deliver</button>
+                                    <button style="float:right" type="button" class="btn btn-success" href="{% url 'panel:deliver_order' order_id=order.id %}" name="{{ order.id }}">Deliver</button>
                                 {% endif %}
                             </div>
                         </div>
