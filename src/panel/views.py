@@ -21,3 +21,8 @@ def simple_action(view_func):
 
 def edit_order(request, order_id):
     pass
+
+@simple_action
+def approve_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.approve()
