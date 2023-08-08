@@ -16,7 +16,7 @@ def dashboard_staff(request):
 def simple_action(view_func):
     def _wrapped_view(request, order_id, *args, **kwargs):
         response = view_func(request, order_id, *args, **kwargs)
-        return redirect('dashboard')
+        return redirect('panle:dashboard')
     return _wrapped_view
 
 def edit_order(request, order_id):
