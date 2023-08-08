@@ -118,9 +118,11 @@ class CartDeleteView(View):
         response.set_cookie('cart', str_cart)
         return response
 
+class CustomerLoginView(View):
+    def get(self, request):
+        return redirect(request.META.get('HTTP_REFERER', reverse('index')))
 
-def customer_login(request):
-    if request.method == "POST":
+    def post(self,request):
         form = CustomerLoginForm(request.POST)
         if form.is_valid():
             phone = form.cleaned_data['phone']
@@ -129,4 +131,5 @@ def customer_login(request):
             import main.utils
             main.utils.EditableContexts.form_login_error = "Invalid phone number"
 
-    return redirect(request.META.get('HTTP_REFERER', reverse('index')))
+        
+
