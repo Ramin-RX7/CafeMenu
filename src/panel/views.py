@@ -19,20 +19,30 @@ def edit_order(request, order_id):
     order = Order.objects.get(id=order_id)
     order_items = order.orderitem_set.all()
     if request.method == "POST":
-        form = EditOrderForm(request.POST, instance=order)
-        #form_item = EditOrderItemForm(request.POST, instance=order_items)
-        if form.is_valid():
-            form.save()
+        formitem = EditOrderItemForm(request.POST)
+        for i in request.POST:
+            print(i)
+        if formitem.is_valid():
+            clean_d=formitem.cleaned_data
+            print(clean_d)
+            # orderitem_id = clean_d['orderitem__id']
+            # orderitem=OrderItem.objects.get(id=orderitem_id)
+            # form = EditOrderForm(request.POST, instance=order)
+            # formitem.save()
+            # form_item = EditOrderItemForm(request.POST, instance=order_items)
+            # if form.is_valid():
+                # Order.objects.update(form)
+                # return redirect('dashboard')
         # elif form_item.is_valid():
-        #     form_item.save()
-    else:
-        form =EditOrderForm(instance=order)
-        formitems = []
-        for i in order_items:
-            formitems.append(EditOrderItemForm(instance=i))
-    
+            # form_item.save()
+
+    form =EditOrderForm(instance=order)
+    formitems = []
+    for i in order_items:
+        formitems.append(EditOrderItemForm(instance=i, initial={"id":i.id}))
+
     context = {'form':form,'order':order, 'orderitems':formitems}
- 
+
     return render(request,'panel/dashboard_editoreder.html',context)
 
 
