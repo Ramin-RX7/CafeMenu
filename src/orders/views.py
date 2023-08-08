@@ -40,7 +40,6 @@ class SetOrderView(View):
     def get(self,request):
         return redirect("orders:index")
     
-    
     def post(self, request):
         if not (data := request.COOKIES.get("cart")):
             redirect("orders:cart")
@@ -87,22 +86,25 @@ def cart(request):
         context = {"cart": new_cart}
     return render(request,'orders/cart.html',context)
 
+class CartAddView(View):
+    def get(self, request):
+        return redirect("foods:menu")
 
-def cart_add(request):
-    if request.method == "POST":
-        food_id = request.POST.get('food')
-        quantity = request.POST.get('quantity')
-        cart_cookie = request.COOKIES.get('cart')
-        if cart_cookie:
-            cart_dict = eval(cart_cookie)
-        else:
-            cart_dict= {}
 
-        cart_dict[food_id] = quantity
-        response = redirect('foods:menu')
-        response.set_cookie('cart', str(cart_dict))
-        return response
-    return redirect("foods:menu")
+    def post(self, request):
+        if request.method == "POST":
+            food_id = request.POST.get('food')
+            quantity = request.POST.get('quantity')
+            cart_cookie = request.COOKIES.get('cart')
+            if cart_cookie:
+                cart_dict = eval(cart_cookie)
+            else:
+                cart_dict= {}
+
+            cart_dict[food_id] = quantity
+            response = redirect('foods:menu')
+            response.set_cookie('cart', str(cart_dict))
+            return response
 
 def cart_delete(request):
     if request.method =="POST":
