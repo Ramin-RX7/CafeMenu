@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "users",
     "main",
     "panel",
+    "dynamic_menu",
 ]
 
 MIDDLEWARE = [
