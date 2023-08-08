@@ -13,7 +13,7 @@
     </div>
 
     {% for order in orders %}
-    
+
     <div class="row mt-3">
         <div class="col-md-7 mx-auto" id="contentSection">
             <!-- All Orders -->
@@ -26,7 +26,7 @@
                         {% comment %} <button class="button edit-dsh">Edit</button> {% endcomment %}
                         <div class="row" >
                             <div class="col">
-                                
+
                                 {% if order.status == 'Pending' or order.status == 'Approved' %}
                                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                                 {% elif order.status == 'Delivered' %}
@@ -42,8 +42,8 @@
                         </div>
                         </div>
                     </div>
-                </div>            
-                
+                </div>
+
             <!-- By Table -->
             <div id="newContent" style="display: none;">
                 Filter by table
