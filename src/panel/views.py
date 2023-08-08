@@ -36,3 +36,8 @@ def reject_order(request, order_id):
 def pay_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.pay()
+
+@simple_action
+def deliver_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.deliver()
