@@ -90,24 +90,25 @@ class CartAddView(View):
     def get(self, request):
         return redirect("foods:menu")
 
-
     def post(self, request):
-        if request.method == "POST":
-            food_id = request.POST.get('food')
-            quantity = request.POST.get('quantity')
-            cart_cookie = request.COOKIES.get('cart')
-            if cart_cookie:
-                cart_dict = eval(cart_cookie)
-            else:
-                cart_dict= {}
+        food_id = request.POST.get('food')
+        quantity = request.POST.get('quantity')
+        cart_cookie = request.COOKIES.get('cart')
+        if cart_cookie:
+            cart_dict = eval(cart_cookie)
+        else:
+            cart_dict= {}
 
-            cart_dict[food_id] = quantity
-            response = redirect('foods:menu')
-            response.set_cookie('cart', str(cart_dict))
-            return response
-
-def cart_delete(request):
-    if request.method =="POST":
+        cart_dict[food_id] = quantity
+        response = redirect('foods:menu')
+        response.set_cookie('cart', str(cart_dict))
+        return response
+        
+class CartDeleteView(View):
+    def get(self, request):
+        return redirect('orders:cart')
+    
+    def post(self, request):
         data = request.COOKIES.get("cart")
         cart = eval(data)
         food_id = request.POST["food"]
@@ -116,7 +117,6 @@ def cart_delete(request):
         response = redirect('orders:cart')
         response.set_cookie('cart', str_cart)
         return response
-    return redirect('orders:cart')
 
 
 def customer_login(request):
