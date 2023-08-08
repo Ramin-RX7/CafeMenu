@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from orders.models import Order, Table
+from .urls import *
 
 # Create your views here.
 
@@ -11,3 +12,9 @@ def dashboard_staff(request):
         'tables': tables ,
     }
     return render(request,'panel/dashboard_staff.html', context)
+
+def simple_action(view_func):
+    def _wrapped_view(request, order_id, *args, **kwargs):
+        response = view_func(request, order_id, *args, **kwargs)
+        return redirect('dashboard')
+    return _wrapped_view
