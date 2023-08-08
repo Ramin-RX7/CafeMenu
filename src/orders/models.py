@@ -44,7 +44,12 @@ class Order(BaseModel):
     def approve(self):
         self.status = "Approved"
         self.save()
-
+    def reject(self):
+        self.status = "Rejected"
+        self.save()
+    def deliver(self):
+        self.status = "Delivered"
+        self.save()
     def pay(self):
         self.status = "Paid"
         self.save()
