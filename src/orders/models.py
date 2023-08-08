@@ -1,6 +1,7 @@
 from django.db import models
-from django.core.validators import RegexValidator
+
 from main.models import BaseModel
+from main.validators import phone_validator
 from foods.models import Food
 
 
@@ -20,14 +21,21 @@ class Table(BaseModel):
                 return table
 
 
-customer_validator = RegexValidator(r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?P<middle3>\d{3})-?(?P<last4>\d{4})")
+
 class Order(BaseModel):
-    customer = models.CharField(max_length=15, validators=[customer_validator])
+    customer = models.CharField(max_length=15, validators=[phone_validator])
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
-    price = models.DecimalField(decimal_places=2, max_digits=6, null=True)
     discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
     status_field = models.TextChoices("Status","Pending Rejected Approved Delivered Paid")
     status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
+
+    @property
+    def price(self):
+        return sum([item.unit_price*item.quantity for item in self.orderitem_set.all()])
+
+    @property
+    def final_price(self):
+        return self.price / 100 * (self.discount or 100)
 
     def __str__(self) -> str:
         return f"{self.customer}"
@@ -36,7 +44,12 @@ class Order(BaseModel):
     def approve(self):
         self.status = "Approved"
         self.save()
-
+    def reject(self):
+        self.status = "Rejected"
+        self.save()
+    def deliver(self):
+        self.status = "Delivered"
+        self.save()
     def pay(self):
         self.status = "Paid"
         self.save()
@@ -57,11 +70,3 @@ class OrderItem(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.quantity}"
-
-    def total_price(self):
-        if not self.order.price:
-            self.order.price = 0.0
-            self.order.price += (self.unit_price * self.quantity)
-            self.order.save()
-        else:
-            raise SystemError

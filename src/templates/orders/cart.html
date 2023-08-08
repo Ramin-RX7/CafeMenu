@@ -14,7 +14,11 @@
 
             <div class="col-4">
                 <a href="{% url 'foods:food_details' food.id %}">
-                <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+                  {% if food.image %}
+                    <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+                  {% else %}
+                    <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow">
+                  {% endif %}
                 </a>
             </div>
 
