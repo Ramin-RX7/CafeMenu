@@ -9,6 +9,8 @@ from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
 from foods.models import Food
 
+from django.views import View
+
 # Create your views here.
 
 def index(request):
@@ -34,17 +36,19 @@ def order_details(request,id):
     return render(request,'orders/order_details.html',context)
 
 
-def set_order(request):
-    if request.method == "POST":
+class SetOrderView(View):
+    def get(self,request):
+        return redirect("orders:index")
+    
+    
+    def post(self, request):
         if not (data := request.COOKIES.get("cart")):
             redirect("orders:cart")
         cart = eval(data)
         customer = request.session.get("phone")
         discount = 0.0
         table = Table.get_available_table()
-
         order = Order(customer=customer, table=table, discount=discount)
-
         response = redirect("orders:index")
         with transaction.atomic():
             order.save(check_price=False)
@@ -64,8 +68,8 @@ def set_order(request):
 
         response.delete_cookie("cart")
         return response
-
-    return redirect("orders:index")
+    
+    
 
 
 def cart(request):
