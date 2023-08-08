@@ -65,11 +65,3 @@ class OrderItem(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.quantity}"
-
-    def total_price(self):
-        if not self.order.price:
-            self.order.price = 0.0
-            self.order.price += (self.unit_price * self.quantity)
-            self.order.save()
-        else:
-            raise SystemError
