@@ -10,12 +10,13 @@ from django.forms import ModelForm
 
 
 class EditOrderItemForm(ModelForm):
+    id = forms.IntegerField()
     class Meta:
         model = OrderItem
         fields = ['food', 'quantity', 'unit_price', 'discount']
 
 
-class EditOrderForm(ModelForm): 
+class EditOrderForm(ModelForm):
     class Meta:
         model = Order
         fields = "__all__"
