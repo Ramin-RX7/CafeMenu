@@ -31,7 +31,7 @@ def dynamic_menu_context():
 def context_handler(request):
     context = {}
 
-    context["logged_in"] = request.session.get("phone") or isinstance(request.user, USer)
+    context["logged_in"] = request.session.get("phone") or isinstance(request.user, User)
 
     context["login_form"] = CustomerLoginForm()
 
