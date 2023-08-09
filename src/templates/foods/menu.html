@@ -12,7 +12,7 @@
         <div class="section-devider my-6 transparent"></div>
         <div class="row align-items-center">
             <div class="col-4 mb-5">
-                {% if food.image %}
+                {% if category.image %}
                   <img src="{{ category.image.url }}" alt=""  class="w-100 rounded shadow">
                 {% else %}
                   <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow">
