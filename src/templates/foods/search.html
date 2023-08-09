@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} Search {% endblock %}
+
 
 
 {% block content %}
@@ -12,7 +14,11 @@
             <div class="col-md-6 mb-4 px-5">
                 <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                     <div class="img-holder">
-                        <img src="{{ food.image.url }}" alt="">
+                        {% if food.image %}
+                          <img src="{{ food.image.url }}" alt="">
+                        {% else %}
+                          <img src="{% static 'images/defaults/food.jpeg' %}" alt="">
+                        {% endif %}
                     </div>
                     <div class="info">
                         <div class="head clearfix">

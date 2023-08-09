@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} {{maininfo.title}} {% endblock %}
 
 {% block content %}
 
@@ -7,9 +8,9 @@
 <!-- Page Header -->
 <header class="header" style="background: url({% static 'images/header.jpg' %}) no-repeat center center fixed;background-size:cover;">
     <div class="overlay">
-        <img src="{% static 'images/logo.svg' %}" alt="header Image" class="logo">
+        <img src="{{ maininfo.logo.url }}" alt="header Image" class="logo">
         <h1 class="subtitle">Welcome To Our Restaurant</h1>
-        <h2 class="title">Really Fresh &amp; Tasty</h2>
+        <h2 class="title">{{maininfo.motto}}</h2>
         <a class="btn btn-primary btn-lg mt-3" href="{% url 'foods:menu' %}">Menu</a>
     </div>
 </header>

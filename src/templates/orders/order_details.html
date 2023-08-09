@@ -1,1 +1,47 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %} Order Details {% endblock %}
+
+{% load filters %}
+{% block content %}
+
+<section id="about2">
+    <h3 class="section-title pb-3 text-center">Your Order</h3>
+    <div class="container">
+        <div class="section-devider my-6 transparent"></div>
+        <h4 class="float-left title">Order</h4>
+    </div>
+
+    <br>
+    <hr>
+    <div class="container"><h5 class="text-primary">Order details</h5></div>
+    <div class="container">
+        <div class="row mt-3">
+            {% for item in order.orderitem_set.all %}
+            <div class="col-md-6 mb-4">
+                  <div class="custom-list">
+                      <div class="info">
+                          <div class="head clearfix">
+                              <h class="title float-left text-primary " style="font-size: 20px;">{{ item.food }}</h>
+                              <h class="float-right" style="font-size: 20px;">price : {{ item.unit_price }}$</h>
+                          </div>
+                          <div class="body">
+                              <h class="float-right" style="font-size: 18px;">quantity : {{ item.quantity }}</h>
+                            </div>
+                            <div class="body">
+                                <h class="float-right"style="font-size: 18px;"> total : {{ item.unit_price|mul:item.quantity }}</h>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+              {% endfor %}
+        </div>
+        <div class="info">
+            <div class="head clearfix">
+                    <h5 class="title float-left">Total Price &nbsp:<h5 class="text-primary">&nbsp {{order.price}}</h5></h5>
+                    <p class="float-left"> This order is submit at &nbsp {{order.date_submit}}</p>
+                </div>
+            </div>
+    </div>
+    </section>
+    {% endblock %}

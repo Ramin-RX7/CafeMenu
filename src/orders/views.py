@@ -1,42 +1,41 @@
 from datetime import datetime
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
+from django.http import Http404
 
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
 from foods.models import Food
 
+from django.views import View
+
 # Create your views here.
 
 def index(request):
     current_session_orders_ids = request.session.get('orders', [])
-    current_session_orders = []
-    for order_id in current_session_orders_ids:
-        try:
-            order = Order.objects.get(id=order_id)
-            current_session_orders.append(order)
-        except Order.DoesNotExist:
-            pass
+    current_session_orders = Order.objects.filter(id__in=current_session_orders_ids)
     context = {
         'orders' : current_session_orders
     }
-
     return render(request,'orders/order_list.html',context)
+
 
 def order_list(request):
     return redirect("index")
 
 
 def order_details(request,id):
-    order = Order.objects.get(id=id)
+    session_id=request.session['orders']
+    order = get_object_or_404(Order, id=session_id[id-1])
     context = {"order": order}
     return render(request,'orders/order_details.html',context)
 
 
-def set_order(request):
-    if request.method == "POST":
+class SetOrderView(View):
+
+    def post(self, request):
         if not (data := request.COOKIES.get("cart")):
             redirect("orders:cart")
         cart = eval(data)
@@ -48,7 +47,7 @@ def set_order(request):
 
         response = redirect("orders:index")
         with transaction.atomic():
-            order.save(check_price=False)
+            order.save(check_items=False)
             for food_id,quantity in cart.items():
                 food = Food.objects.get(id=food_id)
                 orderitem = OrderItem(
@@ -66,25 +65,10 @@ def set_order(request):
         response.delete_cookie("cart")
         return response
 
-    return redirect("orders:index")
+
 
 
 def cart(request):
-    if request.method == "POST":  # moved to cart_add()
-        food_id = request.POST.get('food')
-        quantity = request.POST.get('quantity')
-        cart_cookie = request.COOKIES.get('cart')
-
-        if cart_cookie:
-            cart_dict = eval(cart_cookie)
-        else:
-            cart_dict= {}
-
-        cart_dict[food_id] = quantity
-        response = redirect('foods:menu')
-        response.set_cookie('cart', str(cart_dict))
-        return response
-
     data = request.COOKIES.get("cart")
     if not (data := request.COOKIES.get("cart")):
         return render(request,'orders/cart.html',{})
@@ -99,9 +83,11 @@ def cart(request):
         context = {"cart": new_cart}
     return render(request,'orders/cart.html',context)
 
+class CartAddView(View):
+    def get(self, request):
+        return redirect("foods:menu")
 
-def cart_add(request):
-    if request.method == "POST":
+    def post(self, request):
         food_id = request.POST.get('food')
         quantity = request.POST.get('quantity')
         cart_cookie = request.COOKIES.get('cart')
@@ -114,10 +100,11 @@ def cart_add(request):
         response = redirect('foods:menu')
         response.set_cookie('cart', str(cart_dict))
         return response
-    return redirect("foods:menu")
 
-def cart_delete(request):
-    if request.method =="POST":
+
+
+class CartDeleteView(View):
+    def post(self, request):
         data = request.COOKIES.get("cart")
         cart = eval(data)
         food_id = request.POST["food"]
@@ -126,11 +113,11 @@ def cart_delete(request):
         response = redirect('orders:cart')
         response.set_cookie('cart', str_cart)
         return response
-    return redirect('orders:cart')
 
 
-def customer_login(request):
-    if request.method == "POST":
+
+class CustomerLoginView(View):
+    def post(self,request):
         form = CustomerLoginForm(request.POST)
         if form.is_valid():
             phone = form.cleaned_data['phone']
@@ -138,5 +125,4 @@ def customer_login(request):
         else:
             import main.utils
             main.utils.EditableContexts.form_login_error = "Invalid phone number"
-
-    return redirect(request.META.get('HTTP_REFERER', reverse('index')))
+        return redirect(request.META.get('HTTP_REFERER', reverse('index')))

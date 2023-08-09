@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}
+    {% if subtitle %}{{ subtitle }} | {% endif %}
+    {{ title }} | {{ maininfo.title|default:_('Cafe Amoo admin') }}
+{% endblock %}
+
+{% block extrastyle %}
+     <link rel="stylesheet" type="text/css" href="{% static 'styles/admin_color.css' %}"/>
+{% endblock %}
+
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ maininfo.title|default:'Django Admin' }}</a></h1>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

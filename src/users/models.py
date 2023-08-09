@@ -2,9 +2,10 @@ import re
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 
+from main.models import BaseModel
+from main.validators import phone_validator
 
 class UserManager(BaseUserManager):
 
@@ -17,7 +18,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
     def create_superuser(self, phone, password=None, **other_fields):
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -25,10 +25,9 @@ class UserManager(BaseUserManager):
         if other_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if other_fields.get('is_superuser') is not True:
-            raise ValueError('Superusermust have is_superuser=True.')
+            raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(phone, password, **other_fields)
-
 
 
 class PhoneNumberField(models.CharField):
@@ -36,9 +35,10 @@ class PhoneNumberField(models.CharField):
         if value is None:
             return value
 
-        pattern = r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?P<middle3>\d{3})-?(?P<last4>\d{4})"
-        if not (regex := re.fullmatch(pattern, value)):
-            raise ValidationError("Invalid ")
+        try:
+            regex = phone_validator(value)
+        except ValidationError:
+            raise
 
         phone_parts = regex.groupdict()
         phone = phone_parts["operator"]+phone_parts["middle3"]+phone_parts["last4"]
@@ -46,8 +46,7 @@ class PhoneNumberField(models.CharField):
 
 
 
-phone_validator = RegexValidator(r"(((\+|00)(98))|0)?9\d{2}-?\d{3}-?\d{4}")
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin,BaseModel):
     phone = PhoneNumberField(validators=[phone_validator], unique=True, max_length=20)
 
     first_name = models.CharField(max_length=50)
