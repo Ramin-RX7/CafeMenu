@@ -54,10 +54,10 @@ class Order(BaseModel):
         self.status = "Paid"
         self.save()
 
-    def save(self, check_price=True):
-        if (check_price)  and  (self.price is None):
-            raise SystemError("No price given")
-        # self.price = sum([item.price for item in self.orderitem_set.all()])
+    def save(self, check_items=True):
+        if check_items:
+            if not self.price:
+                raise SystemError("No price given")
         super().save()
 
 

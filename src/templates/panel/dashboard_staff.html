@@ -1,0 +1,82 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-7 mx-auto">
+            <!-- Button to toggle content -->
+            <button type="button" class="btn btn-primary" id="toggleButton">Filter by table</button>
+        </div>
+    </div>
+
+    {% for order in orders %}
+
+    <div class="row mt-3">
+        <div class="col-md-8 mx-auto" id="contentSection">
+            <!-- All Orders -->
+                <div id="initialContent">
+                    <div class="order-dsh">
+                        {% if order.table %} {{order.table}}<br> {% endif %}
+                        Phone: {{order.customer}}
+                        <br>
+                        Total Price {{order.final_price}}
+
+                        <div class="col">
+                            <div class="row" >
+                                <div class="col">
+                                    {% if order.status == 'Pending' or order.status == 'Approved' %}
+                                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% elif order.status == 'Delivered' %}
+                                        <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                    {% endif %}
+                                    {% if order.status == 'Pending' %}
+                                        <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                        <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                    {% elif order.status == 'Approved' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- By Table -->
+            <div id="newContent" style="display: none;">
+                Filter by table
+                <div class="order-dsh pending">
+                    <div class="row" >
+                        <div class="col">
+                            Order ID: 001 Table: 1
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button class="button edit-dsh">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Add Bootstrap JS and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Function to toggle content on button click
+    $(document).ready(function() {
+        $("#toggleButton").click(function() {
+            $("#initialContent").toggle();
+            $("#newContent").toggle();
+        });
+    });
+</script>
+
+
+
+{% endblock %}
