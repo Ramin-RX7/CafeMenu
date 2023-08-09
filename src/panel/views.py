@@ -21,11 +21,14 @@ from .forms import EditOrderForm, EditOrderItemForm
 # Create your views here.
 
 
-def login(request):
-    if isinstance(request.user, User):
-        return redirect("panel:dashboard")
-    form=UserLogInForm()
-    if request.method=="POST":
+class LoginView(View):
+
+    def dispatch(self, request, *args, **kwargs):
+        if isinstance(request.user, User):
+            return redirect("panel:dashboard")
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
         form=UserLogInForm(request.POST)
         if form.is_valid():
             cd=form.cleaned_data
@@ -39,8 +42,13 @@ def login(request):
         else:
             # form.add_error("phone", "Invalid phone number")
             pass
-    context={'form':form}
-    return render(request, 'panel/login.html', context)
+        context={'form':form}
+        return render(request, 'panel/login.html', context)
+
+    def get(self, request):
+        form=UserLogInForm()
+        context={'form':form}
+        return render(request, 'panel/login.html', context)
 
 
 def generate_2fa(request):
@@ -50,29 +58,34 @@ def generate_2fa(request):
     return request
 
 
-def user_verify(request):
-    if isinstance(request.user, User):
-        return redirect("panel:dashboard")
-    user_phone = request.session.get('user_phone')
-    if not user_phone:
-        return redirect("panel:login")
-    generated_otp = request.session.get('2FA')
-    expiration_time = request.session.get('2fa_expire')
 
-    if request.method == "GET":
+class UserVerifyView(View):
+    def dispatch(self, request, *args, **kwargs):
+        if isinstance(request.user, User):
+            return redirect("panel:dashboard")
+        self.user_phone = request.session.get('user_phone')
+        if not self.user_phone:
+            return redirect("panel:login")
+        self.generated_otp = request.session.get('2FA')
+        self.expiration_time = request.session.get('2fa_expire')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request):
         form = UserVerifyForm()
-        if (not expiration_time) or (
-            timezone.now() > timezone.datetime.strptime(expiration_time, "%d/%m/%Y, %H:%M:%S")
+        if (not self.expiration_time) or (
+            timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S")
         ):
             request = generate_2fa(request)
         else:
             # form.add_error("already generated")
-            print(f"previous:{generated_otp}  until:{expiration_time}")
+            print(f"previous:{self.generated_otp}  until:{self.expiration_time}")
         return render(request, 'panel/user_verify.html', {'form': form})
 
-    elif request.method == "POST":
+    def post(self, request):
+        if not all(self.generated_otp,self.expiration_time):
+            return redirect("panel:user_verify")
         form = UserVerifyForm(request.POST)
-        if timezone.now() > timezone.datetime.strptime(expiration_time, "%d/%m/%Y, %H:%M:%S"):
+        if timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S"):
             print("expired")
             request = generate_2fa(request)
             form.add_error(None, "Previous 2FA code expired. A new code has been sent to you")
@@ -80,11 +93,11 @@ def user_verify(request):
         else:
             if form.is_valid():
                 entered_otp = form.cleaned_data.get('otp')
-                if entered_otp == str(generated_otp):
+                if entered_otp == str(self.generated_otp):
                     request.session.pop('2FA')
                     request.session.pop('2fa_expire')
                     request.session["authenticated"] = True
-                    user = User.objects.get(phone=user_phone)
+                    user = User.objects.get(phone=self.user_phone)
                     django_login(request, user, "users.auth.UserAuthBackend")
                     request.session['phone'] = user.phone
                     return redirect("panel:dashboard")
@@ -92,7 +105,8 @@ def user_verify(request):
                     form.add_error(None,"Invalid code entered")
                     return render(request, 'panel/user_verify.html', {'form': form})
             else:
-                ...
+                print("BUG?!")
+                return redirect("panel:login")
 
 
 @login_required

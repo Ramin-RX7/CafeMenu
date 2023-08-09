@@ -6,8 +6,8 @@ app_name = "panel"
 
 
 urlpatterns = [
-    path('login/', login, name='login'),
-    path('verify/', user_verify, name='user_verify'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('verify/', UserVerifyView.as_view(), name='user_verify'),
     path('logout/', logout, name="logout"),
     path("",dashboard_staff, name="dashboard"),
     path("order/<int:order_id>/edit/", EditOrders.as_view(), name="edit_order"),
