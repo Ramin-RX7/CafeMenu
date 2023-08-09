@@ -3,20 +3,26 @@
 <html>
 <head>
     <link rel="stylesheet" href="{% static 'styles/pigga.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
 
 
 <body>
+
+    {% block navbar %}
 	{% include 'base/navbar.html' %}
+    {% endblock navbar %}
+
 
     {% block content %}
+
     {% endblock %}
 
-    {% if customer_logged_in %}
+    {% if logged_in %}
     {% else %}
-    {% include 'base/customer_login.html' %}
+        {% include 'base/customer_login.html' %}
     {% endif %}
 
     {% include 'base/footer.html' %}
