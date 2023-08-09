@@ -21,11 +21,14 @@ from .forms import EditOrderForm, EditOrderItemForm
 # Create your views here.
 
 
-def login(request):
-    if isinstance(request.user, User):
-        return redirect("panel:dashboard")
-    form=UserLogInForm()
-    if request.method=="POST":
+class LoginView(View):
+
+    def dispatch(self, request, *args, **kwargs):
+        if isinstance(request.user, User):
+            return redirect("panel:dashboard")
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
         form=UserLogInForm(request.POST)
         if form.is_valid():
             cd=form.cleaned_data
@@ -39,8 +42,13 @@ def login(request):
         else:
             # form.add_error("phone", "Invalid phone number")
             pass
-    context={'form':form}
-    return render(request, 'panel/login.html', context)
+        context={'form':form}
+        return render(request, 'panel/login.html', context)
+
+    def get(self, request):
+        form=UserLogInForm()
+        context={'form':form}
+        return render(request, 'panel/login.html', context)
 
 
 def generate_2fa(request):
