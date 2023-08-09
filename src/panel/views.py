@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.contrib.auth import login as django_login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
@@ -21,7 +23,7 @@ from .forms import EditOrderForm, EditOrderItemForm
 
 def login(request):
     if isinstance(request.user, User):
-        return redirect("index")
+        return redirect("panel:dashboard")
     form=UserLogInForm()
     if request.method=="POST":
         form=UserLogInForm(request.POST)
@@ -50,7 +52,7 @@ def generate_2fa(request):
 
 def user_verify(request):
     if isinstance(request.user, User):
-        return redirect("index")
+        return redirect("panel:dashboard")
     user_phone = request.session.get('user_phone')
     if not user_phone:
         return redirect("panel:login")
@@ -85,7 +87,7 @@ def user_verify(request):
                     user = User.objects.get(phone=user_phone)
                     django_login(request, user, "users.auth.UserAuthBackend")
                     request.session['phone'] = user.phone
-                    return redirect("index")
+                    return redirect("panel:dashboard")
                 else:
                     form.add_error(None,"Invalid code entered")
                     return render(request, 'panel/user_verify.html', {'form': form})
@@ -94,6 +96,7 @@ def user_verify(request):
 
 
 
+@login_required(login_url="panel:login")
 def dashboard_staff(request):
     orders = Order.objects.order_by('status')
     tables = Table.objects.all()
@@ -110,6 +113,7 @@ class EditOrders(View):
         self.order_items = self.order.orderitem_set.all()
         return super().dispatch(request, order_id)
 
+    @method_decorator(login_required(login_url='panel:login'))
     def get(self, request, order_id:int):
         form =EditOrderForm(instance=self.order)
         item_forms = []
@@ -120,6 +124,7 @@ class EditOrders(View):
 
         return render(request,'panel/dashboard_editoreder.html',context)
 
+    @method_decorator(login_required(login_url='panel:login'))
     def post(self, request, order_id):
         if request.POST.get("order"):
             form = EditOrderForm(request.POST, instance=self.order)
@@ -146,6 +151,7 @@ class EditOrders(View):
 
 
 def simple_action(view_func):
+    @login_required(login_url='panel:login')
     def _wrapped_view(request, order_id, *args, **kwargs):
         response = view_func(request, order_id, *args, **kwargs)
         return redirect("panel:dashboard")
