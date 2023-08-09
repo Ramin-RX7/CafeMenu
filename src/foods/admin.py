@@ -64,11 +64,11 @@ class FoodFilter(admin.SimpleListFilter):
 
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
-    list_display=['title','price','discount','category', 'created_at']
+    list_display=['title','price','is_active','discount','category', 'created_at']
     ordering = ['title']
     search_fields = ['title','category']
     list_filter = [FoodFilter]
-    list_editable = ['price','discount']
+    list_editable = ['price','discount','is_active']
     list_per_page = 20
 
     form = FoodForm
