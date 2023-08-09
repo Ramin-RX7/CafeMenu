@@ -12,9 +12,10 @@ from django.db.models import Case, CharField, Value, When
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
+from foods.models import Food
 from .forms import UserLogInForm, UserVerifyForm
 from .urls import *
-from .forms import EditOrderForm, EditOrderItemForm
+from .forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
 
@@ -152,8 +153,9 @@ class EditOrders(View):
         item_forms = []
         for i in self.order_items:
             item_forms.append(EditOrderItemForm(instance=i, initial={"id":i.id}))
+        add_item_form = AddOrderItemForm()
 
-        context = {'form':form,'order':self.order, 'orderitems':item_forms}
+        context = {'form':form, 'order':self.order, 'orderitems':item_forms, "add_item_form":add_item_form}
 
         return render(request,'panel/dashboard_editoreder.html',context)
 
@@ -179,6 +181,19 @@ class EditOrders(View):
                     item.save()
                 else:
                     itemform.add_error(None,"Invalid input")
+        elif request.POST.get("add_item"):
+            form = AddOrderItemForm(request.POST)
+            if form.is_valid():
+                cd = form.cleaned_data
+                unit_price = cd["food"].price
+                discount = cd["food"].discount
+                item = OrderItem(
+                    food=cd["food"],
+                    quantity=cd["quantity"],
+                    unit_price=unit_price,
+                    discount=discount,
+                    order=self.order,
+                ).save()
         return redirect("panel:edit_order",order_id=order_id)
 
 
