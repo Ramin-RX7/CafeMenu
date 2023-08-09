@@ -6,7 +6,7 @@
 {% block content %}
 
 <section id="about2">
-    <h3 class="section-title pb-3 text-center">Your Orders</h3>
+    <h2 class="section-title pb-3 text-center text-primary">Your Orders</h2>
     {% for order in orders %}
     <div class="container">
         <div class="section-devider my-6 transparent"></div>
@@ -47,6 +47,9 @@
             </div>
         </div>
     </div>
+    {% empty %}
+    <h3 class="pb-3 text-center text-secondary my-5">You haven't ordered yet</h3>
+    <br><br><br><br><br>
     {% endfor %}
 </section>
 {% endblock %}
