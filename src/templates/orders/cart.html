@@ -47,7 +47,7 @@
 
     {% if cart %}
     <div class="container my-5">
-        {% if customer_logged_in %}
+        {% if logged_in %}
         <form method="post" action="{% url 'orders:set_order' %}">
             {% csrf_token %}
             <div class="d-flex px-5 mx-5 py-5">
