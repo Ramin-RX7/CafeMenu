@@ -40,4 +40,4 @@ class EditOrderForm(ModelForm):
     customer = forms.CharField(validators=[RegexValidator(r"(((\+|00)(98))|0)?9\d{2}-?\d{3}-?\d{4}")],widget=forms.TextInput(attrs={"class":"form-control my-2"}))
     class Meta:
         model = Order
-        fields = ["customer", "discount", "status"]
+        fields = ["customer", "discount", "status","table"]
