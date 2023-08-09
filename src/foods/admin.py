@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.utils.html import format_html
-
 from . import models
 from .forms import FoodForm, CategoryForm
 
@@ -62,13 +61,15 @@ class FoodFilter(admin.SimpleListFilter):
         if self.value() == 'inactive':
             return queryset.filter(is_active = False)
 
+
 @admin.register(models.Food)
 class FoodAdmin(admin.ModelAdmin):
-    list_display=['title','price','discount','category', 'created_at']
+    list_display=['title','price','is_active','discount','category', 'created_at']
     ordering = ['title']
-    search_fields = ['title','category']
-    list_filter = [FoodFilter]
-    list_editable = ['price','discount']
+    search_fields = ['title']
+    autocomplete_fields = ['category']
+    list_filter = ['title']
+    list_editable = ['price','discount','is_active']
     list_per_page = 20
 
     form = FoodForm
