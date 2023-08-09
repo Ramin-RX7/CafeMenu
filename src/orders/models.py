@@ -70,3 +70,12 @@ class OrderItem(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.quantity}"
+
+    def save(self, *args, **kwargs):
+        related_order_items = OrderItem.objects.filter(order=self.order, food=self.food).exclude(id=self.id)
+        if len(related_order_items):
+            total_quantity = sum([item.quantity for item in related_order_items])
+            for item in related_order_items:
+                item.delete()
+            self.quantity = total_quantity + self.quantity
+        super().save(*args, **kwargs)
