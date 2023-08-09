@@ -2,29 +2,33 @@
 {% load static %}
 {% block content %}
 <div class="container py-5">
-    <div class="container">
-        <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex my-4">
-            {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
-            <br>
-            <button type="submit" class="btn btn-primery">changed</button>
-        </form>
-        <div class="container py-5">
-            <div class="row">
-                {% for itemform in orderitems %}
-                <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex my-4">
-                    <table>
-                        {% csrf_token %}
-                        {{ itemform.as_table }}
-                    </table>
-                    <br>
-                    <button type="submit" class="btn btn-primery" name="orderitem:{{ itemform.id }}">changed</button>
-                    {%endfor%}
-                </form>
-            </div>
+    <h2 class="mb-5">Order Info</h2>
+    <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex mb-5 mt-2">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary mx-5" name="order" value="order">update</button>
+    </form>
+    <hr>
+    <hr>
+    <h2 class="my-4">Items:</h2>
+    <div class="row">
+        {% for itemform in orderitems %}
+        <div class="col-md-6">
+            <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex my-4">
+                <table>
+                    {% csrf_token %}
+                    {{ itemform.as_table }}
+                </table>
+                <br>
+                <button type="submit" class="mx-1 my-1 btn btn-primary" name="orderitem" value="update">update</button>
+                <button type="submit" class="mx-1 my-1 btn btn-outline-primary" name="orderitem" value="delete">delete</button>
+            </form>
         </div>
+        {%endfor%}
+    </div>
     </div>
 </div>
 
