@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Case, CharField, Value, When
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
@@ -98,7 +99,18 @@ def user_verify(request):
 
 @login_required(login_url="panel:login")
 def dashboard_staff(request):
-    orders = Order.objects.order_by('status')
+    orders = Order.objects.annotate(
+        status_order=Case(
+            When(status="Pending", then=Value(1)),
+            When(status="Approved", then=Value(2)),
+            When(status="Delivered", then=Value(3)),
+            When(status="Rejected", then=Value(4)),
+            When(status="Paid", then=Value(5)),
+            # Add more cases for other choices
+            default=Value(1),
+            output_field=CharField(),
+        )
+    ).order_by('status_order')
     tables = Table.objects.all()
     context = {
         'orders': orders,
