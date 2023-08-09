@@ -1,10 +1,9 @@
 import random
-from typing import Any
 from datetime import timedelta
 
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.contrib.auth import login as django_login
+from django.contrib.auth import (login as django_login, logout as django_logout)
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -95,6 +94,13 @@ def user_verify(request):
             else:
                 ...
 
+
+@login_required
+def logout(request):
+    django_logout(request)
+    request.session["authenticated"] = False
+    request.session["phone"] = None
+    request.session["user_phone"] = None
 
 
 @login_required(login_url="panel:login")
