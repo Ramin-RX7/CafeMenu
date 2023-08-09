@@ -42,7 +42,14 @@
         </div>
     </div>
     {% empty %}
+        <div class="text-center">
         <h3 class="text-center">Your cart is empty</h3>
+        <br><br>
+        <h4 class="text-center">Check out our menu to add foods to your cart</h4>
+        <br>
+        <a href="{% url 'foods:menu' %}"><button class="btn btn-primary btn-lg">Menu</button></a>
+        <br>
+    </div>
     {% endfor %}
 
     {% if cart %}
