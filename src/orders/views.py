@@ -1,17 +1,14 @@
-from datetime import datetime
-
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
-from django.http import Http404
-
-from .models import Order,Table,OrderItem
-from .forms import CustomerLoginForm
-from foods.models import Food
-
 from django.views import View
 
-# Create your views here.
+from foods.models import Food
+from users.models import User
+from .models import Order,Table,OrderItem
+from .forms import CustomerLoginForm
+
+
 
 def index(request):
     current_session_orders_ids = request.session.get('orders', [])
@@ -40,6 +37,11 @@ class SetOrderView(View):
             redirect("orders:cart")
         cart = eval(data)
         customer = request.session.get("phone")
+        if not customer:
+            if isinstance(request.user, User):
+                customer = request.user.phone
+            else:
+                redirect("index")
         discount = 0.0
         table = Table.get_available_table()
 
