@@ -82,7 +82,7 @@ class UserVerifyView(View):
         return render(request, 'panel/user_verify.html', {'form': form})
 
     def post(self, request):
-        if not all(self.generated_otp,self.expiration_time):
+        if not all([self.generated_otp,self.expiration_time]):
             return redirect("panel:user_verify")
         form = UserVerifyForm(request.POST)
         if timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S"):
@@ -115,6 +115,7 @@ def logout(request):
     request.session["authenticated"] = False
     request.session["phone"] = None
     request.session["user_phone"] = None
+    return redirect("index")
 
 
 @login_required(login_url="panel:login")
