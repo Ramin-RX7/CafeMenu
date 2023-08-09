@@ -1,5 +1,5 @@
 from orders.forms import CustomerLoginForm
-
+from users.models import User
 
 class EditableContexts:
     form_login_error = None
@@ -31,7 +31,7 @@ def dynamic_menu_context():
 def context_handler(request):
     context = {}
 
-    context["customer_logged_in"] = request.session.get("phone")
+    context["logged_in"] = request.session.get("phone") or isinstance(request.user, User)
 
     context["login_form"] = CustomerLoginForm()
 

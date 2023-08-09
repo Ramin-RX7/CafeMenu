@@ -10,15 +10,19 @@
 
 
 <body>
+
+    {% block navbar %}
 	{% include 'base/navbar.html' %}
+    {% endblock navbar %}
+
 
     {% block content %}
 
     {% endblock %}
 
-    {% if customer_logged_in %}
+    {% if logged_in %}
     {% else %}
-    {% include 'base/customer_login.html' %}
+        {% include 'base/customer_login.html' %}
     {% endif %}
 
     {% include 'base/footer.html' %}

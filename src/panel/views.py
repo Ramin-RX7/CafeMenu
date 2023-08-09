@@ -1,12 +1,14 @@
 import random
-from typing import Any
 from datetime import timedelta
 
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.contrib.auth import login as django_login
+from django.contrib.auth import (login as django_login, logout as django_logout)
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.db.models import Case, CharField, Value, When
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
@@ -21,7 +23,7 @@ from .forms import EditOrderForm, EditOrderItemForm
 
 def login(request):
     if isinstance(request.user, User):
-        return redirect("index")
+        return redirect("panel:dashboard")
     form=UserLogInForm()
     if request.method=="POST":
         form=UserLogInForm(request.POST)
@@ -50,7 +52,7 @@ def generate_2fa(request):
 
 def user_verify(request):
     if isinstance(request.user, User):
-        return redirect("index")
+        return redirect("panel:dashboard")
     user_phone = request.session.get('user_phone')
     if not user_phone:
         return redirect("panel:login")
@@ -85,7 +87,7 @@ def user_verify(request):
                     user = User.objects.get(phone=user_phone)
                     django_login(request, user, "users.auth.UserAuthBackend")
                     request.session['phone'] = user.phone
-                    return redirect("index")
+                    return redirect("panel:dashboard")
                 else:
                     form.add_error(None,"Invalid code entered")
                     return render(request, 'panel/user_verify.html', {'form': form})
@@ -93,9 +95,28 @@ def user_verify(request):
                 ...
 
 
+@login_required
+def logout(request):
+    django_logout(request)
+    request.session["authenticated"] = False
+    request.session["phone"] = None
+    request.session["user_phone"] = None
 
+
+@login_required(login_url="panel:login")
 def dashboard_staff(request):
-    orders = Order.objects.order_by('status')
+    orders = Order.objects.annotate(
+        status_order=Case(
+            When(status="Pending", then=Value(1)),
+            When(status="Approved", then=Value(2)),
+            When(status="Delivered", then=Value(3)),
+            When(status="Rejected", then=Value(4)),
+            When(status="Paid", then=Value(5)),
+            # Add more cases for other choices
+            default=Value(1),
+            output_field=CharField(),
+        )
+    ).order_by('status_order')
     tables = Table.objects.all()
     context = {
         'orders': orders,
@@ -110,6 +131,7 @@ class EditOrders(View):
         self.order_items = self.order.orderitem_set.all()
         return super().dispatch(request, order_id)
 
+    @method_decorator(login_required(login_url='panel:login'))
     def get(self, request, order_id:int):
         form =EditOrderForm(instance=self.order)
         item_forms = []
@@ -120,6 +142,7 @@ class EditOrders(View):
 
         return render(request,'panel/dashboard_editoreder.html',context)
 
+    @method_decorator(login_required(login_url='panel:login'))
     def post(self, request, order_id):
         if request.POST.get("order"):
             form = EditOrderForm(request.POST, instance=self.order)
@@ -146,6 +169,7 @@ class EditOrders(View):
 
 
 def simple_action(view_func):
+    @login_required(login_url='panel:login')
     def _wrapped_view(request, order_id, *args, **kwargs):
         response = view_func(request, order_id, *args, **kwargs)
         return redirect("panel:dashboard")
