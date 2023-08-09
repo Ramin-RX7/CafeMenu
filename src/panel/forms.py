@@ -32,6 +32,13 @@ class EditOrderItemForm(ModelForm):
         model = OrderItem
         fields = ['food', 'quantity']
 
+class AddOrderItemForm(ModelForm):
+    quantity = forms.IntegerField(min_value=1,max_value=100,widget=forms.TextInput(attrs={"class":"form-control my-1"}))
+    class Meta:
+        model = OrderItem
+        fields = ['food', 'quantity']
+
+
 
 class EditOrderForm(ModelForm):
     discount = forms.DecimalField(min_value=0.0, max_value=100.0,max_digits=4,widget=forms.TextInput(attrs={"class":"form-control my-1"}))
