@@ -68,7 +68,7 @@ class FoodAdmin(admin.ModelAdmin):
     ordering = ['title']
     search_fields = ['title']
     autocomplete_fields = ['category']
-    list_filter = ['title']
+    list_filter = [FoodFilter]
     list_editable = ['price','discount','is_active']
     list_per_page = 20
 
