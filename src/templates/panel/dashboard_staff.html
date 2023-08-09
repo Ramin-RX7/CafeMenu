@@ -15,31 +15,31 @@
     {% for order in orders %}
 
     <div class="row mt-3">
-        <div class="col-md-7 mx-auto" id="contentSection">
+        <div class="col-md-8 mx-auto" id="contentSection">
             <!-- All Orders -->
                 <div id="initialContent">
                     <div class="order-dsh">
-                        Order ID: 001 Table: 1
-                        {% comment %}  {% endcomment %}
-                        <div class="col">
-                        {% comment %} <button class="button approve">Approve</button> {% endcomment %}
-                        {% comment %} <button class="button edit-dsh">Edit</button> {% endcomment %}
-                        <div class="row" >
-                            <div class="col">
+                        {% if order.table %} {{order.table}}<br> {% endif %}
+                        Phone: {{order.customer}}
+                        <br>
+                        Total Price {{order.final_price}}
 
-                                {% if order.status == 'Pending' or order.status == 'Approved' %}
-                                    <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                {% elif order.status == 'Delivered' %}
-                                    <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="btn btn-success" name="{{ order.id }}">Pay</button></a>
-                                {% endif %}
-                                {% if order.status == 'Pending' %}
-                                    <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="btn btn-light"  name="{{ order.id }}">Approve</button></a>
-                                    <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="btn btn-danger" name="{{ order.id }}">Reject</button></a>
-                                {% elif order.status == 'Approved' %}
-                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                {% endif %}
+                        <div class="col">
+                            <div class="row" >
+                                <div class="col">
+                                    {% if order.status == 'Pending' or order.status == 'Approved' %}
+                                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% elif order.status == 'Delivered' %}
+                                        <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                    {% endif %}
+                                    {% if order.status == 'Pending' %}
+                                        <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                        <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                    {% elif order.status == 'Approved' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
