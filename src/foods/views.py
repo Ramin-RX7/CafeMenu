@@ -15,7 +15,7 @@ def category_list(request):
 
 def category_details(request,id):
     category = Category.objects.get(id=id)
-    context = {"category":category}
+    context = {"category":category, "foods":category.food_set.all()}
     return render(request,'foods/category_details.html',context)
 
 
