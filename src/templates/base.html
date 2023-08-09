@@ -16,9 +16,9 @@
 
     {% endblock %}
 
-    {% if customer_logged_in %}
+    {% if logged_in %}
     {% else %}
-    {% include 'base/customer_login.html' %}
+        {% include 'base/customer_login.html' %}
     {% endif %}
 
     {% include 'base/footer.html' %}
