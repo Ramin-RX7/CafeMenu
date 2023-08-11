@@ -70,8 +70,6 @@
                                 {% endif %}{% endcomment %}
                                 {% if order.status == 'Approved' %}
                                     <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                {% elif order.status == 'Rejected' %}
-                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
                                 {% elif order.status == 'Delivered' %}
                                     <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                                 {% endif %}
