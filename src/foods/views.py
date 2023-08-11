@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import Http404
 from django.db.models import Count
+from django.views import View
+
 
 from .models import Category,Food
 
@@ -14,7 +15,7 @@ def category_list(request):
 
 def category_details(request,id):
     category = Category.objects.get(id=id)
-    context = {"category":category}
+    context = {"category":category, "foods":category.food_set.all()}
     return render(request,'foods/category_details.html',context)
 
 
@@ -24,13 +25,12 @@ def food_details(request, id):
     return render(request, "foods/food_details.html",context)
 
 
-def search(request):
-    if request.method == "GET":
+class SearchView(View):
+    def get(self, request):
         searched = request.GET.get('searched')
         FOODS_QUERYSET = Food.objects.filter(title__contains=searched).distinct()
         return render(request, 'foods/search.html', {'searched':searched, "foods":FOODS_QUERYSET})
-    else:
-        raise Http404
+
 
 
 def menu(request):

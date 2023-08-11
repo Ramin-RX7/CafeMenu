@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %} Cart {% endblock %}
+
 {% block content %}
 
 
@@ -12,7 +15,11 @@
 
             <div class="col-4">
                 <a href="{% url 'foods:food_details' food.id %}">
-                <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+                  {% if food.image %}
+                    <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
+                  {% else %}
+                    <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow">
+                  {% endif %}
                 </a>
             </div>
 
@@ -35,12 +42,19 @@
         </div>
     </div>
     {% empty %}
+        <div class="text-center">
         <h3 class="text-center">Your cart is empty</h3>
+        <br><br>
+        <h4 class="text-center">Check out our menu to add foods to your cart</h4>
+        <br>
+        <a href="{% url 'foods:menu' %}"><button class="btn btn-primary btn-lg">Menu</button></a>
+        <br>
+    </div>
     {% endfor %}
 
     {% if cart %}
     <div class="container my-5">
-        {% if customer_logged_in %}
+        {% if logged_in %}
         <form method="post" action="{% url 'orders:set_order' %}">
             {% csrf_token %}
             <div class="d-flex px-5 mx-5 py-5">

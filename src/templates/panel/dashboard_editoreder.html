@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-5">Order Info</h2>
+    <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex mb-5 mt-2">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary mx-5" name="order" value="order">update</button>
+    </form>
+
+    <hr>
+    <hr>
+
+    <h2 class="my-4">Items:</h2>
+    <div class="row">
+        {% for itemform in orderitems %}
+        <div class="col-md-6">
+            <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex my-4">
+                <table>
+                    {% csrf_token %}
+                    {{ itemform.as_table }}
+                </table>
+                <br>
+                <button type="submit" class="mx-1 my-1 btn btn-primary" name="orderitem" value="update">update</button>
+                <button type="submit" class="mx-1 my-1 btn btn-outline-primary" name="orderitem" value="delete">delete</button>
+            </form>
+        </div>
+        {%endfor%}
+    </div>
+    <hr><hr>
+
+    <h2 class="my-3">Add item</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{% url 'panel:edit_order' order.id %}" method="post">
+                {% csrf_token %}
+                <div class="d-flex my-3 align-items-center">
+                    <label for="{{ add_item_form.food.id_for_label }}" class="h4 mx-4">Food:</label>
+                    <select name="{{ add_item_form.food.name }}" class="form-control" required>
+                        {% for food in add_item_form.food.field.choices %}
+                            <option value="{{ food.0 }}">{{ food.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="d-flex my-3 align-items-center">
+                    <label for="{{ add_item_form.food.id_for_label }}" class="h4 mx-4">Quantity:</label>
+                    {{add_item_form.quantity}}
+                </div>
+                <button type="submit" class="mx-1 my-1 btn btn-primary" name="add_item" value="add_item">update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

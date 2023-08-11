@@ -1,6 +1,7 @@
 from django.db import models
-from django.core.validators import RegexValidator
+
 from main.models import BaseModel
+from main.validators import phone_validator
 from foods.models import Food
 
 
@@ -20,14 +21,21 @@ class Table(BaseModel):
                 return table
 
 
-customer_validator = RegexValidator(r"(((\+|00)(98))|0)?9(?P<operator>\d{2})-?(?P<middle3>\d{3})-?(?P<last4>\d{4})")
+
 class Order(BaseModel):
-    customer = models.CharField(max_length=15, validators=[customer_validator])
+    customer = models.CharField(max_length=15, validators=[phone_validator])
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
-    price = models.FloatField(null=True)
-    discount = models.FloatField(default=0.0)
+    discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
     status_field = models.TextChoices("Status","Pending Rejected Approved Delivered Paid")
     status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
+
+    @property
+    def price(self):
+        return sum([item.unit_price*item.quantity for item in self.orderitem_set.all()])
+
+    @property
+    def final_price(self):
+        return self.price / 100 * (self.discount or 100)
 
     def __str__(self) -> str:
         return f"{self.customer}"
@@ -36,15 +44,20 @@ class Order(BaseModel):
     def approve(self):
         self.status = "Approved"
         self.save()
-
+    def reject(self):
+        self.status = "Rejected"
+        self.save()
+    def deliver(self):
+        self.status = "Delivered"
+        self.save()
     def pay(self):
         self.status = "Paid"
         self.save()
 
-    def save(self, check_price=True):
-        if (check_price)  and  (self.price is None):
-            raise SystemError("No price given")
-        # self.price = sum([item.price for item in self.orderitem_set.all()])
+    def save(self, check_items=True):
+        if check_items:
+            if not self.price:
+                raise SystemError("No price given")
         super().save()
 
 
@@ -52,16 +65,17 @@ class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    unit_price = models.FloatField()
-    discount = models.FloatField(default=0.0)
+    unit_price = models.DecimalField(decimal_places=2, max_digits=5)
+    discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
 
     def __str__(self) -> str:
         return f"{self.quantity}"
-    
-    def total_price(self):
-        if not self.order.price:
-            self.order.price = 0.0
-            self.order.price += (self.unit_price * self.quantity)
-            self.order.save()
-        else:
-            raise SystemError
+
+    def save(self, *args, **kwargs):
+        related_order_items = OrderItem.objects.filter(order=self.order, food=self.food).exclude(id=self.id)
+        if len(related_order_items):
+            total_quantity = sum([item.quantity for item in related_order_items])
+            for item in related_order_items:
+                item.delete()
+            self.quantity = total_quantity + self.quantity
+        super().save(*args, **kwargs)
