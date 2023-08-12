@@ -1,76 +1,107 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} Cart {% endblock %}
-
+{% load filters %}
 {% block content %}
-
-
+<script src="script.js"></script>
 <section id="about2">
     <h6 class="section-subtitle text-center">Your</h6>
     <h3 class="section-title mb-6 pb-3 text-center">Cart</h3>
-    {% for food,quantity in cart.items %}
     <div class="container">
-        <div class="section-devider my-5 transparent"></div>
-        <div class="row align-items-center">
-
-            <div class="col-4">
-                <a href="{% url 'foods:food_details' food.id %}">
-                  {% if food.image %}
-                    <img alt="" src="{{ food.image.url }}" class="w-100 rounded shadow">
-                  {% else %}
-                    <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow">
-                  {% endif %}
-                </a>
-            </div>
-
-            <div class="col-md-6">
-                <!-- <h6 class="section-subtitle">{}}</h6> -->
-                <h3 class="section-title"><a href="{% url 'foods:food_details' food.id %}">{{food.title}}</a></h3>
-                <p>{{ food.description|truncatechars:50 }}</p>
-
-                <div class="mb-4 h4 float-left text-primary">
-                    Quantity: {{ quantity }}
+        <div class="section-devider my-6 transparent"></div>
+    </div>
+    <div class="container">
+    <div class="row mt-3" style="justify-content:space-around;">
+        {% for food,quantity in cart.items %}
+        <div class="card mb-3" style="max-width: 400px;">
+            <div class="row g-0">
+              <div class="col-md-6">
+                <img src="{{ food.image.url }}" class="img-fluid img-thumbnail" alt="{{ food.title }}">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body" style="padding-right:2% ;padding-right:3%;">
+                  <h5 class="card-title text-primary">{{ food.title }}</h5>
+                  <div class="custom-list">
+                    <div class="info">
+                        <div class="head clearfix">
+                            <div class="title float-left" style="font-size: 16px;">For each</div>
+                            <div class="float-right" style="font-size: 16px;">{{ food.price }} $</div>
+                        </div>
+                        <div class="head clearfix">
+                            <div class="title float-left" style="font-size: 16px;">Quantity</div>
+                            <div class="float-right" style="font-size: 16px;">{{ quantity }}</div>
+                       </div>
+                       <div class="head clearfix">
+                        <div class="title float-left " style="font-size: 16px;">Total</div>
+                        <div class="float-right" style="font-size: 16px;">{{ food.price|mul:quantity }} $</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-                <div class="body">
-                    <form method="post" action="{% url 'orders:cart_delete' %}">
-                      {% csrf_token %}
-                      <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block">Delete</button>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="row">
+                <div class="col">
+                    <form action="{% url 'orders:cart_add' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                        <div class="col">
+                        <input type="number" name="quantity" id="" class="form-control" value="{{ quantity }}" min="1" >   
+                        </div>
+                        <div>
+                            <button type="submit_change" name="change" value="{{ food.id }}" class="btn btn-primary">Change</button>
+                        </div>
+                        </div>
                     </form>
+                </div>
+                <div class="col">
+                    <form method="post" action="{% url 'orders:cart_delete' %}">
+                        {% csrf_token %}
+                        <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block">Delete</button>
+                 </form> 
                 </div>
             </div>
         </div>
     </div>
-    {% empty %}
-        <div class="text-center">
-        <h3 class="text-center">Your cart is empty</h3>
-        <br><br>
-        <h4 class="text-center">Check out our menu to add foods to your cart</h4>
-        <br>
-        <a href="{% url 'foods:menu' %}"><button class="btn btn-primary btn-lg">Menu</button></a>
-        <br>
-    </div>
-    {% endfor %}
 
-    {% if cart %}
-    <div class="container my-5">
-        {% if logged_in %}
-        <form method="post" action="{% url 'orders:set_order' %}">
-            {% csrf_token %}
-            <div class="d-flex px-5 mx-5 py-5">
-                <button type="submit" name="food" value="{{ food.id }}" class="btn btn-lg btn-primary btn-block"><h3>Order</h3></button>
+          {% empty %}
+          <div class="text-center">
+            <h3 class="text-center">Your cart is empty</h3>
+            <br><br>
+            <h4 class="text-center">Check out our menu to add foods to your cart</h4>
+            <br>
+            <a href="{% url 'foods:menu' %}"><button class="btn btn-primary btn-lg">Menu</button></a>
+            <br>
             </div>
-        </form>
-        {% else %}
-        <!-- <h2 class="text-center">Please fill out the form below to continue</h2> -->
-        {% endif %}
+            {% endfor %}
     </div>
-    {% else %}
-        <!-- ... -->
-    {% endif %}
-
-  </section>
-
-
-
+</div>
+{% if cart %}
+<div class="container text-center head clearfix py-5" >
+    <div class="row">
+        <div class="col">
+            <h4 class="py-2">Total orders price : <h4 class="text-primary"> 100 $ </h4></h4>
+            {% endif %}
+        </div>
+            <div class="col">
+                {% if cart %}
+                    {% if logged_in %}
+                    <form method="post" action="{% url 'orders:set_order' %}">
+                        {% csrf_token %}
+                        <!-- <div class="d-flex px-5 mx-5 py-3"> -->
+                            <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block py-1" ><h4>Set Order</h4></button>
+                        <!-- </div> -->
+                    </form>
+                    {% else %}
+                    <!-- <h2 class="text-center">Please fill out the form below to continue</h2> -->
+                    {% endif %}
+                {% else %}
+                    <!-- ... -->
+                {% endif %}
+    
+            </div>
+    </div>
+</div>
+</section>
 {% endblock %}
