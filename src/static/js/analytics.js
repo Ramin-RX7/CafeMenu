@@ -64,7 +64,6 @@ function _getComparativeChartConfig(labels, data, other_data=null){
     return config
 }
 
-// set up the config for relative charts
 
 
 // Get a list of labels for chart based on the name or dictionary keys
@@ -87,6 +86,7 @@ function _getDurationLabels(duration, data){
     return Object.keys(data)
 }
 
+// Get values of the chart (y axis) and return them in an array of arrays.
 function _getValues(duration_data){
     if (Object.prototype.toString.call(duration_data) === "[object Object]"){
         if (typeof duration_data.old === "object"){
@@ -101,16 +101,10 @@ function _getValues(duration_data){
 
 
 
-// Get the chart config from the namespace and DATA
-function getChartConfig(fulltype, full_data) {
-    let [query,type,duration] = fulltype.split(":");
-    let chartConfig;
-    let duration_data = full_data[query][type][duration]
-    let labels =  _getDurationLabels(duration,duration_data)
-    let [oldData,newData]  =  _getValues(duration_data)
-    chartConfig = _getComparativeChartConfig(labels, oldData, newData)
-    // console.log(old);
-
+function getChartConfig(duration, data) {
+    let labels =  _getDurationLabels(duration,data)
+    let [oldData,newData] =  _getValues(data)
+    let chartConfig = _getComparativeChartConfig(labels, oldData, newData)
     return chartConfig
 }
 
@@ -128,7 +122,10 @@ function createChartWithData(duration, fulltype, data) {
 
 
 fetchDataFromAPI().then(data => {
-    // createChartWithData("sales:comparative:week", data);
-    createChartWithData("sales:relative:week", data);
-
+    const flattenedData = flattenNestedObject(data, '', 0, 2);
+    for (const fulltype in flattenedData) {
+        const data = flattenedData[fulltype]
+        duration_name = fulltype.split(":").pop()
+        createChartWithData(duration_name, fulltype, data)
+    }
 });
