@@ -31,7 +31,6 @@ def order_details(request,id):
 
 
 class SetOrderView(View):
-
     def post(self, request):
         if not (data := request.COOKIES.get("cart")):
             redirect("orders:cart")
@@ -90,18 +89,30 @@ class CartAddView(View):
         return redirect("foods:menu")
 
     def post(self, request):
-        food_id = request.POST.get('food')
-        quantity = request.POST.get('quantity')
-        cart_cookie = request.COOKIES.get('cart')
-        if cart_cookie:
-            cart_dict = eval(cart_cookie)
-        else:
-            cart_dict= {}
+        if (food_id := request.POST.get('change')):
+            quantity = request.POST.get('quantity')
+            cart_cookie = request.COOKIES.get('cart')
+            if cart_cookie:
+                cart_dict = eval(cart_cookie)
+            else:
+                cart_dict= {}
 
-        cart_dict[food_id] = quantity
-        response = redirect('foods:menu')
-        response.set_cookie('cart', str(cart_dict))
-        return response
+            cart_dict[food_id] = quantity
+            response = redirect('orders:cart')
+            response.set_cookie('cart', str(cart_dict))
+            return response
+        elif (food_id := request.POST.get('food')):
+            quantity = request.POST.get('quantity')
+            cart_cookie = request.COOKIES.get('cart')
+            if cart_cookie:
+                cart_dict = eval(cart_cookie)
+            else:
+                cart_dict= {}
+
+            cart_dict[food_id] = quantity
+            response = redirect('foods:menu')
+            response.set_cookie('cart', str(cart_dict))
+            return response
 
 
 
