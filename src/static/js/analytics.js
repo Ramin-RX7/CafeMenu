@@ -8,6 +8,21 @@ function fetchDataFromAPI() {
 }
 
 
+function flattenNestedObject(obj, prefix = '', depth = 0, maxDepth = 3) {
+    const result = {};
+    for (const key in obj) {
+        const value = obj[key];
+        if (depth < maxDepth && typeof value === 'object' && !Array.isArray(value)) {
+            const nestedPrefix = prefix ? `${prefix}:${key}` : key;
+            const nestedFlattened = flattenNestedObject(value, nestedPrefix, depth + 1, maxDepth);
+            Object.assign(result, nestedFlattened);
+        } else {
+            result[prefix ? `${prefix}:${key}` : key] = value;
+        }
+    }
+    return result;
+}
+
 
 // set up the config for comparative charts
 function _getComparativeChartConfig(labels, data, other_data=null){
