@@ -1,18 +1,249 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'styles/dashboard_analytics.css' %}">
+{% endblock extra_style %}
+
+
 {% block content %}
 
-<div class="container">
-  <canvas id="sales:comparative:week"></canvas>
-  <br><br><br>
-  <canvas id="sales:relative:week"></canvas>
+<div class="container text-center py-5 ">
+    <div class="card">
+        <div class="card-header">
+            Cafe details
+          </div>
+          <div class="card-body">
+            <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                            <button class="btn text-center btn-primary collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                amount of sales by price
+                            </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne headingTwo h" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="py-3" style="justify-content: space-between;">
+                                    <input type="radio" name="section" id="Day1" >
+                                    <label for="Day1" class="btn btn-outline-dark">Day</label>
 
+                                    <input type="radio" name="section" id="Week1" >
+                                    <label for="Week1" class="btn btn-outline-dark">Week</label>
 
-</div>
+                                    <input type="radio" name="section" id="Month1" >
+                                    <label for="Month1" class="btn btn-outline-dark">Month</label>
 
+                                    <input type="radio" name="section" id="Total1" >
+                                    <label for="Total1" class="btn btn-outline-dark">Total</label>
 
+                                    <div class="section" id="Day1-content">
+                                        <h2> Day amount </h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
 
+                                    <div class="section" id="Week1-content">
+                                        <h2>Week amount</h2>
+                                        <div style="width: 800px; justify-content: center;">
+                                            <canvas id="sales:comparative:week" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Month1-content">
+                                        <h2> month amount</h2>
+                                        <div style="width: 800px; justify-content: center;">
+                                            <canvas id="amount-sales-month" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Total1-content">
+                                        <h2>Total amount</h2>
+                                        <div style="width: 800px; justify-content: center;">
+                                            <canvas id="amount-sales-total" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                            <button class="btn text-center btn-primary collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                count of each foods items sold
+                            </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="py-3" style="justify-content: space-between;">
+
+                                    <input type="radio" name="section" id="Day2">
+                                    <label for="Day2" class="btn btn-outline-dark">Day</label>
+
+                                    <input type="radio" name="section" id="Week2" >
+                                    <label for="Week2" class="btn btn-outline-dark">Week</label>
+
+                                    <input type="radio" name="section" id="Month2" >
+                                    <label for="Month2" class="btn btn-outline-dark">Month</label>
+
+                                    <input type="radio" name="section" id="Total2" >
+                                    <label for="Total2" class="btn btn-outline-dark">Total</label>
+
+                                    <div class="section" id="Day2-content">
+                                        <h2>Day Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="count-sold-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Week2-content">
+                                        <h2>Week Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="count-sold-week" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Month2-content">
+                                        <h2>Month Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="count-sold-month" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Total2-content">
+                                        <h2>Total Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="count-sold-total" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                            <button class="btn text-center btn-primary collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                count of orders
+                            </button>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="py-3" style="justify-content: space-between;">
+
+                                    <input type="radio" name="section" id="Day3">
+                                    <label for="Day3" class="btn btn-outline-dark">Day</label>
+
+                                    <input type="radio" name="section" id="Week3" >
+                                    <label for="Week3" class="btn btn-outline-dark">Week</label>
+
+                                    <input type="radio" name="section" id="Month3" >
+                                    <label for="Month3" class="btn btn-outline-dark">Month</label>
+
+                                    <input type="radio" name="section" id="Total3" >
+                                    <label for="Total3" class="btn btn-outline-dark">Total</label>
+
+                                    <div class="section" id="Day3-content">
+                                        <h2>Day Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Week3-content">
+                                        <h2>Week Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Month3-content">
+                                        <h2>Month Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Total3-content">
+                                        <h2>Total Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                                <button class="btn text-center btn-primary collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    count of sales in each category
+                                </button>
+                            </h2>
+                        </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="py-3" style="justify-content: space-between;">
+
+                                    <input type="radio" name="section" id="Day4">
+                                    <label for="Day4" class="btn btn-outline-dark">Day</label>
+
+                                    <input type="radio" name="section" id="Week4" >
+                                    <label for="Week4" class="btn btn-outline-dark">Week</label>
+
+                                    <input type="radio" name="section" id="Month4" >
+                                    <label for="Month4" class="btn btn-outline-dark">Month</label>
+
+                                    <input type="radio" name="section" id="Total4" >
+                                    <label for="Total4" class="btn btn-outline-dark">Total</label>
+
+                                    <div class="section" id="Day4-content">
+                                        <h2>Day Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Week4-content">
+                                        <h2>Week Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="count-category-week" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Month4-content">
+                                        <h2>Month Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <div class="section" id="Total4-content">
+                                        <h2>Total Content</h2>
+                                        <div style="width: 800px; justify-content:center ;">
+                                            <canvas id="amount-sales-day" width="800" height="400"></canvas>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{% static 'js/analytics.js' %}"></script>
-{% endblock content %}
+{% endblock %}
+
