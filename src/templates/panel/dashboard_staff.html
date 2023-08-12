@@ -2,6 +2,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
+{% endblock extra_style %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+
+
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded shadow py-2">
     <div class="container">
