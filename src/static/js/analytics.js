@@ -1,11 +1,13 @@
 function fetchDataFromAPI() {
-    return fetch('/test/')
+    return fetch('/dashboard/analytics-api/')
         .then(response => response.json())
         .catch(error => {
             console.error('Error fetching sales data:', error);
             throw error; // Propagate the error
         });
 }
+
+
 
 // set up the config for comparative charts
 function _getComparativeChartConfig(labels, oldData, newData){
