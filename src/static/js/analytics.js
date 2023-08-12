@@ -114,11 +114,14 @@ function getChartConfig(fulltype, full_data) {
     return chartConfig
 }
 
-
-
-function createChartWithData(fulltype, full_data) {
-    const ctx = document.getElementById(fulltype).getContext('2d');
-    const chartConfig = getChartConfig(fulltype, full_data);
+function createChartWithData(duration, fulltype, data) {
+    let ctx;
+    try {
+        ctx = document.getElementById(fulltype).getContext('2d');
+    } catch (error) {
+        return null
+    }
+    const chartConfig = getChartConfig(duration, data);
     const salesChart = new Chart(ctx, chartConfig);
 }
 
