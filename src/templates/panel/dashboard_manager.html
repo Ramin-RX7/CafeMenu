@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <canvas id="sales:comparative:week"></canvas>
+  <br><br><br>
+  <canvas id="sales:relative:week"></canvas>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/analytics.js' %}"></script>
+{% endblock content %}
