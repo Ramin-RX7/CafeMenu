@@ -10,25 +10,24 @@ function fetchDataFromAPI() {
 
 
 // set up the config for comparative charts
-function _getComparativeChartConfig(labels, oldData, newData){
-    return {
-        type: 'bar',
+function _getComparativeChartConfig(labels, data, other_data=null){
+    config = {
         data: {
             labels: labels,
             datasets: [
                 {
                     label: 'This',
-                    data: newData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    data: data,
+                    backgroundColor: 'rgba(190,140,75, 0.6)',
+                    borderColor: "#bc8c4c",
+                    borderWidth: 5
                 },
                 {
                     label: 'Previous',
-                    data: oldData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1,
+                    data: other_data,
+                    backgroundColor: 'rgba(190,190,190, 0.6)',
+                    borderColor: '#bdbebf',
+                    borderWidth: 5,
                     hidden: true
                 }
             ]
@@ -42,98 +41,76 @@ function _getComparativeChartConfig(labels, oldData, newData){
             }
         }
     };
+    if (other_data == null){
+        config.type = "bar"
+    } else {
+        config.type = "line"
+    }
+    return config
 }
 
 // set up the config for relative charts
-function _getRelativeChartConfig(labels, data){
-    return {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Data',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    };
-}
 
-// Get a list of labels based on array length
-function _getDurationLabels(array){
-    switch (array.length) {
-        case 24:
+
+// Get a list of labels for chart based on the name or dictionary keys
+function _getDurationLabels(duration, data){
+    if (typeof data === "object"){
+        if (typeof data.old == "object"){
+            return Object.keys(data.old)
+        }
+    }
+    switch (duration) {
+        case "day":
             return Array.from({ length: 24 }, (_, index) => (index + 1).toString());
-        case 31:
+        case "month":
             return Array.from({ length: 31 }, (_, index) => (index).toString());
-        case 7:
+        case "week":
             return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        case 12:
+        case "year":
             return ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     }
+    return Object.keys(data)
+}
+
+function _getValues(duration_data){
+    if (Object.prototype.toString.call(duration_data) === "[object Object]"){
+        if (typeof duration_data.old === "object"){
+            return [Object.values(duration_data.old), Object.values(duration_data.new)]
+        } else {
+            return [duration_data.old, duration_data.new]
+        }
+    } else {
+        return [duration_data,[]]
+    }
 }
 
 
+
+// Get the chart config from the namespace and DATA
 function getChartConfig(fulltype, full_data) {
-    let [main_type,sub_type] = fulltype.split(":");
+    let [query,type,duration] = fulltype.split(":");
     let chartConfig;
-    if (main_type=="Comparative"){
-        let oldData = full_data[main_type][sub_type][0];
-        let newData = full_data[main_type][sub_type][1];
-        let labels  = _getDurationLabels(newData)
-        chartConfig = _getComparativeChartConfig(labels, oldData, newData)
-    } else {
-        let data = full_data[main_type][sub_type]
-        let labels = _getDurationLabels(data)
-        chartConfig = _getRelativeChartConfig(labels, data)
-    }
+    let duration_data = full_data[query][type][duration]
+    let labels =  _getDurationLabels(duration,duration_data)
+    let [oldData,newData]  =  _getValues(duration_data)
+    chartConfig = _getComparativeChartConfig(labels, oldData, newData)
+    // console.log(old);
+
     return chartConfig
 }
 
 
 
-
-
-
-
-
-
-
-
-
-function createChartWithData(oldData, newData) {
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-    const chartConfig = getChartConfig(labels, oldData, newData);
-
-    // Create the chart
+function createChartWithData(fulltype, full_data) {
+    const ctx = document.getElementById(fulltype).getContext('2d');
+    const chartConfig = getChartConfig(fulltype, full_data);
     const salesChart = new Chart(ctx, chartConfig);
-
-    // Toggle button functionality
-    const toggleButton = document.getElementById('toggleButton');
-    toggleButton.addEventListener('click', () => {
-        // Toggle the hidden property of the last week's dataset
-        salesChart.data.datasets[1].hidden = !salesChart.data.datasets[1].hidden;
-        salesChart.update(); // Update the chart to reflect changes
-    });
 }
 
 
+
 fetchDataFromAPI().then(data => {
-    const thisWeekData = data.sales;
-    const lastWeekData = [5, 8, 6, 2, 4];
-    createChartWithData(thisWeekData, lastWeekData);
+    // createChartWithData("sales:comparative:week", data);
+    createChartWithData("sales:relative:week", data);
 
 });
