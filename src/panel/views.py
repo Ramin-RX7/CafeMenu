@@ -205,6 +205,7 @@ def simple_action(view_func):
         return redirect("panel:dashboard")
     return _wrapped_view
 
+
 @simple_action
 def approve_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
@@ -225,3 +226,8 @@ def pay_order(request, order_id):
 def deliver_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.deliver()
+
+@simple_action
+def take_responsibility(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.take_responsibility(request.user)
