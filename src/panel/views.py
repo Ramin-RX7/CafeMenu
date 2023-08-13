@@ -209,6 +209,7 @@ def simple_action(view_func):
 def approve_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.approve()
+    order.take_responsibility(request.user)
 
 @simple_action
 def reject_order(request, order_id):
