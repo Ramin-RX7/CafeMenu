@@ -6,15 +6,14 @@
 
 <section id="about2">
   <h6 class="section-subtitle text-center">Menu</h6>
-  <h3 class="section-title mb-6 pb-3 text-center">Categories</h3>
-  
+  <h3 class="section-title mb-5 pb-3 text-center">Categories</h3>
+
   {% for category in categories %}
   <div class="container">
-      <div class="section-devider my-6 transparent"></div>
+      <div class="section-devider my-4 transparent"></div>
 
       <div class="row align-items-center">
-          <!-- Image: On mobile, make it full-width, on desktop maintain 6 columns -->
-          <div class="col-12 col-md-6 order-1 order-md-2"> 
+          <div class="col-12 col-md-6 order-1 order-md-1">
               {% if category.image %}
                   <img src="{{ category.image.url }}" alt="" class="w-100 rounded shadow">
               {% else %}
@@ -22,9 +21,8 @@
               {% endif %}
           </div>
 
-          <!-- Text: On mobile, make it full-width, on desktop maintain 6 columns -->
-          <div class="col-12 col-md-6 order-2 order-md-1 mt-3 mt-md-0"> 
-              <h6 class="section-subtitle">Category</h6>
+          <div class="col-12 col-md-6 order-2 order-md-2 mt-3 mt-md-0">
+              <!-- <h6 class="section-subtitle">Category</h6> -->
               <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
               <p>{{ category.description|truncatewords:50 }}</p>
           </div>
