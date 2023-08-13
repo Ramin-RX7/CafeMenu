@@ -6,10 +6,10 @@
 {% block content %}
 
 <section id="about2">
-    <h2 class="section-title pb-3 text-center text-primary">Your Orders</h2>
+    <h2 class="section-title text-center text-primary">Your Orders</h2>
     {% for order in orders %}
     <div class="container">
-        <div class="section-devider my-6 transparent"></div>
+        <div class="section-devider my-4 transparent"></div>
         <h4 class="float-left title">Order {{forloop.counter}}</h4>
     </div>
     <br>
@@ -59,6 +59,7 @@
             </div>
         </div>
     </div>
+    <hr>
     {% empty %}
     <h3 class="pb-3 text-center text-secondary my-5">You haven't ordered yet</h3>
     <br><br><br><br><br>
