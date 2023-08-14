@@ -7,7 +7,7 @@ from django.db.models import Sum , Count , Q
 from foods.models import Category,Food
 from orders.models import Order,OrderItem
 
-
+from main.models import BaseModel
 
 def json_api(request):
     from django.http import HttpResponse
@@ -198,3 +198,9 @@ def dashboard(request):
                     }
 
         return render(request,'panel/dashboard_manager.html',context)
+    
+    #----------------------------------------------------------------------------------------
+
+    # Get top 5 peak business hours in month, year
+    
+    
