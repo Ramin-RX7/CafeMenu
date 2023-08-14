@@ -202,20 +202,54 @@ def dashboard(request):
 
         return render(request,'panel/dashboard_manager.html',context)
     
-    #----------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------
 
-    # Get top 5 peak business hours in month, year
-    def get_top_peak_hours(request, year, month):
-        start_date = datetime(year, month, 1)
-        end_date = start_date.replace(month=month+1) - timedelta(days=1)
-        
-        top_5_in_year = BaseModel.objects.filter(created_at__year=year).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
-        top_5_in_month = BaseModel.objects.filter(created_at__range=(start_date, end_date)).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
-
-        data = {"year": list(top_5_in_year), "month": list(top_5_in_month)}
-        return JsonResponse(data)
+# Get top 5 peak business hours in month, year
+def get_top_peak_hours(request, year, month):
+    start_date = datetime.datetime(year, month, 1)
+    end_date = start_date.replace(month=month+1) - timedelta(days=1)
     
-    #----------------------------------------------------------------------------------------
+    top_5_in_year = Order.objects.filter(created_at__year=year).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+    top_5_in_month = Order.objects.filter(created_at__range=(start_date, end_date)).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
 
-    # Get top 5 peak business hours in month, year
+    data = {"year": list(top_5_in_year), "month": list(top_5_in_month)}
+    # return JsonResponse(data)
+
+#----------------------------------------------------------------------------------------
+
+# Get the number of unique people coming to our café in day, week, month, year
+def get_uniqe_visitors(request, time_range):
+    current_time = datetime.now()
+    start_date = None
+    
+    if time_range == "day":
+        start_date = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
+    elif time_range == "week":
+        start_date = current_time - timedelta(days=current_time.weekday())
+    elif time_range == "month":
+        start_date = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    else:  # Assuming "year"
+        start_date = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    unique_visitors = Visit.objects.filter(timestamp__gte=start_date).values('timestamp__hour').distinct().count()
+
+    data = {"unique_visitors": unique_visitors}
+    # return JsonResponse(data)
+    
+    
+    # unique_visitors_data = {
+    #     "comparative": {
+    #         time_range: {
+    #             "old": [0] * 24,  # Placeholder for old data, you need to replace with actual data
+    #             "new": [0] * 24   # Placeholder for new data, you need to replace with actual data
+    #         }
+    #     },
+    #     "relative": {
+    #         "day": list(range(1, 25)),  # 1 to 24 hours
+    #         "week": list(range(1, 8)),   # 1 to 7 days
+    #         "month": list(range(1, 31))  # 1 to 30 days (approximate)
+    #     }
+    # }
+    # return JsonResponse(unique_visitors_data)
+
     
