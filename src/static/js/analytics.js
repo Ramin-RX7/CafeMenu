@@ -26,7 +26,7 @@ function flattenNestedObject(obj, prefix = '', depth = 0, maxDepth = 3) {
 
 // set up the config for comparative charts
 function _getComparativeChartConfig(labels, data, other_data=null){
-    config = {
+    let config = {
         data: {
             labels: labels,
             datasets: [
@@ -36,14 +36,6 @@ function _getComparativeChartConfig(labels, data, other_data=null){
                     backgroundColor: 'rgba(190,140,75, 0.6)',
                     borderColor: "#bc8c4c",
                     borderWidth: 5
-                },
-                {
-                    label: 'Previous',
-                    data: other_data,
-                    backgroundColor: 'rgba(190,190,190, 0.6)',
-                    borderColor: '#bdbebf',
-                    borderWidth: 5,
-                    hidden: true
                 }
             ]
         },
@@ -56,10 +48,19 @@ function _getComparativeChartConfig(labels, data, other_data=null){
             }
         }
     };
+
     if (other_data == null){
         config.type = "bar"
     } else {
         config.type = "line"
+        config.data.datasets.push({
+            label: 'Previous',
+            data: other_data,
+            backgroundColor: 'rgba(190,190,190, 0.6)',
+            borderColor: '#bdbebf',
+            borderWidth: 5,
+            hidden: true
+        })
     }
     return config
 }
@@ -68,18 +69,20 @@ function _getComparativeChartConfig(labels, data, other_data=null){
 
 // Get a list of labels for chart based on the name or dictionary keys
 function _getDurationLabels(duration, data){
-    if (typeof data === "object"){
-        if (typeof data.old == "object"){
+    if (!Array.isArray(data)){
+        if (!Array.isArray(data.old)){
+            console.log(data.old);
             return Object.keys(data.old)
         }
+        // data = data.old;
     }
     switch (duration) {
         case "day":
             return Array.from({ length: 24 }, (_, index) => (index + 1).toString());
-        case "month":
-            return Array.from({ length: 31 }, (_, index) => (index).toString());
+            case "month":
+                return Array.from({ length: 31 }, (_, index) => (index).toString());
         case "week":
-            return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         case "year":
             return ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     }
@@ -95,7 +98,7 @@ function _getValues(duration_data){
             return [duration_data.old, duration_data.new]
         }
     } else {
-        return [duration_data,[]]
+        return [duration_data,null]
     }
 }
 
@@ -103,8 +106,8 @@ function _getValues(duration_data){
 
 function getChartConfig(duration, data) {
     let labels =  _getDurationLabels(duration,data)
-    let [oldData,newData] =  _getValues(data)
-    let chartConfig = _getComparativeChartConfig(labels, oldData, newData)
+    let [newData,oldData] =  _getValues(data)
+    let chartConfig = _getComparativeChartConfig(labels, newData, oldData)
     return chartConfig
 }
 
