@@ -205,4 +205,17 @@ def dashboard(request):
     #----------------------------------------------------------------------------------------
 
     # Get top 5 peak business hours in month, year
+    def get_top_peak_hours(request, year, month):
+        start_date = datetime(year, month, 1)
+        end_date = start_date.replace(month=month+1) - timedelta(days=1)
+        
+        top_5_in_year = BaseModel.objects.filter(created_at__year=year).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+        top_5_in_month = BaseModel.objects.filter(created_at__range=(start_date, end_date)).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+
+        data = {"year": list(top_5_in_year), "month": list(top_5_in_month)}
+        return JsonResponse(data)
+    
+    #----------------------------------------------------------------------------------------
+
+    # Get top 5 peak business hours in month, year
     
