@@ -5,13 +5,14 @@ from orders.models import Order
 
 
 
+ALL_ORDERS = Order.objects.all()
 
 
 def sales_rel_week():
     today = datetime.now()
     start_date = today - timedelta(days=7)
 
-    orders_within_last_7_days = Order.objects.filter(status="Paid",created_at__range=(start_date, today))
+    orders_within_last_7_days = ALL_ORDERS.filter(status="Paid",created_at__range=(start_date, today))
     amount_sold_by_day = [0] * 7
 
     for order in orders_within_last_7_days:
@@ -26,7 +27,7 @@ def sales_rel_day():
     today = datetime.now()
     start_date = today - timedelta(days=1)
 
-    orders_within_last_day = Order.objects.filter(created_at__range=(start_date, today))
+    orders_within_last_day = ALL_ORDERS.filter(created_at__range=(start_date, today))
     amount_sold_by_hour = [0] * 24
 
     for order in orders_within_last_day:
@@ -42,7 +43,7 @@ def sales_rel_month():
     today = datetime.now()
     start_date = today - timedelta(days=30)
 
-    orders_within_last_30_days = Order.objects.filter(created_at__range=(start_date, today))
+    orders_within_last_30_days = ALL_ORDERS.filter(created_at__range=(start_date, today))
     amount_sold_by_day = [0] * 30
 
     for order in orders_within_last_30_days:
@@ -57,7 +58,7 @@ def sales_rel_year():
     today = datetime.now()
     start_date = today - timedelta(days=365)
 
-    orders_within_last_year = Order.objects.filter(created_at__range=(start_date, today))
+    orders_within_last_year = ALL_ORDERS.filter(created_at__range=(start_date, today))
     amount_sold_by_month = [0] * 12
 
     for order in orders_within_last_year:
@@ -74,7 +75,7 @@ def sales_compar_day():
     def calculate_sales_for_day(day, include_full_day=False):
         start_of_day = day.replace(hour=0, minute=0, second=0, microsecond=0)
         end_of_day = day.replace(hour=23, minute=59, second=59, microsecond=999999)
-        orders_within_day = Order.objects.filter(created_at__range=(start_of_day, end_of_day))
+        orders_within_day = ALL_ORDERS.filter(created_at__range=(start_of_day, end_of_day))
         sales_by_hour = [0] * 24
 
         for order in orders_within_day:
@@ -99,7 +100,7 @@ def sales_compar_day():
 
 def sales_compar_week():
     def calculate_sales_for_week(start_of_week, end_of_week):
-        orders_within_week = Order.objects.filter(created_at__range=(start_of_week, end_of_week))
+        orders_within_week = ALL_ORDERS.filter(created_at__range=(start_of_week, end_of_week))
         sales_by_day = [0] * 7
 
         for order in orders_within_week:
@@ -126,7 +127,7 @@ def sales_compar_month():
     def calculate_sales_for_month(year, month, last_day):
         start_of_month = datetime(year, month, 1)
         end_of_month = datetime(year, month, last_day)
-        orders_within_month = Order.objects.filter(created_at__range=(start_of_month, end_of_month))
+        orders_within_month = ALL_ORDERS.filter(created_at__range=(start_of_month, end_of_month))
         sales_by_day = [0] * last_day
 
         for order in orders_within_month:
@@ -164,7 +165,7 @@ def sales_compar_year():
             else:
                 end_of_month = datetime(year, month, last_day_of_month)
 
-            orders_within_month = Order.objects.filter(created_at__range=(start_of_month, end_of_month))
+            orders_within_month = ALL_ORDERS.filter(created_at__range=(start_of_month, end_of_month))
             month_total_sales = sum(float(order.price) for order in orders_within_month)
             sales_by_month[month - 1] = month_total_sales
 
@@ -184,7 +185,8 @@ def sales_compar_year():
 
 
 
-
+def sales_by_category():
+    ...
 
 
 
