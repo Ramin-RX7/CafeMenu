@@ -8,7 +8,7 @@
 {% block content %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded shadow py-2 mb-4 col-lg-9">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand ml-4" href="/">
         <img src="{{ maininfo.icon.url }}" alt="" class="navbar-brand" width="50px">
     </a>
     <a class="navbar-brand" href="/">{{ maininfo.title }}</a>
@@ -40,20 +40,17 @@
 <style>
     /* Custom CSS */
     @media (min-width: 768px) {
-        /* Desktop view */
         .sidebar {
-            width: 25%; /* Adjust the width as needed */
-            position:absolute;
+            width: 25%;
+            position:fixed;
             top: 0;
             right: 0;
             height: 100vh;
-            min-height:;
             background-color: #f5f5f5;
         }
     }
 
     @media (max-width: 767.98px) {
-        /* Mobile view */
         .sidebar {
             position: static;
             width: 100%;
@@ -66,7 +63,7 @@
 <div class="container my-5">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-19">
                 <div class="row">
                     <div class="col-md-12 mx-auto">
                         <button type="button" id="toggleButton" class="btn btn-outline-primary" onclick="toggleButtonStyle(this)">Filter by table</button>
@@ -77,7 +74,7 @@
                 <div id="initialContent">
                     <div class="row mt-3">
                         {% for order in orders %}
-                        <div class="col-md-11">
+                        <div class="col-md-12">
                             <div class="order-dsh">
                                 {% if order.table %} {{order.table.name}}<br> {% endif %}
                                 Phone: {{order.customer}}
@@ -115,30 +112,26 @@
                     <div class="row mt-3">
                         {% for order in table.order_set.all %}
                         {% if order.status != "Paid" %}
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="order-dsh">
                                 Phone: {{order.customer}}
                                 <br>
                                 Total Price {{order.final_price}}
                                 <div class="col">
-                                    <div class="row" >
-                                        <div class="col">
-                                            {% if order.status == 'Pending' %}
-                                                <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
-                                                <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
-                                            {% endif %}
-                                            {% if order.status == 'Pending' or order.status == 'Approved' %}
-                                                <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                            {% endif %}
-                                            {% if order.status == 'Approved' %}
-                                                <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                            {% elif order.status == 'Rejected' %}
-                                                <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                            {% elif order.status == 'Delivered' %}
-                                                <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
+                                    {% if order.status == 'Pending' %}
+                                        <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                        <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                    {% endif %}
+                                    {% if order.status == 'Pending' or order.status == 'Approved' %}
+                                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% endif %}
+                                    {% if order.status == 'Approved' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% elif order.status == 'Rejected' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% elif order.status == 'Delivered' %}
+                                        <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -187,7 +180,7 @@
 
 {% block footer %}
 {% endblock footer %}
-<div class="py-4 border border-lighter border-bottom-0 border-left-0 border-right-0 bg-dark col-lg-9">
+<div class="py-0 border border-lighter border-bottom-0 border-left-0 border-right-0 bg-dark col-lg-9">
     <div class="container">
         <div class="row justify-content-between align-items-center text-center">
             <div class="col-md-3 text-md-left mb-3 mb-md-0">
