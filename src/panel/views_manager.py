@@ -9,6 +9,7 @@ from orders.models import Order,OrderItem
 
 from main.models import BaseModel
 from datetime import timedelta
+from django.http import JsonResponse
 
 def json_api(request):
     from django.http import HttpResponse
@@ -203,5 +204,4 @@ def dashboard(request):
     #----------------------------------------------------------------------------------------
 
     # Get top 5 peak business hours in month, year
-    def get_top_peak_hours(request, year, month):
-        
+    
