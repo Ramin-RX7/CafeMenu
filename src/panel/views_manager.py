@@ -10,6 +10,7 @@ from orders.models import Order,OrderItem
 from main.models import BaseModel
 from datetime import timedelta
 from django.http import JsonResponse
+from django.db.models.functions import ExtractHour
 
 def json_api(request):
     from django.http import HttpResponse
