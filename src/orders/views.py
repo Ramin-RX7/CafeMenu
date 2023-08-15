@@ -23,10 +23,8 @@ class IndexView(ListView):
 
 
 class OrderListView(RedirectView):
-    pattern_name = 'index'  # Name of the URL pattern you want to redirect to
+    pattern_name = 'orders:index'
 
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse(self.pattern_name)
 
 class OrderDetailView(DetailView):
     model = Order
@@ -38,7 +36,7 @@ class OrderDetailView(DetailView):
         order_id = int(self.kwargs.get('id')) - 1
         order = get_object_or_404(Order, id=session_id[order_id])
         return order
-    
+
 
 class SetOrderView(View):
 
