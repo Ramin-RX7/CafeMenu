@@ -225,6 +225,7 @@
                             </button>
                             </h2>
                         </div>
+
                         <div id="collapseOthers" class="collapse" aria-labelledby="Others" data-parent="#accordionExample">
                             <div class="card-body">
                                 <h2>Peak Hours</h2>
@@ -234,9 +235,21 @@
                             </div>
                             <br><br>
                             <div class="card-body">
-                                <h2>Peak Hours</h2>
                                 <div style="width: 800px; justify-content:center ;">
-                                    <canvas id="others:relative:peak-hour2" width="800" height="400"></canvas>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p class="h3">Peak Hours of this year:</p>
+                                            {% for hour in peak_hours.year %}
+                                                <p class="h4">{{hour}}</p>
+                                            {% endfor %}
+                                            <br><br>
+                                            <p class="h3">Peak Hours of this Month:</p>
+                                            {% for hour in peak_hours.year %}
+                                                <p class="h4">{{hour}}</p>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
