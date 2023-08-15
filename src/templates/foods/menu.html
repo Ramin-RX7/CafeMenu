@@ -30,7 +30,7 @@
 
         <div class="row mt-3">
             {% for food in category.food_set.all %}
-            <div class="col-md-12 mb-4">
+            <div class="col-md-6 mb-4">
                 <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                     <div class="img-holder" style="margin-right: 35px; width: 20%;">
                         {% if food.image %}
@@ -66,3 +66,6 @@
 </section>
 
 {% endblock %}
+
+
+
