@@ -9,14 +9,10 @@ from .models import Category,Food
 
 
 class CategoryListView(ListView):
-    model=Category
-    template_name='foods/category_list.html'
+    model = Category
+    template_name = 'foods/category_list.html'
+    context_object_name = "categories"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        categories = Category.objects.all()
-        context['categories'] = categories
-        return context
 
 
 class CategoryDetailView(DetailView):
