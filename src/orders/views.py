@@ -28,13 +28,17 @@ class OrderListView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         return reverse(self.pattern_name)
 
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'orders/order_details.html'
+    context_object_name = 'order'
 
-def order_details(request,id):
-    session_id=request.session['orders']
-    order = get_object_or_404(Order, id=session_id[id-1])
-    context = {"order": order}
-    return render(request,'orders/order_details.html',context)
-
+    def get_object(self, queryset=None):
+        session_id = self.request.session.get('orders')
+        order_id = int(self.kwargs.get('id')) - 1
+        order = get_object_or_404(Order, id=session_id[order_id])
+        return order
+    
 
 class SetOrderView(View):
 
