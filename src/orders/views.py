@@ -106,8 +106,8 @@ class CartAddView(View):
 
 
 
-class CartDeleteView(View):
-    def post(self, request):
+class CartDeleteView(RedirectView):
+    def post(self, request, *args, **kwargs):
         data = request.COOKIES.get("cart")
         cart = eval(data)
         food_id = request.POST["food"]
