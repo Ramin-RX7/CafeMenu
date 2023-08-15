@@ -8,7 +8,7 @@ from foods.models import Food
 from users.models import User
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
-from django.views.generic import TemplateView, ListView,DetailView
+from django.views.generic import TemplateView, ListView,DetailView,RedirectView
 
 
 class IndexTemplateView(TemplateView):
@@ -22,8 +22,11 @@ class IndexTemplateView(TemplateView):
         return context
 
 
-def order_list(request):
-    return redirect("index")
+class OrderListView(RedirectView):
+    pattern_name = 'index'  # Name of the URL pattern you want to redirect to
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse(self.pattern_name)
 
 
 def order_details(request,id):
