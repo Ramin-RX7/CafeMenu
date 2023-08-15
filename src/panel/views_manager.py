@@ -231,7 +231,7 @@ def get_uniqe_visitors(request, time_range):
     else:  # Assuming "year"
         start_date = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
 
-    unique_visitors = Visit.objects.filter(timestamp__gte=start_date).values('timestamp__hour').distinct().count()
+    unique_visitors = Order.objects.filter(created_at__gte=start_date).values('created_at__hour').distinct().count()
 
     data = {"unique_visitors": unique_visitors}
     # return JsonResponse(data)
@@ -253,3 +253,28 @@ def get_uniqe_visitors(request, time_range):
     # return JsonResponse(unique_visitors_data)
 
     
+
+#----------------------------------------------------------------------------------------
+
+# Get top 10 selling items (most items sold) in day, week, month, year
+def get_top_selling_items(request):
+    current_time = datetime.datetime.now()
+    start_of_day = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
+    start_of_week = current_time - timedelta(days=current_time.weekday())
+    start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    top_selling_in_day = OrderItem.objects.filter(created_at__gte=start_of_day).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_week = OrderItem.objects.filter(created_at__gte=start_of_week).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_month = OrderItem.objects.filter(created_at__gte=start_of_month).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+
+    top_selling_data = {
+        "year": [item['food'] for item in top_selling_in_year],
+        "month": [item['food'] for item in top_selling_in_month],
+        "week": [item['food'] for item in top_selling_in_week],
+        "day": [item['food'] for item in top_selling_in_day]
+    }
+
+    return top_selling_data
+
