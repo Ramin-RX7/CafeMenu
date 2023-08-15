@@ -201,15 +201,14 @@ def get_category_quantity_sold():
         category_name = entry['food__category__title']
         total_quantity = entry['total_quantity']
         category_quantity_sold[category_name] = total_quantity
-
-    return {"old":category_quantity_sold}
+    return {"new":category_quantity_sold, "old":None}
 
 
 
 def get_most_popular_item():
     top_favorite_items = OrderItem.objects.values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:5]
     favorite_items_dict = {favorite_item['food__title']: favorite_item['total_quantity'] for favorite_item in top_favorite_items}
-    return {"old":favorite_items_dict}
+    return {"new":favorite_items_dict, "old":None}
 
 
 
@@ -217,7 +216,7 @@ def get_peak_hours():
     orders_with_hour = Order.objects.annotate(created_hour=F('created_at__hour'))
     hourly_order_counts = orders_with_hour.values('created_hour').annotate(order_count=Count('id')).order_by('-order_count')[:5]
     peak_hours_dict = {hourly_order['created_hour']: hourly_order['order_count'] for hourly_order in hourly_order_counts}
-    return ({"old":peak_hours_dict})
+    return ({"new":peak_hours_dict, "old":None})
 
 
 
@@ -232,7 +231,7 @@ def customerSales_rel(days):
     sorted_phone_total_spent = sorted(phone_total_spent.items(), key=lambda item: item[1], reverse=True)
     top_customers = {phone: total_spent for phone, total_spent in sorted_phone_total_spent[:5]}
 
-    return {"old":top_customers}
+    return {"new":top_customers, "old":None}
 
 
 
