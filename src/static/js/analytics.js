@@ -49,7 +49,7 @@ function _getComparativeChartConfig(labels, data, other_data=null){
         }
     };
 
-    if (other_data == null){
+    if (other_data === null){
         config.type = "bar"
     } else {
         config.type = "line"
@@ -69,15 +69,16 @@ function _getComparativeChartConfig(labels, data, other_data=null){
 
 // Get a list of labels for chart based on the name or dictionary keys
 function _getDurationLabels(duration, data){
+    // console.log(data);
     if (!Array.isArray(data)){
-        if (!Array.isArray(data.old)){
-            return Object.keys(data.old)
+        if (!Array.isArray(data.new)){
+            return Object.keys(data.new)
         }
         data = data.old;
     }
     switch (duration) {
         case "day":
-            return Array.from({ length: 24 }, (_, index) => (index + 1).toString());
+            return Array.from({ length: 24 }, (_, index) => (index).toString());
             case "month":
                 return Array.from({ length: 31 }, (_, index) => (index).toString());
         case "week":
