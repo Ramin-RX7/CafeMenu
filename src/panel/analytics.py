@@ -189,8 +189,6 @@ def sales_compar_year():
 
 
 
-def sales_by_category():
-    ...
 
 
 
@@ -214,3 +212,9 @@ def get_most_popular_item():
     return {"old":favorite_items_dict}
 
 
+
+def get_peak_hours():
+    orders_with_hour = Order.objects.annotate(created_hour=F('created_at__hour'))
+    hourly_order_counts = orders_with_hour.values('created_hour').annotate(order_count=Count('id')).order_by('-order_count')[:5]
+    peak_hours_dict = {hourly_order['created_hour']: hourly_order['order_count'] for hourly_order in hourly_order_counts}
+    return ({"old":peak_hours_dict})
