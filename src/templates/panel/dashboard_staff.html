@@ -83,23 +83,19 @@
                                 <br>
                                 Total Price {{order.final_price}}
                                 <div class="col">
-                                    <div class="row" >
-                                        <div class="col">
-                                            <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                            {% if order.status == 'Pending' %}
-                                                <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
-                                                <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
-                                            {% endif %}
-                                            {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
-                                                <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                            {% endif %}{% endcomment %}
-                                            {% if order.status == 'Approved' %}
-                                                <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                            {% elif order.status == 'Delivered' %}
-                                                <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
+                                    <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% if order.status == 'Pending' %}
+                                        <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                        <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                    {% endif %}
+                                    {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
+                                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% endif %}{% endcomment %}
+                                    {% if order.status == 'Approved' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% elif order.status == 'Delivered' %}
+                                        <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -157,10 +153,11 @@
 
             <div class="col-md-3 sidebar py-4">
                 <!-- Sidebar content -->
-                <p class="d-flex justify-content-center">Welcome {user.firstname}</p>
+                <p class="d-flex justify-content-center">Welcome {{user.firstname}}</p>
                 <hr>
-                <li class="list-group-item px-1"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
-                <li class="list-group-item px-1"><a class="nav-link" href="{% url 'foods:menu' %}">Menu</a></li>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:menu' %}">Menu</a></li>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:dashboard' %}">Analytics</a></li>
                 <li class="list-group-item px-3">
                     <form action="{% url 'foods:search' %}" method="get">
                         <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
