@@ -14,7 +14,7 @@ from .analytics import *
 
 def json_api(request):
     from django.http import HttpResponse
-    print(get_top_peak_hours(2023,8))
+    print(get_unique_visitors())
     context = {
         "sales": {
             "comparative":{
@@ -54,11 +54,6 @@ def analytics(request):
         "peak_hours": get_top_peak_hours(2023,3),
     }
     return render(request, "panel/dashboard_manager.html", context)
-
-
-
-
-
 
 # Create your views here.
 def dashboard(request):
@@ -248,85 +243,81 @@ def get_top_peak_hours(year, month):
 #----------------------------------------------------------------------------------------
 
 # Get the number of unique people coming to our café in day, week, month, year
-def get_uniqe_visitors(request, time_range):
+def get_unique_visitors():
     current_time = datetime.now()
-    start_date = None
+    start_of_week = current_time - timedelta(days=current_time.weekday())
+    start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
 
-    if time_range == "day":
-        start_date = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
-    elif time_range == "week":
-        start_date = current_time - timedelta(days=current_time.weekday())
-    elif time_range == "month":
-        start_date = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    else:  # Assuming "year"
-        start_date = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+    def calculate_data(queryset):
+        return queryset.values('created_at__hour').annotate(count=Count('customer')).order_by('created_at__hour')
 
-    unique_visitors = Order.objects.filter(created_at__gte=start_date).values('created_at__hour').distinct().count()
+    comparative_data = {
+        "day": {
+            "old": calculate_data(Order.objects.filter(created_at__date=current_time - timedelta(days=1))),
+            "new": calculate_data(Order.objects.filter(created_at__date=current_time))
+        },
+        "week": {
+            "old": calculate_data(Order.objects.filter(created_at__date__range=[start_of_week - timedelta(days=7), start_of_week - timedelta(days=1)])),
+            "new": calculate_data(Order.objects.filter(created_at__date__range=[start_of_week, current_time]))
+        },
+        "month": {
+            "old": calculate_data(Order.objects.filter(created_at__date__range=[start_of_month - timedelta(days=30), start_of_month - timedelta(days=1)])),
+            "new": calculate_data(Order.objects.filter(created_at__date__range=[start_of_month, current_time]))
+        },
+        "year": {
+            "old": calculate_data(Order.objects.filter(created_at__date__range=[start_of_year - timedelta(days=365), start_of_year - timedelta(days=1)])),
+            "new": calculate_data(Order.objects.filter(created_at__date__range=[start_of_year, current_time]))
+        }
+    }
 
-    data = {"unique_visitors": unique_visitors}
-    # return JsonResponse(data)
+    response_data = {
+        "comparative": comparative_data,
+    }
 
-
-    # unique_visitors_data = {
-    #     "comparative": {
-    #         time_range: {
-    #             "old": [0] * 24,  # Placeholder for old data, you need to replace with actual data
-    #             "new": [0] * 24   # Placeholder for new data, you need to replace with actual data
-    #         }
-    #     },
-    #     "relative": {
-    #         "day": list(range(1, 25)),  # 1 to 24 hours
-    #         "week": list(range(1, 8)),   # 1 to 7 days
-    #         "month": list(range(1, 31))  # 1 to 30 days (approximate)
-    #     }
-    # }
-    # return JsonResponse(unique_visitors_data)
-
-
+    return response_data
 
 #----------------------------------------------------------------------------------------
 
 # Get top 10 selling items (most items sold) in day, week, month, year
-def get_top_selling_items(request):
-    current_time = datetime.datetime.now()
+def get_top_selling_items():
+    current_time = datetime.now()
     start_of_day = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
     start_of_week = current_time - timedelta(days=current_time.weekday())
     start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
 
-    top_selling_in_day = OrderItem.objects.filter(created_at__gte=start_of_day).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
-    top_selling_in_week = OrderItem.objects.filter(created_at__gte=start_of_week).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
-    top_selling_in_month = OrderItem.objects.filter(created_at__gte=start_of_month).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
-    top_selling_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_day = OrderItem.objects.filter(created_at__gte=start_of_day).values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_week = OrderItem.objects.filter(created_at__gte=start_of_week).values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_month = OrderItem.objects.filter(created_at__gte=start_of_month).values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
 
     top_selling_data = {
-        "year": [item['food'] for item in top_selling_in_year],
-        "month": [item['food'] for item in top_selling_in_month],
-        "week": [item['food'] for item in top_selling_in_week],
-        "day": [item['food'] for item in top_selling_in_day]
+        "year": [item['food__title'] for item in top_selling_in_year],
+        "month": [item['food__title'] for item in top_selling_in_month],
+        "week": [item['food__title'] for item in top_selling_in_week],
+        "day": [item['food__title'] for item in top_selling_in_day]
     }
 
     return top_selling_data
-
-
 
 #----------------------------------------------------------------------------------------
 
 # Get 10 phone numbers that has the most money spend in our cafe in week,month,year
 def get_top_spending_customers():
-    current_time = datetime.datetime.now()
+    current_time = datetime.now()
     start_of_week = current_time - timedelta(days=current_time.weekday())
     start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
 
-    top_spending_in_week = OrderItem.objects.filter(create_at__gte=start_of_week).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
-    top_spending_in_month = OrderItem.objects.filter(create_at__gte=start_of_month).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
-    top_spending_in_year = OrderItem.objects.filter(create_at__gte=start_of_year).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_week = OrderItem.objects.filter(created_at__gte=start_of_week).values('order__customer').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_month = OrderItem.objects.filter(created_at__gte=start_of_month).values('order__customer').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('order__customer').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
 
     top_spending_customers_data = {
-        "year": [item['order'] for item in top_spending_in_year],
-        "month": [item['order'] for item in top_spending_in_month],
-        "week": [item['order'] for item in top_spending_in_week]
+        "year": [item['order__customer'] for item in top_spending_in_year],
+        "month": [item['order__customer'] for item in top_spending_in_month],
+        "week": [item['order__customer'] for item in top_spending_in_week]
     }
 
     return top_spending_customers_data
