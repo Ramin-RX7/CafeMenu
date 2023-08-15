@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
 from django.views import View
+from django.views.generic import RedirectView
 
 from foods.models import Food
 from users.models import User
