@@ -119,8 +119,8 @@ class CartDeleteView(RedirectView):
 
 
 
-class CustomerLoginView(View):
-    def post(self,request):
+class CustomerLoginView(RedirectView):
+    def post(self,request, *args, **kwargs):
         form = CustomerLoginForm(request.POST)
         if form.is_valid():
             phone = form.cleaned_data['phone']
