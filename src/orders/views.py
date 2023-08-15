@@ -11,14 +11,14 @@ from .forms import CustomerLoginForm
 from django.views.generic import TemplateView, ListView,DetailView,RedirectView
 
 
-class IndexTemplateView(TemplateView):
+class IndexView(ListView):
     model=Order
     template_name= 'orders/order_list.html'
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context= super().get_context_data(**kwargs)
         current_session_orders_ids=self.request.session.get('orders',[])
-        current_session_orders=Order.objects.filter(id__in=current_session_orders_ids)
-        context['orders'] = current_session_orders
+        context['orders'] = Order.objects.filter(id__in=current_session_orders_ids)
         return context
 
 
