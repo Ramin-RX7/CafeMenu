@@ -71,10 +71,9 @@ function _getComparativeChartConfig(labels, data, other_data=null){
 function _getDurationLabels(duration, data){
     if (!Array.isArray(data)){
         if (!Array.isArray(data.old)){
-            console.log(data.old);
             return Object.keys(data.old)
         }
-        // data = data.old;
+        data = data.old;
     }
     switch (duration) {
         case "day":
@@ -91,11 +90,11 @@ function _getDurationLabels(duration, data){
 
 // Get values of the chart (y axis) and return them in an array of arrays.
 function _getValues(duration_data){
-    if (Object.prototype.toString.call(duration_data) === "[object Object]"){
-        if (typeof duration_data.old === "object"){
-            return [Object.values(duration_data.old), Object.values(duration_data.new)]
-        } else {
+    if (!Array.isArray(duration_data)){
+        if (!Array.isArray(duration_data.old)){
             return [duration_data.old, duration_data.new]
+        } else {
+            return [Object.values(duration_data.old), Object.values(duration_data.new)]
         }
     } else {
         return [duration_data,null]
@@ -127,8 +126,9 @@ function createChartWithData(duration, fulltype, data) {
 fetchDataFromAPI().then(data => {
     const flattenedData = flattenNestedObject(data, '', 0, 2);
     for (const fulltype in flattenedData) {
-        const data = flattenedData[fulltype]
-        duration_name = fulltype.split(":").pop()
-        createChartWithData(duration_name, fulltype, data)
+        console.log(fulltype);
+        const data = flattenedData[fulltype];
+        duration_name = fulltype.split(":").pop();
+        createChartWithData(duration_name, fulltype, data);
     }
 });
