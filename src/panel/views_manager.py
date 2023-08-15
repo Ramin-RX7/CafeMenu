@@ -1,29 +1,50 @@
-import datetime
 import json
+import datetime
+from datetime import timedelta
 
 from django.shortcuts import render
 from django.db.models import Sum , Count , Q
-
-from foods.models import Category,Food
-from orders.models import Order,OrderItem
-
-from main.models import BaseModel
-from datetime import timedelta
 from django.http import JsonResponse
 from django.db.models.functions import ExtractHour
 
+from foods.models import Category,Food
+from orders.models import Order,OrderItem
+from .analytics import *
+
+
 def json_api(request):
     from django.http import HttpResponse
+    print(get_top_peak_hours(2023,8))
     context = {
         "sales": {
             "comparative":{
-                "week" : {"old":[10,15,2,6,4,8,7] , "new":[5,7,6,2,4,5,3]},
+                "day" :  sales_compar_day(),
+                "week":  sales_compar_week(),
+                "month": sales_compar_month(),
+                "year":  sales_compar_year(),
             },
             "relative": {
-                "day": [6, 1, 13, 2, 12, 15, 13, 6, 11, 15, 9, 7, 8, 9, 1, 1, 1, 4, 7, 6, 9, 3, 14, 3, 7, 13, 1, 15, 6, 13],
-                "week": [5,8,6,7,5,2,12]
+                "day": sales_rel_day(),
+                "week": sales_rel_week(),
+                "month": sales_rel_month(),
+                "year": sales_rel_year(),
             }
         },
+        "categories": {
+            "comparative": {
+                "total": get_category_quantity_sold(),
+            }
+        },
+        "items":{
+            "relative":{
+                "total": get_most_popular_item()
+            }
+        },
+        "others":{
+            "relative" : {
+                "peak-hour": get_peak_hours(),
+            }
+        }
     }
     return HttpResponse(json.dumps(context))
 
@@ -201,7 +222,7 @@ def dashboard(request):
                     }
 
         return render(request,'panel/dashboard_manager.html',context)
-    
+
 #----------------------------------------------------------------------------------------
 
 # Get top 5 peak business hours in month, year
@@ -227,7 +248,7 @@ def get_top_peak_hours(year, month):
 def get_uniqe_visitors(request, time_range):
     current_time = datetime.now()
     start_date = None
-    
+
     if time_range == "day":
         start_date = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
     elif time_range == "week":
@@ -241,8 +262,8 @@ def get_uniqe_visitors(request, time_range):
 
     data = {"unique_visitors": unique_visitors}
     # return JsonResponse(data)
-    
-    
+
+
     # unique_visitors_data = {
     #     "comparative": {
     #         time_range: {
@@ -258,7 +279,7 @@ def get_uniqe_visitors(request, time_range):
     # }
     # return JsonResponse(unique_visitors_data)
 
-    
+
 
 #----------------------------------------------------------------------------------------
 
