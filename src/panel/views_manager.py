@@ -14,7 +14,8 @@ from .analytics import *
 
 def json_api(request):
     from django.http import HttpResponse
-    print(unique_customers_rel(7))
+    from pprint import pprint
+    pprint(get_top_selling_items())
     context = {
         "sales": {
             "comparative":{
@@ -36,7 +37,10 @@ def json_api(request):
             }
         },
         "items":{
-            "relative":{
+            "relative": {
+                **get_top_selling_items()
+            },
+            "comparative":{
                 "total": get_most_popular_item()
             }
         },
@@ -307,10 +311,10 @@ def get_top_selling_items():
     top_selling_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
 
     top_selling_data = {
-        "year": [item['food__title'] for item in top_selling_in_year],
-        "month": [item['food__title'] for item in top_selling_in_month],
-        "week": [item['food__title'] for item in top_selling_in_week],
-        "day": [item['food__title'] for item in top_selling_in_day]
+        "day"  : {item['food__title']:item['total_quantity']  for item in top_selling_in_day  },
+        "week" : {item['food__title']:item['total_quantity']  for item in top_selling_in_week },
+        "month": {item['food__title']:item['total_quantity']  for item in top_selling_in_month},
+        "year" : {item['food__title']:item['total_quantity']  for item in top_selling_in_year },
     }
 
     return top_selling_data
