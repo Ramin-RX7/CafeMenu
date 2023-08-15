@@ -29,10 +29,11 @@ class OrderStatusFilter(admin.SimpleListFilter):
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display=['customer','table','status','price','discount','final_price']
+    list_display=['customer','table','status','price','discount','final_price',"created_at"]
     ordering = ['created_at','updated_at']
     list_filter=[OrderToDayFilter,OrderStatusFilter]
     list_per_page = 20
+    readonly_fields = ["created_at"]
 
 @admin.register(models.Table)
 class TableAdmin(admin.ModelAdmin):
