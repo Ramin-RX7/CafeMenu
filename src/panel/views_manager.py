@@ -229,11 +229,11 @@ def dashboard(request):
 def get_top_peak_hours(year, month):
     start_date = datetime(year, month, 1)
     end_date = start_date.replace(month=month + 1, day=1) - timedelta(days=1)
-    activities_in_month = Order.objects.filter(create_at__range=(start_date, end_date))
+    activities_in_month = Order.objects.filter(created_at__range=(start_date, end_date))
 
-    top_hours_in_month = activities_in_month.annotate(hour=ExtractHour('create_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+    top_hours_in_month = activities_in_month.annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
 
-    top_hours_in_year = Order.objects.filter(timestamp__year=year).annotate(hour=ExtractHour('create_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+    top_hours_in_year = Order.objects.filter(created_at__year=year).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
 
     response_data = {
         "year": [item['hour'] for item in top_hours_in_year],
