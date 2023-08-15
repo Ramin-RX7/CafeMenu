@@ -3,11 +3,10 @@ import datetime
 from datetime import timedelta
 
 from django.shortcuts import render
-from django.db.models import Sum , Count , Q
 from django.http import JsonResponse
+from django.db.models import Sum,Count
 from django.db.models.functions import ExtractHour
 
-from foods.models import Category,Food
 from orders.models import Order,OrderItem
 from .analytics import *
 
@@ -15,7 +14,8 @@ from .analytics import *
 def json_api(request):
     from django.http import HttpResponse
     from pprint import pprint
-    pprint(get_category_quantity_sold())
+    from .views_saji import count_orders,food_items
+    # pprint(food_items())
     context = {
         "sales": {
             "comparative":{
@@ -31,17 +31,22 @@ def json_api(request):
                 "year": sales_rel_year(),
             }
         },
+
+        "items":{
+            **food_items()
+            # "comparative": {
+            #     **get_top_selling_items()
+            # },
+            # "relative":{
+            #     "total": get_most_popular_item()
+            # }
+        },
+
+        "orders": {**count_orders()},
+
         "categories": {
             "comparative": {
                 "total": get_category_quantity_sold(),
-            }
-        },
-        "items":{
-            "relative": {
-                **get_top_selling_items()
-            },
-            "comparative":{
-                "total": get_most_popular_item()
             }
         },
         "customer-sales":{
