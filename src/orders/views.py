@@ -86,11 +86,11 @@ def cart(request):
         context = {"cart": new_cart}
     return render(request,'orders/cart.html',context)
 
-class CartAddView(View):
+class CartAddView(RedirectView):
     def get(self, request):
         return redirect("foods:menu")
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         food_id = request.POST.get('food')
         quantity = request.POST.get('quantity')
         cart_cookie = request.COOKIES.get('cart')
