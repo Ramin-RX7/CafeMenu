@@ -278,3 +278,25 @@ def get_top_selling_items(request):
 
     return top_selling_data
 
+
+
+#----------------------------------------------------------------------------------------
+
+# Get 10 phone numbers that has the most money spend in our cafe in week,month,year
+def get_top_spending_customers():
+    current_time = datetime.datetime.now()
+    start_of_week = current_time - timedelta(days=current_time.weekday())
+    start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    top_spending_in_week = OrderItem.objects.filter(create_at__gte=start_of_week).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_month = OrderItem.objects.filter(create_at__gte=start_of_month).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_year = OrderItem.objects.filter(create_at__gte=start_of_year).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+
+    top_spending_customers_data = {
+        "year": [item['order'] for item in top_spending_in_year],
+        "month": [item['order'] for item in top_spending_in_month],
+        "week": [item['order'] for item in top_spending_in_week]
+    }
+
+    return top_spending_customers_data
