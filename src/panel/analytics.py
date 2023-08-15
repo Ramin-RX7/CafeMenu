@@ -1,11 +1,15 @@
 import calendar
 from datetime import datetime,timedelta
+from collections import defaultdict
 
-from orders.models import Order
+from django.db.models import Sum,F,Count
+
+from orders.models import Order,OrderItem
 
 
 
 ALL_ORDERS = Order.objects.all()
+
 
 
 def sales_rel_week():
@@ -190,6 +194,17 @@ def sales_by_category():
 
 
 
+
+def get_category_quantity_sold():
+    category_quantity_sold = defaultdict(int)
+    category_quantity = OrderItem.objects.values('food__category__title').annotate(total_quantity=Sum('quantity'))
+
+    for entry in category_quantity:
+        category_name = entry['food__category__title']
+        total_quantity = entry['total_quantity']
+        category_quantity_sold[category_name] = total_quantity
+
+    return {"old":category_quantity_sold}
 
 
 
