@@ -40,6 +40,13 @@ def json_api(request):
                 "total": get_most_popular_item()
             }
         },
+        "customer-sales":{
+            "relative": {
+                "week":  customerSales_rel(7),
+                "month": customerSales_rel(30),
+                "year":  customerSales_rel(365),
+            }
+        },
         "others":{
             "relative" : {
                 "peak-hour": get_peak_hours(),
