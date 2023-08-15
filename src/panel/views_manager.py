@@ -202,20 +202,107 @@ def dashboard(request):
 
         return render(request,'panel/dashboard_manager.html',context)
     
-    #----------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------
 
-    # Get top 5 peak business hours in month, year
-    def get_top_peak_hours(request, year, month):
-        start_date = datetime(year, month, 1)
-        end_date = start_date.replace(month=month+1) - timedelta(days=1)
-        
-        top_5_in_year = BaseModel.objects.filter(created_at__year=year).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
-        top_5_in_month = BaseModel.objects.filter(created_at__range=(start_date, end_date)).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+# Get top 5 peak business hours in month, year
+def get_top_peak_hours(year, month):
+    start_date = datetime(year, month, 1)
+    end_date = start_date.replace(month=month + 1, day=1) - timedelta(days=1)
+    activities_in_month = Order.objects.filter(create_at__range=(start_date, end_date))
 
-        data = {"year": list(top_5_in_year), "month": list(top_5_in_month)}
-        return JsonResponse(data)
+    top_hours_in_month = activities_in_month.annotate(hour=ExtractHour('create_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+
+    top_hours_in_year = Order.objects.filter(timestamp__year=year).annotate(hour=ExtractHour('create_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+
+    response_data = {
+        "year": [item['hour'] for item in top_hours_in_year],
+        "month": [item['hour'] for item in top_hours_in_month]
+    }
+
+    return response_data
+
+#----------------------------------------------------------------------------------------
+
+# Get the number of unique people coming to our café in day, week, month, year
+def get_uniqe_visitors(request, time_range):
+    current_time = datetime.now()
+    start_date = None
     
-    #----------------------------------------------------------------------------------------
+    if time_range == "day":
+        start_date = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
+    elif time_range == "week":
+        start_date = current_time - timedelta(days=current_time.weekday())
+    elif time_range == "month":
+        start_date = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    else:  # Assuming "year"
+        start_date = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
 
-    # Get top 5 peak business hours in month, year
+    unique_visitors = Order.objects.filter(created_at__gte=start_date).values('created_at__hour').distinct().count()
+
+    data = {"unique_visitors": unique_visitors}
+    # return JsonResponse(data)
     
+    
+    # unique_visitors_data = {
+    #     "comparative": {
+    #         time_range: {
+    #             "old": [0] * 24,  # Placeholder for old data, you need to replace with actual data
+    #             "new": [0] * 24   # Placeholder for new data, you need to replace with actual data
+    #         }
+    #     },
+    #     "relative": {
+    #         "day": list(range(1, 25)),  # 1 to 24 hours
+    #         "week": list(range(1, 8)),   # 1 to 7 days
+    #         "month": list(range(1, 31))  # 1 to 30 days (approximate)
+    #     }
+    # }
+    # return JsonResponse(unique_visitors_data)
+
+    
+
+#----------------------------------------------------------------------------------------
+
+# Get top 10 selling items (most items sold) in day, week, month, year
+def get_top_selling_items(request):
+    current_time = datetime.datetime.now()
+    start_of_day = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
+    start_of_week = current_time - timedelta(days=current_time.weekday())
+    start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    top_selling_in_day = OrderItem.objects.filter(created_at__gte=start_of_day).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_week = OrderItem.objects.filter(created_at__gte=start_of_week).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_month = OrderItem.objects.filter(created_at__gte=start_of_month).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+    top_selling_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('food').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
+
+    top_selling_data = {
+        "year": [item['food'] for item in top_selling_in_year],
+        "month": [item['food'] for item in top_selling_in_month],
+        "week": [item['food'] for item in top_selling_in_week],
+        "day": [item['food'] for item in top_selling_in_day]
+    }
+
+    return top_selling_data
+
+
+
+#----------------------------------------------------------------------------------------
+
+# Get 10 phone numbers that has the most money spend in our cafe in week,month,year
+def get_top_spending_customers():
+    current_time = datetime.datetime.now()
+    start_of_week = current_time - timedelta(days=current_time.weekday())
+    start_of_month = current_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_of_year = current_time.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    top_spending_in_week = OrderItem.objects.filter(create_at__gte=start_of_week).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_month = OrderItem.objects.filter(create_at__gte=start_of_month).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+    top_spending_in_year = OrderItem.objects.filter(create_at__gte=start_of_year).values('order').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
+
+    top_spending_customers_data = {
+        "year": [item['order'] for item in top_spending_in_year],
+        "month": [item['order'] for item in top_spending_in_month],
+        "week": [item['order'] for item in top_spending_in_week]
+    }
+
+    return top_spending_customers_data
