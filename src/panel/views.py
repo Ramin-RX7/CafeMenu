@@ -1,5 +1,7 @@
 import random
 from datetime import timedelta
+from typing import Any
+from django.http import HttpRequest, HttpResponse
 
 from django.shortcuts import render, redirect
 from django.utils import timezone
@@ -9,6 +11,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Case, CharField, Value, When
+from django.views.generic import FormView
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
@@ -22,14 +25,18 @@ from .forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 # Create your views here.
 
 
-class LoginView(View):
+class LoginView(FormView):
+
+    template_name = 'panel/login.html'
+    form_class = UserLogInForm
+    success_url = "panel:user_verify"
 
     def dispatch(self, request, *args, **kwargs):
         if isinstance(request.user, User):
             return redirect("panel:dashboard")
         return super().dispatch(request, *args, **kwargs)
 
-    def post(self, request):
+    def post(self, request,*args,**kwargs):
         form=UserLogInForm(request.POST)
         if form.is_valid():
             cd=form.cleaned_data
@@ -46,10 +53,6 @@ class LoginView(View):
         context={'form':form}
         return render(request, 'panel/login.html', context)
 
-    def get(self, request):
-        form=UserLogInForm()
-        context={'form':form}
-        return render(request, 'panel/login.html', context)
 
 
 def generate_2fa(request):
