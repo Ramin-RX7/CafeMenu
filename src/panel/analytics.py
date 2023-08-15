@@ -208,4 +208,9 @@ def get_category_quantity_sold():
 
 
 
+def get_most_popular_item():
+    top_favorite_items = OrderItem.objects.values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:5]
+    favorite_items_dict = {favorite_item['food__title']: favorite_item['total_quantity'] for favorite_item in top_favorite_items}
+    return {"old":favorite_items_dict}
+
 
