@@ -50,7 +50,10 @@ def json_api(request):
 
 
 def analytics(request):
-    return render(request, "panel/dashboard_manager.html", {})
+    context = {
+        "peak_hours": get_top_peak_hours(2023,3),
+    }
+    return render(request, "panel/dashboard_manager.html", context)
 
 
 
