@@ -218,3 +218,20 @@ def get_peak_hours():
     hourly_order_counts = orders_with_hour.values('created_hour').annotate(order_count=Count('id')).order_by('-order_count')[:5]
     peak_hours_dict = {hourly_order['created_hour']: hourly_order['order_count'] for hourly_order in hourly_order_counts}
     return ({"old":peak_hours_dict})
+
+
+
+def customerSales_rel(days):
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=days)
+
+    phone_total_spent = defaultdict(float)
+    for order in ALL_ORDERS.filter(created_at__range=(start_date, end_date)):
+        phone_total_spent[order.customer] += float(order.price)
+
+    sorted_phone_total_spent = sorted(phone_total_spent.items(), key=lambda item: item[1], reverse=True)
+    top_customers = {phone: total_spent for phone, total_spent in sorted_phone_total_spent[:5]}
+
+    return {"old":top_customers}
+
+
