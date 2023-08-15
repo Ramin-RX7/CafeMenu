@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.shortcuts import render
 from django.db.models import Count
 from django.views import View
@@ -30,11 +31,16 @@ class CategoryDetailView(DetailView):
         context['foods'] = category.food_set.all()
         return context
 
-
-def food_details(request, id):
-    food = Food.objects.get(id=id)
-    context = {"food": food}
-    return render(request, "foods/food_details.html",context)
+class FoodDetailView(DetailView):
+    model=Food
+    template_name="foods/food_details.html"
+    pk_url_kwarg='id'
+    context_object_name='food'
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context= super().get_context_data(**kwargs)
+        food=self.get_object()
+        context['food']=food
+        return context
 
 
 class SearchView(View):
