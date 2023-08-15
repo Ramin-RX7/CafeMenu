@@ -205,15 +205,21 @@ def dashboard(request):
 #----------------------------------------------------------------------------------------
 
 # Get top 5 peak business hours in month, year
-def get_top_peak_hours(request, year, month):
-    start_date = datetime.datetime(year, month, 1)
-    end_date = start_date.replace(month=month+1) - timedelta(days=1)
-    
-    top_5_in_year = Order.objects.filter(created_at__year=year).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
-    top_5_in_month = Order.objects.filter(created_at__range=(start_date, end_date)).annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+def get_top_peak_hours(year, month):
+    start_date = datetime(year, month, 1)
+    end_date = start_date.replace(month=month + 1, day=1) - timedelta(days=1)
+    activities_in_month = Order.objects.filter(create_at__range=(start_date, end_date))
 
-    data = {"year": list(top_5_in_year), "month": list(top_5_in_month)}
-    # return JsonResponse(data)
+    top_hours_in_month = activities_in_month.annotate(hour=ExtractHour('create_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+
+    top_hours_in_year = Order.objects.filter(timestamp__year=year).annotate(hour=ExtractHour('create_at')).values('hour').annotate(count=Count('id')).order_by('-count')[:5]
+
+    response_data = {
+        "year": [item['hour'] for item in top_hours_in_year],
+        "month": [item['hour'] for item in top_hours_in_month]
+    }
+
+    return response_data
 
 #----------------------------------------------------------------------------------------
 
