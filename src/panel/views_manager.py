@@ -14,7 +14,7 @@ from .analytics import *
 
 def json_api(request):
     from django.http import HttpResponse
-    print(get_top_peak_hours(2023,8))
+    print(unique_customers_rel(7))
     context = {
         "sales": {
             "comparative":{
@@ -47,6 +47,12 @@ def json_api(request):
                 "year":  customerSales_rel(365),
             }
         },
+        "unique-customers": {
+            "relative": {
+                "week": unique_customers_rel(7),
+                "month": unique_customers_rel(30),
+            }
+        },
         "others":{
             "relative" : {
                 "peak-hour": get_peak_hours(),
@@ -54,6 +60,7 @@ def json_api(request):
         }
     }
     return HttpResponse(json.dumps(context))
+
 
 
 def analytics(request):
