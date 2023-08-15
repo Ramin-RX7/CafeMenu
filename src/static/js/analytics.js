@@ -68,23 +68,42 @@ function _getComparativeChartConfig(labels, data, other_data=null){
 
 
 // Get a list of labels for chart based on the name or dictionary keys
-function _getDurationLabels(duration, data){
-    // console.log(data);
+function _getDurationLabels(duration, fulltype, data){
+    let type = fulltype.split(":")[1]
     if (!Array.isArray(data)){
         if (!Array.isArray(data.new)){
-            return Object.keys(data.new)
+            try {
+                return Object.keys(data.new)
+            } catch (error) {
+            }
         }
         data = data.old;
     }
     switch (duration) {
         case "day":
-            return Array.from({ length: 24 }, (_, index) => (index).toString());
-            case "month":
-                return Array.from({ length: 31 }, (_, index) => (index).toString());
+            let hours = Array.from({ length: 24 }, (_, index) => (index).toString());
+            if (type === "relative"){
+                return hours.reverse()
+            }
+            return hours
+        case "month":
+            let days = Array.from({ length: 31 }, (_, index) => (index).toString());
+            if (type === "relative"){
+                return days.reverse()
+            }
+            return days;
         case "week":
-            return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            const weekArray = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            if (type === "relative"){
+                return [7,6,5,4,3,2,1];
+            }
+            return weekArray
         case "year":
-            return ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const months = ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            if (type === "relative"){
+                return [12,11,10,9,8,7,6,5,4,3,2,1];
+            }
+            return months
     }
     return Object.keys(data)
 }
@@ -93,9 +112,9 @@ function _getDurationLabels(duration, data){
 function _getValues(duration_data){
     if (!Array.isArray(duration_data)){
         if (!Array.isArray(duration_data.old)){
-            return [duration_data.old, duration_data.new]
+            return [duration_data.new, duration_data.old]
         } else {
-            return [Object.values(duration_data.old), Object.values(duration_data.new)]
+            return [Object.values(duration_data.new), Object.values(duration_data.old)]
         }
     } else {
         return [duration_data,null]
@@ -104,8 +123,8 @@ function _getValues(duration_data){
 
 
 
-function getChartConfig(duration, data) {
-    let labels =  _getDurationLabels(duration,data)
+function getChartConfig(duration, fulltype, data) {
+    let labels =  _getDurationLabels(duration, fulltype, data)
     let [newData,oldData] =  _getValues(data)
     let chartConfig = _getComparativeChartConfig(labels, newData, oldData)
     return chartConfig
@@ -118,7 +137,7 @@ function createChartWithData(duration, fulltype, data) {
     } catch (error) {
         return null
     }
-    const chartConfig = getChartConfig(duration, data);
+    const chartConfig = getChartConfig(duration, fulltype, data);
     const salesChart = new Chart(ctx, chartConfig);
 }
 
