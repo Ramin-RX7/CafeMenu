@@ -1,22 +1,34 @@
 from django.shortcuts import render
 from django.db.models import Count
 from django.views import View
+from django.views.generic import ListView,DetailView
 
 
 from .models import Category,Food
 
 
+class CategoryListView(ListView):
+    model=Category
+    template_name='foods/category_list.html'
 
-def category_list(request):
-    categories = Category.objects.all()
-    context = {"categories":categories}
-    return render(request,'foods/category_list.html',context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
+        context['categories'] = categories
+        return context
 
 
-def category_details(request,id):
-    category = Category.objects.get(id=id)
-    context = {"category":category, "foods":category.food_set.all()}
-    return render(request,'foods/category_details.html',context)
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'foods/category_details.html'
+    context_object_name = 'category'
+    pk_url_kwarg = 'id'  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = self.get_object()
+        context['foods'] = category.food_set.all()
+        return context
 
 
 def food_details(request, id):
