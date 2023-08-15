@@ -15,7 +15,7 @@ from .analytics import *
 def json_api(request):
     from django.http import HttpResponse
     from pprint import pprint
-    pprint(get_top_selling_items())
+    pprint(get_category_quantity_sold())
     context = {
         "sales": {
             "comparative":{
@@ -311,10 +311,10 @@ def get_top_selling_items():
     top_selling_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('food__title').annotate(total_quantity=Sum('quantity')).order_by('-total_quantity')[:10]
 
     top_selling_data = {
-        "day"  : {item['food__title']:item['total_quantity']  for item in top_selling_in_day  },
-        "week" : {item['food__title']:item['total_quantity']  for item in top_selling_in_week },
-        "month": {item['food__title']:item['total_quantity']  for item in top_selling_in_month},
-        "year" : {item['food__title']:item['total_quantity']  for item in top_selling_in_year },
+        "day"  : {"new": {item['food__title']:item['total_quantity'] for item in top_selling_in_day  }, "old":None},
+        "week" : {"new": {item['food__title']:item['total_quantity'] for item in top_selling_in_week }, "old":None},
+        "month": {"new": {item['food__title']:item['total_quantity'] for item in top_selling_in_month}, "old":None},
+        "year" : {"new": {item['food__title']:item['total_quantity'] for item in top_selling_in_year }, "old":None},
     }
 
     return top_selling_data
@@ -333,9 +333,9 @@ def get_top_spending_customers():
     top_spending_in_year = OrderItem.objects.filter(created_at__gte=start_of_year).values('order__customer').annotate(total_spent=Sum('unit_price')).order_by('-total_spent')[:10]
 
     top_spending_customers_data = {
-        "year": [item['order__customer'] for item in top_spending_in_year],
-        "month": [item['order__customer'] for item in top_spending_in_month],
-        "week": [item['order__customer'] for item in top_spending_in_week]
+        "year": {"new": [item['order__customer'] for item in top_spending_in_year] , "old":None},
+        "month":{"new": [item['order__customer'] for item in top_spending_in_month], "old":None},
+        "week": {"new": [item['order__customer'] for item in top_spending_in_week] , "old":None}
     }
 
     return top_spending_customers_data
