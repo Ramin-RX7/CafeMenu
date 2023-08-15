@@ -51,9 +51,15 @@ class SearchView(View):
 
 
 
-def menu(request):
-    categories = Category.objects.annotate(
+class MenuListView(ListView):
+    model = Category
+    template_name = 'foods/menu.html'
+    context_object_name = 'categories'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.annotate(
             num_foods=Count('food')
         ).filter(num_foods__gt=0).prefetch_related('food_set')
-    context = {"categories":categories}
-    return render(request, "foods/menu.html", context)
+        return queryset
+
