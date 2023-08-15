@@ -11,5 +11,5 @@ urlpatterns = [
     path("category/<int:id>/", CategoryDetailView.as_view(), name="category_details"),
     path("search/", SearchView.as_view(), name="search"),
     path("<int:id>/", FoodDetailView.as_view(), name="food_details"),
-    path("menu/", menu, name="menu")
+    path("menu/", MenuListView.as_view(), name="menu")
 ]
