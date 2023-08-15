@@ -218,3 +218,34 @@ def get_peak_hours():
     hourly_order_counts = orders_with_hour.values('created_hour').annotate(order_count=Count('id')).order_by('-order_count')[:5]
     peak_hours_dict = {hourly_order['created_hour']: hourly_order['order_count'] for hourly_order in hourly_order_counts}
     return ({"old":peak_hours_dict})
+
+
+
+def customerSales_rel(days):
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=days)
+
+    phone_total_spent = defaultdict(float)
+    for order in ALL_ORDERS.filter(created_at__range=(start_date, end_date)):
+        phone_total_spent[order.customer] += float(order.price)
+
+    sorted_phone_total_spent = sorted(phone_total_spent.items(), key=lambda item: item[1], reverse=True)
+    top_customers = {phone: total_spent for phone, total_spent in sorted_phone_total_spent[:5]}
+
+    return {"old":top_customers}
+
+
+
+def unique_customers_rel(days):
+    unique_customers_by_day = defaultdict(set)
+
+    for day in range(days):
+        end_date =   datetime.now() - timedelta(days=day)
+        start_date = datetime(end_date.year, end_date.month, end_date.day, 0, 0, 0)
+        end_date =   datetime(end_date.year, end_date.month, end_date.day, 23, 59, 59)
+
+        unique_customers = ALL_ORDERS.filter(created_at__range=(start_date, end_date)).values('customer').distinct()
+
+        unique_customers_by_day[day] = len(unique_customers)
+
+    return list(unique_customers_by_day.values())[::-1]
