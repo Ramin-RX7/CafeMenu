@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
@@ -7,16 +8,18 @@ from foods.models import Food
 from users.models import User
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
+from django.views.generic import TemplateView, ListView,DetailView
 
 
-
-def index(request):
-    current_session_orders_ids = request.session.get('orders', [])
-    current_session_orders = Order.objects.filter(id__in=current_session_orders_ids)
-    context = {
-        'orders' : current_session_orders
-    }
-    return render(request,'orders/order_list.html',context)
+class IndexTemplateView(TemplateView):
+    model=Order
+    template_name= 'orders/order_list.html'
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context= super().get_context_data(**kwargs)
+        current_session_orders_ids=self.request.session.get('orders',[])
+        current_session_orders=Order.objects.filter(id__in=current_session_orders_ids)
+        context['orders'] = current_session_orders
+        return context
 
 
 def order_list(request):
