@@ -27,7 +27,7 @@ urlpatterns = [
     path("orders/", include("orders.urls")),
     path("dashboard/", include("panel.urls")),
 
-    path("", include("main.urls")),
+    path("", include("core.urls")),
 ]
 
 if settings.DEBUG:

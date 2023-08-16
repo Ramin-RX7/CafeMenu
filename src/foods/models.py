@@ -1,5 +1,5 @@
 from django.db import models
-from main.models import BaseModel
+from core.models import BaseModel
 
 
 

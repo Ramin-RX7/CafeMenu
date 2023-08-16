@@ -4,8 +4,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.exceptions import ValidationError
 
-from main.models import BaseModel
-from main.validators import phone_validator
+from core.models import BaseModel
+from core.validators import phone_validator
 
 class UserManager(BaseUserManager):
 

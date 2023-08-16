@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 
 from orders.models import OrderItem,Order
-from main.validators import phone_validator
+from core.validators import phone_validator
 
 
 

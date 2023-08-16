@@ -1,7 +1,7 @@
 from django.db import models
 
-from main.models import BaseModel
-from main.validators import phone_validator
+from core.models import BaseModel
+from core.validators import phone_validator
 from foods.models import Food
 from users.models import User
 
