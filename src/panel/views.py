@@ -1,57 +1,47 @@
 import random
 from datetime import timedelta
-from typing import Any
-from django.http import HttpRequest, HttpResponse
 
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib.auth import (login as django_login, logout as django_logout)
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Case, CharField, Value, When
+from django.views import View
 from django.views.generic import FormView
+from django.urls import reverse_lazy
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
-from foods.models import Food
 from .forms import UserLogInForm, UserVerifyForm
 from .urls import *
 from .forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
 
-# Create your views here.
-
 
 class LoginView(FormView):
 
     template_name = 'panel/login.html'
     form_class = UserLogInForm
-    success_url = "panel:user_verify"
+    success_url = reverse_lazy("panel:user_verify")
 
     def dispatch(self, request, *args, **kwargs):
         if isinstance(request.user, User):
             return redirect("panel:dashboard")
         return super().dispatch(request, *args, **kwargs)
 
-    def post(self, request,*args,**kwargs):
-        form=UserLogInForm(request.POST)
-        if form.is_valid():
-            cd=form.cleaned_data
-            phone=str(cd['phone'])
-            user=User.objects.filter(phone=phone).first()
-            if user:
-                request.session['user_phone']=phone
-                return redirect("panel:user_verify")
-            else:
-                form.add_error("phone", "Phone number not found")
+    def form_valid(self, form):
+        cd = form.cleaned_data
+        phone = str(cd['phone'])
+        user = User.objects.filter(phone=phone).first()
+        if user:
+            self.request.session['user_phone'] = phone
+            return super().form_valid(form)
         else:
-            # form.add_error("phone", "Invalid phone number")
-            pass
-        context={'form':form}
-        return render(request, 'panel/login.html', context)
+            form.add_error("phone", "Phone number not found")
+            return super().form_invalid(form)
 
 
 
