@@ -72,5 +72,6 @@ def json_api(request):
 def analytics(request):
     context = {
         "peak_hours": get_top_peak_hours(),
+        "sales_total":sales_total(),
     }
     return render(request, "panel/dashboard_manager.html", context)
