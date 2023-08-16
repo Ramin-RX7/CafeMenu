@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'panel/dashboard_base.html' %}
 {% load static %}
 
 
@@ -8,9 +8,9 @@
 {% endblock extra_style %}
 
 
-{% block content %}
+{% block dashboard_content %}
 
-<div class="container text-center py-5 ">
+<div class="col-md-9 text-center py-5 ">
     <div class="card">
         <div class="card-header">
             Cafe details
@@ -355,7 +355,7 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{% static 'js/analytics.js' %}"></script>
 {% endblock %}
