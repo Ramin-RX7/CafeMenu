@@ -178,8 +178,35 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
 
+                <div id="currentUserOrders" class="order-section" style="display: none;">
+                    {% for order in orders_user %}
+                    <div class="col-md-12">
+                        <div class="order-dsh rounded">
+                            {% if order.table %} {{order.table.name}}<br> {% endif %}
+                            Phone: {{order.customer}}
+                            <br>
+                            Total Price {{order.final_price}}
+                            <div class="col">
+                                <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                {% if order.status == 'Pending' %}
+                                    <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                    <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                {% endif %}
+                                {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
+                                    <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                {% endif %}{% endcomment %}
+                                {% if order.status == 'Approved' %}
+                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                {% elif order.status == 'Delivered' %}
+                                    <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
 
             <div class="col-md-3 sidebar py-4">
