@@ -45,10 +45,10 @@
                                     {% csrf_token %}
                                     <div class="row">
                                     <div class="col">
-                                    <input type="number" name="quantity" id="" class="form-control" value="{{ quantity }}" min="1" style="width: 80%;" >   
+                                    <input type="number" name="quantity" id="" class="form-control" value="{{ quantity }}" min="1" style="width: 80%;" >
                                     </div>
                                     <div class="col py-1">
-                                        <button type="submit_change" name="change" value="{{ food.id }}" class="btn btn-primary btn-block" >Change</button>
+                                        <button type="submit_change" name="change" value="{{ food.id }}" class="btn btn-info btn-block" >Change</button>
                                     </div>
                                     </div>
                                 </form>
@@ -56,8 +56,8 @@
                         <div class="col py-2">
                             <form method="post" action="{% url 'orders:cart_delete' %}">
                                 {% csrf_token %}
-                                <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block">Delete</button>
-                            </form> 
+                                <button type="submit" name="food" value="{{ food.id }}" class="btn btn-danger btn-block">Delete</button>
+                            </form>
                         </div>
                     </div>
                     </div>
@@ -89,7 +89,7 @@
                     <form method="post" action="{% url 'orders:set_order' %}">
                         {% csrf_token %}
                         <!-- <div class="d-flex px-5 mx-5 py-3"> -->
-                            <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary"  style="width: 45%;"><h4 style="padding-top:3%;">Set Order</h4></button>
+                            <button type="submit" name="food" value="{{ food.id }}" class="btn btn-success"  style="width: 45%;"><h4 style="padding-top:3%;">Set Order</h4></button>
                         <!-- </div> -->
                     </form>
                     {% else %}
@@ -98,7 +98,7 @@
                 {% else %}
                     <!-- ... -->
                 {% endif %}
-    
+
             </div>
 </div>
 </section>

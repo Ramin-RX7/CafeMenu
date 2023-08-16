@@ -8,4 +8,4 @@ class IndexTemplateView(TemplateView):
 
 
 class AboutUsTemplateView(TemplateView):
-    template_name = "main/about_us.html"
+    template_name = "core/about_us.html"

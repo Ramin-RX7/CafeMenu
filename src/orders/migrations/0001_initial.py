@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import main.validators
+import core.validators
 
 
 class Migration(migrations.Migration):
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 (
                     "customer",
                     models.CharField(
-                        max_length=15, validators=[main.validators.phone_validator]
+                        max_length=15, validators=[core.validators.phone_validator]
                     ),
                 ),
                 (

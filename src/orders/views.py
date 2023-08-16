@@ -143,6 +143,6 @@ class CustomerLoginView(View):
             phone = form.cleaned_data['phone']
             request.session['phone'] = phone
         else:
-            import main.utils
-            main.utils.EditableContexts.form_login_error = "Invalid phone number"
+            import core.utils
+            core.utils.EditableContexts.form_login_error = "Invalid phone number"
         return redirect(request.META.get('HTTP_REFERER', reverse('index')))

@@ -1,6 +1,6 @@
 from django import forms
 
-from main.validators import phone_validator
+from core.validators import phone_validator
 
 
 
