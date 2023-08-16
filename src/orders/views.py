@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
 from django.views import View
+from django.views.generic import RedirectView
 
 from foods.models import Food
 from users.models import User
@@ -93,11 +94,11 @@ def cart(request):
         context = {"cart": new_cart}
     return render(request,'orders/cart.html',context)
 
-class CartAddView(View):
-    def get(self, request):
-        return redirect("foods:menu")
 
-    def post(self, request):
+class CartAddView(RedirectView):
+    pattern_name = "foods:menu"
+
+    def post(self, request, *args, **kwargs):
         food_id = request.POST.get('food')
         quantity = request.POST.get('quantity')
         cart_cookie = request.COOKIES.get('cart')
@@ -105,22 +106,21 @@ class CartAddView(View):
             cart_dict = eval(cart_cookie)
         else:
             cart_dict= {}
-
         cart_dict[food_id] = quantity
-        response = redirect('foods:menu')
+        response = redirect(self.pattern_name)
         response.set_cookie('cart', str(cart_dict))
         return response
 
 
-
-class CartDeleteView(View):
-    def post(self, request):
+class CartDeleteView(RedirectView):
+    pattern_name = "orders:cart"
+    def post(self, request, *args, **kwargs):
         data = request.COOKIES.get("cart")
         cart = eval(data)
         food_id = request.POST["food"]
         del cart[food_id]
         str_cart = str(cart)
-        response = redirect('orders:cart')
+        response = redirect(self.pattern_name)
         response.set_cookie('cart', str_cart)
         return response
 
