@@ -12,9 +12,7 @@ def customerSales_rel(days):
     start_date = end_date - timedelta(days=days)
 
     phone_total_spent = defaultdict(float)
-    for order in Order.objects.filter(created_at__range=(start_date, end_date)).\
-            values('order__customer').annotate(total_spent=Sum('unit_price'))\
-                .order_by('-total_spent')[:10]:
+    for order in Order.objects.filter(created_at__range=(start_date, end_date)):
         phone_total_spent[order.customer] += float(order.price)
 
     sorted_phone_total_spent = sorted(phone_total_spent.items(), key=lambda item: item[1], reverse=True)
