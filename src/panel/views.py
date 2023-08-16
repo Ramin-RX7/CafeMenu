@@ -119,14 +119,14 @@ def logout(request):
 
 @login_required(login_url="panel:login")
 def dashboard_staff(request):
-    orders = Order.objects.annotate(
+    ALL_ORDERS = Order.objects.all()
+    orders = ALL_ORDERS.annotate(
         status_order=Case(
             When(status="Pending", then=Value(1)),
             When(status="Approved", then=Value(2)),
             When(status="Delivered", then=Value(3)),
             When(status="Rejected", then=Value(4)),
             When(status="Paid", then=Value(5)),
-            # Add more cases for other choices
             default=Value(1),
             output_field=CharField(),
         )
@@ -134,6 +134,7 @@ def dashboard_staff(request):
     tables = Table.objects.all()
     context = {
         'orders': orders,
+        'orders_by_date': ALL_ORDERS,
         'tables': tables,
     }
     return render(request,'panel/dashboard_staff.html', context)
