@@ -87,7 +87,7 @@ function _getDurationLabels(duration, fulltype, data){
             }
             return hours
         case "month":
-            let days = Array.from({ length: 31 }, (_, index) => (index).toString());
+            let days = Array.from({ length: 30 }, (_, index) => (index+1).toString());
             if (type === "relative"){
                 return days.reverse()
             }
@@ -99,7 +99,7 @@ function _getDurationLabels(duration, fulltype, data){
             }
             return weekArray
         case "year":
-            const months = ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             if (type === "relative"){
                 return [12,11,10,9,8,7,6,5,4,3,2,1];
             }
