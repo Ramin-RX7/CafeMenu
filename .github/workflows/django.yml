@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "develop" ]
 
-env:
-  DEBUG: ${{ secrets.DEBUG }}
-  SECRET_KEY: ${{ secrets.SECRET_KEY }}
-
 
 jobs:
   build:
@@ -19,6 +15,10 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.11]
+
+    env:
+      DEBUG: ${{ secrets.DEBUG }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
     - uses: actions/checkout@v3
