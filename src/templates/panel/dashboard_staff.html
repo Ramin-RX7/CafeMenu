@@ -32,10 +32,13 @@
                 <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
             </li>
             <li class="nav-item mx-2 mt-2">
-            <a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a>
+                <a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a>
             </li>
             <li class="nav-item mx-2 mt-2">
-            <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
+                <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+                <a class="nav-link" href="{% url 'panel:analytics' %}">Analytics</a>
             </li>
             <li class="nav-item mx-2 mt-2">
                 <a href="{% url 'panel:logout' %}" class="ml-4 mt-1 btn btn-primary btn-sm w-100">Logout</a>
@@ -215,7 +218,7 @@
                 <hr>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:menu' %}">Menu</a></li>
-                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:dashboard' %}">Analytics</a></li>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:analytics' %}">Analytics</a></li>
                 <li class="list-group-item px-3">
                     <form action="{% url 'foods:search' %}" method="get">
                         <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
@@ -244,6 +247,7 @@
                 <img src="{{ maininfo.icon.url }}" width="100" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Pigga Landing page" class="mb-0">
             </div>
             <div class="col-md-9 text-md-right">
+                <a href="{% url 'panel:analytics' %}" class="pr-5"><small class="font-weight-bold">Analytics</small></a>
                 <a href="{% url 'orders:cart' %}" class="pr-5"><small class="font-weight-bold">Cart</small></a>
                 <a href="{% url 'orders:index' %}" class="pr-4"><small class="font-weight-bold">Orders</small></a>
                 <a href="{% url 'foods:menu' %}" class="px-3"><small class="font-weight-bold">Menu</small></a>
@@ -302,7 +306,7 @@
             $("#currentUserOrders").show();
         });
     });
-    </script>
+</script>
 
 
 {% endblock %}
