@@ -177,3 +177,7 @@ def sales_compar_year():
     sales_previous_year = calculate_sales_for_year(previous_year, 12)
 
     return {"new":sales_current_year, "old":sales_previous_year}
+
+
+def sales_total():
+    return sum(getattr(order,"price") for order in Order.objects.all())
