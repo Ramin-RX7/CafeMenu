@@ -2,6 +2,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
+{% endblock extra_style %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+
+
 {% block navbar %}
 {% endblock navbar %}
 
