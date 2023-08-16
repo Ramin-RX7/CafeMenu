@@ -4,4 +4,4 @@ register = template.Library()
 
 @register.filter
 def mul(value, other):
-    return value*other
+    return float(value)*float(other)

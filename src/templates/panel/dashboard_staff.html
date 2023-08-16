@@ -3,129 +3,217 @@
 {% load static %}
 
 {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded shadow py-2">
-    <div class="container">
-       <a class="navbar-brand" href="/">
-          <img src="{{ maininfo.icon.url }}" alt="" class="navbar-brand" width="50px">
-       </a>
-       <a class="navbar-brand" href="/">{{ maininfo.title }}</a>
-       <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
+{% endblock navbar %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded shadow py-2 mb-4 col-lg-9">
+    <a class="navbar-brand ml-4" href="/">
+        <img src="{{ maininfo.icon.url }}" alt="" class="navbar-brand" width="50px">
+    </a>
+    <a class="navbar-brand" href="/">{{ maininfo.title }}</a>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-2 mt-2">
                 <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
             </li>
             <li class="nav-item mx-2 mt-2">
-               <a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a>
+            <a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a>
             </li>
             <li class="nav-item mx-2 mt-2">
-               <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
+            <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
             </li>
             <li class="nav-item mx-2 mt-2">
                 <a href="{% url 'panel:logout' %}" class="ml-4 mt-1 btn btn-primary btn-sm w-100">Logout</a>
             </li>
             <li class="nav-item mx-2">
-              <form action="{% url 'foods:search' %}" method="get" class="ml-5">
-                  <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
-              </form>
+            <form action="{% url 'foods:search' %}" method="get" class="ml-5">
+                <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
+            </form>
             </li>
-          </ul>
-       </div>
+        </ul>
     </div>
 </nav>
 
-{% endblock navbar %}
 
-{% block content %}
+<style>
+    /* Custom CSS */
+    @media (min-width: 768px) {
+        .sidebar {
+            width: 25%;
+            position:fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .sidebar {
+            position: static;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #f5f5f5;
+        }
+    }
+</style>
 
 <div class="container my-5">
-    <div class="row">
-        <div class="col-md-12 mx-auto">
-            <button type="button" id="toggleButton" class="btn btn-outline-primary" onclick="toggleButtonStyle(this)">Filter by table</button>
-        </div>
-    </div>
-
-    <!-- All Orders -->
-    <div id="initialContent">
-        <div class="row mt-3">
-            {% for order in orders %}
-            <div class="col-md-8">
-                <div class="order-dsh">
-                    {% if order.table %} {{order.table.name}}<br> {% endif %}
-                    Phone: {{order.customer}}
-                    <br>
-                    Total Price {{order.final_price}}
-                    <div class="col">
-                        <div class="row" >
-                            <div class="col">
-                                <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                {% if order.status == 'Pending' %}
-                                    <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
-                                    <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
-                                {% endif %}
-                                {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
-                                    <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                {% endif %}{% endcomment %}
-                                {% if order.status == 'Approved' %}
-                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                {% elif order.status == 'Delivered' %}
-                                    <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
-                                {% endif %}
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12 mx-auto">
+                        <button type="button" id="toggleButton" class="btn btn-outline-primary" onclick="toggleButtonStyle(this)">Filter by table</button>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
 
-    <!-- By Table -->
-    <div id="newContent" style="display: none;">
-        {% for table in tables %}
-        <h3 class="mb-3 mt-5">{{table.name}}</h3>
-        <div class="row mt-3">
-            {% for order in table.order_set.all %}
-            {% if order.status != "Paid" %}
-            <div class="col-md-8">
-                <div class="order-dsh">
-                    Phone: {{order.customer}}
-                    <br>
-                    Total Price {{order.final_price}}
-                    <div class="col">
-                        <div class="row" >
-                            <div class="col">
-                                {% if order.status == 'Pending' %}
-                                    <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
-                                    <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
-                                {% endif %}
-                                {% if order.status == 'Pending' or order.status == 'Approved' %}
+                <!-- All Orders -->
+                <div id="initialContent">
+                    <div class="row mt-3">
+                        {% for order in orders %}
+                        <div class="col-md-12">
+                            <div class="order-dsh rounded">
+                                {% if order.table %} {{order.table.name}}<br> {% endif %}
+                                Phone: {{order.customer}}
+                                <br>
+                                Total Price {{order.final_price}}
+                                <div class="col">
                                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                                {% endif %}
-                                {% if order.status == 'Approved' %}
-                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                {% elif order.status == 'Rejected' %}
-                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                                {% elif order.status == 'Delivered' %}
-                                    <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
-                                {% endif %}
+                                    {% if order.status == 'Pending' %}
+                                        <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                        <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                    {% endif %}
+                                    {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
+                                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% endif %}{% endcomment %}
+                                    {% if order.status == 'Approved' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% elif order.status == 'Delivered' %}
+                                        <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
+
+                <!-- By Table -->
+                <div id="newContent" style="display: none;">
+                    {% for table in tables %}
+                    <h3 class="mb-3 mt-5">{{table.name}}</h3>
+                    <div class="row mt-3">
+                        {% for order in table.order_set.all %}
+                        {% if order.status != "Paid" %}
+                        <div class="col-md-12">
+                            <div class="order-dsh">
+                                Phone: {{order.customer}}
+                                <br>
+                                Total Price {{order.final_price}}
+                                <div class="col">
+                                    {% if order.status == 'Pending' %}
+                                        <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                        <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                    {% endif %}
+                                    {% if order.status == 'Pending' or order.status == 'Approved' %}
+                                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                    {% endif %}
+                                    {% if order.status == 'Approved' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% elif order.status == 'Rejected' %}
+                                        <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                    {% elif order.status == 'Delivered' %}
+                                        <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% empty %}
+                        <div class="col-md-8">
+                            Table is empty
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
-            {% endif %}
-            {% empty %}
-            <div class="col-md-8">
-                Table is empty
+
+
+
+            <div class="col-md-3 sidebar py-4">
+                <!-- Sidebar content -->
+                <p class="d-flex justify-content-center">Welcome {{user.firstname}}</p>
+                <hr>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:menu' %}">Menu</a></li>
+                <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:dashboard' %}">Analytics</a></li>
+                <li class="list-group-item px-3">
+                    <form action="{% url 'foods:search' %}" method="get">
+                        <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
+                    </form>
+                </li>
+
+                <li class="list-group-item px-3"><a href="{% url 'panel:logout' %}" class="btn btn-primary btn-block">Logout</a></li>
+
             </div>
-            {% endfor %}
+
+
+
         </div>
-        {% endfor %}
     </div>
 </div>
+
+
+
+
+{% block footer %}
+{% endblock footer %}
+<div class="py-0 border border-lighter border-bottom-0 border-left-0 border-right-0 bg-dark col-lg-9">
+    <div class="container">
+        <div class="row justify-content-between align-items-center text-center">
+            <div class="col-md-3 text-md-left mb-3 mb-md-0">
+                <img src="{{ maininfo.icon.url }}" width="100" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Pigga Landing page" class="mb-0">
+            </div>
+            <div class="col-md-9 text-md-right">
+                <a href="{% url 'orders:cart' %}" class="pr-5"><small class="font-weight-bold">Cart</small></a>
+                <a href="{% url 'orders:index' %}" class="pr-4"><small class="font-weight-bold">Orders</small></a>
+                <a href="{% url 'foods:menu' %}" class="px-3"><small class="font-weight-bold">Menu</small></a>
+                <a href="{% url 'foods:category_list' %}" class="px-3"><small class="font-weight-bold">Categories</small></a>
+                <a href="{% url 'about_us' %}" class="px-3"><small class="font-weight-bold">About Us</small></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="border border-dark border-left-0 border-right-0 border-bottom-0 p-4 bg-dark col-lg-9">
+    <div class="container">
+        <div class="row align-items-center text-center text-md-left">
+            <div class="col">
+                <p class="mb-0 small">© <script>document.write(new Date().getFullYear())</script>, <a href="https://github.com/Ramin-RX7/CafeMenu" target="_blank">Group1</a>  All rights reserved </p>
+            </div>
+            <div class="d-none d-md-block">
+                <h6 class="small mb-0">
+                    {% for app_name,link in socials.items %}
+                        <a href="{{link}}" class="px-2"><i class="ti-{{app_name}}"></i></a>
+                    {% endfor %}
+                </h6>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
 
 
 
@@ -152,14 +240,5 @@
     }
 </script>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 {% endblock %}
