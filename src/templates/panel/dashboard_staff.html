@@ -232,24 +232,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
 <script>
-    // Function to toggle content on button click
     $(document).ready(function() {
-        $("#toggleButton").click(function() {
-            $("#initialContent").toggle();
-            $("#newContent").toggle();
+        $("#allOrdersBtn").click(function() {
+            $(".order-section").hide();
+            $("#allOrders").show();
+        });
+
+        $("#pendingOrdersBtn").click(function() {
+            $(".order-section").hide();
+            $("#pendingOrders").show();
+        });
+
+        $("#byDateBtn").click(function() {
+            $(".order-section").hide();
+            $("#byDateOrders").show();
+        });
+
+        $("#currentUserOrdersBtn").click(function() {
+            $(".order-section").hide();
+            $("#currentUserOrders").show();
         });
     });
-    function toggleButtonStyle(button) {
-      if (button.classList.contains("btn-outline-primary")) {
-        button.classList.remove("btn-outline-primary");
-        button.classList.add("btn-primary");
-      } else {
-        button.classList.remove("btn-primary");
-        button.classList.add("btn-outline-primary");
-      }
-    }
-</script>
+    </script>
 
 
 {% endblock %}
