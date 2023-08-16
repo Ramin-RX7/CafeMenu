@@ -40,7 +40,6 @@ class OrderDetailView(DetailView):
 
 
 class SetOrderView(View):
-
     def post(self, request):
         if not (data := request.COOKIES.get("cart")):
             redirect("orders:cart")
@@ -95,21 +94,32 @@ def cart(request):
     return render(request,'orders/cart.html',context)
 
 
-class CartAddView(RedirectView):
-    pattern_name = "foods:menu"
+class CartAddView(View):
+    def post(self, request):
+        if (food_id := request.POST.get('change')):
+            quantity = request.POST.get('quantity')
+            cart_cookie = request.COOKIES.get('cart')
+            if cart_cookie:
+                cart_dict = eval(cart_cookie)
+            else:
+                cart_dict= {}
 
-    def post(self, request, *args, **kwargs):
-        food_id = request.POST.get('food')
-        quantity = request.POST.get('quantity')
-        cart_cookie = request.COOKIES.get('cart')
-        if cart_cookie:
-            cart_dict = eval(cart_cookie)
-        else:
-            cart_dict= {}
-        cart_dict[food_id] = quantity
-        response = redirect(self.pattern_name)
-        response.set_cookie('cart', str(cart_dict))
-        return response
+            cart_dict[food_id] = quantity
+            response = redirect('orders:cart')
+            response.set_cookie('cart', str(cart_dict))
+            return response
+        elif (food_id := request.POST.get('food')):
+            quantity = request.POST.get('quantity')
+            cart_cookie = request.COOKIES.get('cart')
+            if cart_cookie:
+                cart_dict = eval(cart_cookie)
+            else:
+                cart_dict= {}
+
+            cart_dict[food_id] = quantity
+            response = redirect('foods:menu')
+            response.set_cookie('cart', str(cart_dict))
+            return response
 
 
 class CartDeleteView(RedirectView):

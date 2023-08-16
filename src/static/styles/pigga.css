@@ -71,6 +71,14 @@ body {
   background-color: #fff;
 }
 
+@media only screen and (max-width: 767px) {
+  .footer-mobile-text {
+      font-size: 1.5rem !important;  
+  }
+}
+
+
+
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }
