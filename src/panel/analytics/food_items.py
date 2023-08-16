@@ -33,9 +33,9 @@ def food_items():
                 "month": {"old":{},"new":{}},
             },
             "relative":{
-                "day"  : {},
-                "week" : {},
-                "month": {},
+                "day"  : {"new":{},"old":None},
+                "week" : {"new":{},"old":None},
+                "month": {"new":{},"old":None},
             }
         }
     orderitems = OrderItem.objects.all()
@@ -65,7 +65,8 @@ def food_items():
                 count_of_fooditem_sold_hour_of_last_day.append(0)
         food_items['comparative']["day"]["old"][food_name] = sum(count_of_fooditem_sold_hour_of_last_day)
 
-        food_items["relative"]["day"][food_name] = sum(count_of_fooditem_sold_hour_of_last_day)
+        food_items["relative"]["day"]["new"][food_name] = sum(count_of_fooditem_sold_hour_of_last_day)
+
 
 
         count_this_week_food = list(orderitems.filter(Q(food__title = food_name) & Q(order__created_at__date__gte=this_week)).\
@@ -86,7 +87,9 @@ def food_items():
         annotate(day=TruncDate('order__created_at')).\
         values('day').annotate(count=Sum('quantity')))
         count_of_fooditem_sold_for_each_day_of_week = dict_to_list(count_week_food,value_item='count',last7days=True)
-        food_items["relative"]["week"][food_name] = sum(count_of_fooditem_sold_for_each_day_of_week)
+        food_items["relative"]["week"]["new"][food_name] = sum(count_of_fooditem_sold_for_each_day_of_week)
+        print(food_items["relative"]["week"]["new"])
+
 
 
         count_this_month_food = list(orderitems.filter(Q(food__title=food_name) & Q(order__created_at__date__gte=this_month)).\
@@ -94,7 +97,6 @@ def food_items():
         values('day').annotate(count=Sum('quantity')))
         count_of_fooditem_sold_this_month = dict_to_list(count_this_month_food,value_item='count',thismonth=True)
         food_items['comparative']["month"]["new"][food_name] = sum(count_of_fooditem_sold_this_month)
-
 
 
         count_last_month_food = list(orderitems.filter(Q(food__title=food_name)& Q(order__created_at__date__gte=last_month)& Q(order__created_at__date__lt=this_month)).\
@@ -108,7 +110,7 @@ def food_items():
         annotate(day=TruncDate('order__created_at')).\
         values('day').annotate(count=Sum('quantity')))
         count_of_fooditem_sold_for_each_day_of_month = dict_to_list(count_month_food,value_item='count',last30days=True)
-        food_items["relative"]["month"][food_name] = sum(count_of_fooditem_sold_for_each_day_of_month)
+        food_items["relative"]["month"]["new"][food_name] = sum(count_of_fooditem_sold_for_each_day_of_month)
 
 
     return food_items
