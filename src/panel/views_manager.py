@@ -62,6 +62,8 @@ def json_api(request):
         "others":{
             "relative" : {
                 "peak-hour": get_peak_hours(),
+                "order-status-week": {"new":order_status_counts(7), "old":None},
+                "order-status-month": {"new":order_status_counts(30), "old":None},
             }
         }
     }
