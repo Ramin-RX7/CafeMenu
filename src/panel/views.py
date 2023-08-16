@@ -135,6 +135,7 @@ def dashboard_staff(request):
     context = {
         'orders': orders,
         'orders_by_date': ALL_ORDERS,
+        'orders_user': ALL_ORDERS.filter(responsible_staff=request.user),
         'tables': tables,
     }
     return render(request,'panel/dashboard_staff.html', context)
