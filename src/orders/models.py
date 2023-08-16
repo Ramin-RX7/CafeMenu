@@ -3,7 +3,7 @@ from django.db import models
 from main.models import BaseModel
 from main.validators import phone_validator
 from foods.models import Food
-
+from users.models import User
 
 
 class Table(BaseModel):
@@ -28,6 +28,7 @@ class Order(BaseModel):
     discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
     status_field = models.TextChoices("Status","Pending Rejected Approved Delivered Paid")
     status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
+    responsible_staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     @property
     def price(self):
@@ -52,6 +53,10 @@ class Order(BaseModel):
         self.save()
     def pay(self):
         self.status = "Paid"
+        self.save()
+
+    def take_responsibility(self, staff:User):
+        self.responsible_staff = staff
         self.save()
 
     def save(self, check_items=True):

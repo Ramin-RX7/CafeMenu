@@ -119,14 +119,14 @@ def logout(request):
 
 @login_required(login_url="panel:login")
 def dashboard_staff(request):
-    orders = Order.objects.annotate(
+    ALL_ORDERS = Order.objects.all()
+    orders = ALL_ORDERS.annotate(
         status_order=Case(
             When(status="Pending", then=Value(1)),
             When(status="Approved", then=Value(2)),
             When(status="Delivered", then=Value(3)),
             When(status="Rejected", then=Value(4)),
             When(status="Paid", then=Value(5)),
-            # Add more cases for other choices
             default=Value(1),
             output_field=CharField(),
         )
@@ -134,7 +134,10 @@ def dashboard_staff(request):
     tables = Table.objects.all()
     context = {
         'orders': orders,
+        'orders_by_date': ALL_ORDERS,
+        'orders_user': ALL_ORDERS.filter(responsible_staff=request.user),
         'tables': tables,
+        "name": request.user.first_name,
     }
     return render(request,'panel/dashboard_staff.html', context)
 
@@ -203,10 +206,12 @@ def simple_action(view_func):
         return redirect("panel:dashboard")
     return _wrapped_view
 
+
 @simple_action
 def approve_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.approve()
+    order.take_responsibility(request.user)
 
 @simple_action
 def reject_order(request, order_id):
@@ -222,3 +227,8 @@ def pay_order(request, order_id):
 def deliver_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.deliver()
+
+@simple_action
+def take_responsibility(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.take_responsibility(request.user)

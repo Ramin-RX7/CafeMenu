@@ -9,7 +9,7 @@
     {% for category in categories %}
     <div class="container">
         <div class="section-devider my-6 transparent"></div>
-        <div class="row align-items-center">
+        <div class="row align-items-center mb-4">
             <div class="col-md-6">
                 <div class="category-img">
                     {% if category.image %}
@@ -34,9 +34,9 @@
                 <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                     <div class="row">
                         <div class="col-md-6 col-sm-9 text-center">
-                            <div class="d-lg" style="">
+                            <div class="" style="">
                                 {% if food.image %}
-                                  <img src="{{ food.image.url }}" alt="" class="rounded" style="width: 50%;">
+                                  <img src="{{ food.image.url }}" alt="" class="rounded" style="width: 80%;">
                                 {% else %}
                                   <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow food-image">
                                 {% endif %}
