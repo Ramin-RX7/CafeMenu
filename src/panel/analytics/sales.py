@@ -9,7 +9,7 @@ def sales_rel_week():
     today = datetime.now()
     start_date = today - timedelta(days=7)
 
-    orders_within_last_7_days = Order.objects.filter(status="Paid",created_at__range=(start_date, today))
+    orders_within_last_7_days = Order.objects.filter(created_at__range=(start_date, today))
     amount_sold_by_day = [0] * 7
 
     for order in orders_within_last_7_days:
