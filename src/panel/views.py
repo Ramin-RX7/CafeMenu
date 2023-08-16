@@ -5,51 +5,44 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib.auth import (login as django_login, logout as django_logout)
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Case, CharField, Value, When
+from django.views import View
+from django.views.generic import FormView
+from django.urls import reverse_lazy
 
 from users.models import User
 from orders.models import Order, Table, OrderItem
-from foods.models import Food
 from .forms import UserLogInForm, UserVerifyForm
 from .urls import *
 from .forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
 
-# Create your views here.
 
+class LoginView(FormView):
 
-class LoginView(View):
+    template_name = 'panel/login.html'
+    form_class = UserLogInForm
+    success_url = reverse_lazy("panel:user_verify")
 
     def dispatch(self, request, *args, **kwargs):
         if isinstance(request.user, User):
             return redirect("panel:dashboard")
         return super().dispatch(request, *args, **kwargs)
 
-    def post(self, request):
-        form=UserLogInForm(request.POST)
-        if form.is_valid():
-            cd=form.cleaned_data
-            phone=str(cd['phone'])
-            user=User.objects.filter(phone=phone).first()
-            if user:
-                request.session['user_phone']=phone
-                return redirect("panel:user_verify")
-            else:
-                form.add_error("phone", "Phone number not found")
+    def form_valid(self, form):
+        cd = form.cleaned_data
+        phone = str(cd['phone'])
+        user = User.objects.filter(phone=phone).first()
+        if user:
+            self.request.session['user_phone'] = phone
+            return super().form_valid(form)
         else:
-            # form.add_error("phone", "Invalid phone number")
-            pass
-        context={'form':form}
-        return render(request, 'panel/login.html', context)
+            form.add_error("phone", "Phone number not found")
+            return super().form_invalid(form)
 
-    def get(self, request):
-        form=UserLogInForm()
-        context={'form':form}
-        return render(request, 'panel/login.html', context)
 
 
 def generate_2fa(request):
@@ -60,7 +53,11 @@ def generate_2fa(request):
 
 
 
-class UserVerifyView(View):
+class UserVerifyView(FormView):
+    template_name = 'panel/user_verify.html'
+    form_class = UserVerifyForm
+    success_url = reverse_lazy("panel:dashboard")
+
     def dispatch(self, request, *args, **kwargs):
         if isinstance(request.user, User):
             return redirect("panel:dashboard")
@@ -72,42 +69,43 @@ class UserVerifyView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
-        form = UserVerifyForm()
         if (not self.expiration_time) or (
             timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S")
         ):
             request = generate_2fa(request)
         else:
-            # form.add_error("already generated")
             print(f"previous:{self.generated_otp}  until:{self.expiration_time}")
-        return render(request, 'panel/user_verify.html', {'form': form})
+        return super().get(request)
 
     def post(self, request):
         if not all([self.generated_otp,self.expiration_time]):
             return redirect("panel:user_verify")
-        form = UserVerifyForm(request.POST)
         if timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S"):
             print("expired")
-            request = generate_2fa(request)
-            form.add_error(None, "Previous 2FA code expired. A new code has been sent to you")
-            return render(request, 'panel/user_verify.html', {'form': form})
+            self.request = generate_2fa(request)
+            form = self.get_form()
+            form.add_error("otp", "Previous 2FA code expired. A new code has been sent to you")
+            return self.form_invalid(form)
         else:
+            form = self.get_form()
             if form.is_valid():
-                entered_otp = form.cleaned_data.get('otp')
-                if entered_otp == str(self.generated_otp):
-                    request.session.pop('2FA')
-                    request.session.pop('2fa_expire')
-                    request.session["authenticated"] = True
-                    user = User.objects.get(phone=self.user_phone)
-                    django_login(request, user, "users.auth.UserAuthBackend")
-                    request.session['phone'] = user.phone
-                    return redirect("panel:dashboard")
-                else:
-                    form.add_error(None,"Invalid code entered")
-                    return render(request, 'panel/user_verify.html', {'form': form})
-            else:
-                print("BUG?!")
-                return redirect("panel:login")
+                return self.form_valid(form)
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        entered_otp = form.clean().get('otp')
+        if entered_otp == str(self.generated_otp):
+            self.request.session.pop('2FA')
+            self.request.session.pop('2fa_expire')
+            self.request.session["authenticated"] = True
+            user = User.objects.get(phone=self.user_phone)
+            django_login(self.request, user, "users.auth.UserAuthBackend")
+            self.request.session['phone'] = user.phone
+            return super().form_valid(form)
+        else:
+            form.add_error("otp","Invalid code entered")
+            return self.form_invalid(form)
+
 
 
 @login_required
@@ -121,14 +119,14 @@ def logout(request):
 
 @login_required(login_url="panel:login")
 def dashboard_staff(request):
-    orders = Order.objects.annotate(
+    ALL_ORDERS = Order.objects.all()
+    orders = ALL_ORDERS.annotate(
         status_order=Case(
             When(status="Pending", then=Value(1)),
             When(status="Approved", then=Value(2)),
             When(status="Delivered", then=Value(3)),
             When(status="Rejected", then=Value(4)),
             When(status="Paid", then=Value(5)),
-            # Add more cases for other choices
             default=Value(1),
             output_field=CharField(),
         )
@@ -136,7 +134,10 @@ def dashboard_staff(request):
     tables = Table.objects.all()
     context = {
         'orders': orders,
+        'orders_by_date': ALL_ORDERS,
+        'orders_user': ALL_ORDERS.filter(responsible_staff=request.user),
         'tables': tables,
+        "name": request.user.first_name,
     }
     return render(request,'panel/dashboard_staff.html', context)
 
@@ -205,10 +206,12 @@ def simple_action(view_func):
         return redirect("panel:dashboard")
     return _wrapped_view
 
+
 @simple_action
 def approve_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.approve()
+    order.take_responsibility(request.user)
 
 @simple_action
 def reject_order(request, order_id):
@@ -224,3 +227,8 @@ def pay_order(request, order_id):
 def deliver_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.deliver()
+
+@simple_action
+def take_responsibility(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.take_responsibility(request.user)
