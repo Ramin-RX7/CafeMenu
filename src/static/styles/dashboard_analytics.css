@@ -1,0 +1,43 @@
+
+/* Hide radio buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* Show custom-styled labels as a bar */
+label {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* Show the corresponding section when the radio button is checked */
+#Day1:checked ~ #Day1-content,
+#Week1:checked ~ #Week1-content,
+#Month1:checked ~ #Month1-content,
+#Total1:checked ~ #Total1-content,
+#Day2:checked ~ #Day2-content,
+#Week2:checked ~ #Week2-content,
+#Month2:checked ~ #Month2-content,
+#Total2:checked ~ #Total2-content,
+#Day3:checked ~ #Day3-content,
+#Week3:checked ~ #Week3-content,
+#Month3:checked ~ #Month3-content,
+#Total3:checked ~ #Total3-content,
+#Day4:checked ~ #Day4-content,
+#Week4:checked ~ #Week4-content,
+#Month4:checked ~ #Month4-content,
+#Total4:checked ~ #Total4-content {
+    display: block;
+}
+
+/* Hide all sections by default */
+.section {
+    display: none;
+}
+
+/* Show the selected section */
+.section.active {
+    display: block;
+}

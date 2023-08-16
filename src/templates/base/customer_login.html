@@ -4,19 +4,21 @@
     <div class="container">
         <h3 class="section-title mb-4 text-center">Want to Order? Enter your phone number</h3>
         <div class="row justify-content-center align-items-center">
-            <img class="container col-6 justify-content-center" src="{% static 'images/phone2.jpeg' %}" alt=" " class="w-100 rounded shadow">
-            <form class="col-6" action="{% url 'orders:customer_login' %}" method="POST">
+            <form class="col-12 col-md-6 mb-4" action="{% url 'orders:customer_login' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                 <!-- <input type="tel" class="form-control" id="" placeholder="Phone number"> -->
-                 {% if form_login_error %}
-                    <h4>Invalid phone number</h4>
-                 {% endif %}
-                 {{ login_form.phone.errors }}
-                 {{ login_form.phone }}
+                    {% if form_login_error %}
+                        <h4 class="text-danger">Invalid phone number</h4>
+                    {% endif %}
+                    {{ login_form.phone.errors }}
+                    {{ login_form.phone }}
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Create user</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Create user</button>
             </form>
+            <div class="col-12 col-md-6">
+                <img src="{% static 'images/phone2.jpeg' %}" alt=" " class="w-100 rounded shadow">
+            </div>
+
         </div>
     </div>
 </section>

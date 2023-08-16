@@ -1,10 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen and (max-width:768px)" href="{% static 'styles/mobile.css' %}">
     <link rel="stylesheet" href="{% static 'styles/pigga.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
+    {% block extra_style %}{% endblock extra_style %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 
@@ -12,7 +15,7 @@
 <body>
 
     {% block navbar %}
-	{% include 'base/navbar.html' %}
+    {% include 'base/navbar.html' %}
     {% endblock navbar %}
 
 
@@ -22,15 +25,18 @@
 
     {% if logged_in %}
     {% else %}
-        {% include 'base/customer_login.html' %}
+    {% include 'base/customer_login.html' %}
     {% endif %}
 
-    {% include 'base/footer.html' %}
+    {% block footer %}
+        {% include 'base/footer.html' %}
+    {% endblock footer %}
 
     <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     <script src="{% static 'js/bootstrap.affix.js' %}"></script>
     <script src="{% static 'js/pigga.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 
 </html>

@@ -7,9 +7,9 @@ app_name = "foods"
 
 
 urlpatterns = [
-    path("categories/", category_list, name="category_list"),
-    path("category/<int:id>/", category_details, name="category_details"),
+    path("categories/", CategoryListView.as_view(), name="category_list"),
+    path("category/<int:id>/", CategoryDetailView.as_view(), name="category_details"),
     path("search/", SearchView.as_view(), name="search"),
-    path("<int:id>/", food_details, name="food_details"),
-    path("menu/", menu, name="menu")
+    path("<int:id>/", FoodDetailView.as_view(), name="food_details"),
+    path("menu/", MenuListView.as_view(), name="menu")
 ]
