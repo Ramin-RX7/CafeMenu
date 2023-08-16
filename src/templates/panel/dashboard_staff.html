@@ -112,8 +112,7 @@
                     {% endfor %}
                 </div>
 
-                <!-- By Table -->
-                <div id="newContent" style="display: none;">
+                <div id="pendingOrders" class="order-section" style="display: none;">
                     {% for table in tables %}
                     <h3 class="mb-3 mt-5">{{table.name}}</h3>
                     <div class="row mt-3">
@@ -152,10 +151,33 @@
                     {% endfor %}
                 </div>
 
-                <br>
-                <br>
-                <br>
-                <br>
+                <div id="byDateOrders" class="order-section" style="display: none;">
+                    {% for order in orders_by_date %}
+                    <div class="col-md-12">
+                        <div class="order-dsh rounded">
+                            {% if order.table %} {{order.table.name}}<br> {% endif %}
+                            Phone: {{order.customer}}
+                            <br>
+                            Total Price {{order.final_price}}
+                            <div class="col">
+                                <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                {% if order.status == 'Pending' %}
+                                    <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                                    <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                                {% endif %}
+                                {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
+                                    <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                                {% endif %}{% endcomment %}
+                                {% if order.status == 'Approved' %}
+                                    <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                                {% elif order.status == 'Delivered' %}
+                                    <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
 
 
