@@ -1,33 +1,42 @@
+from typing import Any, Dict
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
 from django.views import View
+from django.views.generic import RedirectView
 
 from foods.models import Food
 from users.models import User
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
+from django.views.generic import TemplateView, ListView,DetailView,RedirectView
 
 
+class IndexView(ListView):
+    model=Order
+    template_name= 'orders/order_list.html'
 
-def index(request):
-    current_session_orders_ids = request.session.get('orders', [])
-    current_session_orders = Order.objects.filter(id__in=current_session_orders_ids)
-    context = {
-        'orders' : current_session_orders
-    }
-    return render(request,'orders/order_list.html',context)
-
-
-def order_list(request):
-    return redirect("index")
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context= super().get_context_data(**kwargs)
+        current_session_orders_ids=self.request.session.get('orders',[])
+        context['orders'] = Order.objects.filter(id__in=current_session_orders_ids)
+        return context
 
 
-def order_details(request,id):
-    session_id=request.session['orders']
-    order = get_object_or_404(Order, id=session_id[id-1])
-    context = {"order": order}
-    return render(request,'orders/order_details.html',context)
+class OrderListView(RedirectView):
+    pattern_name = 'orders:index'
+
+
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'orders/order_details.html'
+    context_object_name = 'order'
+
+    def get_object(self, queryset=None):
+        session_id = self.request.session.get('orders')
+        order_id = int(self.kwargs.get('id')) - 1
+        order = get_object_or_404(Order, id=session_id[order_id])
+        return order
 
 
 class SetOrderView(View):
@@ -84,10 +93,8 @@ def cart(request):
         context = {"cart": new_cart}
     return render(request,'orders/cart.html',context)
 
-class CartAddView(View):
-    def get(self, request):
-        return redirect("foods:menu")
 
+class CartAddView(View):
     def post(self, request):
         if (food_id := request.POST.get('change')):
             quantity = request.POST.get('quantity')
@@ -115,15 +122,15 @@ class CartAddView(View):
             return response
 
 
-
-class CartDeleteView(View):
-    def post(self, request):
+class CartDeleteView(RedirectView):
+    pattern_name = "orders:cart"
+    def post(self, request, *args, **kwargs):
         data = request.COOKIES.get("cart")
         cart = eval(data)
         food_id = request.POST["food"]
         del cart[food_id]
         str_cart = str(cart)
-        response = redirect('orders:cart')
+        response = redirect(self.pattern_name)
         response.set_cookie('cart', str_cart)
         return response
 

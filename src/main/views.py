@@ -1,11 +1,11 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def index(request):
-    context = {}
-    return render(request, "index.html", context)
+
+class IndexTemplateView(TemplateView):
+    template_name = "index.html"
 
 
-def about_us(request):
-    context = {}
-    return render(request, "main/about_us.html")
+class AboutUsTemplateView(TemplateView):
+    template_name = "main/about_us.html"

@@ -6,10 +6,10 @@ app_name = "orders"
 
 
 urlpatterns = [
-    path("order_list/", order_list, name="order_list"),
-    path("<int:id>/", order_details, name="order_details"),
+    path("order_list/", OrderListView.as_view(), name="order_list"),
+    path("<int:id>/", OrderDetailView.as_view(), name="order_details"),
     path("cart/", cart, name="cart"),
-    path("", index, name="index"),
+    path("", IndexView.as_view(), name="index"),
     path("cart/delete/",CartDeleteView.as_view(),name="cart_delete"),
     path("customer_login/", CustomerLoginView.as_view(),name="customer_login"),
     path("cart_add/", CartAddView.as_view(), name='cart_add'),
