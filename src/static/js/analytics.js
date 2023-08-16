@@ -77,7 +77,7 @@ function _getDurationLabels(duration, fulltype, data){
             } catch (error) {
             }
         }
-        data = data.old;
+        data = data.new;
     }
     switch (duration) {
         case "day":
@@ -111,7 +111,7 @@ function _getDurationLabels(duration, fulltype, data){
 // Get values of the chart (y axis) and return them in an array of arrays.
 function _getValues(duration_data){
     if (!Array.isArray(duration_data)){
-        if (!Array.isArray(duration_data.old)){
+        if (!Array.isArray(duration_data.new)){
             return [duration_data.new, duration_data.old]
         } else {
             return [Object.values(duration_data.new), Object.values(duration_data.old)]
