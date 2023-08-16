@@ -53,7 +53,11 @@ def generate_2fa(request):
 
 
 
-class UserVerifyView(View):
+class UserVerifyView(FormView):
+    template_name = 'panel/user_verify.html'
+    form_class = UserVerifyForm
+    success_url = reverse_lazy("panel:dashboard")
+
     def dispatch(self, request, *args, **kwargs):
         if isinstance(request.user, User):
             return redirect("panel:dashboard")
@@ -65,42 +69,40 @@ class UserVerifyView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
-        form = UserVerifyForm()
         if (not self.expiration_time) or (
             timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S")
         ):
             request = generate_2fa(request)
         else:
-            # form.add_error("already generated")
             print(f"previous:{self.generated_otp}  until:{self.expiration_time}")
-        return render(request, 'panel/user_verify.html', {'form': form})
+        return super().get(request)
+
 
     def post(self, request):
         if not all([self.generated_otp,self.expiration_time]):
             return redirect("panel:user_verify")
-        form = UserVerifyForm(request.POST)
         if timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S"):
             print("expired")
-            request = generate_2fa(request)
+            form = self.get_form()
             form.add_error(None, "Previous 2FA code expired. A new code has been sent to you")
-            return render(request, 'panel/user_verify.html', {'form': form})
+            return self.form_invalid(form)
         else:
-            if form.is_valid():
-                entered_otp = form.cleaned_data.get('otp')
-                if entered_otp == str(self.generated_otp):
-                    request.session.pop('2FA')
-                    request.session.pop('2fa_expire')
-                    request.session["authenticated"] = True
-                    user = User.objects.get(phone=self.user_phone)
-                    django_login(request, user, "users.auth.UserAuthBackend")
-                    request.session['phone'] = user.phone
-                    return redirect("panel:dashboard")
-                else:
-                    form.add_error(None,"Invalid code entered")
-                    return render(request, 'panel/user_verify.html', {'form': form})
-            else:
-                print("BUG?!")
-                return redirect("panel:login")
+            return self.form_valid(self.get_form())
+
+    def form_valid(self, form):
+        entered_otp = form.cleaned_data.get('otp')
+        if entered_otp == str(self.generated_otp):
+            self.request.session.pop('2FA')
+            self.request.session.pop('2fa_expire')
+            self.request.session["authenticated"] = True
+            user = User.objects.get(phone=self.user_phone)
+            django_login(self.request, user, "users.auth.UserAuthBackend")
+            self.request.session['phone'] = user.phone
+            return redirect("panel:dashboard")
+        else:
+            form.add_error(None,"Invalid code entered")
+            return self.form_invalid(form)
+
 
 
 @login_required
