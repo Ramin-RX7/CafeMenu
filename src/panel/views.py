@@ -77,20 +77,23 @@ class UserVerifyView(FormView):
             print(f"previous:{self.generated_otp}  until:{self.expiration_time}")
         return super().get(request)
 
-
     def post(self, request):
         if not all([self.generated_otp,self.expiration_time]):
             return redirect("panel:user_verify")
         if timezone.now() > timezone.datetime.strptime(self.expiration_time, "%d/%m/%Y, %H:%M:%S"):
             print("expired")
+            self.request = generate_2fa(request)
             form = self.get_form()
-            form.add_error(None, "Previous 2FA code expired. A new code has been sent to you")
+            form.add_error("otp", "Previous 2FA code expired. A new code has been sent to you")
             return self.form_invalid(form)
         else:
-            return self.form_valid(self.get_form())
+            form = self.get_form()
+            if form.is_valid():
+                return self.form_valid(form)
+            return self.form_invalid(form)
 
     def form_valid(self, form):
-        entered_otp = form.cleaned_data.get('otp')
+        entered_otp = form.clean().get('otp')
         if entered_otp == str(self.generated_otp):
             self.request.session.pop('2FA')
             self.request.session.pop('2fa_expire')
@@ -98,9 +101,9 @@ class UserVerifyView(FormView):
             user = User.objects.get(phone=self.user_phone)
             django_login(self.request, user, "users.auth.UserAuthBackend")
             self.request.session['phone'] = user.phone
-            return redirect("panel:dashboard")
+            return super().form_valid(form)
         else:
-            form.add_error(None,"Invalid code entered")
+            form.add_error("otp","Invalid code entered")
             return self.form_invalid(form)
 
 
