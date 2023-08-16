@@ -88,7 +88,6 @@ def food_items():
         values('day').annotate(count=Sum('quantity')))
         count_of_fooditem_sold_for_each_day_of_week = dict_to_list(count_week_food,value_item='count',last7days=True)
         food_items["relative"]["week"]["new"][food_name] = sum(count_of_fooditem_sold_for_each_day_of_week)
-        print(food_items["relative"]["week"]["new"])
 
 
 
