@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import LoginView,UserVerifyView,logout,dashboard_staff,EditOrders,approve_order,reject_order,pay_order,deliver_order,take_responsibility
 from .views_manager import json_api,analytics
 
 app_name = "panel"
