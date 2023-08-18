@@ -18,3 +18,7 @@ class TestUrls(SimpleTestCase):
     def test_dashboard_url_is_resolved(self):
         url = reverse('panel:dashboard')
         self.assertEquals(resolve(url).func,dashboard_staff)
+
+    def test_edit_order_url_is_resolved(self):
+        url = reverse('panel:edit_order',args=[1])
+        self.assertEquals(resolve(url).func.view_class,EditOrders)
