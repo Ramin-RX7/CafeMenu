@@ -24,3 +24,7 @@ class TestUrls(SimpleTestCase):
     def test_index_url_is_resolved(self):
         url =reverse_lazy('orders:index')
         self.assertEquals(resolve(url).func.view_class, IndexView)
+        
+    def test_cart_delete_url_is_resolved(self):
+        url =reverse_lazy('orders:cart_delete')
+        self.assertEquals(resolve(url).func.view_class, CartDeleteView)
