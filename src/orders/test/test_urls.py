@@ -28,3 +28,7 @@ class TestUrls(SimpleTestCase):
     def test_cart_delete_url_is_resolved(self):
         url =reverse_lazy('orders:cart_delete')
         self.assertEquals(resolve(url).func.view_class, CartDeleteView)
+        
+    def test_customer_login_url_is_resolved(self):
+        url =reverse_lazy('orders:customer_login')
+        self.assertEquals(resolve(url).func.view_class, CustomerLoginView)
