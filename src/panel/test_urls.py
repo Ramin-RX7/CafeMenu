@@ -7,3 +7,7 @@ class TestUrls(SimpleTestCase):
         url = reverse('panel:login')
         self.assertEquals(resolve(url).func.view_class,LoginView)
 
+    def test_userverify_url_is_resolved(self):
+        url = reverse('panel:user_verify')
+        self.assertEquals(resolve(url).func.view_class,UserVerifyView)
+
