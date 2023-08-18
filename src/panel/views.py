@@ -15,7 +15,6 @@ from django.urls import reverse_lazy
 from users.models import User
 from orders.models import Order, Table, OrderItem
 from .forms import UserLogInForm, UserVerifyForm
-from .urls import *
 from .forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
