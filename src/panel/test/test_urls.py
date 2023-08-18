@@ -26,3 +26,7 @@ class TestUrls(SimpleTestCase):
     def test_approve_order_url_is_resolved(self):
         url = reverse('panel:approve_order',args=[1])
         self.assertEquals(resolve(url).func,approve_order)
+
+    def test_reject_order_url_is_resolved(self):
+        url = reverse('panel:reject_order',args=[1])
+        self.assertEquals(resolve(url).func,reject_order)
