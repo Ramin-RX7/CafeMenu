@@ -22,3 +22,7 @@ class TestUrls(SimpleTestCase):
     def test_edit_order_url_is_resolved(self):
         url = reverse('panel:edit_order',args=[1])
         self.assertEquals(resolve(url).func.view_class,EditOrders)
+
+    def test_approve_order_url_is_resolved(self):
+        url = reverse('panel:approve_order',args=[1])
+        self.assertEquals(resolve(url).func,approve_order)
