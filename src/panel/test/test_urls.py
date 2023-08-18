@@ -15,3 +15,6 @@ class TestUrls(SimpleTestCase):
         url = reverse('panel:logout')
         self.assertEquals(resolve(url).func,logout)
 
+    def test_dashboard_url_is_resolved(self):
+        url = reverse('panel:dashboard')
+        self.assertEquals(resolve(url).func,dashboard_staff)
