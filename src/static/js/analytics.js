@@ -152,3 +152,29 @@ fetchDataFromAPI().then(data => {
         createChartWithData(duration_name, fulltype, data);
     }
 });
+
+
+
+
+
+
+document.querySelectorAll('.download-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        let chartId = button.getAttribute('data-chart-id');
+        let canvas = document.getElementById(chartId);
+        downloadChartAsImage(canvas, chartId);
+    });
+});
+
+function downloadChartAsImage(canvas, chartId) {
+    console.log("here");
+    let imageBase64 = canvas.toDataURL('image/png');
+    let currentDate = new Date();
+    let formattedDate = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+    let formattedTime = currentDate.toLocaleTimeString().replace(/:/g, '-'); // HH-MM-SS format
+    let filename = chartId.replace(":", "-") + '-' + formattedDate + '-' + formattedTime + '.png';
+    let link = document.createElement('a');
+    link.href = imageBase64;
+    link.download = filename;
+    link.click();
+}
