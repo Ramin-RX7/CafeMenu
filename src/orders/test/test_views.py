@@ -13,3 +13,6 @@ class TestViews(TestCase):
         response = self.client.get(self.order_list_url)
         self.assertEquals(response.status_code, 302)
     
+    def test_order_list_GET(self):
+        response = self.client.get(self.index)
+        self.assertEquals(response.status_code, 200)
