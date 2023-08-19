@@ -33,7 +33,7 @@ def dashboard(request):
         'tables': tables,
         "name": request.user.first_name,
     }
-    return render(request,'panel/dashboard_staff.html', context)
+    return render(request,'panel/dashboard.html', context)
 
 
 
