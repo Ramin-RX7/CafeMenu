@@ -6,7 +6,6 @@ from django.views import View
 
 from foods.models import Food
 from orders.models import Order, Table, OrderItem
-from ..urls import *
 from ..forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
