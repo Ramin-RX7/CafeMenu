@@ -34,6 +34,12 @@ class EditOrderItemForm(ModelForm):
 
 class AddOrderItemForm(ModelForm):
     quantity = forms.IntegerField(min_value=1,max_value=100,widget=forms.TextInput(attrs={"class":"form-control my-1"}))
+
+    def __init__(self, exclude=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if exclude is not None:
+            self.fields['food'].queryset = self.fields['food'].queryset.exclude(id__in=exclude)
+
     class Meta:
         model = OrderItem
         fields = ['food', 'quantity']
