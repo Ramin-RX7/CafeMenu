@@ -25,13 +25,19 @@ function flattenNestedObject(obj, prefix = '', depth = 0, maxDepth = 3) {
 
 
 // set up the config for comparative charts
-function _getChartConfig(labels, data, other_data=null){
+function _getChartConfig(fulltype, labels, data, other_data=null){
+    let duration_units = {
+        month: "day",
+        week: "day",
+        day: "hour",
+        year: "month",
+    }
     let config = {
         data: {
             labels: labels,
             datasets: [
                 {
-                    label: 'This',
+                    label: 'Current',
                     data: data,
                     backgroundColor: 'rgba(190,140,75, 0.6)',
                     borderColor: "#bc8c4c",
@@ -42,8 +48,27 @@ function _getChartConfig(labels, data, other_data=null){
         options: {
             responsive: true,
             scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: duration_units[fulltype.split(":")[2]]+"s",
+                        font: {
+                            size: 16
+                        }
+                    },
+                    ticks: {
+                        maxRotation: 0,
+                        autoSkip: false
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    title: {
+                        display: true,
+                        text: fulltype.split(":")[0]
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }
             }
         }
@@ -126,7 +151,7 @@ function _getValues(duration_data){
 function getChartConfig(duration, fulltype, data) {
     let labels =  _getDurationLabels(duration, fulltype, data)
     let [newData,oldData] =  _getValues(data)
-    let chartConfig = _getChartConfig(labels, newData, oldData)
+    let chartConfig = _getChartConfig(fulltype, labels, newData, oldData)
     return chartConfig
 }
 
