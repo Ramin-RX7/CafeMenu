@@ -95,14 +95,31 @@
             <div class="col py-2">
                 {% if cart %}
                     {% if logged_in %}
-                    <form method="post" action="{% url 'orders:set_order' %}">
+                    <button id="sendDataButton" class="btn btn-success"  style="width: 50%;"><h4 style="padding-top:3%;">Set Order</h4></button>
+
+                    <form id="orderForm" action="{% url 'orders:set_order' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" name="food" value="{{ food.id }}" class="btn btn-success"  style="width: 45%;"><h4 style="padding-top:3%;">Set Order</h4></button>
+                        <input type="hidden" name="cart_data" id="cartDataInput">
                     </form>
                     {% endif %}
                 {% endif %}
             </div>
 </div>
 </section>
+
+
+<script>
+document.getElementById('sendDataButton').addEventListener('click', function() {
+    let cartData = JSON.parse(localStorage.getItem('cart'));
+    let cartDataInput = document.getElementById('cartDataInput');
+    cartDataInput.value = JSON.stringify(cartData);
+    let orderForm = document.getElementById('orderForm');
+    localStorage.removeItem('cart');
+    orderForm.submit();
+});
+</script>
+
+<script src="{% static 'js/cart.js' %}"></script>
+
 {% endblock %}
 
