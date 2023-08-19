@@ -1,5 +1,6 @@
 import datetime
 from django.db.models import Count,Q
+from django.db.models.functions import TruncDate ,ExtractHour
 from orders.models import Order
 
 from .lib import dict_to_list
@@ -40,29 +41,18 @@ def count_orders():
         }
 
     # count of order part
-    count_order_hour_today =[]
-    for i in range(0,24):
-        hour = f'{i}'
-        data = all_orders.filter(Q(created_at__date=today_date) & Q(created_at__hour__gte=i) & Q(created_at__hour__lt=i+1))\
-        .count()
-        if data:
-            count_order_hour_today.append(data)
-        else:
-            count_order_hour_today.append(0)
-    sales['comparative']["day"]["new"]=count_order_hour_today
+    today_hours = list(all_orders.filter(Q(created_at__date=today_date))\
+    .annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')))
+    count_order_hour_today = dict_to_list(today_hours,value_item='count',hour=True)
+    sales['comparative']["day"]["new"]= count_order_hour_today
 
-    count_order_hour_last_day = []
-    for i in range(0,24):
-        hour = f'{i}'
-        data = all_orders.filter(Q(created_at__date=last_day) & Q(created_at__hour__gte=i) & Q(created_at__hour__lt=i+1))\
-        .count()
-        if data:
-            count_order_hour_last_day.append(data)
-        else:
-            count_order_hour_last_day.append(0)
-    sales['comparative']["day"]["old"] = count_order_hour_today
-    sales["relative"]["day"] = count_order_hour_today
-
+ 
+    last_day_hours =list(all_orders.filter(Q(created_at__date=last_day))\
+    .annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')))
+    count_order_hour_last_day = dict_to_list(last_day_hours,value_item='count',hour=True)
+    sales['comparative']["day"]["old"] = count_order_hour_last_day
+    sales["relative"]["day"] = count_order_hour_last_day
+    
     count_this_week =list(all_orders.filter(Q(created_at__date__gte = this_week)).\
     extra({'day':"date(created_at)"}).\
     values('day').annotate(count=Count('id')))
@@ -115,6 +105,6 @@ def count_orders():
             "month": count_order_for_30_day_past,
         }
     }
-
+    print(sales["comparative"]["day"])
     return context
 
