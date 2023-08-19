@@ -13,9 +13,9 @@
     <h3 class="section-title mb-6 pb-3 text-center">Cart</h3>
     <div class="container">
         <div class="row mt-3" style="justify-content:space-around;">
-        {% if cart %}
+        {% if cart_given %}
             {% for food,quantity in cart.items %}
-            <div class="card mb-3" style="max-width:90%;">
+            <div class="card mb-3" style="max-width:90%;" id="food-{{food.id}}">
                 <div class="row g-0">
                     <div class="col-md-6">
                         <img src="{{ food.image.url }}" class="img-fluid img-thumbnail" alt="{{ food.title }}" style="height: 100%; width: 100%;">
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="head clearfix">
                                         <div class="title float-left" style="font-size: 16px;">Quantity</div>
-                                        <div class="float-right" style="font-size: 16px;">{{ quantity }}</div>
+                                        <div id="item-quantity-{{food.id}}" class="float-right" style="font-size: 16px;">{{ quantity }}</div>
                                 </div>
                                 <div class="head clearfix">
                                     <div class="title float-left " style="font-size: 16px;">Total</div>
@@ -42,23 +42,20 @@
                         </div>
                         <div class="card-body">
                             <div class="col py-3">
-                                <form action="{% url 'orders:cart_add' %}" method="POST">
+                                <form id="form-{{ food.id }}">
                                     {% csrf_token %}
                                     <div class="row">
-                                    <div class="col">
-                                    <input type="number" name="quantity" id="" class="form-control" value="{{ quantity }}" min="1" style="width: 80%;" >
-                                    </div>
-                                    <div class="col py-1">
-                                        <button type="submit_change" name="change" value="{{ food.id }}" class="btn btn-info btn-block" >Change</button>
-                                    </div>
+                                        <div class="col">
+                                            <input type="number" name="quantity" id="" class="quantity-input form-control" value="1" min="1" max="50" style="width: 80%;">
+                                        </div>
+                                        <div class="col py-1">
+                                            <button type="submit" name="food" value="{{ food.id }}" data-id="{{ food.id }}" class="add-button btn btn-info btn-block">Change</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="col py-2">
-                                <form method="post" action="{% url 'orders:cart_delete' %}">
-                                    {% csrf_token %}
-                                    <button type="submit" name="food" value="{{ food.id }}" class="btn btn-danger btn-block">Delete</button>
-                                </form>
+                                <button name="food" value="{{ food.id }}" class="btn btn-danger btn-block del-button">Delete</button>
                             </div>
                         </div>
                     </div>
