@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-from .views_manager import json_api,analytics
+from .views_manager import *
 
 app_name = "panel"
 
@@ -18,4 +18,5 @@ urlpatterns = [
     path("order/<int:order_id>/take/", take_responsibility, name="take_responsibility"),
     path("analytics-api/", json_api, name="analytics-api"),
     path("analytics/", analytics, name="analytics"),
+    path("download/<str:dataset_name>", download_dataset, name="dataset_download"),
 ]

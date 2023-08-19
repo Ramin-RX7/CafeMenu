@@ -1,12 +1,10 @@
 import json
-from datetime import timedelta,datetime
+import csv
 
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
-from django.db.models import Sum
+from django.http import HttpResponse,Http404
 
 from orders.models import OrderItem
-
 from .analytics import *
 
 
@@ -72,10 +70,54 @@ def json_api(request):
     return HttpResponse(json.dumps(context))
 
 
+def export_order_items_to_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="order_items.csv"'
+
+    order_items = OrderItem.objects.all()
+
+    writer = csv.writer(response)
+    writer.writerow(['Order ID', 'Customer', 'Food', 'Quantity', 'Unit Price', 'Discount'])
+
+    for order_item in order_items:
+        writer.writerow([order_item.order.id, order_item.order.customer, order_item.food.title, order_item.quantity,
+                         order_item.unit_price, order_item.discount])
+
+    return response
+
+
+def export_orders_to_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="order_items.csv"'
+
+    order_items = OrderItem.objects.all()
+
+    writer = csv.writer(response)
+    writer.writerow(['Order ID', 'Customer', 'Food', 'Quantity', 'Unit Price', 'Discount'])
+
+    for order_item in order_items:
+        writer.writerow([order_item.order.id, order_item.order.customer, order_item.food.title, order_item.quantity,
+                         order_item.unit_price, order_item.discount])
+
+    return response
+
+
+datasets = {
+    "orderitems" : export_order_items_to_csv,
+    "orders" : export_orders_to_csv,
+}
+def download_dataset(request, dataset_name):
+
+    if dataset_name in datasets:
+        return datasets[dataset_name](request)
+    else:
+        raise Http404
+
 
 def analytics(request):
     context = {
         "peak_hours": get_top_peak_hours(),
         "sales_total":sales_total(),
+        "datasets": datasets.keys()
     }
     return render(request, "panel/dashboard_manager.html", context)
