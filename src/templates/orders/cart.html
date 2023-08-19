@@ -21,23 +21,23 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body" style="padding-right:2% ;padding-right:3%;">
-                        <h5 class="card-title text-primary">{{ food.title }}</h5>
-                        <div class="custom-list">
-                            <div class="info">
-                                <div class="head clearfix">
-                                    <div class="title float-left" style="font-size: 16px;">For each</div>
-                                    <div class="float-right" style="font-size: 16px;">{{ food.price }} $</div>
+                            <h5 class="card-title text-primary">{{ food.title }}</h5>
+                            <div class="custom-list">
+                                <div class="info">
+                                    <div class="head clearfix">
+                                        <div class="title float-left" style="font-size: 16px;">For each</div>
+                                        <div class="float-right" style="font-size: 16px;">{{ food.price }} $</div>
+                                    </div>
+                                    <div class="head clearfix">
+                                        <div class="title float-left" style="font-size: 16px;">Quantity</div>
+                                        <div class="float-right" style="font-size: 16px;">{{ quantity }}</div>
                                 </div>
                                 <div class="head clearfix">
-                                    <div class="title float-left" style="font-size: 16px;">Quantity</div>
-                                    <div class="float-right" style="font-size: 16px;">{{ quantity }}</div>
+                                    <div class="title float-left " style="font-size: 16px;">Total</div>
+                                    <div class="float-right" style="font-size: 16px;"><span class="item-total-price">{{ food.price|mul:quantity }}</span>$</div>
+                                </div>
+                                </div>
                             </div>
-                            <div class="head clearfix">
-                                <div class="title float-left " style="font-size: 16px;">Total</div>
-                                <div class="float-right" style="font-size: 16px;"><span class="item-total-price">{{ food.price|mul:quantity }}</span>$</div>
-                            </div>
-                            </div>
-                        </div>
                         </div>
                         <div class="card-body">
                             <div class="col py-3">
@@ -53,13 +53,13 @@
                                     </div>
                                 </form>
                             </div>
-                        <div class="col py-2">
-                            <form method="post" action="{% url 'orders:cart_delete' %}">
-                                {% csrf_token %}
-                                <button type="submit" name="food" value="{{ food.id }}" class="btn btn-danger btn-block">Delete</button>
-                            </form>
+                            <div class="col py-2">
+                                <form method="post" action="{% url 'orders:cart_delete' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" name="food" value="{{ food.id }}" class="btn btn-danger btn-block">Delete</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -88,17 +88,10 @@
                     {% if logged_in %}
                     <form method="post" action="{% url 'orders:set_order' %}">
                         {% csrf_token %}
-                        <!-- <div class="d-flex px-5 mx-5 py-3"> -->
-                            <button type="submit" name="food" value="{{ food.id }}" class="btn btn-success"  style="width: 45%;"><h4 style="padding-top:3%;">Set Order</h4></button>
-                        <!-- </div> -->
+                        <button type="submit" name="food" value="{{ food.id }}" class="btn btn-success"  style="width: 45%;"><h4 style="padding-top:3%;">Set Order</h4></button>
                     </form>
-                    {% else %}
-                    <!-- <h2 class="text-center">Please fill out the form below to continue</h2> -->
                     {% endif %}
-                {% else %}
-                    <!-- ... -->
                 {% endif %}
-
             </div>
 </div>
 </section>
