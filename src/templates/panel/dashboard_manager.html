@@ -393,6 +393,16 @@
                         </div>
                     </div>
 
+
+                    <div class="card">
+                        <div class="h4 mt-5">Download cafe datasets <span class="h6">(csv format)</span></div>
+                        {% for dataset_name in datasets %}
+                        <div class="card-header">
+                            <button class="btn btn-secondary"><a href="{% url 'panel:dataset_download' dataset_name %}" class="text-white">"{{dataset_name}}" dataset</a></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+
                 </div>
             </div>
         </div>
