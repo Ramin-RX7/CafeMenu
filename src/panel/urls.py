@@ -1,6 +1,5 @@
 from django.urls import path
 from .views import *
-from .views_manager import *
 
 app_name = "panel"
 
@@ -20,7 +19,7 @@ dashboard_urls = [
     path("order/<int:order_id>/pay/", pay_order, name="pay_order"),
     path("order/<int:order_id>/deliver/", deliver_order, name="deliver_order"),
     path("order/<int:order_id>/take/", take_responsibility, name="take_responsibility"),
-    path("",dashboard_staff, name="dashboard"),
+    path("",dashboard, name="dashboard"),
 ]
 
 
