@@ -7,7 +7,7 @@ class UserModelTest(TestCase):
     def setUp(self) -> None:
         self.user_data={
             'phone':'9121111555',
-            'first_name':'test',
+            'first_name':'testname',
             'last_name':'test'
         }
 
@@ -36,11 +36,6 @@ class UserModelTest(TestCase):
     def test_create_superuser_non_superuser(self):
         with self.assertRaises(ValueError):
             User.objects.create_superuser(is_superuser=False, password='testpass', **self.user_data)
-
-    def test_phone_number_field_prep_value(self):
-        phone_field = User._meta.get_field('phone')
-        prepped_value = phone_field.get_prep_value('1234567890')
-        self.assertEqual(prepped_value, '1234567890')
 
     def test_phone_number_field_prep_value(self):
         phone_field = User._meta.get_field('phone')
