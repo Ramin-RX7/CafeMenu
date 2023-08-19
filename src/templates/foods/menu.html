@@ -2,6 +2,27 @@
 {% load static %}
 {% block title %} Menu {% endblock %}
 
+{% block extra_style %}
+<style>
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.popup-content {
+    text-align: center;
+}
+</style>
+{% endblock %}
+
+
 {% block content %}
 
 <section id="about2" style="background-image: url({% static 'images/style-4.png' %});">
@@ -69,6 +90,13 @@
         </div>
     </div>
     {% endfor %}
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            Item added to cart!
+        </div>
+    </div>
+
 </section>
 
 {% endblock %}
