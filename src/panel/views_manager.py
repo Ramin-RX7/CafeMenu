@@ -1,12 +1,10 @@
 import json
-from datetime import timedelta,datetime
+import csv
 
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
-from django.db.models import Sum
+from django.http import HttpResponse,Http404
 
 from orders.models import OrderItem
-
 from .analytics import *
 
 
