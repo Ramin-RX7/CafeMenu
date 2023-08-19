@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
 
+from foods.models import Food
 from orders.models import Order, Table, OrderItem
 from ..urls import *
 from ..forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
@@ -47,12 +48,13 @@ class EditOrders(View):
     def get(self, request, order_id:int):
         form =EditOrderForm(instance=self.order)
         item_forms = []
-        for i in self.order_items:
-            item_forms.append(EditOrderItemForm(instance=i, initial={"id":i.id}))
-        add_item_form = AddOrderItemForm()
-
+        for item in self.order_items:
+            item_forms.append(EditOrderItemForm(instance=item, initial={"id":item.id}))
+        foods = self.order_items.values_list('food', flat=True)
+        foods2 = Food.objects.filter(is_active=False).values_list('id', flat=True)
+        foods = (*foods, *foods2)
+        add_item_form = AddOrderItemForm(exclude=foods)
         context = {'form':form, 'order':self.order, 'orderitems':item_forms, "add_item_form":add_item_form}
-
         return render(request,'panel/dashboard_editoreder.html',context)
 
 
