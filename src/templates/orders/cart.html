@@ -13,6 +13,7 @@
     <h3 class="section-title mb-6 pb-3 text-center">Cart</h3>
     <div class="container">
         <div class="row mt-3" style="justify-content:space-around;">
+        {% if cart %}
             {% for food,quantity in cart.items %}
             <div class="card mb-3" style="max-width:90%;">
                 <div class="row g-0">
@@ -73,6 +74,14 @@
                 <br>
             </div>
             {% endfor %}
+        {% else %}
+            <script>
+                let cartData = JSON.parse(localStorage.getItem('cart'));
+                let cartDataString = JSON.stringify(cartData);
+
+                window.location.href = '/orders/cart/?cart_data=' + encodeURIComponent(cartDataString);
+            </script>
+        {% endif %}
         </div>
     </div>
 
