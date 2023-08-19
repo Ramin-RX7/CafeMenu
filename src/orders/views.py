@@ -41,24 +41,25 @@ class OrderDetailView(DetailView):
 
 class SetOrderView(View):
     def post(self, request):
-        if not (data := request.COOKIES.get("cart")):
-            redirect("orders:cart")
-        cart = eval(data)
+        data = request.POST.get("cart_data")
+        if not data:
+            return redirect("orders:cart")
         customer = request.session.get("phone")
         if not customer:
             if isinstance(request.user, User):
                 customer = request.user.phone
             else:
-                redirect("index")
+                redirect("orders:cart")
+
+        data = json.loads(data)
         discount = 0.0
         table = Table.get_available_table()
 
         order = Order(customer=customer, table=table, discount=discount)
 
-        response = redirect("orders:index")
         with transaction.atomic():
             order.save(check_items=False)
-            for food_id,quantity in cart.items():
+            for food_id,quantity in data.items():
                 food = Food.objects.get(id=food_id)
                 orderitem = OrderItem(
                     order = order,
@@ -72,6 +73,7 @@ class SetOrderView(View):
             session_orders.append(order.id)
             request.session["orders"] = session_orders
 
+        response = redirect("orders:index")
         response.delete_cookie("cart")
         return response
 
