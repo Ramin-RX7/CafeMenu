@@ -81,13 +81,15 @@ class SetOrderView(View):
 def cart(request):
     data = request.GET.get("cart_data") or {}
     cart = {}
+    cart_given = False
     if data:
-        data = json.loads(data)
-        for food_id,quantity in data.items():
-            food = Food.objects.get(id=food_id)
-            cart[food] = quantity
+        cart_given = True
+        if (data:=json.loads(data)):
+            for food_id,quantity in data.items():
+                food = Food.objects.get(id=food_id)
+                cart[food] = quantity
 
-    context = {"cart": cart}
+    context = {"cart": cart, "cart_given":cart_given}
     return render(request,'orders/cart.html',context)
 
 
