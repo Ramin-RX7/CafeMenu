@@ -25,7 +25,7 @@ function flattenNestedObject(obj, prefix = '', depth = 0, maxDepth = 3) {
 
 
 // set up the config for comparative charts
-function _getComparativeChartConfig(labels, data, other_data=null){
+function _getChartConfig(labels, data, other_data=null){
     let config = {
         data: {
             labels: labels,
@@ -126,7 +126,7 @@ function _getValues(duration_data){
 function getChartConfig(duration, fulltype, data) {
     let labels =  _getDurationLabels(duration, fulltype, data)
     let [newData,oldData] =  _getValues(data)
-    let chartConfig = _getComparativeChartConfig(labels, newData, oldData)
+    let chartConfig = _getChartConfig(labels, newData, oldData)
     return chartConfig
 }
 
