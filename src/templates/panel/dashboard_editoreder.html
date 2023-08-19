@@ -1,7 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'panel/dashboard_base.html' %}
 {% load static %}
-{% block content %}
-<div class="container py-5">
+{% block dashboard_content %}
+
+
+
+<div class="mx-5 col-md-9 py-5">
     <h2 class="mb-5">Order Info</h2>
     <form action="{% url 'panel:edit_order' order_id=order.id %}" method="POST" class="d-flex mb-5 mt-2">
         {% csrf_token %}
