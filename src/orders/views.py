@@ -1,22 +1,22 @@
-from typing import Any, Dict
+import json
+
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
 from django.views import View
-from django.views.generic import RedirectView
+from django.views.generic import ListView,DetailView,RedirectView
 
 from foods.models import Food
 from users.models import User
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
-from django.views.generic import TemplateView, ListView,DetailView,RedirectView
 
 
 class IndexView(ListView):
     model=Order
     template_name= 'orders/order_list.html'
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         current_session_orders_ids=self.request.session.get('orders',[])
         context['orders'] = Order.objects.filter(id__in=current_session_orders_ids)
@@ -79,18 +79,15 @@ class SetOrderView(View):
 
 
 def cart(request):
-    data = request.COOKIES.get("cart")
-    if not (data := request.COOKIES.get("cart")):
-        return render(request,'orders/cart.html',{})
-    cart = eval(data)
-    new_cart = {}
-    for key,value in cart.items():
-        food = Food.objects.get(id=key)
-        new_cart[food] = value
-    if new_cart == {}:
-        context = {}
-    else:
-        context = {"cart": new_cart}
+    data = request.GET.get("cart_data") or {}
+    cart = {}
+    if data:
+        data = json.loads(data)
+        for food_id,quantity in data.items():
+            food = Food.objects.get(id=food_id)
+            cart[food] = quantity
+
+    context = {"cart": cart}
     return render(request,'orders/cart.html',context)
 
 
