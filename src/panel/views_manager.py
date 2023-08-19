@@ -104,9 +104,22 @@ def export_orders_to_csv(request):
     return response
 
 
+datasets = {
+    "orderitems" : export_order_items_to_csv,
+    "orders" : export_orders_to_csv,
+}
+def download_dataset(request, dataset_name):
+
+    if dataset_name in datasets:
+        return datasets[dataset_name](request)
+    else:
+        raise Http404
+
+
 def analytics(request):
     context = {
         "peak_hours": get_top_peak_hours(),
         "sales_total":sales_total(),
+        "datasets": datasets.keys()
     }
     return render(request, "panel/dashboard_manager.html", context)
