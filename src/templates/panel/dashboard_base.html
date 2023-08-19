@@ -14,14 +14,15 @@
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded shadow py-2 mb-4 col-md-9">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow py-2 col-md-9">
     <a class="navbar-brand ml-4" href="/">
         <img src="{{ maininfo.icon.url }}" alt="" class="navbar-brand" width="50px">
     </a>
     <a class="navbar-brand" href="/">{{ maininfo.title }}</a>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-4 mt-2">
@@ -67,7 +68,7 @@
 
 
 
-<div class="my-5">
+<div class="">
     <div class="container-fluid">
         <div class="row">
 
@@ -75,7 +76,7 @@
             {% endblock dashboard_content %}
 
 
-            <div class="col-md-3 sidebar py-4 d-flex flex-column justify-content-center">
+            <div class="col-md-3 sidebar border-left border-top bg-light py-4 d-flex flex-column justify-content-center">
                 <!-- Sidebar content -->
                 <p class="d-flex justify-content-center h5">Welcome "{{name}}"</p>
                 <hr>
@@ -103,7 +104,7 @@
 
 {% block footer %}
 {% endblock footer %}
-<div class="py-3 bg-dark col-md-9">
+<div class="py-3 bg-light col-md-9 border-top">
     <div class="container">
         <div class="row justify-content-between align-items-center text-center">
             <div class="col-md-3 text-md-left mb-3 mb-md-0">
