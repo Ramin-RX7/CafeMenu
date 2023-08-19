@@ -21,7 +21,7 @@ def analytics(request):
         "sales_total":sales_total(),
         "datasets": datasets.keys()
     }
-    return render(request, "panel/dashboard_manager.html", context)
+    return render(request, "panel/analytics.html", context)
 
 
 def download_dataset(request, dataset_name):
