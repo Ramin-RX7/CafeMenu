@@ -134,7 +134,7 @@ def dashboard_staff(request):
     tables = Table.objects.all()
     context = {
         'orders': orders,
-        'orders_by_date': ALL_ORDERS,
+        'orders_by_date': ALL_ORDERS.order_by('-created_at'),
         'orders_user': ALL_ORDERS.filter(responsible_staff=request.user),
         'tables': tables,
         "name": request.user.first_name,
