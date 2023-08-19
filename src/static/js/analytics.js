@@ -32,6 +32,13 @@ function _getChartConfig(fulltype, labels, data, other_data=null){
         day: "hour",
         year: "month",
     }
+    let x_label;
+    if (duration_units.hasOwnProperty(fulltype.split(":")[2])) {
+        x_label = duration_units[fulltype.split(":")[2]]+"s"
+    } else {
+        x_label = ""
+    }
+
     let config = {
         data: {
             labels: labels,
@@ -51,7 +58,7 @@ function _getChartConfig(fulltype, labels, data, other_data=null){
                 x: {
                     title: {
                         display: true,
-                        text: duration_units[fulltype.split(":")[2]]+"s",
+                        text: x_label,
                         font: {
                             size: 16
                         }
