@@ -13,11 +13,41 @@ document.querySelectorAll('.add-button').forEach(function(button) {
 
         localStorage.setItem('cart', JSON.stringify(cartData));
 
-        let popup = document.getElementById('popup');
-        popup.style.display = 'block';
+        let quantityElement = document.getElementById(`item-quantity-${itemId}`)
+        quantityElement.textContent = quantity;
 
-        setTimeout(function() {
-            popup.style.display = 'none';
-        }, 2000);
+        showPopup("Item quantity changed")
     });
 });
+
+document.querySelectorAll('.del-button').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log("here");
+
+        let itemId = button.getAttribute('value');
+
+        let cartData = JSON.parse(localStorage.getItem('cart')) || {};
+
+        delete cartData[itemId];
+
+        let new_data = JSON.stringify(cartData)
+        localStorage.setItem('cart', new_data);
+
+        let foodSection = document.getElementById(`food-${itemId}`)
+        foodSection.remove()
+
+        showPopup("Item deleted")
+    });
+});
+
+
+function showPopup(text){
+    let popup = document.getElementById('popup');
+    popup.style.display = 'block';
+    popup.textContent = text
+
+    setTimeout(function() {
+        popup.style.display = 'none';
+    }, 2500);
+}
