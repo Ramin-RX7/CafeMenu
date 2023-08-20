@@ -1,15 +1,34 @@
 import json
-from datetime import timedelta,datetime
 
+from django.http import Http404
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
-from django.db.models import Sum
 
-from orders.models import OrderItem
-
-from .analytics import *
+from ..analytics.datasets import *
+from ..analytics import *
 
 
+
+
+datasets = {
+    "orderitems" : export_order_items_to_csv,
+    "orders" : export_orders_to_csv,
+}
+
+
+def analytics(request):
+    context = {
+        "peak_hours": get_top_peak_hours(),
+        "sales_total":sales_total(),
+        "datasets": datasets.keys()
+    }
+    return render(request, "panel/analytics.html", context)
+
+
+def download_dataset(request, dataset_name):
+    if dataset_name in datasets:
+        return datasets[dataset_name](request)
+    else:
+        raise Http404
 
 
 def json_api(request):
@@ -71,11 +90,3 @@ def json_api(request):
     }
     return HttpResponse(json.dumps(context))
 
-
-
-def analytics(request):
-    context = {
-        "peak_hours": get_top_peak_hours(),
-        "sales_total":sales_total(),
-    }
-    return render(request, "panel/dashboard_manager.html", context)
