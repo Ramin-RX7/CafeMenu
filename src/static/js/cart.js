@@ -51,3 +51,18 @@ function showPopup(text){
         popup.style.display = 'none';
     }, 2500);
 }
+
+
+document.getElementById('sendDataButton').addEventListener('click', function() {
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    }
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cartDataString = JSON.stringify(cart);
+    setCookie('cart', cartDataString, 0.01);
+    localStorage.removeItem('cart');
+    orderForm.submit();
+});
+
