@@ -5,11 +5,15 @@ from orders.views import OrderListView, IndexView, OrderDetailView, SetOrderView
 class TestUrls(TestCase):
     def setUp(self):
         self.client = Client()
-        # self.order_list = reverse('order_list')
-        self.cart = reverse('orders:cart')
+        self.order_list_url = reverse('orders:order_list')
+        self.cart_url = reverse('orders:cart')
           
+    def test_order_list_url_status_code(self):
+            response = self.client.get(self.order_list_url)
+            self.assertEquals(response.status_code, 302)
+    
     def test_cart_url_status_code(self):
-            response = self.client.get(self.cart)
+            response = self.client.get(self.cart_url)
             self.assertEquals(response.status_code, 200)
     
     def test_order_list_url_is_resolved(self):
