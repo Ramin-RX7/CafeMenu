@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm,BaseUserCreationForm
+from django.contrib.auth.models import Group
 
 from .models import User
 
@@ -14,6 +15,9 @@ class UserAddForm(BaseUserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].required = False
         self.fields['last_name'].required = False
+
+        super_staff_group = Group.objects.get(name='Normal Staff')
+        self.fields['groups'].initial = [super_staff_group.id]
 
 
 
