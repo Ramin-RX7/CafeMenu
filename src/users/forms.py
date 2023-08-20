@@ -16,10 +16,11 @@ class UserAddForm(UserCreationForm):
         self.fields['last_name'].required = False
 
 
-class UserChangeForm(UserChangeForm):
+
+class ChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('phone', 'first_name', 'last_name', 'is_staff', 'is_active')
+        fields = ('phone', 'first_name', 'last_name', 'is_staff', 'is_active','groups','user_permissions','password', )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,8 +29,13 @@ class UserChangeForm(UserChangeForm):
 
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
 
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
-        if password:
-            self.instance.set_password(password)
-        return password
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data['password']:
+            user.set_password(self.cleaned_data['password'])
+        elif not self.cleaned_data['password'] and user.pk:
+            old_user = User.objects.get(pk=user.pk)
+            user.password = old_user.password
+        if commit:
+            user.save()
+        return user
