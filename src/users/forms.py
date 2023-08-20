@@ -1,14 +1,14 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django.contrib.auth.forms import UserChangeForm,BaseUserCreationForm
 
 from .models import User
 
 
 
-class UserAddForm(UserCreationForm):
+class UserAddForm(BaseUserCreationForm):
     class Meta:
         model = User
-        fields = ('phone', 'first_name', 'last_name', 'is_staff', 'is_active')
+        fields = ('phone', 'first_name', 'last_name', 'is_staff', 'is_active','groups','user_permissions')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
