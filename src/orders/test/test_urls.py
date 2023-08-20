@@ -7,6 +7,10 @@ class TestUrls(TestCase):
         self.client = Client()
         # self.order_list = reverse('order_list')
         self.cart = reverse('orders:cart')
+          
+    def test_cart_url_status_code(self):
+            response = self.client.get(self.cart)
+            self.assertEquals(response.status_code, 200)
     
     def test_order_list_url_is_resolved(self):
         url =reverse_lazy('orders:order_list')
