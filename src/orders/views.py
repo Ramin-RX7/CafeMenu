@@ -41,7 +41,7 @@ class OrderDetailView(DetailView):
 
 class SetOrderView(View):
     def post(self, request):
-        data = request.POST.get("cart_data")
+        data = request.COOKIES.get("cart")
         if not data:
             return redirect("orders:cart")
         customer = request.session.get("phone")
