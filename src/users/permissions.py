@@ -38,7 +38,7 @@ manager.permissions.add(*permissions)
 
 
 #> Super Staff
-manager, created = Group.objects.get_or_create(name='Super Staff')
+super_staff, created = Group.objects.get_or_create(name='Super Staff')
 
 superstaff_permissions = [
     *staff_permissions,
@@ -54,7 +54,7 @@ superstaff_permissions = [
     'change_table',
     'delete_table'
 ]
-permissions = Permission.objects.exclude(codename__in=superstaff_permissions)
+permissions = Permission.objects.filter(codename__in=superstaff_permissions)
 if not created:
-    manager.permissions.clear()
-manager.permissions.add(*permissions)
+    super_staff.permissions.clear()
+super_staff.permissions.add(*permissions)
