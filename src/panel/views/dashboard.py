@@ -1,7 +1,8 @@
 from django.db.models import Case, CharField, Value, When
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
+from django.utils.decorators import method_decorator
 from django.views import View
 
 from foods.models import Food
@@ -12,6 +13,7 @@ from ..forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
 @login_required(login_url="panel:login")
+@permission_required("orders.view_order", raise_exception=True)
 def dashboard(request):
     ALL_ORDERS = Order.objects.all()
     orders = ALL_ORDERS.annotate(
