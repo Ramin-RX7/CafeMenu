@@ -17,8 +17,8 @@ staff_permissions = [
 ]
 
 permissions = Permission.objects.filter(codename__in=staff_permissions)
-
-normal_staff.permissions.clear()
+if not created:
+    normal_staff.permissions.clear()
 normal_staff.permissions.add(*permissions)
 
 
@@ -31,8 +31,8 @@ manager_excludes = [
     'delete_social',
 ]
 permissions = Permission.objects.exclude(codename__in=manager_excludes)
-
-manager.permissions.clear()
+if not created:
+    manager.permissions.clear()
 manager.permissions.add(*permissions)
 
 
@@ -55,6 +55,6 @@ superstaff_permissions = [
     'delete_table'
 ]
 permissions = Permission.objects.exclude(codename__in=superstaff_permissions)
-
-manager.permissions.clear()
+if not created:
+    manager.permissions.clear()
 manager.permissions.add(*permissions)
