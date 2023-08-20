@@ -101,7 +101,7 @@ class EditOrders(View):
 
 
 def simple_action(view_func):
-    @login_required(login_url='panel:login')
+    @permission_required('orders.change_order', raise_exception=True)
     def _wrapped_view(request, order_id, *args, **kwargs):
         response = view_func(request, order_id, *args, **kwargs)
         return redirect("panel:dashboard")
