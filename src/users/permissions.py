@@ -1,4 +1,5 @@
 from django.contrib.auth.models import Group,Permission
+from django.db.models import Q
 
 
 
@@ -30,7 +31,10 @@ manager_excludes = [
     'delete_maininfo',
     'delete_social',
 ]
-permissions = Permission.objects.exclude(codename__in=manager_excludes)
+manager_customs = [
+    "view_analytics"
+]
+permissions = Permission.objects.filter(Q(codename__in=manager_excludes) | Q(codename__in=manager_customs))
 if not created:
     manager.permissions.clear()
 manager.permissions.add(*permissions)
