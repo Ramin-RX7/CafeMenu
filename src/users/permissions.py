@@ -16,7 +16,23 @@ staff_permissions = [
     'view_table',
 ]
 
-permissions = Permission.objects.filter(codename__in=permission_codenames)
+permissions = Permission.objects.filter(codename__in=staff_permissions)
 
 normal_staff.permissions.clear()
 normal_staff.permissions.add(*permissions)
+
+
+
+#> Manager
+manager, created = Group.objects.get_or_create(name='Manager')
+
+manager_excludes = [
+    'delete_maininfo',
+    'delete_social',
+]
+permissions = Permission.objects.exclude(codename__in=manager_excludes)
+
+manager.permissions.clear()
+manager.permissions.add(*permissions)
+
+
