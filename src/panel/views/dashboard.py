@@ -45,7 +45,7 @@ class EditOrders(View):
         self.order_items = self.order.orderitem_set.all()
         return super().dispatch(request, order_id)
 
-    @method_decorator(login_required(login_url='panel:login'))
+    @method_decorator(permission_required("orders.change_order", raise_exception=True))
     def get(self, request, order_id:int):
         form =EditOrderForm(instance=self.order)
         item_forms = []
@@ -58,8 +58,7 @@ class EditOrders(View):
         context = {'form':form, 'order':self.order, 'orderitems':item_forms, "add_item_form":add_item_form}
         return render(request,'panel/dashboard_editoreder.html',context)
 
-
-    @method_decorator(login_required(login_url='panel:login'))
+    @method_decorator(permission_required("orders.change_order", raise_exception=True))
     def post(self, request, order_id):
         # update order main info
         if request.POST.get("order"):
