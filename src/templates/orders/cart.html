@@ -73,10 +73,15 @@
             {% endfor %}
         {% else %}
             <script>
+                function setCookie(name, value, days) {
+                    const expires = new Date();
+                    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+                    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+                }
                 let cartData = JSON.parse(localStorage.getItem('cart'));
                 let cartDataString = JSON.stringify(cartData);
-
-                window.location.href = '/orders/cart/?cart_data=' + encodeURIComponent(cartDataString);
+                setCookie('cart', cartDataString, 0.01);
+                window.location.href = window.location.href;
             </script>
         {% endif %}
         </div>
