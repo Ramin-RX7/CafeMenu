@@ -81,7 +81,7 @@ class SetOrderView(View):
 
 
 def cart(request):
-    data = request.GET.get("cart_data") or {}
+    data = request.COOKIES.get("cart") or {}
     cart = {}
     cart_given = False
     if data:
@@ -90,9 +90,11 @@ def cart(request):
             for food_id,quantity in data.items():
                 food = Food.objects.get(id=food_id)
                 cart[food] = quantity
-
+        del request.COOKIES["cart"]
     context = {"cart": cart, "cart_given":cart_given}
-    return render(request,'orders/cart.html',context)
+    response = render(request, 'orders/cart.html', context)
+    response.delete_cookie('cart')
+    return response
 
 
 class CartAddView(View):
