@@ -36,3 +36,25 @@ manager.permissions.clear()
 manager.permissions.add(*permissions)
 
 
+
+#> Super Staff
+manager, created = Group.objects.get_or_create(name='Super Staff')
+
+superstaff_permissions = [
+    *staff_permissions,
+    'change_maininfo',
+    'change_social',
+    'add_category',
+    'change_category',
+    'delete_category',
+    'add_food',
+    'change_food',
+    'delete_food',
+    'add_table',
+    'change_table',
+    'delete_table'
+]
+permissions = Permission.objects.exclude(codename__in=superstaff_permissions)
+
+manager.permissions.clear()
+manager.permissions.add(*permissions)
