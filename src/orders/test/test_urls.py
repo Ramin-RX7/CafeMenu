@@ -8,6 +8,8 @@ class TestUrls(TestCase):
         self.order_list_url = reverse('orders:order_list')
         self.cart_url = reverse('orders:cart')
         self.index_url = reverse('orders:index')
+        self.cart_delete_url = reverse('orders:cart_delete')
+        
     def test_order_list_url_status_code(self):
             response = self.client.get(self.order_list_url)
             self.assertEquals(response.status_code, 302)
@@ -19,6 +21,10 @@ class TestUrls(TestCase):
     def test_index_url_status_code(self):
             response = self.client.get(self.index_url)
             self.assertEquals(response.status_code, 200)
+    
+    def test_cart_delete_url_status_code(self):
+            response = self.client.get(self.cart_delete_url)
+            self.assertEquals(response.status_code, 302)
             
     def test_order_list_url_is_resolved(self):
         url =reverse_lazy('orders:order_list')
