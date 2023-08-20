@@ -12,7 +12,7 @@ staff_permissions = [
     'change_order',
     'view_food',
     'view_maininfo',
-    'view_socials',
+    'view_social',
     'view_category',
     'view_table',
 ]
