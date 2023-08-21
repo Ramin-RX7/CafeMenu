@@ -17,7 +17,17 @@ class TestModels(TestCase):
         self.category1 = Category.objects.create(
             title='Iranian Foods'
         )
-    
+        
+        self.food1 = Food.objects.create(
+            title='Kabab',
+            price=22,
+            category=self.category1
+        )
+        self.food2 = Food.objects.create(
+            title='Ghormeh Sabzi',
+            price=20,
+            category=self.category1
+        )
         
         
     def test_table_str(self):
