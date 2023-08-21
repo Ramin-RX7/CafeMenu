@@ -17,3 +17,7 @@ class TestModels(TestCase):
     def test_table_str(self):
         self.assertEquals(str(self.table1), f"{self.table1}")
         
+    def test_get_available_table(self):
+        available_table = Table.get_available_table()
+        self.assertEqual(available_table, self.table1)
+        
