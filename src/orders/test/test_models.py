@@ -62,6 +62,7 @@ class TestModels(TestCase):
                                                     discount=0.0,
                                                     )
         
+        
     def test_table_str(self):
         self.assertEquals(str(self.table1), f"{self.table1}")
         
@@ -71,4 +72,10 @@ class TestModels(TestCase):
         
     def test_save_table(self):
         self.assertEqual(Table.objects.count(), 2)
+        
+    def test_price_order(self):
+        calculated_price = self.order1.price
+        expected_price = self.order_item1.unit_price*self.order_item1.quantity + self.order_item2.unit_price*self.order_item2.quantity
+        
+        self.assertEqual(calculated_price, expected_price)
         
