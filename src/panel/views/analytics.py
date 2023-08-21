@@ -102,16 +102,17 @@ def get_analytics_data():
 
 
 class JsonAPI(PermissionRequiredMixin, View):
+    permission_required = ("analytics",)
+
     _conf = None
+    last_update = datetime.now()
+    current_data = None
     @property
     def configurations(self):
         if not self._conf:
             self._conf = Configuration.objects.first()
         return self._conf
 
-    permission_required = ("analytics",)
-    current_data = get_analytics_data()
-    last_update = datetime.now()
 
     def get(self, request):
         if self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now():
