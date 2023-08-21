@@ -1,9 +1,13 @@
 import json
+from datetime import datetime,timedelta
 
 from django.http import Http404
+from django.views import View
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
+from dynamic_menu.models import Configuration
 from ..analytics.datasets import *
 from ..analytics import *
 
@@ -16,6 +20,15 @@ datasets = {
 }
 
 
+
+def download_dataset(request, dataset_name):
+    if dataset_name in datasets:
+        return datasets[dataset_name](request)
+    else:
+        raise Http404
+
+
+
 @permission_required("analytics", raise_exception=True)
 def analytics(request):
     context = {
@@ -26,11 +39,6 @@ def analytics(request):
     return render(request, "panel/analytics.html", context)
 
 
-def download_dataset(request, dataset_name):
-    if dataset_name in datasets:
-        return datasets[dataset_name](request)
-    else:
-        raise Http404
 
 
 @permission_required("analytics", raise_exception=True)
