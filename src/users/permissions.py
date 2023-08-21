@@ -72,6 +72,7 @@ manager, created = Group.objects.get_or_create(name='Manager')
 manager_excludes = [
     'delete_maininfo',
     'delete_social',
+    'delete_configuration',
 ]
 permissions = Permission.objects.exclude(codename__in=manager_excludes)
 if not created:
