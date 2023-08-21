@@ -114,3 +114,9 @@ class TestModels(TestCase):
         updated_order = Order.objects.get(pk=self.order1.pk)
         
         self.assertEquals(updated_order.status, 'Paid')
+        
+    def test_take_responsibility_order(self):
+        self.order1.take_responsibility(self.user1)
+        updated_order1 = Order.objects.get(pk=self.order1.pk)
+        
+        self.assertEqual(updated_order1.responsible_staff, self.user1)
