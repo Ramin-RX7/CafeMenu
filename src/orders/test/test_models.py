@@ -96,3 +96,9 @@ class TestModels(TestCase):
         updated_order = Order.objects.get(pk=self.order1.pk)
         
         self.assertEquals(updated_order.status, 'Approved')
+        
+    def test_reject_order(self):
+        self.order1.reject()
+        updated_order = Order.objects.get(pk=self.order1.pk)
+        
+        self.assertEquals(updated_order.status, 'Rejected')
