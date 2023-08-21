@@ -90,3 +90,9 @@ class TestModels(TestCase):
         customer__str__ = str(self.order1)
         
         self.assertEquals(customer__str__, customer_order1)
+        
+    def test_approve_order(self):
+        self.order1.approve()
+        updated_order = Order.objects.get(pk=self.order1.pk)
+        
+        self.assertEquals(updated_order.status, 'Approved')
