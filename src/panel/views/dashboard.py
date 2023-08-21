@@ -83,7 +83,7 @@ class EditOrders(View):
                     itemform.add_error(None,"Invalid input")
         # add new item
         elif request.POST.get("add_item"):
-            form = AddOrderItemForm(request.POST)
+            form = AddOrderItemForm(data=request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
                 unit_price = cd["food"].price
