@@ -79,3 +79,9 @@ class TestModels(TestCase):
         
         self.assertEqual(calculated_price, expected_price)
         
+    def test_final_price_order(self):
+        expected_price = self.order1.price / 100 * (self.order1.discount or 100)
+        final_price = self.order1.final_price
+        
+        self.assertEquals(final_price, expected_price)
+        
