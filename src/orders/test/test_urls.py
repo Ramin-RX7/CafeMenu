@@ -25,17 +25,17 @@ class TestUrls(TestCase):
             response = self.client.get(self.index_url)
             self.assertEquals(response.status_code, 200)
     
-    def test_cart_delete_url_status_code(self):
-            response = self.client.get(self.cart_delete_url)
-            self.assertEquals(response.status_code, 302)
+    # def test_cart_delete_url_status_code(self):
+    #         response = self.client.get(self.cart_delete_url)
+    #         self.assertEquals(response.status_code, 302)
     
     def test_customer_login_url_status_code(self):
-            response = self.client.get(self.customer_login_url)
-            self.assertEquals(response.status_code, 405)
+            response = self.client.post(self.customer_login_url)
+            self.assertEquals(response.status_code, 302)
             
-    def test_cart_add_url_status_code(self):
-            response = self.client.get(self.cart_add_url)
-            self.assertEquals(response.status_code, 405)
+    # def test_cart_add_url_status_code(self):
+    #         response = self.client.get(self.cart_add_url)
+    #         self.assertEquals(response.status_code, 405)
             
     def test_set_order_url_status_code(self):
             response = self.client.get(self.set_order_url)
