@@ -16,7 +16,7 @@ datasets = {
 }
 
 
-@permission_required("view_analytics", raise_exception=True)
+@permission_required("analytics", raise_exception=True)
 def analytics(request):
     context = {
         "peak_hours": get_top_peak_hours(),
@@ -33,7 +33,7 @@ def download_dataset(request, dataset_name):
         raise Http404
 
 
-@permission_required("view_analytics", raise_exception=True)
+@permission_required("analytics", raise_exception=True)
 def json_api(request):
     context = {
         "sales": {

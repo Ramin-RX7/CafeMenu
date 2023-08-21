@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 #> view_analytics permission
 content_type = ContentType.objects.get_for_model(Permission)
 
-permission_codename = 'view_analytics'
+permission_codename = 'analytics'
 permission_name = 'Can View Analytics'
 
 try:
