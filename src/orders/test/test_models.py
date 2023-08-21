@@ -120,3 +120,9 @@ class TestModels(TestCase):
         updated_order1 = Order.objects.get(pk=self.order1.pk)
         
         self.assertEqual(updated_order1.responsible_staff, self.user1)
+        
+    def test__str__orderitem(self):
+        order_item_quantity = str(self.order_item1.quantity)
+        quantity__str__ = str(self.order_item1)
+        
+        self.assertEquals(quantity__str__, order_item_quantity)
