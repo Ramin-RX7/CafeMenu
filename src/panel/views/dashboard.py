@@ -1,7 +1,7 @@
 from django.db.models import Case, CharField, Value, When
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required,permission_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.views import View
 
 from foods.models import Food
@@ -12,7 +12,6 @@ from ..forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
 
 
 @login_required(login_url="panel:login")
-@permission_required("orders.view_order", raise_exception=True)
 def dashboard(request):
     ALL_ORDERS = Order.objects.all()
     orders = ALL_ORDERS.annotate(
@@ -38,13 +37,13 @@ def dashboard(request):
 
 
 
-class EditOrders(PermissionRequiredMixin,View):
-    permission_required = ("orders.change_order",)
+class EditOrders(View):
     def dispatch(self, request, order_id:int):
         self.order = get_object_or_404(Order, id=order_id)
         self.order_items = self.order.orderitem_set.all()
         return super().dispatch(request, order_id)
 
+    @method_decorator(login_required(login_url='panel:login'))
     def get(self, request, order_id:int):
         form =EditOrderForm(instance=self.order)
         item_forms = []
@@ -57,6 +56,8 @@ class EditOrders(PermissionRequiredMixin,View):
         context = {'form':form, 'order':self.order, 'orderitems':item_forms, "add_item_form":add_item_form}
         return render(request,'panel/dashboard_editoreder.html',context)
 
+
+    @method_decorator(login_required(login_url='panel:login'))
     def post(self, request, order_id):
         # update order main info
         if request.POST.get("order"):
@@ -99,7 +100,7 @@ class EditOrders(PermissionRequiredMixin,View):
 
 
 def simple_action(view_func):
-    @permission_required('orders.change_order', raise_exception=True)
+    @login_required(login_url='panel:login')
     def _wrapped_view(request, order_id, *args, **kwargs):
         response = view_func(request, order_id, *args, **kwargs)
         return redirect("panel:dashboard")
