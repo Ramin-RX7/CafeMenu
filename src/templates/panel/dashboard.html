@@ -49,6 +49,7 @@
                     <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
                 </div>
                 <div class="col-5">
+                {% if perms.orders.change_order %}
                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                     {% if order.status == 'Pending' %}
                         <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
@@ -62,6 +63,7 @@
                     {% elif order.status == 'Delivered' %}
                         <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>
@@ -120,6 +122,7 @@
                     <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
                 </div>
                 <div class="col-5">
+                {% if perms.orders.change_order %}
                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                     {% if order.status == 'Pending' %}
                         <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
@@ -133,6 +136,7 @@
                     {% elif order.status == 'Delivered' %}
                         <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>
@@ -152,6 +156,7 @@
                     <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
                 </div>
                 <div class="col-5">
+                {% if perms.orders.change_order %}
                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                     {% if order.status == 'Pending' %}
                         <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
@@ -165,6 +170,7 @@
                     {% elif order.status == 'Delivered' %}
                         <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>

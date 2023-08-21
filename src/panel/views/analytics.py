@@ -2,6 +2,7 @@ import json
 
 from django.http import Http404
 from django.shortcuts import render
+from django.contrib.auth.decorators import permission_required
 
 from ..analytics.datasets import *
 from ..analytics import *
@@ -15,6 +16,7 @@ datasets = {
 }
 
 
+@permission_required("analytics", raise_exception=True)
 def analytics(request):
     context = {
         "peak_hours": get_top_peak_hours(),
@@ -31,6 +33,7 @@ def download_dataset(request, dataset_name):
         raise Http404
 
 
+@permission_required("analytics", raise_exception=True)
 def json_api(request):
     context = {
         "sales": {
