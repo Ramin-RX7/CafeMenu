@@ -1,6 +1,7 @@
 from django.test import TestCase
 from orders.models import Order, Table, OrderItem
 from foods.models import Food, Category
+from users.models import User
 
 class TestModels(TestCase):
     def setUp(self): 
@@ -23,10 +24,19 @@ class TestModels(TestCase):
             price=22,
             category=self.category1
         )
+        
         self.food2 = Food.objects.create(
             title='Ghormeh Sabzi',
             price=20,
             category=self.category1
+        )
+        
+        self.user1 = User.objects.create(
+            phone="9176877108",
+            first_name = 'Ali',
+            last_name= 'Afzal',
+            is_active=True,
+            is_staff=False,
         )
         
         
