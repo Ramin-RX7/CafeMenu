@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models.query import QuerySet
 
 from . import models
-from .forms import UserAddForm,ChangeForm
+from .forms import UserAddForm,UserChangeForm
 
 
 
@@ -47,4 +47,4 @@ class UserAdmin(admin.ModelAdmin):
         if obj is None:
             return UserAddForm
         else:
-            return ChangeForm
+            return UserChangeForm
