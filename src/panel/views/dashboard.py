@@ -6,7 +6,7 @@ from django.views import View
 
 from foods.models import Food
 from orders.models import Order, Table, OrderItem
-from ..forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm
+from ..forms import EditOrderForm, EditOrderItemForm, AddOrderItemForm,SearchbyDate
 
 
 
@@ -27,13 +27,27 @@ def dashboard(request):
         )
     ).order_by('status_order')
     tables = Table.objects.all()
+    form = SearchbyDate()
     context = {
         'orders': orders,
-        'orders_by_date': ALL_ORDERS,
+        'orders_by_date': ALL_ORDERS[::-1],
         'orders_user': ALL_ORDERS.filter(responsible_staff=request.user),
         'tables': tables,
         "name": request.user.first_name,
+        'date_form':form,
     }
+    if request.method == 'POST':
+        form = SearchbyDate(request.POST)
+        if form.is_valid():
+            start = form.cleaned_data['start_date']
+            end = form.cleaned_data['end_date']
+            context['orders_between'] = ALL_ORDERS.filter(
+                created_at__date__gte = start,
+                created_at__date__lt = end
+            )
+        else:
+            form.add_error(None,"Invalid input")
+
     return render(request,'panel/dashboard.html', context)
 
 
