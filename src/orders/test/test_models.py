@@ -108,3 +108,9 @@ class TestModels(TestCase):
         updated_order = Order.objects.get(pk=self.order1.pk)
         
         self.assertEquals(updated_order.status, 'Delivered')
+        
+    def test_pay_order(self):
+        self.order1.pay()
+        updated_order = Order.objects.get(pk=self.order1.pk)
+        
+        self.assertEquals(updated_order.status, 'Paid')
