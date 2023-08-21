@@ -39,6 +39,14 @@ class TestModels(TestCase):
             is_staff=False,
         )
         
+        self.order1 = Order(
+            customer='9176877108',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+        )
+        self.order1.save(check_items=False)
+        
         
     def test_table_str(self):
         self.assertEquals(str(self.table1), f"{self.table1}")
