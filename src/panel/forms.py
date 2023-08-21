@@ -1,8 +1,11 @@
 from django import forms
 from django.forms import ModelForm
-
+import datetime
 from orders.models import OrderItem,Order
 from core.validators import phone_validator
+
+today =datetime.date.today()
+last_30days_past = (datetime.datetime.now()-datetime.timedelta(30)).date()
 
 
 
@@ -52,3 +55,25 @@ class EditOrderForm(ModelForm):
     class Meta:
         model = Order
         fields = ["customer", "discount", "status","table"]
+
+class SearchbyDate(forms.Form):
+    start_date =forms.DateField(required=True,widget = forms.SelectDateWidget(attrs=({'style': 'width: 25%; display: inline-block;'})),initial=datetime.date.today())
+    end_date = forms.DateField(required=True,widget = forms.SelectDateWidget(attrs=({'style': 'width: 25%; display: inline-block;'})),initial=datetime.date.today())
+
+    def clean(self):
+        super(SearchbyDate, self).clean()
+        start_date = self.cleaned_data.get('start_date')
+        end_date = self.cleaned_data.get('end_date')
+        
+        if start_date < last_30days_past:
+            raise forms.ValidationError("Date cannot be more than 30 days past.")
+        if start_date > today:
+            raise forms.ValidationError("Start day should be in the past.")
+        if end_date > today:
+            raise forms.ValidationError("End day cant be bigger than today.")
+        if end_date < start_date:
+            raise forms.ValidationError("End day dhould be bigger than stat day.")
+        if end_date < last_30days_past:
+            raise forms.ValidationError("End day should be bigger than last 30 days past nad start day.")
+            
+        return self.cleaned_data
