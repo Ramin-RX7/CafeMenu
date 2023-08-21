@@ -92,7 +92,7 @@
 
             <div class="col-md-3 sidebar border-left border-top bg-light py-4 d-flex flex-column justify-content-center">
                 <!-- Sidebar content -->
-                <p class="d-flex justify-content-center h5">Welcome "{{name}}"</p>
+                <p class="d-flex justify-content-center h5">Welcome {% if name %}"{{name}}"{% endif %}</p>
                 <hr>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:dashboard' %}">Dashboard</a></li>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
