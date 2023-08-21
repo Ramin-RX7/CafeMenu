@@ -31,7 +31,9 @@ class Social(BaseModel,SingletonModel):
 
 
 class Configuration(BaseModel,SingletonModel):
-    analytics_refresh = models.PositiveIntegerField(default=0)
+    analytics_refresh = models.PositiveIntegerField(
+        default=0,help_text="hours needed to get analytics data from database again"
+    )
 
     def __str__(self) -> str:
         return "Configurations"
