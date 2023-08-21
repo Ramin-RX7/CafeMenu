@@ -25,3 +25,13 @@ class Social(BaseModel,SingletonModel):
     youtube   =  models.CharField(max_length=150, blank=True)
     facebook  =  models.CharField(max_length=150, blank=True)
     tweeter   =  models.CharField(max_length=150, blank=True)
+
+    def __str__(self) -> str:
+        return "Social Links"
+
+
+class Configuration(BaseModel,SingletonModel):
+    analytics_refresh = models.PositiveIntegerField(default=0)
+
+    def __str__(self) -> str:
+        return "Configurations"
