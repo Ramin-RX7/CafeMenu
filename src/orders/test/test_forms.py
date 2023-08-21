@@ -22,3 +22,9 @@ class TestForms(SimpleTestCase):
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors), 1)
     
+    def test_phone_input_attrs(self):
+        widget = PhoneInput()
+
+        self.assertIn('class', widget.attrs)
+        self.assertEqual(widget.attrs['class'], 'form-control')
+    
