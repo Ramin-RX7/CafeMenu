@@ -37,13 +37,40 @@ class UserModelTest(TestCase):
         with self.assertRaises(ValueError):
             User.objects.create_superuser(is_superuser=False, password='testpass', **self.user_data)
 
-    def test_phone_number_field_prep_value(self):
+    def test_phone_number_field_with_hyphen(self):
         phone_field = User._meta.get_field('phone')
         valid_phone = '9124567890'
         expected_formatted_phone = '912-456-7890'
         prepped_valid = phone_field.get_prep_value(valid_phone)
         self.assertEqual(prepped_valid, valid_phone)
 
+    def test_phone_number_field_with_countrycode(self):
+        phone_field = User._meta.get_field('phone')
+        valid_phone = '9124567890'
+        expected_formatted_phone = '+989124567890'
+        prepped_valid = phone_field.get_prep_value(valid_phone)
+        self.assertEqual(prepped_valid, valid_phone)
+
+    def test_phone_number_field_with_countrycode_two_zero(self):
+        phone_field = User._meta.get_field('phone')
+        valid_phone = '9124567890'
+        expected_formatted_phone = '00989124567890'
+        prepped_valid = phone_field.get_prep_value(valid_phone)
+        self.assertEqual(prepped_valid, valid_phone)
+
+    def test_phone_number_field_without_zero(self):
+        phone_field = User._meta.get_field('phone')
+        valid_phone = '9124567890'
+        expected_formatted_phone = '9124567890'
+        prepped_valid = phone_field.get_prep_value(valid_phone)
+        self.assertEqual(prepped_valid, valid_phone)
+
+    def test_phone_number_field_with_a_zero(self):
+        phone_field = User._meta.get_field('phone')
+        valid_phone = '9124567890'
+        expected_formatted_phone = '09124567890'
+        prepped_valid = phone_field.get_prep_value(valid_phone)
+        self.assertEqual(prepped_valid, valid_phone)
 
 
 
