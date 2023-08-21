@@ -48,6 +48,20 @@ class TestModels(TestCase):
         self.order1.save(check_items=False)
         
         
+        self.order_item1 = OrderItem.objects.create(order=self.order1,
+                                                    food=self.food1,
+                                                    unit_price=self.food1.price,
+                                                    quantity=4,
+                                                    discount=0.0,
+                                                    )
+        
+        self.order_item2 = OrderItem.objects.create(order=self.order1,
+                                                    food=self.food2,
+                                                    unit_price=self.food2.price,
+                                                    quantity=8,
+                                                    discount=0.0,
+                                                    )
+        
     def test_table_str(self):
         self.assertEquals(str(self.table1), f"{self.table1}")
         
