@@ -1,5 +1,6 @@
 from django.test import TestCase
 from orders.models import Order, Table, OrderItem
+from foods.models import Food, Category
 
 class TestModels(TestCase):
     def setUp(self): 
@@ -12,6 +13,11 @@ class TestModels(TestCase):
             name='table 2',
             is_reserved=True,
         )
+        
+        self.category1 = Category.objects.create(
+            title='Iranian Foods'
+        )
+    
         
         
     def test_table_str(self):
