@@ -85,3 +85,8 @@ class TestModels(TestCase):
         
         self.assertEquals(final_price, expected_price)
         
+    def test__str__order(self):
+        customer_order1 = str(self.order1.customer)
+        customer__str__ = str(self.order1)
+        
+        self.assertEquals(customer__str__, customer_order1)
