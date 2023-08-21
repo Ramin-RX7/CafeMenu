@@ -8,11 +8,14 @@ content_type = ContentType.objects.get_for_model(Permission)
 permission_codename = 'view_analytics'
 permission_name = 'Can View Analytics'
 
-custom_permission = Permission.objects.create(
-    codename=permission_codename,
-    name=permission_name,
-    content_type=content_type,
-)
+try:
+    Permission.objects.get(codename=permission_codename)
+except Permission.DoesNotExist:
+    analytics_permission = Permission.objects.create(
+        codename=permission_codename,
+        name=permission_name,
+        content_type=content_type,
+    )
 
 
 
