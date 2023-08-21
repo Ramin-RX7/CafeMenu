@@ -2,6 +2,21 @@ from django.contrib.auth.models import Group,Permission
 from django.contrib.contenttypes.models import ContentType
 
 
+#> view_analytics permission
+content_type = ContentType.objects.get_for_model(Permission)
+
+permission_codename = 'view_analytics'
+permission_name = 'Can View Analytics'
+
+custom_permission = Permission.objects.create(
+    codename=permission_codename,
+    name=permission_name,
+    content_type=content_type,
+)
+
+
+
+
 
 #> Normal staff
 normal_staff, created = Group.objects.get_or_create(name='Normal Staff')
@@ -49,28 +64,13 @@ super_staff.permissions.add(*permissions)
 
 
 #> Manager
-content_type = ContentType.objects.get_for_model(Permission)
-
-permission_codename = 'view_analytics'
-permission_name = 'Can View Analytics'
-
-custom_permission = Permission.objects.create(
-    codename=permission_codename,
-    name=permission_name,
-    content_type=content_type,
-)
-
-
 manager, created = Group.objects.get_or_create(name='Manager')
 
 manager_excludes = [
     'delete_maininfo',
     'delete_social',
 ]
-manager_customs = [
-    "view_analytics"
-]
-permissions = Permission.objects.filter(codename__in=manager_excludes)
+permissions = Permission.objects.exclude(codename__in=manager_excludes)
 if not created:
     manager.permissions.clear()
 manager.permissions.add(*permissions)
