@@ -73,7 +73,7 @@
         {% endfor %}
     </div>
 
-    <div id="pendingOrders" class="order-section" style="display: none;">
+    <div id="pendingOrders" class="order-section my-5" style="display: none;">
         {% for table in tables %}
         <h3 class="mb-3 mt-5 mx-lg-3 px-lg-3">{{table.name}}</h3>
         <div class="row mt-3">
@@ -112,7 +112,7 @@
         {% endfor %}
     </div>
 
-    <div id="byDateOrders" class="order-section" style="display: none;">
+    <div id="byDateOrders" class="order-section my-5" style="display: none;">
         {% for order in orders_by_date %}
         <div class="col-md-12">
             <div class="order-dsh transparent-card rounded mx-lg-5 px-lg-3">
@@ -144,7 +144,7 @@
         {% endfor %}
     </div>
 
-    <div id="currentUserOrders" class="order-section" style="display: none;">
+    <div id="currentUserOrders" class="order-section my-5" style="display: none;">
         {% for order in orders_user %}
         <div class="col-md-12">
             <div class="order-dsh transparent-card rounded mx-lg-5 px-lg-3">
