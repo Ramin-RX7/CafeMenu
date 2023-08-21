@@ -8,6 +8,12 @@ class TestModels(TestCase):
             is_reserved=False,
         )
         
+        self.table2 = Table.objects.create(
+            name='table 2',
+            is_reserved=True,
+        )
+        
+        
     def test_table_str(self):
         self.assertEquals(str(self.table1), f"{self.table1}")
         
