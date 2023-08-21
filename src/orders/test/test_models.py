@@ -21,3 +21,6 @@ class TestModels(TestCase):
         available_table = Table.get_available_table()
         self.assertEqual(available_table, self.table1)
         
+    def test_save_table(self):
+        self.assertEqual(Table.objects.count(), 2)
+        
