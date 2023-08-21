@@ -27,7 +27,7 @@ dashboard_urls = [
 
 
 analytics_urls = [
-    path("analytics-api/", json_api, name="analytics-api"),
+    path("analytics-api/", JsonAPI.as_view(), name="analytics-api"),
     path("analytics/", analytics, name="analytics"),
     path("download/<str:dataset_name>", download_dataset, name="dataset_download"),
 ]

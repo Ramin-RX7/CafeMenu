@@ -1,4 +1,4 @@
-from .analytics import json_api,download_dataset,analytics
+from .analytics import JsonAPI,download_dataset,analytics
 
 from .authentication import LoginView,logout,UserVerifyView
 

@@ -1,9 +1,13 @@
 import json
+from datetime import datetime,timedelta
 
 from django.http import Http404
+from django.views import View
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
+from dynamic_menu.models import Configuration
 from ..analytics.datasets import *
 from ..analytics import *
 
@@ -16,6 +20,15 @@ datasets = {
 }
 
 
+
+def download_dataset(request, dataset_name):
+    if dataset_name in datasets:
+        return datasets[dataset_name](request)
+    else:
+        raise Http404
+
+
+
 @permission_required("analytics", raise_exception=True)
 def analytics(request):
     context = {
@@ -26,15 +39,8 @@ def analytics(request):
     return render(request, "panel/analytics.html", context)
 
 
-def download_dataset(request, dataset_name):
-    if dataset_name in datasets:
-        return datasets[dataset_name](request)
-    else:
-        raise Http404
 
-
-@permission_required("analytics", raise_exception=True)
-def json_api(request):
+def get_analytics_data():
     context = {
         "sales": {
             "comparative":{
@@ -93,3 +99,23 @@ def json_api(request):
     }
     return HttpResponse(json.dumps(context))
 
+
+
+class JsonAPI(PermissionRequiredMixin, View):
+    permission_required = ("analytics",)
+
+    _conf = None
+    last_update = datetime.now()
+    current_data = None
+    @property
+    def configurations(self):
+        if not self._conf:
+            self._conf = Configuration.objects.first()
+        return self._conf
+
+
+    def get(self, request):
+        if self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now():
+            self.current_data = get_analytics_data()
+            self.last_update = datetime.now()
+        return self.current_data
