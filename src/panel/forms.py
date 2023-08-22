@@ -7,7 +7,13 @@ from core.validators import phone_validator
 today =datetime.date.today()
 last_30days_past = (datetime.datetime.now()-datetime.timedelta(30)).date()
 
-
+class UserOrderHistoryForm(forms.Form):
+    phone=forms.CharField(
+        validators = [phone_validator],
+        widget = forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Phone"
+        }))
 
 class UserLogInForm(forms.Form):
     phone=forms.CharField(
@@ -79,3 +85,4 @@ class SearchbyDate(forms.Form):
             raise forms.ValidationError("End day should be bigger than last 30 days past nad start day.")
 
         return self.cleaned_data
+
