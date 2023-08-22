@@ -46,14 +46,14 @@ def food_items():
     
         today_hours = list(orderitems.filter(Q(food__title=food_name) & Q(created_at__date=today_date))\
         .annotate(hour=ExtractHour('order__created_at')).values('hour').annotate(count=Sum('quantity')))
-        food_items['comparative']["day"]["new"][food_name] = dict_to_list(today_hours,value_item='count',hour=True)
+        food_items['comparative']["day"]["new"][food_name] = sum(dict_to_list(today_hours,value_item='count',hour=True))
 
         last_day_hours = list(orderitems.filter(Q(food__title=food_name) & Q(order__created_at__date=last_day))\
         .annotate(hour=ExtractHour('order__created_at')).values('id').annotate(count=Sum('quantity')))
 
-        food_items['comparative']["day"]["old"][food_name] = dict_to_list(last_day_hours,value_item='count',hour=True)
+        food_items['comparative']["day"]["old"][food_name] = sum(dict_to_list(last_day_hours,value_item='count',hour=True))
 
-        food_items["relative"]["day"]["new"][food_name] = dict_to_list(last_day_hours,value_item='count',hour=True)
+        food_items["relative"]["day"]["new"][food_name] = sum(dict_to_list(last_day_hours,value_item='count',hour=True))
 
         count_this_week_food = list(orderitems.filter(Q(food__title = food_name) & Q(order__created_at__date__gte=this_week)).\
         annotate(day=TruncDate('order__created_at')).\
