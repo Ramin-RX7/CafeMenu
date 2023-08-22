@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("analytics_refresh", models.PositiveIntegerField(default=0)),
+                ("analytics_refresh", models.PositiveIntegerField(default=0,help_text="hours needed to get analytics data from database again")),
             ],
             options={
                 "abstract": False,
