@@ -6,4 +6,4 @@ class UsersConfig(AppConfig):
     name = "users"
 
     def ready(self) -> None:
-        from . import permissions
+        from .signals import apply_permissions
