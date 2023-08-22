@@ -8,6 +8,9 @@ from django.contrib.admin.sites import AdminSite
 from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
 from foods.admin import FoodAdmin,FoodFilter,CategoryFilter
+from django.test import TestCase, RequestFactory
+from foods.admin import CategoryAdmin
+
 User=get_user_model()
 
 class FoodFilterTestCase(TestCase):
@@ -95,3 +98,57 @@ class CategoryFilterTestCase(TestCase):
         queryset = Category.objects.all()
         filtered_queryset = self.filter2.queryset(request, queryset)
         self.assertEqual(filtered_queryset,None)
+        
+
+class CategoryAdminTestCase(TestCase):
+    def setUp(self):
+        self.site = AdminSite()
+        self.factory = RequestFactory()
+        self.admin = CategoryAdmin(Category, self.site)
+        self.user = User.objects.create_user(phone='09123456789', password='admin')
+
+    def test_list_display(self):
+        self.assertEqual(self.admin.list_display, ['title', 'view_foods', 'created_at', 'updated_at'])
+
+    def test_ordering(self):
+        self.assertEqual(self.admin.ordering, ['title'])
+
+    def test_search_fields(self):
+        self.assertEqual(self.admin.search_fields, ['title'])
+
+    def test_list_filter(self):
+        self.assertEqual(str(self.admin.list_filter), "[<class 'foods.admin.CategoryFilter'>]")
+
+    def test_view_foods(self):
+        category = Category.objects.create(title='Category 1')
+        food = Food.objects.create(title='Food 1', category=category,price=7 )
+
+        result = self.admin.view_foods(category)
+
+        self.assertEqual(result, '<a href="/admin/foods/food/?category__id__exact=1">View Foods</a>')
+
+    def test_get_fieldsets_without_obj(self):
+        request = self.factory.get(reverse('admin:foods_category_add'))
+        request.user = self.user
+
+        fieldsets = self.admin.get_fieldsets(request)
+
+        self.assertEqual(len(fieldsets), 1)
+        self.assertEqual(fieldsets[0][0], 'Category Details')
+        self.assertEqual(fieldsets[0][1]['fields'], ('title', 'description', 'image'))
+
+    def test_get_fieldsets_with_obj(self):
+        category = Category.objects.create(title='Category 1')
+        request = self.factory.get(reverse('admin:foods_category_change', args=[category.id]))
+        request.user = self.user
+
+        fieldsets = self.admin.get_fieldsets(request, obj=category)
+
+        self.assertEqual(len(fieldsets), 3)
+        self.assertEqual(fieldsets[0][0], 'Category Details')
+        self.assertEqual(fieldsets[0][1]['fields'], ('title', 'description', 'image'))
+        self.assertEqual(fieldsets[1][0], 'Associated Foods')
+        self.assertEqual(fieldsets[1][1]['fields'], ('view_foods',))
+        self.assertEqual(fieldsets[2][0], None)
+        self.assertEqual(fieldsets[2][1]['fields'], ('delete_image',))
+
