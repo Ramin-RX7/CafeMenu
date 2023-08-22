@@ -19,6 +19,9 @@ class IndexTemplateViewTest(TestCase):
     def test_template_content(self):
         response=self.client.get(reverse('index'))
         self.assertContains(response,'<h1 class="subtitle">Welcome To Our Restaurant</h1>')
+
+    def test_template_content_not_contain(self):
+        response=self.client.get(reverse('index'))
         self.assertNotContains(response,'Not on the page')
 
 
@@ -39,4 +42,7 @@ class AboutUsTemplateViewTest(TestCase):
     def test_template_content(self):
         response=self.client.get(reverse('about_us'))
         self.assertContains(response,'<h1 class="my-5">About CafeAmoo</h1>')
+
+    def test_template_content_not_contain(self):
+        response=self.client.get(reverse('about_us'))
         self.assertNotContains(response,'Not on the page')
