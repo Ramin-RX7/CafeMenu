@@ -15,7 +15,11 @@ class UserAddForm(BaseUserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].required = False
         self.fields['last_name'].required = False
-
+        try:
+            super_staff_group = Group.objects.get(name='Normal Staff')
+        except Group.DoesNotExist:
+            from . import permissions
+            super_staff_group = Group.objects.get(name='Normal Staff')
         super_staff_group = Group.objects.get(name='Normal Staff')
         self.fields['groups'].initial = [super_staff_group.id]
 
