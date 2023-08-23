@@ -1,11 +1,10 @@
 from datetime import datetime,timedelta
 
 from django.db.models.functions import TruncDate
-
-from django.db.models import Count,Sum
+from django.db.models import Count,Sum,Q
 
 from orders.models import Order,OrderItem
-
+from foods.models import Category
 from .lib import dict_to_list
 
 
@@ -76,6 +75,7 @@ def get_top_selling_items():
     return top_selling_data
 
 
+
 # Get 10 phone numbers that has the most money spend in our cafe in week,month,year
 def get_top_spending_customers():
     current_time = datetime.now()
@@ -95,8 +95,10 @@ def get_top_spending_customers():
 
     return top_spending_customers_data
 
+
+
 def category_items():
-    
+
     today_date = datetime.datetime.today()
     week_day = today_date.weekday()
     to_day = today_date.day
@@ -111,7 +113,7 @@ def category_items():
 
     last_7_days = datetime.datetime.today() - datetime.timedelta(7)
     last_30_days = datetime.datetime.today() - datetime.timedelta(30)
-    
+
     categories_item = {
             "comparative":{
                 "day"  : {"old":{},"new":{}},
@@ -198,12 +200,16 @@ def category_items():
 
     return categories_item
 
+
+
 def count_of_fooditems_at_between_date(start_day:datetime,end_day:datetime):
     orderitems = OrderItem.objects.all()
     count_fooditems = list(orderitems.filter(order__created_at__date__gte=start_day,order__created_at__date__lt=end_day).values_list('food__title').\
     annotate(total_count=Sum('quantity')).order_by('-total_count'))
     return count_fooditems
-    
+
+
+
 def count_of_category_at_given_date(start_day:datetime,end_day:datetime):
     orderitems = OrderItem.objects.all()
     count_category = list(orderitems.filter(order__created_at__date=start_day ,order__created_at__date__lt=end_day).values_list('food__category__title').\
