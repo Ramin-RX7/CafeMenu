@@ -31,9 +31,11 @@
             <li class="nav-item mx-4 mt-2">
                 <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
             </li>
+            {% if perms.analytics %}
             <li class="nav-item mx-3 mt-2">
                 <a class="nav-link" href="{% url 'panel:analytics' %}">Analytics</a>
             </li>
+            {%endif%}
             <li class="nav-item ml-2 mr-5 mt-2">
                 <a href="{% url 'panel:logout' %}" class="ml-4 mt-1 btn btn-primary btn-sm w-100">Logout</a>
             </li>
@@ -97,7 +99,9 @@
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:dashboard' %}">Dashboard</a></li>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:menu' %}">Menu</a></li>
+                {% if perms.analytics %}
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:analytics' %}">Analytics</a></li>
+                {%endif%}
                 <li class="list-group-item px-3">
                     <form action="{% url 'foods:search' %}" method="get">
                         <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
@@ -125,7 +129,9 @@
                 <img src="{{ maininfo.icon.url }}" width="100" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Pigga Landing page" class="mb-0">
             </div>
             <div class="col-md-9 text-md-right">
+                {% if perms.analytics %}
                 <a href="{% url 'panel:analytics' %}" class="link text-primary pr-5"><small class="font-weight-bold">Analytics</small></a>
+                {%endif%}
                 <a href="{% url 'orders:cart' %}" class="link text-primary pr-5"><small class="font-weight-bold">Cart</small></a>
                 <a href="{% url 'orders:index' %}" class="link text-primary pr-4"><small class="font-weight-bold">Orders</small></a>
                 <a href="{% url 'foods:menu' %}" class="link text-primary px-3"><small class="font-weight-bold">Menu</small></a>
