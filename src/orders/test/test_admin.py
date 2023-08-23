@@ -11,6 +11,14 @@ from users.models import User
 
 
 class TestAdmin(TestCase):
+    def setUp(self):
+        self.site = AdminSite()
+        self.model_admin = ModelAdmin(Order, self.site)
+        self.order_admin = OrderAdmin(Order, self.site)
+        self.table_admin = TableAdmin(Table, self.site)
+        self.filter = OrderToDayFilter(None, {'Date': 'todaye'}, self.model_admin, self.site)
+        self.factory = RequestFactory()
+        
     def test_lookups_order_detail_filter(self):
             filter_instance = OrderToDayFilter(
                 request=None,
@@ -34,5 +42,8 @@ class TestAdmin(TestCase):
         expected_lookups = [('not_paid', 'not_paid')]
         self.assertEqual(filter_instance.lookups(None, None), expected_lookups)
 
-
-
+    def test_list_display_order_admin(self):
+        self.assertEqual(
+            self.order_admin.list_display,
+            ['customer', 'table', 'status', 'price', 'discount', 'final_price', 'created_at']
+        )
