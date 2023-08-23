@@ -62,3 +62,9 @@ class TestAdmin(TestCase):
         
     def test_readonly_fields_order_admin(self):
         self.assertEqual(self.order_admin.readonly_fields, ["created_at"])
+        
+    def test_list_display_table_admin(self):
+        self.assertEqual(
+            self.table_admin.list_display,
+            ['name', 'is_reserved']
+        )
