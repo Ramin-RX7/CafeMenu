@@ -59,3 +59,6 @@ class TestAdmin(TestCase):
         
     def test_list_per_page_order_admin(self):
         self.assertEqual(self.order_admin.list_per_page, 20)
+        
+    def test_readonly_fields_order_admin(self):
+        self.assertEqual(self.order_admin.readonly_fields, ["created_at"])
