@@ -56,3 +56,6 @@ class TestAdmin(TestCase):
             self.order_admin.list_filter,
             [OrderToDayFilter, OrderStatusFilter]
         )
+        
+    def test_list_per_page_order_admin(self):
+        self.assertEqual(self.order_admin.list_per_page, 20)
