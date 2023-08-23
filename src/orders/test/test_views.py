@@ -108,4 +108,8 @@ class TestViews(TestCase):
         import core.utils
         self.assertEquals(core.utils.EditableContexts.form_login_error, "Invalid phone number")
         
+    def test_redirect_to_referer_customer_login_view(self):
+        response = self.client.post(reverse('orders:customer_login'))
+        self.assertRedirects(response, reverse('index'), target_status_code=200)
+        
     
