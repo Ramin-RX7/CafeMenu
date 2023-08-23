@@ -50,3 +50,9 @@ class TestAdmin(TestCase):
         
     def test_ordering_order_admin(self):
         self.assertEqual(self.order_admin.ordering, ['created_at', 'updated_at'])
+        
+    def test_list_filter_order_admin(self):
+        self.assertEqual(
+            self.order_admin.list_filter,
+            [OrderToDayFilter, OrderStatusFilter]
+        )
