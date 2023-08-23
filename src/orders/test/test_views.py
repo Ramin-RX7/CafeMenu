@@ -112,4 +112,18 @@ class TestViews(TestCase):
         response = self.client.post(reverse('orders:customer_login'))
         self.assertRedirects(response, reverse('index'), target_status_code=200)
         
-    
+    def test_cart_item_add_to_cart_view(self):
+        initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
+        request = HttpRequest()
+        request.COOKIES['cart'] = str(initial_cart_data)
+
+        food_id_to_add = 'food_3'
+        quantity_to_add = 'quantity_3'
+
+        response = self.client.post(reverse('orders:cart_add'), data={'food': food_id_to_add, 'quantity': quantity_to_add}, cookies=request.COOKIES)
+
+        self.assertEqual(response.status_code, 302)
+        new_cart_data = eval(response.cookies['cart'].value)
+        self.assertIn(food_id_to_add, new_cart_data)
+        self.assertEqual(new_cart_data[food_id_to_add], quantity_to_add)
+        self.assertRedirects(response, reverse('foods:menu'))
