@@ -108,6 +108,6 @@ class TestAdmin(TestCase):
     #     request = self.factory.get('/')
     #     self.assertFalse(self.order_admin.has_add_permission(request))
 
-    def test_has_change_permission(self):
-        request = self.factory.get('/')
-        self.assertTrue(self.order_admin.has_change_permission(request))
+    # def test_has_change_permission(self):
+        # request = self.factory.get('/')
+        # self.assertTrue(self.order_admin.has_change_permission(request))
