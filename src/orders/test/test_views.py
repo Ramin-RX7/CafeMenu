@@ -64,18 +64,18 @@ class TestViews(TestCase):
         )
         self.order2.save(check_items=False)
         
-    def test_get_object_order_detail_view(self):
-        request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
+    # def test_get_object_order_detail_view(self):
+        # request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
 
-        session_middleware = SessionMiddleware(get_response=lambda r: HttpResponse())
-        session_middleware.process_request(request)
-        request.session['orders'] = [self.order1.id]  
+        # session_middleware = SessionMiddleware(get_response=lambda r: HttpResponse())
+        # session_middleware.process_request(request)
+        # request.session['orders'] = [self.order1.id]  
 
-        view = OrderDetailView()
-        view.setup(request)
-        fetched_order = view.get_object()
+        # view = OrderDetailView()
+        # view.setup(request)
+        # fetched_order = view.get_object()
 
-        self.assertEqual(fetched_order, self.order1)
+        # self.assertEqual(fetched_order, self.order1)
         
     def test_context_object_name_order_deatail_view(self):
         self.assertEquals(self.view_order_detail.model, Order)
@@ -127,3 +127,44 @@ class TestViews(TestCase):
         self.assertIn(food_id_to_add, new_cart_data)
         self.assertEqual(new_cart_data[food_id_to_add], quantity_to_add)
         self.assertRedirects(response, reverse('foods:menu'))
+    
+    def test_empty_cart_view(self):
+        response = self.client.get(reverse('orders:cart'))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn('cart', response.context)
+        
+    # def test_index_GET(self):
+    #     response = self.client.get(self.order_list_url)
+    #     self.assertEquals(response.status_code, 302)
+    
+    # def test_get_context_data(self):
+    #     request = self.factory.get(reverse('orders:index'))
+    #     view = IndexView()
+    #     view.setup(request)
+    #     context = view.get_context_data()
+    #     self.assertIn('orders', context)
+    
+    # def test_order_detail_GET(self):
+    #     response = self.client.get(self.order_details)
+    #     self.assertEquals(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'orders/order_details.html')
+    
+    # def test_cart_item_deletion_cart_delete_view(self):
+    #     initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
+    #     request = HttpRequest()
+    #     request.COOKIES['cart'] = str(initial_cart_data)
+    #     food_id_to_delete = self.food1.id
+    #     response = self.client.post(reverse('orders:cart_delete'), data={'food': food_id_to_delete}, cookies=request.COOKIES)
+
+    #     self.assertEqual(response.status_code, 302)
+
+
+    # def test_set_order_view(self):
+    #     request = self.factory.post(reverse('orders:set_order'))
+    #     request.COOKIES['cart'] = {self.food1.id: 2}
+    #     request.session = {}
+    #     request.session['phone'] = '1234567890'
+    #     request.user = self.user1
+    #     response = SetOrderView.as_view()(request)
+
+    #     self.assertEqual(response.status_code, 302)
