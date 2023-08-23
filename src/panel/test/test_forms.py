@@ -10,3 +10,9 @@ class TestForms(SimpleTestCase):
         })
 
         self.assertTrue(form.is_valid())
+
+    def test_user_login_form_no_data(self):
+        form = UserLogInForm(data={})
+
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors),1)
