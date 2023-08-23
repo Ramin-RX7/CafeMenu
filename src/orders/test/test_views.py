@@ -76,3 +76,8 @@ class TestViews(TestCase):
         fetched_order = view.get_object()
 
         self.assertEqual(fetched_order, self.order1)
+        
+    def test_context_object_name_order_deatail_view(self):
+        self.assertEquals(self.view_order_detail.model, Order)
+        self.assertEquals(self.view_order_detail.context_object_name, 'order')
+        self.assertEquals(self.view_order_detail.template_name, 'orders/order_details.html')
