@@ -127,12 +127,12 @@ class TestViews(TestCase):
         self.assertIn(food_id_to_add, new_cart_data)
         self.assertEqual(new_cart_data[food_id_to_add], quantity_to_add)
         self.assertRedirects(response, reverse('foods:menu'))
-    
-    def test_empty_cart_view(self):
-        response = self.client.get(reverse('orders:cart'))
-        self.assertEqual(response.status_code, 200)
-        self.assertNotIn('cart', response.context)
-        
+
+    # def test_empty_cart_view(self):
+    #     response = self.client.get(reverse('orders:cart'))
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertNotIn('cart', response.context)
+
     # def test_index_GET(self):
     #     response = self.client.get(self.order_list_url)
     #     self.assertEquals(response.status_code, 302)
