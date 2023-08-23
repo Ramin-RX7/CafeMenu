@@ -9,15 +9,29 @@ from django.contrib.admin import ModelAdmin
 from orders.models import Table, Order, OrderItem
 from users.models import User 
 
-def test_lookups_order_detail_filter(self):
-        filter_instance = OrderToDayFilter(
+
+class TestAdmin(TestCase):
+    def test_lookups_order_detail_filter(self):
+            filter_instance = OrderToDayFilter(
+                request=None,
+                params={},
+                model=Order,
+                model_admin=None
+            )
+            
+            expected_lookups = [('today', 'today')]
+            self.assertEqual(filter_instance.lookups(None, None), expected_lookups)
+        
+
+    def test_lookups_order_staus_filter(self):
+        filter_instance = OrderStatusFilter(
             request=None,
             params={},
             model=Order,
             model_admin=None
         )
         
-        expected_lookups = [('today', 'today')]
+        expected_lookups = [('not_paid', 'not_paid')]
         self.assertEqual(filter_instance.lookups(None, None), expected_lookups)
 
 
