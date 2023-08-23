@@ -41,7 +41,7 @@
         <button id="bitweendateBtn" class="btn btn-primary mx-1">Filter by date</button>
     </div>
 
-    <div id="allOrders" class="order-section my-5" {% if orders_between %}style="display:none;"{% endif %}>
+    <div id="allOrders" class="order-section my-5" {% if orders_between != None %}style="display:none;"{% endif %}>
         {% for order in orders %}
         <div class="col-md-12">
             <div class="order-dsh rounded mx-lg-5 px-lg-3 transparent-card">
@@ -182,7 +182,7 @@
         {% endfor %}
     </div>
 
-    <div id="bitweendateSrch" class="order-section my-5" {% if not orders_between %}style="display:none;"{% endif %}>
+    <div id="bitweendateSrch" class="order-section my-5" {% if not orders_between != None %}style="display:none;"{% endif %}>
         <!-- <h3 class="text-center mt-3">Order between date</h3> -->
         <form method="post">
             {% csrf_token %}
