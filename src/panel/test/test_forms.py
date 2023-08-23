@@ -23,3 +23,9 @@ class TestForms(SimpleTestCase):
         })
 
         self.assertTrue(form.is_valid())
+
+    def test_user_verify_form_no_data(self):
+        form = UserVerifyForm(data={})
+
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors),1)
