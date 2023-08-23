@@ -1,5 +1,6 @@
 from django.test import TestCase,Client
 from django.urls import reverse
+from panel.forms import *
 import json
 
 
@@ -18,3 +19,17 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code,200)
 
+    # def test_login_POST(self):
+    #     self.url=reverse("panel:login")
+    #     phone = "09123456789"
+
+    # def test_call_view_fail_blank(self):
+    #     self.client.login(usename="09125242979")
+    #     response = self.client.post(reverse("panel:login"), {})
+    #     self.assertFormError(response, 'UserLogInForm', 'some_field')
+
+    def test_user_verify_GET(self):
+        self.url=reverse("panel:user_verify")
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,302)
