@@ -88,3 +88,7 @@ class TestViews(TestCase):
     def test_order_list_template_index_view(self):
         response = self.client.get(self.index_url)
         self.assertTemplateUsed(response, 'orders/order_list.html')
+        
+    def test_cart_template(self):
+        response = self.client.get(self.cart_url)
+        self.assertTemplateUsed(response, 'orders/cart.html')
