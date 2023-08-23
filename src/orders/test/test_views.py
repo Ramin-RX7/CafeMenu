@@ -84,3 +84,7 @@ class TestViews(TestCase):
         
     def test_context_data_index_view(self):
         self.assertEquals(self.view_index.model, Order)
+        
+    def test_order_list_template_index_view(self):
+        response = self.client.get(self.index_url)
+        self.assertTemplateUsed(response, 'orders/order_list.html')
