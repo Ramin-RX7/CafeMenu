@@ -16,3 +16,10 @@ class TestForms(SimpleTestCase):
 
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors),1)
+
+    def test_user_verify_form(self):
+        form = UserVerifyForm(data={
+            'otp':1222
+        })
+
+        self.assertTrue(form.is_valid())
