@@ -2,6 +2,7 @@ from django.test import TestCase
 from orders.models import Order, Table, OrderItem
 from foods.models import Food, Category
 from users.models import User
+from unittest.mock import Mock
 
 class TestModels(TestCase):
     def setUp(self): 
@@ -46,7 +47,6 @@ class TestModels(TestCase):
             responsible_staff=self.user1,
         )
         self.order1.save(check_items=False)
-        
         
         self.order_item1 = OrderItem.objects.create(order=self.order1,
                                                     food=self.food1,
@@ -93,27 +93,23 @@ class TestModels(TestCase):
         
     def test_approve_order(self):
         self.order1.approve()
-        updated_order = Order.objects.get(pk=self.order1.pk)
         
-        self.assertEquals(updated_order.status, 'Approved')
+        self.assertEquals(self.order1.status, 'Approved')
         
     def test_reject_order(self):
         self.order1.reject()
-        updated_order = Order.objects.get(pk=self.order1.pk)
         
-        self.assertEquals(updated_order.status, 'Rejected')
+        self.assertEquals(self.order1.status, 'Rejected')
         
     def test_deliver_order(self):
         self.order1.deliver()
-        updated_order = Order.objects.get(pk=self.order1.pk)
         
-        self.assertEquals(updated_order.status, 'Delivered')
+        self.assertEquals(self.order1.status, 'Delivered')
         
     def test_pay_order(self):
         self.order1.pay()
-        updated_order = Order.objects.get(pk=self.order1.pk)
         
-        self.assertEquals(updated_order.status, 'Paid')
+        self.assertEquals(self.order1.status, 'Paid')
         
     def test_take_responsibility_order(self):
         self.order1.take_responsibility(self.user1)
@@ -128,8 +124,15 @@ class TestModels(TestCase):
         self.assertEquals(quantity__str__, order_item_quantity)
         
     def test__save__orderitem(self):
-        self.order_item2.save()
+        order2 = Order(
+            customer='9173523613',
+            table=self.table2,
+            discount=2,
+            responsible_staff=self.user1,
+        )
+        order2.save(check_items=False)
         
-        updated_order_item1 = OrderItem.objects.get(pk=self.order_item1.pk)
+        related_order_item_1 = OrderItem.objects.create(order=order2, unit_price=self.food1.price, food=self.food1, quantity=2, discount=0.0)
+        related_order_item_2 = OrderItem.objects.create(order=order2, food=self.food1, unit_price=self.food1.price, quantity=3, discount=0.0)
         
-        self.assertEqual(updated_order_item1.quantity, 4)
+        self.assertEquals(related_order_item_2.quantity, 5) 
