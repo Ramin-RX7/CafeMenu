@@ -1,6 +1,8 @@
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse, reverse_lazy
 from orders.models import Table, Order, OrderItem
+from users.models import User
+from foods.models import Food, Category
 from orders.views import IndexView, OrderDetailView, SetOrderView
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.http import HttpRequest
@@ -61,3 +63,16 @@ class TestViews(TestCase):
             responsible_staff=self.user1, 
         )
         self.order2.save(check_items=False)
+        
+    def test_get_object_order_detail_view(self):
+        request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
+
+        session_middleware = SessionMiddleware(get_response=lambda r: HttpResponse())
+        session_middleware.process_request(request)
+        request.session['orders'] = [self.order1.id]  
+
+        view = OrderDetailView()
+        view.setup(request)
+        fetched_order = view.get_object()
+
+        self.assertEqual(fetched_order, self.order1)
