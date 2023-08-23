@@ -47,3 +47,6 @@ class TestAdmin(TestCase):
             self.order_admin.list_display,
             ['customer', 'table', 'status', 'price', 'discount', 'final_price', 'created_at']
         )
+        
+    def test_ordering_order_admin(self):
+        self.assertEqual(self.order_admin.ordering, ['created_at', 'updated_at'])
