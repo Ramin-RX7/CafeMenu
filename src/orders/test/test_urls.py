@@ -41,6 +41,12 @@ class TestUrls(TestCase):
     def test_order_list_url_status_code(self):
             response = self.client.get(self.order_list_url)
             self.assertEquals(response.status_code, 302)
+            
+    def test_order_details_url__status_code(self):
+        request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
+        self.client.login(phone="9176877108" ,first_name="Ali")
+        response = self.client.get(request)
+        self.assertEqual(response.status_code, 404)
     
     def test_cart_url_status_code(self):
             response = self.client.get(self.cart_url)
