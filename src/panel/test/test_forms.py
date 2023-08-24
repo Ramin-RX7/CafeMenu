@@ -52,3 +52,15 @@ class TestForms(TestCase):
 
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors),2)
+
+
+
+    def test_add_order_item_form(self):
+        category=Category.objects.create(title="fastfood",description="",image="")
+        food=Food.objects.create(title='pizza',description="",image="",price=10.55,discount=11.5,category=category,is_active=True)
+        form = AddOrderItemForm(data={
+            'quantity':2,
+            'food':food
+        })
+
+        self.assertTrue(form.is_valid())
