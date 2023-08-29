@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase,TestCase
 from panel.forms import *
 from foods.models import *
+from orders.models import Table
 
 
 class TestForms(TestCase):
@@ -71,3 +72,16 @@ class TestForms(TestCase):
 
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors),2)
+
+
+    def test_edit_order_form(self):
+        table=Table.objects.create(name='num1',is_reserved=False)
+        form = EditOrderForm(data={
+            'discount':20.2,
+            'customer':'09125242979',
+            'status':"Approved",
+            'table':table
+        })
+        form.is_valid()
+
+        self.assertTrue(form.is_valid())
