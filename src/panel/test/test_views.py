@@ -28,7 +28,6 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code,302)
 
 
-
     def test_dashboard_staff_GET(self):
         self.url=reverse("panel:dashboard")
         response = self.client.get(self.url)
@@ -53,3 +52,9 @@ class TestLoginView(TestCase):
         response = self.client.get(self.url)
 
         self.assertEquals(response.status_code,200)
+
+    def test_dashboard_staff_template(self):
+        self.url=reverse("panel:dashboard")
+        response = self.client.get(self.url)
+
+        self.assertTemplateUsed(response,'panel/dashboard_staff.html')
