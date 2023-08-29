@@ -85,3 +85,9 @@ class TestForms(TestCase):
         form.is_valid()
 
         self.assertTrue(form.is_valid())
+
+    def test_edit_order_form_no_data(self):
+        form= EditOrderForm(data={})
+
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors),4)
