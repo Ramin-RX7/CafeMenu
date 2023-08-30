@@ -46,13 +46,13 @@ def count_orders():
     count_order_hour_today = dict_to_list(today_hours,value_item='count',hour=True)
     sales['comparative']["day"]["new"]= count_order_hour_today
 
- 
+
     last_day_hours =list(all_orders.filter(Q(created_at__date=last_day))\
     .annotate(hour=ExtractHour('created_at')).values('hour').annotate(count=Count('id')))
     count_order_hour_last_day = dict_to_list(last_day_hours,value_item='count',hour=True)
     sales['comparative']["day"]["old"] = count_order_hour_last_day
     sales["relative"]["day"] = count_order_hour_last_day
-    
+
     count_this_week =list(all_orders.filter(Q(created_at__date__gte = this_week)).\
     extra({'day':"date(created_at)"}).\
     values('day').annotate(count=Count('id')))
@@ -105,6 +105,4 @@ def count_orders():
             "month": count_order_for_30_day_past,
         }
     }
-    print(sales["comparative"]["day"])
     return context
-
