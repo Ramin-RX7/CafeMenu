@@ -21,5 +21,9 @@ class Food(BaseModel):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     is_active = models.BooleanField(default=True)
 
+    @property
+    def final_price(self):
+        return round(self.price / 100 * (self.discount or 100), 2)
+
     def __str__(self) -> str:
         return self.title

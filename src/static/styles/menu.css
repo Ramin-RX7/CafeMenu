@@ -1,0 +1,51 @@
+.equal-height-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.equal-height-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.equal-height-col > * {
+    flex-grow: 1;
+}
+
+
+
+.cart-icon {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #bc8c4c;
+    border: 3px solid #ccc;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+
+
+.sticky-category-image {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    margin: 0 auto 5px;
+    display: block;
+}
+.nav-item {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    display: block;
+}
+
+.category-section:target::before {
+    content: "";
+    display: block;
+    height: 120px; /* Adjust this value as needed */
+    margin-top: -120px; /* Negative value to offset the space */
+}

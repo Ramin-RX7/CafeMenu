@@ -18,7 +18,7 @@
             <div class="card mb-3" style="max-width:90%;" id="food-{{food.id}}">
                 <div class="row g-0">
                     <div class="col-md-6">
-                        <img src="{{ food.image.url }}" class="img-fluid img-thumbnail" alt="{{ food.title }}" style="height: 100%; width: 100%;">
+                        <img src="{{ food.image.url }}" class="img-fluid img-thumbnail p-3" alt="{{ food.title }}" style="height: 100%; width: 100%;">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body" style="padding-right:2% ;padding-right:3%;">
@@ -27,16 +27,22 @@
                                 <div class="info">
                                     <div class="head clearfix">
                                         <div class="title float-left" style="font-size: 16px;">For each</div>
-                                        <div class="float-right" style="font-size: 16px;">{{ food.price }} $</div>
+                                        <div class="float-right" style="font-size: 16px;"><span id="unit-price-{{food.id}}">{{ food.price }}</span> $</div>
                                     </div>
                                     <div class="head clearfix">
                                         <div class="title float-left" style="font-size: 16px;">Quantity</div>
                                         <div id="item-quantity-{{food.id}}" class="float-right" style="font-size: 16px;">{{ quantity }}</div>
-                                </div>
-                                <div class="head clearfix">
-                                    <div class="title float-left " style="font-size: 16px;">Total</div>
-                                    <div class="float-right" style="font-size: 16px;"><span class="item-total-price">{{ food.price|mul:quantity }}</span>$</div>
-                                </div>
+                                    </div>
+                                    {% if food.discount %}
+                                    <div class="head clearfix">
+                                        <div class="title float-left " style="font-size: 16px;">Discount</div>
+                                        <div class="float-right" style="font-size: 16px;"><span class="item-discount" id="discount-{{food.id}}">{{ food.discount }}</span>%</div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="head clearfix">
+                                        <div class="title float-left " style="font-size: 16px;">Total</div>
+                                        <div class="float-right" style="font-size: 16px;"><span class="item-total-price" id="total-price-{{food.id}}">{{ food.final_price|mul:quantity }}</span> $</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -88,31 +94,37 @@
     </div>
 
 
-{% if cart %}
-<div class="container text-center head clearfix py-5" >
+    {% if cart %}
+    <div class="container text-center head clearfix py-5" >
         <div class="col">
             <h4 class="py-2">Total orders price : <span class="text-primary" id="total-price"></span> </h4>
+        </div>
+        <div class="col py-2">
+            {% if cart %}
+                {% if logged_in %}
+                <button id="sendDataButton" class="btn btn-success"  style="width: 50%;"><h4 style="padding-top:3%;">Set Order</h4></button>
+                <form id="orderForm" action="{% url 'orders:set_order' %}" method="post">
+                    {% csrf_token %}
+                </form>
+                {% endif %}
             {% endif %}
         </div>
-            <div class="col py-2">
-                {% if cart %}
-                    {% if logged_in %}
-                    <button id="sendDataButton" class="btn btn-success"  style="width: 50%;"><h4 style="padding-top:3%;">Set Order</h4></button>
-                    <form id="orderForm" action="{% url 'orders:set_order' %}" method="post">
-                        {% csrf_token %}
-                    </form>
-                    {% endif %}
-                {% endif %}
-            </div>
-</div>
-<div id="popup" class="popup">
-    <div class="popup-content">
-        Item added to cart!
     </div>
-</div>
+    {% endif %}
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            Item added to cart!
+        </div>
+    </div>
 </section>
 
+
 <script src="{% static 'js/cart.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        calculateCart()
+    });
+</script>
 
 {% endblock %}
 
