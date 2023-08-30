@@ -175,10 +175,8 @@ class TestAdmin(TestCase):
         )
         
         filtered_queryset = filter_instance.queryset(mock_request, queryset)
-        print(queryset)
-        print(orders)
-        # for order in orders:
-        #     if order.status == 'Not Paid':
-        #         self.assertIn(order, filtered_queryset)
-            # else:
-            #     self.assertNotIn(order, filtered_queryset)
+        for order in orders:
+            if order.status == 'not paid':
+                self.assertIn(order, filtered_queryset)
+            else:
+                self.assertNotIn(order, filtered_queryset)
