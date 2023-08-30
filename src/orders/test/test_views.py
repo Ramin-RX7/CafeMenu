@@ -135,6 +135,17 @@ class TestViews(TestCase):
         
         # self.assertRedirects(response, expected_redirect_url)
     
+    def test_get_object_with_valid_pk(self):
+        # url = reverse("orders:set_order", kwargs={"pk": self.order1.pk})
+        url = reverse("orders:set_order")
+        request = self.factory.get(url)
+        request.user = self.user1 
+        
+        view = SetOrderView.as_view()
+        response = view(request, pk=self.order1.pk)  
+        
+        self.assertEqual(response.status_code, 405)
+    
     def test_cart_item_add_to_cart_view(self):
         initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
         request = HttpRequest()
