@@ -149,3 +149,13 @@ class TestEditOrder(TestCase):
         response = self.client.get(self.url)
 
         self.assertEquals(response.status_code,302)
+
+
+class TestLogoutView(TestCase):
+
+    def test_dashboard_staff_GET(self):
+        self.url=reverse("panel:dashboard")
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,302)
+
