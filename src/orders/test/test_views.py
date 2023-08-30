@@ -69,7 +69,12 @@ class TestViews(TestCase):
         self.assertEquals(self.view_order_detail.context_object_name, 'order')
         self.assertEquals(self.view_order_detail.template_name, 'orders/order_details.html')
         
+    def test_context_data_index_view(self):
+        self.assertEquals(self.view_index.model, Order)
         
+        
+        
+           
     # def test_get_object_order_detail_view(self):
         # request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
 
