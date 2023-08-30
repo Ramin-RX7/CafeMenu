@@ -6,14 +6,16 @@ document.querySelectorAll('.add-button').forEach(function(button) {
         let form = document.querySelector('#form-' + itemId);
         let quantityInput = form.querySelector('.quantity-input');
         let quantity = parseInt(quantityInput.value, 10);
+        console.log(quantity);
+        if (quantity < 1){
+            showPopup("Quantity can not be less than 1");
+        } else {
+            let cartData = JSON.parse(localStorage.getItem('cart')) || {};
+            cartData[itemId] = quantity;
+            localStorage.setItem('cart', JSON.stringify(cartData));
+            showPopup("item added successfully");
+        }
 
-        let cartData = JSON.parse(localStorage.getItem('cart')) || {};
-
-        cartData[itemId] = quantity;
-
-        localStorage.setItem('cart', JSON.stringify(cartData));
-
-        showPopup("item added successfully");
     });
 });
 

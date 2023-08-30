@@ -57,23 +57,12 @@ def get_analytics_data():
             }
         },
 
-        "items":{
-            **food_items()
-            # "comparative": {
-            #     **get_top_selling_items()
-            # },
-            # "relative":{
-            #     "total": get_most_popular_item()
-            # }
-        },
+        "items":{**food_items()},
 
         "orders": {**count_orders()},
 
-        "categories": {
-            "comparative": {
-                "total": get_category_quantity_sold(),
-            }
-        },
+        "categories": {**category_items()},
+
         "customer-sales":{
             "relative": {
                 "week":  customerSales_rel(7),
@@ -115,7 +104,7 @@ class JsonAPI(PermissionRequiredMixin, View):
 
 
     def get(self, request):
-        if self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now():
+        if (not self.current_data)  or  (self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now()):
             self.current_data = get_analytics_data()
             self.last_update = datetime.now()
         return self.current_data

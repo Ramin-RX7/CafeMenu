@@ -16,6 +16,10 @@ document.querySelectorAll('.add-button').forEach(function(button) {
         let quantityElement = document.getElementById(`item-quantity-${itemId}`)
         quantityElement.textContent = quantity;
 
+        let unit_price = document.getElementById(`unit-price-${itemId}`).textContent;
+        let discount = document.getElementById(`discount-${itemId}`).textContent;
+        document.getElementById(`total-price-${itemId}`).textContent = (quantity*unit_price) * (discount/100);
+        calculateCart();
         showPopup("Item quantity changed")
     });
 });
@@ -37,6 +41,7 @@ document.querySelectorAll('.del-button').forEach(function(button) {
         let foodSection = document.getElementById(`food-${itemId}`)
         foodSection.remove()
 
+        calculateCart();
         showPopup("Item deleted")
     });
 });
@@ -52,6 +57,18 @@ function showPopup(text){
     }, 2500);
 }
 
+function calculateCart(){
+    const elementsToSum = document.querySelectorAll('.item-total-price');
+    let sum = 0;
+    elementsToSum.forEach(element => {
+        sum += parseFloat(element.textContent);
+    });
+    const totalPrice = document.getElementById("total-price")
+    if (totalPrice){
+        totalPrice.textContent = sum.toString(10)+"$";
+    }
+}
+
 
 document.getElementById('sendDataButton').addEventListener('click', function() {
     function setCookie(name, value, days) {
@@ -65,4 +82,3 @@ document.getElementById('sendDataButton').addEventListener('click', function() {
     localStorage.removeItem('cart');
     orderForm.submit();
 });
-

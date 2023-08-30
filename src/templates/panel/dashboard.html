@@ -41,7 +41,7 @@
         <button id="bitweendateBtn" class="btn btn-primary mx-1">Filter by date</button>
     </div>
 
-    <div id="allOrders" class="order-section my-5" {% if orders_between %}style="display:none;"{% endif %}>
+    <div id="allOrders" class="order-section my-5" {% if orders_between != None %}style="display:none;"{% endif %}>
         {% for order in orders %}
         <div class="col-md-12">
             <div class="order-dsh rounded mx-lg-5 px-lg-3 transparent-card">
@@ -182,21 +182,15 @@
         {% endfor %}
     </div>
 
-    <div id="bitweendateSrch" class="order-section my-5" {% if not orders_between %}style="display:none;"{% endif %}>
+    <div id="bitweendateSrch" class="order-section my-5" {% if not orders_between != None %}style="display:none;"{% endif %}>
         <!-- <h3 class="text-center mt-3">Order between date</h3> -->
         <form method="post">
             {% csrf_token %}
-            {% if date_form.errors %}
-            <ul class="errorlist">
-            {% for field in date_form %}
-                {% for error in field.errors %}
-                    <li>{{ field.label }}: {{ error }}</li>
-                {% endfor %}
-            {% endfor %}
-            </ul>
-            {%endif%}
-            <div class="row d-flex justify-content-center mt-5">
-              <div class="mx-4 mt-3 col-lg-5 col-sm-12">
+            <div class="d-flex justify-content-center">
+                {{date_form.errors}}
+            </div>
+            <div class="row d-flex justify-content-center mt-3">
+              <div class="mx-4 col-lg-5 col-sm-12">
                 <div class="text-center">
                     {{date_form.start_date.label_tag}}
                 </div>
@@ -204,7 +198,7 @@
                     {{date_form.start_date}}
                 </div>
               </div>
-              <div class="mx-4 mt-3 col-lg-5 col-sm-12">
+              <div class="mx-4 col-lg-5 col-sm-12">
                 <div class="text-center">
                     {{date_form.end_date.label_tag}}
                 </div>

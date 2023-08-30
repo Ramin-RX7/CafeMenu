@@ -67,15 +67,15 @@ class SearchbyDate(forms.Form):
         start_date = self.cleaned_data.get('start_date')
         end_date = self.cleaned_data.get('end_date')
 
-        if start_date < last_30days_past:
-            raise forms.ValidationError("Date cannot be more than 30 days past.")
+        # if start_date < last_30days_past:
+            # raise forms.ValidationError("Date cannot be more than 30 days past.")
         if start_date > today:
             raise forms.ValidationError("Start day should be in the past.")
-        if end_date > today:
-            raise forms.ValidationError("End day cant be bigger than today.")
+        # if end_date > today:
+            # raise forms.ValidationError("End day cant be bigger than today.")
         if end_date < start_date:
             raise forms.ValidationError("End day dhould be bigger than stat day.")
-        if end_date < last_30days_past:
-            raise forms.ValidationError("End day should be bigger than last 30 days past nad start day.")
+        # if end_date < last_30days_past:
+            # raise forms.ValidationError("End day should be bigger than last 30 days past nad start day.")
 
         return self.cleaned_data

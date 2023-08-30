@@ -97,48 +97,6 @@ def cart(request):
     return response
 
 
-class CartAddView(View):
-    def post(self, request):
-        if (food_id := request.POST.get('change')):
-            quantity = request.POST.get('quantity')
-            cart_cookie = request.COOKIES.get('cart')
-            if cart_cookie:
-                cart_dict = eval(cart_cookie)
-            else:
-                cart_dict= {}
-
-            cart_dict[food_id] = quantity
-            response = redirect('orders:cart')
-            response.set_cookie('cart', str(cart_dict))
-            return response
-        elif (food_id := request.POST.get('food')):
-            quantity = request.POST.get('quantity')
-            cart_cookie = request.COOKIES.get('cart')
-            if cart_cookie:
-                cart_dict = eval(cart_cookie)
-            else:
-                cart_dict= {}
-
-            cart_dict[food_id] = quantity
-            response = redirect('foods:menu')
-            response.set_cookie('cart', str(cart_dict))
-            return response
-
-
-class CartDeleteView(RedirectView):
-    pattern_name = "orders:cart"
-    def post(self, request, *args, **kwargs):
-        data = request.COOKIES.get("cart")
-        cart = eval(data)
-        food_id = request.POST["food"]
-        del cart[food_id]
-        str_cart = str(cart)
-        response = redirect(self.pattern_name)
-        response.set_cookie('cart', str_cart)
-        return response
-
-
-
 class CustomerLoginView(View):
     def post(self,request):
         form = CustomerLoginForm(request.POST)
