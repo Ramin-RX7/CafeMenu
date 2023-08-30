@@ -159,9 +159,14 @@ class TestLogoutView(TestCase):
 
         self.assertEquals(response.status_code,302)
 
-
     def test_dashboard_staff_template_not_used(self):
         self.url=reverse("panel:dashboard")
         response = self.client.get(self.url)
 
         self.assertTemplateNotUsed(response,'panel/dashboard_staff.html')
+
+    def test_edit_order_without_user(self):
+        self.url=reverse("panel:edit_order",args=[1])
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,404)
