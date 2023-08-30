@@ -64,7 +64,7 @@
                             <div class="info">
                                 <div class="head clearfix">
                                     <p class="float-left">{{ food.title }}</p>
-                                    <p class="float-right text-primary">${{ food.price }}</p>
+                                    <p class="float-right text-primary">{% if food.discount %}<s>{{ food.price }}</s>{% endif %} {{food.final_price}}$</p>
                                 </div>
                                 <div class="body">
                                     <p>{{ food.description|truncatechars:90 }}</p>

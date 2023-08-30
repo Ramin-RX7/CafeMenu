@@ -19,7 +19,7 @@
                 <div class="info">
                     <div class="head clearfix mt-5">
                         <h1 class="float-left">{{ food.title }}</h1>
-                        <h1 class="float-right text-primary">${{ food.price }}</h1>
+                        <h1 class="float-right text-primary">{% if food.discount %}<s>{{ food.price }}</s>{% endif %} {{food.final_price}}$</h1>
                     </div>
                 </div>
                 {% if food.is_active %}
