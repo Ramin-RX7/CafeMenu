@@ -87,6 +87,14 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)
         self.assertEquals(self.client.session.get('phone'), '9176877108')
            
+    def test_invalid_login_customer_login_view(self):
+        invalid_form_data = {'phone': '123456789'}
+        response = self.client.post(reverse('orders:customer_login'), data=invalid_form_data)
+        self.assertEqual(response.status_code, 302)
+        
+        import core.utils
+        self.assertEquals(core.utils.EditableContexts.form_login_error, "Invalid phone number")
+        
     # def test_get_object_order_detail_view(self):
         # request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
 
