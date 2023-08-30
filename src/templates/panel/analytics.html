@@ -118,10 +118,10 @@
 
                                     <div class="section mt-4" id="Day2-content">
                                         <h2>Day Charts</h2>
-                                        <div class="my-5 w-100 px-4">
-                                            <p>Relative Chart</p>
-                                            <canvas id="items:relative:day"></canvas>
-                                        </div>
+                                        <!-- <div class="my-5 w-100 px-4"> -->
+                                            <!-- <p>Relative Chart</p> -->
+                                            <!-- <canvas id="items:relative:day"></canvas> -->
+                                        <!-- </div> -->
                                         <div class="my-5 w-100 px-4">
                                             <p>Comparative Chart</p>
                                             <canvas id="items:comparative:day"></canvas>
@@ -244,21 +244,24 @@
                                 </button>
                             </h2>
                         </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="py-3" style="justify-content: space-between;">
-
-                                    <input type="radio" name="section" id="Day4">
-                                    <label for="Day4" class="btn btn-outline-dark">Total</label>
-
-                                    <div class="section" id="Day4-content">
-                                        <h2>Total</h2>
-                                        <div class="my-5 w-100 px-4">
-                                            <canvas id="categories:comparative:total"></canvas>
-                                        </div>
+                                    <h2>Day Charts</h2>
+                                    <div class="my-5 w-100 px-4">
+                                        <p>Comparative Chart</p>
+                                        <canvas id="categories:comparative:day"></canvas>
                                     </div>
-
-
+                                    <h2>Week Charts</h2>
+                                    <div class="my-5 w-100 px-4">
+                                        <p>Comparative Chart</p>
+                                        <canvas id="categories:comparative:week"></canvas>
+                                    </div>
+                                    <h2>Month Charts</h2>
+                                    <div class="my-5 w-100 px-4">
+                                        <p>Comparative Chart</p>
+                                        <canvas id="categories:comparative:month"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -347,8 +350,6 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
 
@@ -359,4 +360,3 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{% static 'js/analytics.js' %}"></script>
 {% endblock %}
-
