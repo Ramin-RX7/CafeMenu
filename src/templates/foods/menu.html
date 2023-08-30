@@ -29,13 +29,15 @@
         <div class="section-devider my-4 transparent"></div>
         <div class="row align-items-center mb-4">
             <div class="col-md-6">
-                <div class="category-img">
-                    {% if category.image %}
-                      <img src="{{ category.image.url }}" alt="" class="w-100 rounded shadow category-image">
-                    {% else %}
-                      <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow category-image">
-                    {% endif %}
-                </div>
+                <a href="{% url 'foods:category_details' category.id %}">
+                    <div class="category-img">
+                        {% if category.image %}
+                          <img src="{{ category.image.url }}" alt="" class="w-100 rounded shadow category-image">
+                        {% else %}
+                          <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow category-image">
+                        {% endif %}
+                    </div>
+                </a>
             </div>
             <div class="col-md-6">
                 <div class="caption">

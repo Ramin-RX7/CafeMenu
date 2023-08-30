@@ -10,23 +10,23 @@
 
   {% for category in categories %}
   <div class="container">
-      <div class="section-devider my-4 transparent"></div>
+        <div class="section-devider my-4 transparent"></div>
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 order-1 order-md-1">
+            <a href="{% url 'foods:category_details' category.id %}">
+                {% if category.image %}
+                    <img src="{{ category.image.url }}" alt="" class="w-100 rounded shadow">
+                {% else %}
+                    <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow">
+                {% endif %}
+            </a>
+            </div>
 
-      <div class="row align-items-center">
-          <div class="col-12 col-md-6 order-1 order-md-1">
-              {% if category.image %}
-                  <img src="{{ category.image.url }}" alt="" class="w-100 rounded shadow">
-              {% else %}
-                  <img src="{% static 'images/defaults/category.jpeg' %}" alt="" class="w-100 rounded shadow">
-              {% endif %}
-          </div>
-
-          <div class="col-12 col-md-6 order-2 order-md-2 mt-3 mt-md-0">
-              <!-- <h6 class="section-subtitle">Category</h6> -->
-              <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
-              <p>{{ category.description|truncatewords:50 }}</p>
-          </div>
-      </div>
+            <div class="col-12 col-md-6 order-2 order-md-2 mt-3 mt-md-0">
+                <h3 class="section-title"><a href="{% url 'foods:category_details' category.id %}">{{category.title}}</a></h3>
+                <p>{{ category.description|truncatewords:50 }}</p>
+            </div>
+        </div>
   </div>
   {% endfor %}
 
