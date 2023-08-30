@@ -100,6 +100,16 @@ class TestViews(TestCase):
         self.assertRedirects(response, reverse('index'), target_status_code=200)
     
     
+    def test_post_set_order_view(self):
+        request = self.factory.post(reverse('orders:set_order'))
+        request.COOKIES["cart"] = '{"' + str(self.food1.id) + '": 2}'
+        request.session = {}
+        request.session["phone"] = "9176877108"
+        request.user = self.user1
+        response = SetOrderView.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+    
     def test_cart_item_add_to_cart_view(self):
         initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
         request = HttpRequest()
