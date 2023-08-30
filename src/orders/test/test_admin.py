@@ -85,3 +85,53 @@ class TestAdmin(TestCase):
             self.table_admin.list_display,
             ['name', 'is_reserved']
         )
+        
+    def test_queryset_order_today_filter(self):
+        mock_request = Mock()  
+        mock_model_admin = Mock()  
+
+        today = datetime.today()
+        yesterday = today - timedelta(days=1)
+        tomorrow = today + timedelta(days=1)
+        
+        orders = [
+            Order(
+            customer='9176877108',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+            created_at=yesterday,
+                ),
+            Order(
+            customer='9176877107',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+            created_at=today,
+                ),
+            Order(
+            customer='9176877109',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+            created_at=tomorrow,
+                ),
+        ]
+        
+        queryset = QuerySet(model=Order, query=None, using='default')
+        queryset._result_cache = orders  
+        
+        filter_instance = OrderToDayFilter(
+            request=mock_request,
+            params={'Date': 'today'},
+            model=Order,
+            model_admin=mock_model_admin
+        )
+
+        filtered_queryset = filter_instance.queryset(mock_request, queryset)
+        # print(filtered_queryset)
+        self.assertEqual(len(filtered_queryset), 0)
+        
+        for order in orders:
+            if order.created_at.date() != today.date():
+                self.assertNotIn(order, filtered_queryset)
