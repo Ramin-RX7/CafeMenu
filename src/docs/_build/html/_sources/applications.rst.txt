@@ -1,0 +1,11 @@
+Applications
+============
+
+In this content we talk about apps and some detail of these.
+
+config
+------
+
+This app is our project core or config and we have main urls and settings in this app
+we use less it app because in start of project we change our settings we need and after this we don't very use
+this app
