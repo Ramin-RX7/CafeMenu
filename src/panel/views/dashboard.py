@@ -34,6 +34,7 @@ def dashboard(request):
         'orders_user': ALL_ORDERS.filter(responsible_staff=request.user),
         'tables': tables,
         "name": request.user.first_name,
+        "date_form": form
     }
     if request.method == 'POST':
         form = SearchbyDate(request.POST)
