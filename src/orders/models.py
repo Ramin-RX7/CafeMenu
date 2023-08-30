@@ -32,11 +32,11 @@ class Order(BaseModel):
 
     @property
     def price(self):
-        return sum([item.unit_price*item.quantity for item in self.orderitem_set.all()])
+        return sum([item.final_price for item in self.orderitem_set.all()])
 
     @property
     def final_price(self):
-        return self.price / 100 * (self.discount or 100)
+        return round(self.price / 100 * (self.discount or 100), 2)
 
     def __str__(self) -> str:
         return f"{self.customer}"
@@ -72,6 +72,10 @@ class OrderItem(BaseModel):
     quantity = models.IntegerField()
     unit_price = models.DecimalField(decimal_places=2, max_digits=5)
     discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
+
+    @property
+    def final_price(self):
+        return round((self.quantity*self.unit_price) / 100 * (self.discount or 100), 2)
 
     def __str__(self) -> str:
         return f"{self.quantity}"
