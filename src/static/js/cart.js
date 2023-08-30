@@ -27,7 +27,6 @@ document.querySelectorAll('.add-button').forEach(function(button) {
 document.querySelectorAll('.del-button').forEach(function(button) {
     button.addEventListener('click', function(event) {
         event.preventDefault();
-        console.log("here");
 
         let itemId = button.getAttribute('value');
 
@@ -78,7 +77,15 @@ document.getElementById('sendDataButton').addEventListener('click', function() {
     }
     let cart = JSON.parse(localStorage.getItem('cart'));
     let cartDataString = JSON.stringify(cart);
-    setCookie('cart', cartDataString, 0.01);
-    localStorage.removeItem('cart');
-    orderForm.submit();
+
+    let selected_table = document.getElementById("selected-table")
+    console.log(selected_table.value);
+    if (selected_table.value){
+        setCookie('table', selected_table.value);
+        setCookie('cart', cartDataString, 0.01);
+        localStorage.removeItem('cart');
+        orderForm.submit();
+    } else {
+        showPopup("Please select your table")
+    }
 });

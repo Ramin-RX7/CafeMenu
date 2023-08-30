@@ -99,6 +99,16 @@
         <div class="col">
             <h4 class="py-2">Total orders price : <span class="text-primary" id="total-price"></span> </h4>
         </div>
+
+        <div class="col row d-flex justify-content-center my-5">
+            <select name="" id="selected-table" class="col-12 col-md-4">
+                <option value="" class="form-control" disabled selected>Select your table</option>
+                {% for table in tables %}
+                    <option value="{{table.id}}" class="form-control">{{table.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
         <div class="col py-2">
             {% if cart %}
                 {% if logged_in %}
