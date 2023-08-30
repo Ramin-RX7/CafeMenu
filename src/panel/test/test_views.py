@@ -108,3 +108,10 @@ class TestEditOrder(TestCase):
             quantity=4,
             discount=0.0,
             )
+
+
+    def test_edit_order(self):
+        self.url=reverse("panel:edit_order",args=[1])
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,200)
