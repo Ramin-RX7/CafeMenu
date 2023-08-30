@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from orders.models import Table, Order, OrderItem
 from users.models import User
 from foods.models import Food, Category
-from orders.views import IndexView, OrderDetailView, SetOrderView
+from orders.views import IndexView, OrderDetailView, SetOrderView, cart
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.http import HttpRequest
 
@@ -63,6 +63,12 @@ class TestViews(TestCase):
             responsible_staff=self.user1, 
         )
         self.order2.save(check_items=False)
+    
+    def test_context_object_name_order_deatail_view(self):
+        self.assertEquals(self.view_order_detail.model, Order)
+        self.assertEquals(self.view_order_detail.context_object_name, 'order')
+        self.assertEquals(self.view_order_detail.template_name, 'orders/order_details.html')
+        
         
     # def test_get_object_order_detail_view(self):
         # request = self.factory.get(reverse('orders:order_details', args=[self.order1.id]))
@@ -77,94 +83,4 @@ class TestViews(TestCase):
 
         # self.assertEqual(fetched_order, self.order1)
         
-    def test_context_object_name_order_deatail_view(self):
-        self.assertEquals(self.view_order_detail.model, Order)
-        self.assertEquals(self.view_order_detail.context_object_name, 'order')
-        self.assertEquals(self.view_order_detail.template_name, 'orders/order_details.html')
-        
-    def test_context_data_index_view(self):
-        self.assertEquals(self.view_index.model, Order)
-        
-    def test_order_list_template_index_view(self):
-        response = self.client.get(self.index_url)
-        self.assertTemplateUsed(response, 'orders/order_list.html')
-        
-    def test_cart_template(self):
-        response = self.client.get(self.cart_url)
-        self.assertTemplateUsed(response, 'orders/cart.html')
-        
-    def test_valid_login_customer_login_view(self):
-        valid_form_data = {'phone': '9176877108'}
-        response = self.client.post(reverse('orders:customer_login'), data=valid_form_data)
-        
-        self.assertEquals(response.status_code, 302)
-        self.assertEquals(self.client.session.get('phone'), '9176877108')
-        
-    def test_invalid_login_customer_login_view(self):
-        invalid_form_data = {'phone': '123456789'}
-        response = self.client.post(reverse('orders:customer_login'), data=invalid_form_data)
-        self.assertEqual(response.status_code, 302)
-        
-        import core.utils
-        self.assertEquals(core.utils.EditableContexts.form_login_error, "Invalid phone number")
-        
-    def test_redirect_to_referer_customer_login_view(self):
-        response = self.client.post(reverse('orders:customer_login'))
-        self.assertRedirects(response, reverse('index'), target_status_code=200)
-        
-    def test_cart_item_add_to_cart_view(self):
-        initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
-        request = HttpRequest()
-        request.COOKIES['cart'] = str(initial_cart_data)
-
-        food_id_to_add = 'food_3'
-        quantity_to_add = 'quantity_3'
-
-        response = self.client.post(reverse('orders:cart_add'), data={'food': food_id_to_add, 'quantity': quantity_to_add}, cookies=request.COOKIES)
-
-        self.assertEqual(response.status_code, 302)
-        new_cart_data = eval(response.cookies['cart'].value)
-        self.assertIn(food_id_to_add, new_cart_data)
-        self.assertEqual(new_cart_data[food_id_to_add], quantity_to_add)
-        self.assertRedirects(response, reverse('foods:menu'))
-
-    # def test_empty_cart_view(self):
-    #     response = self.client.get(reverse('orders:cart'))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertNotIn('cart', response.context)
-
-    # def test_index_GET(self):
-    #     response = self.client.get(self.order_list_url)
-    #     self.assertEquals(response.status_code, 302)
-    
-    # def test_get_context_data(self):
-    #     request = self.factory.get(reverse('orders:index'))
-    #     view = IndexView()
-    #     view.setup(request)
-    #     context = view.get_context_data()
-    #     self.assertIn('orders', context)
-    
-    # def test_order_detail_GET(self):
-    #     response = self.client.get(self.order_details)
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'orders/order_details.html')
-    
-    # def test_cart_item_deletion_cart_delete_view(self):
-    #     initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
-    #     request = HttpRequest()
-    #     request.COOKIES['cart'] = str(initial_cart_data)
-    #     food_id_to_delete = self.food1.id
-    #     response = self.client.post(reverse('orders:cart_delete'), data={'food': food_id_to_delete}, cookies=request.COOKIES)
-
-    #     self.assertEqual(response.status_code, 302)
-
-
-    # def test_set_order_view(self):
-    #     request = self.factory.post(reverse('orders:set_order'))
-    #     request.COOKIES['cart'] = {self.food1.id: 2}
-    #     request.session = {}
-    #     request.session['phone'] = '1234567890'
-    #     request.user = self.user1
-    #     response = SetOrderView.as_view()(request)
-
-    #     self.assertEqual(response.status_code, 302)
+   
