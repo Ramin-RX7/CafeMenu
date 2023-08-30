@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from users.models import User
 from core.validators import phone_validator
+from django.db import IntegrityError
 
 
 class UserManagerTestCase(TestCase):
@@ -64,6 +65,64 @@ class PhoneNumberFieldTestCase(TestCase):
         phone_parts = regex.groupdict()
         phone = phone_parts["operator"]+phone_parts["middle3"]+phone_parts["last4"]
         self.assertEqual(phone,'9123456789')
+
+
+class UserTestCase(TestCase):
+    def setUp(self):
+        self.user=User.objects.create_user(
+            phone='9123456789',
+            password='passwordtest',
+            first_name='test',
+            last_name='testy',
+        )
+    
+
+    def test_user_create(self):
+        self.assertIsInstance(self.user,User)
+
+
+    def test_unique_phone(self):
+        with self.assertRaises(IntegrityError):
+            User.objects.create_user(
+                phone='9123456789',
+                password='passpass',
+                first_name='1test',
+                last_name='1testy',
+            )
+
+    def test_valid_phone_validator(self):
+        valid_phones=[
+            '9123456789',
+            '+989123456789',
+            '00989123456789',
+            '09123456789'
+        ]
+        for phone in valid_phones:
+            with self.subTest(phone=phone):
+                self.assertIsNotNone(phone_validator(phone))
+
+    def test_wrong_phones(self):
+
+        invalid_phones=[
+            '123',
+            '123456789123456789',
+            '91234567891234567',
+            '912345678',
+            '',
+            'None'
+        ]
+        for phones in invalid_phones:
+            with self.assertRaises(ValidationError):
+                phone_validator(phones)
+
+
+    def test_user_fields(self):
+        self.assertEqual(self.user.phone, '9123456789')
+        self.assertEqual(self.user.first_name, 'test')
+        self.assertEqual(self.user.last_name, 'testy')
+        self.assertTrue(self.user.is_active)
+        self.assertFalse(self.user.is_staff)
+
 
 
 
