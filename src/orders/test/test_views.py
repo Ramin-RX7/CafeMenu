@@ -176,4 +176,53 @@ class TestViews(TestCase):
 
         # self.assertEqual(fetched_order, self.order1)
         
+    # def test_get_object_with_user_phone(self):
+    #     url = reverse("orders:set_order", kwargs={str(self.order1.pk): 1})  
+    #     request = self.factory.get(url)
+    #     request.user = self.user1  
+    #     request.session = {}
+    #     view = OrderDetailView()
+    #     view.request = request
+        
+    #     obj = view.get_object()  
+        
+    #     self.assertEqual(obj, self.your_model_instance) 
+    
+    # def test_cart_with_empty_cookies(self):
+    #     url = reverse("orders:cart")  # Replace 'orders' with your app's name
+    #     request = self.factory.get(url)
+    #     request.COOKIES = {}  # Simulate an empty cookies dictionary
+        
+    #     response = cart(request)
+    #     context["logged_in"] = request.session.get("phone") or isinstance(request.user, User)
+    #     self.assertEqual(response.status_code, 200)
    
+   # def test_empty_cart_view(self):
+    #     response = self.client.get(reverse('orders:cart'))
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertNotIn('cart', response.context)
+
+    # def test_index_GET(self):
+    #     response = self.client.get(self.order_list_url)
+    #     self.assertEquals(response.status_code, 302)
+    
+    # def test_get_context_data(self):
+    #     request = self.factory.get(reverse('orders:index'))
+    #     view = IndexView()
+    #     view.setup(request)
+    #     context = view.get_context_data()
+    #     self.assertIn('orders', context)
+    
+    # def test_order_detail_GET(self):
+    #     response = self.client.get(self.order_details)
+    #     self.assertEquals(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'orders/order_details.html')
+    
+    # def test_cart_item_deletion_cart_delete_view(self):
+    #     # initial_cart_data = {str(self.food1.id): 2}
+    #     request = HttpRequest()
+    #     request.COOKIES['cart'] = '{"' + str(self.food1.id) + '": 2}'
+    #     food_id_to_delete = self.food1.id
+    #     response = self.client.post(reverse('orders:cart_delete'), data={'food': food_id_to_delete}, cookies=request.COOKIES)
+
+    #     self.assertEqual(response.status_code, 302)
