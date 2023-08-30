@@ -139,3 +139,9 @@ class TestEditOrder(TestCase):
         response = self.client.get(self.url)
 
         self.assertEquals(response.status_code,302)
+
+    def test_take_responsibility(self):
+        self.url=reverse("panel:take_responsibility",args=[1])
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,302)
