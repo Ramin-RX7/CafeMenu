@@ -134,3 +134,8 @@ class TestEditOrder(TestCase):
 
         self.assertEquals(response.status_code,302)
 
+    def test_deliver_order(self):
+        self.url=reverse("panel:deliver_order",args=[1])
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,302)
