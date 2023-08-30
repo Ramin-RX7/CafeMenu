@@ -15,7 +15,7 @@ Welcome to Amoo Cafe's documentation!
    configuration
    applications
    tests
-   licens
+   license
 
 
 
