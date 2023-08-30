@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from ..views import LoginView,UserVerifyView,logout,dashboard_staff,EditOrders,approve_order,reject_order,pay_order,deliver_order,take_responsibility
+from ..views import LoginView,UserVerifyView,logout,dashboard,EditOrders,approve_order,reject_order,pay_order,deliver_order,take_responsibility
 class TestUrls(SimpleTestCase):
 
     def test_login_url_is_resolved(self):
@@ -17,7 +17,7 @@ class TestUrls(SimpleTestCase):
 
     def test_dashboard_url_is_resolved(self):
         url = reverse('panel:dashboard')
-        self.assertEquals(resolve(url).func,dashboard_staff)
+        self.assertEquals(resolve(url).func,dashboard)
 
     def test_edit_order_url_is_resolved(self):
         url = reverse('panel:edit_order',args=[1])
