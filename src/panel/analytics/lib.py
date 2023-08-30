@@ -22,15 +22,15 @@ def dict_to_list(data:dict, value_item:str=None,thisweek=False,lastweek=False,la
 
 
     list_data = []
-    if hour:
-        for i in range(0,24):
-            for item in data:
-                if int(item['hour']) == i:
-                    list_data.append(item[value_item])
-                    break
-            else:
-                list_data.append(0)
-        
+    # if hour:
+    #     for i in range(0,24):
+    #         for item in data:
+    #             if int(item['hour']) == i:
+    #                 list_data.append(item[value_item])
+    #                 break
+    #         else:
+    #             list_data.append(0)
+
     if thisweek:
         for i in range(int((today_date - this_week).days)+1):
             date = str((this_week + datetime.timedelta(i)).date())
