@@ -41,9 +41,9 @@ def food_items():
     orderitems = OrderItem.objects.all()
     foods = Food.objects.all()
     foods = [i['title'] for i in foods.values('title')]
-    
+
     for food_name in foods:
-    
+
         today_hours = list(orderitems.filter(Q(food__title=food_name) & Q(created_at__date=today_date))\
         .annotate(hour=ExtractHour('order__created_at')).values('hour').annotate(count=Sum('quantity')))
         food_items['comparative']["day"]["new"][food_name] = sum(dict_to_list(today_hours,value_item='count',hour=True))
@@ -69,7 +69,7 @@ def food_items():
         food_items['comparative']["week"]["old"][food_name] = sum(count_of_fooditem_sold__last_week)
 
 
-        count_week_food = list(orderitems.filter(Q(food__title=food_name) & Q(order__status='paid') & Q(order__created_at__date__gte=last_7_days)).\
+        count_week_food = list(orderitems.filter(Q(food__title=food_name) & Q(order__created_at__date__gte=last_7_days)).\
         annotate(day=TruncDate('order__created_at')).\
         values('day').annotate(count=Sum('quantity')))
         count_of_fooditem_sold_for_each_day_of_week = dict_to_list(count_week_food,value_item='count',last7days=True)
