@@ -20,6 +20,12 @@ Tip 4: You should pay attention to port(8000), Possibility you use another port 
 port alternative this port
 
 
+Tip 5: In project we should have (.env) file and next to the manage.py and input this code:
+
+```DEBUG=true
+SECRET_KEY=django-insecure-mq11ioa63y^6ypgm^nwl(hrhempg6huelntq)9p53ae)x6f%xz
+DATABASE_URL=postgres://postgres:asdf1234@localhost:5432/cafemenu ```
+
 
 Step 1
 
