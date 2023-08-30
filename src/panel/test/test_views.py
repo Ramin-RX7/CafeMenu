@@ -115,3 +115,11 @@ class TestEditOrder(TestCase):
         response = self.client.get(self.url)
 
         self.assertEquals(response.status_code,200)
+
+    def test_approve_order(self):
+        self.url=reverse("panel:approve_order",args=[1])
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code,302)
+
+
