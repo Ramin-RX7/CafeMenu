@@ -29,23 +29,12 @@ def json_api(request):
             }
         },
 
-        "items":{
-            **food_items()
-            # "comparative": {
-            #     **get_top_selling_items()
-            # },
-            # "relative":{
-            #     "total": get_most_popular_item()
-            # }
-        },
+        "items":{**food_items()},
 
         "orders": {**count_orders()},
 
-        "categories": {
-            "comparative": {
-                "total": get_category_quantity_sold(),
-            }
-        },
+        "categories": {**category_items()},
+
         "customer-sales":{
             "relative": {
                 "week":  customerSales_rel(7),
