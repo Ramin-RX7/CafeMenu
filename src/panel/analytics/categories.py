@@ -2,7 +2,7 @@ from collections import defaultdict
 import datetime
 from django.db.models import Sum,Q
 from django.db.models.functions import TruncDate ,ExtractHour
-from orders.models import OrderItem 
+from orders.models import OrderItem
 from foods.models import Category
 from .lib import dict_to_list
 
@@ -18,8 +18,9 @@ def get_category_quantity_sold():
         category_quantity_sold[category_name] = total_quantity
     return {"new":category_quantity_sold, "old":None}
 
+
 def category_items():
-    
+
     today_date = datetime.datetime.today()
     week_day = today_date.weekday()
     to_day = today_date.day
@@ -34,7 +35,7 @@ def category_items():
 
     last_7_days = datetime.datetime.today() - datetime.timedelta(7)
     last_30_days = datetime.datetime.today() - datetime.timedelta(30)
-    
+
     categories_item = {
             "comparative":{
                 "day"  : {"old":{},"new":{}},
@@ -50,17 +51,32 @@ def category_items():
     orderitems = OrderItem.objects.all()
     categories = Category.objects.all()
     categories = [i['title'] for i in categories.values('title')]
-    
-    for category in categories:
-    
-        today_hours = list(orderitems.filter(Q(food__category__title=category) & Q(order__created_at__date=today_date))\
-        .annotate(day=ExtractHour('order__created_at')).values('hour').annotate(count=Sum('quantity')))
-        categories_item['comparative']["day"]["new"][category] = sum(dict_to_list(today_hours,value_item='count',hour=True))
 
-        last_day_hour = list(orderitems.filter(Q(food__category__title=category) & Q(order__created_at__date=last_day))\
-        .annotate(day=ExtractHour('order__created_at')).values('hour').annotate(count=Sum('quantity')))
-        categories_item['comparative']["day"]["old"][category] = sum(dict_to_list(last_day_hour,value_item='count',hour=True))
-        categories_item["relative"]["day"][category] = sum(dict_to_list(last_day_hour,value_item='count',hour=True))
+    for category in categories:
+        count_of_category_sold_hour_of_today = []
+        for i in range(0,24):
+            hour = f'{i}'
+            data = orderitems.filter(Q(food__category__title=category) & Q(order__created_at__date=today_date) & Q(order__created_at__hour__gte=i) & Q(order__created_at__hour__lt=i+1))\
+            .values('id').annotate(count=Sum('quantity'))
+            if data:
+                count_of_category_sold_hour_of_today.append(data[0]['count'])
+            else:
+                count_of_category_sold_hour_of_today.append(0)
+        categories_item['comparative']["day"]["new"][category] = sum(count_of_category_sold_hour_of_today)
+
+        count_of_category_sold_hour_of_last_day = []
+        for i in range(0,24):
+            hour = f'{i}'
+            data = orderitems.filter(Q(food__category__title=category) & Q(order__created_at__date=last_day) & Q(order__created_at__hour__gte=i) & Q(order__created_at__hour__lt=i+1))\
+            .values('id').annotate(count=Sum('quantity'))
+            if data:
+                count_of_category_sold_hour_of_last_day.append(data[0]['count'])
+            else:
+                count_of_category_sold_hour_of_last_day.append(0)
+        categories_item['comparative']["day"]["old"][category] = sum(count_of_category_sold_hour_of_last_day)
+
+        categories_item["relative"]["day"][category] = sum(count_of_category_sold_hour_of_last_day)
+
 
         count_this_week_category = list(orderitems.filter(Q(food__category__title=category) & Q(order__created_at__date__gte=this_week)).\
         annotate(day=TruncDate('order__created_at')).\
@@ -105,15 +121,3 @@ def category_items():
         categories_item["relative"]["month"][category] = sum(count_of_category_sold_for_each_day_of_month)
 
     return categories_item
-
-def count_of_fooditems_at_between_date(start_day:datetime,end_day:datetime):
-    orderitems = OrderItem.objects.all()
-    count_fooditems = list(orderitems.filter(order__created_at__date__gte=start_day,order__created_at__date__lt=end_day).values_list('food__title').\
-    annotate(total_count=Sum('quantity')).order_by('-total_count'))
-    return count_fooditems
-    
-def count_of_category_at_given_date(start_day:datetime,end_day:datetime):
-    orderitems = OrderItem.objects.all()
-    count_category = list(orderitems.filter(order__created_at__date=start_day ,order__created_at__date__lt=end_day).values_list('food__category__title').\
-    annotate(total_count=Sum('quantity')).order_by('-total_count'))
-    return count_category
