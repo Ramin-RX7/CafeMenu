@@ -48,6 +48,15 @@
         {% endfor %}
       </div>
   </div>
+
+  <!-- <div id="popup" class="popup"> -->
+    <!-- <div class="popup-content"> -->
+        <!-- Item added to cart! -->
+    <!-- </div> -->
+  <!-- </div> -->
+  <a href="{% url 'orders:cart' %}" class="cart-icon px-3 py-4">
+    <img src="{% static 'images/cart.png' %}" alt="" height="35px" class="text-primary">
+  </a>
 </section>
 
 
