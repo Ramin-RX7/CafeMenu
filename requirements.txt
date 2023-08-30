@@ -1,3 +1,4 @@
 django
 Pillow
 environs[django]
+psycopg2-binary
