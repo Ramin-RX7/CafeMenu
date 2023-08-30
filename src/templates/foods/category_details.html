@@ -11,28 +11,8 @@
       <h6 class="section-subtitle text-center">Foods in</h6>
       <h3 class="section-title mb-6 pb-3 text-center">{{category.title}}</h3>
       <div class="row">
-        {% for food in foods %}
-          <div class="col-md-6 mb-4">
-              <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
-                  <div class="img-holder" style="margin-right: 35px;">
-                    {% if food.image %}
-                      <img src="{{ food.image.url }}" alt="" style="width: 140%;">
-                    {% else %}
-                      <img src="{% static 'images/defaults/food.jpeg' %}" alt="">
-                    {% endif %}
-                  </div>
-                  <div class="info">
-                      <div class="head clearfix">
-                          <h5 class="title float-left">{{ food.title }}</h5>
-                          <p class="float-right text-primary">${{ food.price }}</p>
-                      </div>
-                      <div class="body">
-                          <p>{{ food.description|truncatechars:45 }}</p>
-                      </div>
-                  </div>
-              </a>
-              {% if food.is_active %}
-              <form action="{% url 'orders:cart_add' %}" method="POST" style="display: flex;">
+        <div class="col-md-6 mb-4 equal-height-col">
+            <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                 {% csrf_token %}
                 <button type="submit" name="food" value="{{ food.id }}" class="btn btn-primary btn-block" style="align-items: center;margin-right: 1rem;display: grid;">Add to Cart</button>
                 <input type="number" name="quantity" id="" class="form-control" value="1" min="1" max="50" style="width: 20%;">

@@ -11,8 +11,9 @@
 <section id="about2" style="background-image: url({% static 'images/style-4.png' %});">
     <h3 class="section-title pb-3 text-center">Menu</h3>
     {% for category in categories %}
-    <div class="container">
-        <div class="section-devider my-6 transparent"></div>
+    <div class="container position-relative ">
+
+        <div class="section-devider my-4 transparent"></div>
         <div class="row align-items-center mb-4">
             <div class="col-md-6">
                 <div class="category-img">
@@ -32,9 +33,9 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-3 equal-height-row">
             {% for food in category.food_set.all %}
-            <div class="col-md-6 mb-4">
+            <div class="col-md-6 mb-4 equal-height-col">
                 <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                     <div class="row">
                         <div class="col-md-6 col-sm-9 text-center">

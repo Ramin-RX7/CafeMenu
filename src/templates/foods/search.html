@@ -11,7 +11,7 @@
         <h3 class="section-title mb-6 pb-3 text-center">{{ searched }}</h3>
         <div class="row">
         {% for food in foods %}
-            <div class="col-md-6 mb-4 px-5">
+            <div class="col-md-6 mb-4 equal-height-col">
                 <a href="{% url 'foods:food_details' food.id %}" class="custom-list">
                     <div class="img-holder">
                         {% if food.image %}
