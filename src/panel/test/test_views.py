@@ -61,7 +61,11 @@ class TestLoginView(TestCase):
 
         self.assertTemplateUsed(response,'panel/dashboard_staff.html')
 
+    def test_logout_GET(self):
+        self.url=reverse("panel:logout")
+        response = self.client.get(self.url)
 
+        self.assertEquals(response.status_code,302)
 
 
 class TestEditOrder(TestCase):
