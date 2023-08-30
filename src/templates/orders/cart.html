@@ -27,7 +27,7 @@
                                 <div class="info">
                                     <div class="head clearfix">
                                         <div class="title float-left" style="font-size: 16px;">For each</div>
-                                        <div class="float-right" style="font-size: 16px;">{{ food.price }} $</div>
+                                        <div class="float-right" style="font-size: 16px;"><span id="unit-price-{{food.id}}">{{ food.price }}</span> $</div>
                                     </div>
                                     <div class="head clearfix">
                                         <div class="title float-left" style="font-size: 16px;">Quantity</div>
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="head clearfix">
                                     <div class="title float-left " style="font-size: 16px;">Total</div>
-                                    <div class="float-right" style="font-size: 16px;"><span class="item-total-price">{{ food.price|mul:quantity }}</span>$</div>
+                                    <div class="float-right" style="font-size: 16px;"><span class="item-total-price" id="total-price-{{food.id}}">{{ food.price|mul:quantity }}</span>$</div>
                                 </div>
                                 </div>
                             </div>

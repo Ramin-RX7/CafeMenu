@@ -16,6 +16,9 @@ document.querySelectorAll('.add-button').forEach(function(button) {
         let quantityElement = document.getElementById(`item-quantity-${itemId}`)
         quantityElement.textContent = quantity;
 
+        let unit_price = document.getElementById(`unit-price-${itemId}`)
+        document.getElementById(`total-price-${itemId}`).textContent = quantity*unit_price.textContent
+        calculateCart();
         showPopup("Item quantity changed")
     });
 });
