@@ -1,22 +1,22 @@
-from typing import Any, Dict
+import json
+
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
 from django.urls import reverse
 from django.views import View
-from django.views.generic import RedirectView
+from django.views.generic import ListView,DetailView,RedirectView
 
 from foods.models import Food
 from users.models import User
 from .models import Order,Table,OrderItem
 from .forms import CustomerLoginForm
-from django.views.generic import TemplateView, ListView,DetailView,RedirectView
 
 
 class IndexView(ListView):
     model=Order
     template_name= 'orders/order_list.html'
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         current_session_orders_ids=self.request.session.get('orders',[])
         context['orders'] = Order.objects.filter(id__in=current_session_orders_ids)
@@ -41,24 +41,25 @@ class OrderDetailView(DetailView):
 
 class SetOrderView(View):
     def post(self, request):
-        if not (data := request.COOKIES.get("cart")):
-            redirect("orders:cart")
-        cart = eval(data)
+        data = request.COOKIES.get("cart")
+        if not data:
+            return redirect("orders:cart")
         customer = request.session.get("phone")
         if not customer:
             if isinstance(request.user, User):
                 customer = request.user.phone
             else:
-                redirect("index")
+                redirect("orders:cart")
+
+        data = json.loads(data)
         discount = 0.0
         table = Table.get_available_table()
 
         order = Order(customer=customer, table=table, discount=discount)
 
-        response = redirect("orders:index")
         with transaction.atomic():
             order.save(check_items=False)
-            for food_id,quantity in cart.items():
+            for food_id,quantity in data.items():
                 food = Food.objects.get(id=food_id)
                 orderitem = OrderItem(
                     order = order,
@@ -72,6 +73,7 @@ class SetOrderView(View):
             session_orders.append(order.id)
             request.session["orders"] = session_orders
 
+        response = redirect("orders:index")
         response.delete_cookie("cart")
         return response
 
@@ -79,19 +81,20 @@ class SetOrderView(View):
 
 
 def cart(request):
-    data = request.COOKIES.get("cart")
-    if not (data := request.COOKIES.get("cart")):
-        return render(request,'orders/cart.html',{})
-    cart = eval(data)
-    new_cart = {}
-    for key,value in cart.items():
-        food = Food.objects.get(id=key)
-        new_cart[food] = value
-    if new_cart == {}:
-        context = {}
-    else:
-        context = {"cart": new_cart}
-    return render(request,'orders/cart.html',context)
+    data = request.COOKIES.get("cart") or {}
+    cart = {}
+    cart_given = False
+    if data:
+        cart_given = True
+        if (data:=json.loads(data)):
+            for food_id,quantity in data.items():
+                food = Food.objects.get(id=food_id)
+                cart[food] = quantity
+        del request.COOKIES["cart"]
+    context = {"cart": cart, "cart_given":cart_given}
+    response = render(request, 'orders/cart.html', context)
+    response.delete_cookie('cart')
+    return response
 
 
 class CartAddView(View):

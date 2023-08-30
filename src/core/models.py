@@ -16,9 +16,7 @@ class SingletonModel(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        # Check if an instance already exists
         if type(self).objects.exists():
-            # Ensure the instance being saved is the same as the existing instance
             existing_instance = type(self).objects.first()
             if self.pk != existing_instance.pk:
                 raise ValidationError("Only updates to the existing instance are allowed.")

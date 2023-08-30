@@ -1,18 +1,46 @@
 import json
-from datetime import timedelta,datetime
+from datetime import datetime,timedelta
 
+from django.http import Http404
+from django.views import View
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
-from django.db.models import Sum
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
-from orders.models import OrderItem
-
-from .analytics import *
-
-
+from dynamic_menu.models import Configuration
+from ..analytics.datasets import *
+from ..analytics import *
 
 
-def json_api(request):
+
+
+datasets = {
+    "orderitems" : export_order_items_to_csv,
+    "orders" : export_orders_to_csv,
+}
+
+
+
+def download_dataset(request, dataset_name):
+    if dataset_name in datasets:
+        return datasets[dataset_name](request)
+    else:
+        raise Http404
+
+
+
+@permission_required("analytics", raise_exception=True)
+def analytics(request):
+    context = {
+        "peak_hours": get_top_peak_hours(),
+        "sales_total":sales_total(),
+        "datasets": datasets.keys()
+    }
+    return render(request, "panel/analytics.html", context)
+
+
+
+def get_analytics_data():
     context = {
         "sales": {
             "comparative":{
@@ -73,9 +101,21 @@ def json_api(request):
 
 
 
-def analytics(request):
-    context = {
-        "peak_hours": get_top_peak_hours(),
-        "sales_total":sales_total(),
-    }
-    return render(request, "panel/dashboard_manager.html", context)
+class JsonAPI(PermissionRequiredMixin, View):
+    permission_required = ("analytics",)
+
+    _conf = None
+    last_update = datetime.now()
+    current_data = None
+    @property
+    def configurations(self):
+        if not self._conf:
+            self._conf = Configuration.objects.first()
+        return self._conf
+
+
+    def get(self, request):
+        if self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now():
+            self.current_data = get_analytics_data()
+            self.last_update = datetime.now()
+        return self.current_data
