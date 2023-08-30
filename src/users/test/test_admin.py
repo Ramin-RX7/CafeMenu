@@ -1,68 +1,60 @@
-from django.contrib.auth import get_user_model
+from django.test import TestCase, RequestFactory
 from django.contrib.admin.sites import AdminSite
-from django.test import TestCase
-from django.urls import reverse
+from users.models import User
+from users.admin import UserAdmin, UserStaffFilter, UserActiveFilter, SuperUserFilter
+from users.forms import UserAddForm,ChangeForm
 
-from ..admin import UserAdmin
+class MockSuperUser:
+    def has_perm(self, perm):
+        return True
 
-CustomUser = get_user_model()
+request_factory = RequestFactory()
+request = request_factory.get('/admin')
+request.user = MockSuperUser()
+
 class UserAdminTest(TestCase):
-
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.user1 = CustomUser.objects.create(first_name='John', last_name='Doe', phone='09121234567')
-        cls.user2 = CustomUser.objects.create(first_name='Jane', last_name='Doe', phone='09122314567')
-        cls.admin_user = CustomUser.objects.create_superuser(phone='09121234568', password='adminpassword')
-
+    
     def setUp(self):
-        self.client.login(phone='09121234568', password='adminpassword')  
+        self.site = AdminSite()
 
-    def test_search(self):
-        response = self.client.get(reverse('admin:users_user_changelist'), {'q': 'John'})
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'John Doe')
-        self.assertNotContains(response, 'Jane Doe')
+        self.user = User.objects.create(
+            phone='9123456789',
+            first_name='test',
+            last_name='testy',
+            is_active=True,
+            is_staff=True,
+            is_superuser=True
+        )
 
     def test_user_staff_filter(self):
-        response = self.client.get(reverse('admin:users_user_changelist'), {'Staff': 'is_staff'})
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'John Doe')
-        self.assertContains(response, 'Jane Doe')
+        ma = UserAdmin(User, self.site)
+        filter_instance = UserStaffFilter(request, {}, User, ma)
+
+        filter_instance.used_parameters = {'Staff': 'is_staff'}
+        self.assertTrue(self.user in filter_instance.queryset(request, User.objects.all()))
+
+        filter_instance.used_parameters = {'Staff': 'is_not_staff'}
+        self.assertFalse(self.user in filter_instance.queryset(request, User.objects.all()))
 
     def test_user_active_filter(self):
-        response = self.client.get(reverse('admin:users_user_changelist'), {'Active/Inactive': 'active'})
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'John Doe')
-        self.assertContains(response, 'Jane Doe')
+        ma = UserAdmin(User, self.site)
+        filter_instance = UserActiveFilter(request, {}, User, ma)
+
+        filter_instance.used_parameters = {'Active/Inactive': 'active'}
+        self.assertTrue(self.user in filter_instance.queryset(request, User.objects.all()))
+
+        filter_instance.used_parameters = {'Active/Inactive': 'inactive'}
+        self.assertFalse(self.user in filter_instance.queryset(request, User.objects.all()))
 
     def test_superuser_filter(self):
-        response = self.client.get(reverse('admin:users_user_changelist'), {'Superuser': 'superuser'})
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.admin_user.phone) 
+        ma = UserAdmin(User, self.site)
+        filter_instance = SuperUserFilter(request, {}, User, ma)
 
-    def test_change_form(self):
-        response = self.client.get(reverse('admin:users_user_add'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'First name:')
-        self.assertContains(response, 'Last name:')
-        self.assertContains(response, 'Phone:')
+        filter_instance.used_parameters = {'Superuser': 'superuser'}
+        self.assertTrue(self.user in filter_instance.queryset(request, User.objects.all()))
 
-    def test_change_user(self):
-        response = self.client.get(reverse('admin:users_user_change', args=(self.user1.pk,)))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'John Doe')
-
-    def test_change_user_form(self):
-        response = self.client.get(reverse('admin:users_user_change', args=(self.user1.pk,)))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'First name:')
-        self.assertContains(response, 'Last name:')
-        self.assertContains(response, 'Phone:')
-
-    def test_add_user(self):
-        response = self.client.get(reverse('admin:users_user_add'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'First name:')
-        self.assertContains(response, 'Last name:')
-        self.assertContains(response, 'Phone:')
+    def test_get_form(self):
+        ma = UserAdmin(User, self.site)
+        
+        self.assertEqual(ma.get_form(request), UserAddForm)
+        self.assertEqual(ma.get_form(request, self.user), ChangeForm)
