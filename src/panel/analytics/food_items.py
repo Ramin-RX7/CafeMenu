@@ -1,6 +1,6 @@
 import datetime
 from django.db.models import Sum,Q
-from django.db.models.functions import TruncDate
+from django.db.models.functions import TruncDate ,ExtractHour
 from foods.models import Food
 from orders.models import OrderItem
 
@@ -41,33 +41,19 @@ def food_items():
     orderitems = OrderItem.objects.all()
     foods = Food.objects.all()
     foods = [i['title'] for i in foods.values('title')]
-    # info = {}
+
     for food_name in foods:
-        count_of_fooditem_sold_hour_of_today = []
-        for i in range(0,24):
-            hour = f'{i}'
-            data = orderitems.filter(Q(food__title=food_name) & Q(created_at__date=today_date) & Q(created_at__hour__gte=i) & Q(created_at__hour__lt=i+1))\
-            .values('id').annotate(count=Sum('quantity'))
-            if data:
-                count_of_fooditem_sold_hour_of_today.append(data[0]['count'])
-            else:
-                count_of_fooditem_sold_hour_of_today.append(0)
-        food_items['comparative']["day"]["new"][food_name] = sum(count_of_fooditem_sold_hour_of_today)
 
-        count_of_fooditem_sold_hour_of_last_day = []
-        for i in range(0,24):
-            hour = f'{i}'
-            data = orderitems.filter(Q(food__title=food_name) & Q(order__created_at__date=last_day) & Q(order__created_at__hour__gte=i) & Q(order__created_at__hour__lt=i+1))\
-            .values('id').annotate(count=Sum('quantity'))
-            if data:
-                count_of_fooditem_sold_hour_of_last_day.append(data[0]['count'])
-            else:
-                count_of_fooditem_sold_hour_of_last_day.append(0)
-        food_items['comparative']["day"]["old"][food_name] = sum(count_of_fooditem_sold_hour_of_last_day)
+        today_hours = list(orderitems.filter(Q(food__title=food_name) & Q(created_at__date=today_date))\
+        .annotate(hour=ExtractHour('order__created_at')).values('hour').annotate(count=Sum('quantity')))
+        food_items['comparative']["day"]["new"][food_name] = sum(dict_to_list(today_hours,value_item='count',hour=True))
 
-        food_items["relative"]["day"]["new"][food_name] = sum(count_of_fooditem_sold_hour_of_last_day)
+        last_day_hours = list(orderitems.filter(Q(food__title=food_name) & Q(order__created_at__date=last_day))\
+        .annotate(hour=ExtractHour('order__created_at')).values('id').annotate(count=Sum('quantity')))
 
+        food_items['comparative']["day"]["old"][food_name] = sum(dict_to_list(last_day_hours,value_item='count',hour=True))
 
+        food_items["relative"]["day"]["new"][food_name] = sum(dict_to_list(last_day_hours,value_item='count',hour=True))
 
         count_this_week_food = list(orderitems.filter(Q(food__title = food_name) & Q(order__created_at__date__gte=this_week)).\
         annotate(day=TruncDate('order__created_at')).\
@@ -111,5 +97,5 @@ def food_items():
         count_of_fooditem_sold_for_each_day_of_month = dict_to_list(count_month_food,value_item='count',last30days=True)
         food_items["relative"]["month"]["new"][food_name] = sum(count_of_fooditem_sold_for_each_day_of_month)
 
-
+    # print(food_items["comparative"]["day"])
     return food_items

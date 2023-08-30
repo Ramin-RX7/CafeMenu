@@ -13,53 +13,57 @@
     <h3 class="section-title mb-6 pb-3 text-center">Cart</h3>
     <div class="container">
         <div class="row mt-3" style="justify-content:space-around;">
+        {% if cart_given %}
             {% for food,quantity in cart.items %}
-            <div class="card mb-3" style="max-width:90%;">
+            <div class="card mb-3" style="max-width:90%;" id="food-{{food.id}}">
                 <div class="row g-0">
                     <div class="col-md-6">
-                        <img src="{{ food.image.url }}" class="img-fluid img-thumbnail" alt="{{ food.title }}" style="height: 100%; width: 100%;">
+                        <img src="{{ food.image.url }}" class="img-fluid img-thumbnail p-3" alt="{{ food.title }}" style="height: 100%; width: 100%;">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body" style="padding-right:2% ;padding-right:3%;">
-                        <h5 class="card-title text-primary">{{ food.title }}</h5>
-                        <div class="custom-list">
-                            <div class="info">
-                                <div class="head clearfix">
-                                    <div class="title float-left" style="font-size: 16px;">For each</div>
-                                    <div class="float-right" style="font-size: 16px;">{{ food.price }} $</div>
+                            <h5 class="card-title text-primary">{{ food.title }}</h5>
+                            <div class="custom-list">
+                                <div class="info">
+                                    <div class="head clearfix">
+                                        <div class="title float-left" style="font-size: 16px;">For each</div>
+                                        <div class="float-right" style="font-size: 16px;"><span id="unit-price-{{food.id}}">{{ food.price }}</span> $</div>
+                                    </div>
+                                    <div class="head clearfix">
+                                        <div class="title float-left" style="font-size: 16px;">Quantity</div>
+                                        <div id="item-quantity-{{food.id}}" class="float-right" style="font-size: 16px;">{{ quantity }}</div>
+                                    </div>
+                                    {% if food.discount %}
+                                    <div class="head clearfix">
+                                        <div class="title float-left " style="font-size: 16px;">Discount</div>
+                                        <div class="float-right" style="font-size: 16px;"><span class="item-discount" id="discount-{{food.id}}">{{ food.discount }}</span>%</div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="head clearfix">
+                                        <div class="title float-left " style="font-size: 16px;">Total</div>
+                                        <div class="float-right" style="font-size: 16px;"><span class="item-total-price" id="total-price-{{food.id}}">{{ food.final_price|mul:quantity }}</span> $</div>
+                                    </div>
                                 </div>
-                                <div class="head clearfix">
-                                    <div class="title float-left" style="font-size: 16px;">Quantity</div>
-                                    <div class="float-right" style="font-size: 16px;">{{ quantity }}</div>
                             </div>
-                            <div class="head clearfix">
-                                <div class="title float-left " style="font-size: 16px;">Total</div>
-                                <div class="float-right" style="font-size: 16px;"><span class="item-total-price">{{ food.price|mul:quantity }}</span>$</div>
-                            </div>
-                            </div>
-                        </div>
                         </div>
                         <div class="card-body">
                             <div class="col py-3">
-                                <form action="{% url 'orders:cart_add' %}" method="POST">
+                                <form id="form-{{ food.id }}">
                                     {% csrf_token %}
                                     <div class="row">
-                                    <div class="col">
-                                    <input type="number" name="quantity" id="" class="form-control" value="{{ quantity }}" min="1" style="width: 80%;" >
-                                    </div>
-                                    <div class="col py-1">
-                                        <button type="submit_change" name="change" value="{{ food.id }}" class="btn btn-info btn-block" >Change</button>
-                                    </div>
+                                        <div class="col">
+                                            <input type="number" name="quantity" id="" class="quantity-input form-control" value="1" min="1" max="50" style="width: 80%;">
+                                        </div>
+                                        <div class="col py-1">
+                                            <button type="submit" name="food" value="{{ food.id }}" data-id="{{ food.id }}" class="add-button btn btn-info btn-block">Change</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
-                        <div class="col py-2">
-                            <form method="post" action="{% url 'orders:cart_delete' %}">
-                                {% csrf_token %}
-                                <button type="submit" name="food" value="{{ food.id }}" class="btn btn-danger btn-block">Delete</button>
-                            </form>
+                            <div class="col py-2">
+                                <button name="food" value="{{ food.id }}" class="btn btn-danger btn-block del-button">Delete</button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -73,34 +77,64 @@
                 <br>
             </div>
             {% endfor %}
+        {% else %}
+            <script>
+                function setCookie(name, value, days) {
+                    const expires = new Date();
+                    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+                    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+                }
+                let cartData = JSON.parse(localStorage.getItem('cart'));
+                let cartDataString = JSON.stringify(cartData);
+                setCookie('cart', cartDataString, 0.01);
+                window.location.href = window.location.href;
+            </script>
+        {% endif %}
         </div>
     </div>
 
 
-{% if cart %}
-<div class="container text-center head clearfix py-5" >
+    {% if cart %}
+    <div class="container text-center head clearfix py-5" >
         <div class="col">
             <h4 class="py-2">Total orders price : <span class="text-primary" id="total-price"></span> </h4>
+        </div>
+
+        <div class="col row d-flex justify-content-center my-5">
+            <select name="" id="selected-table" class="col-12 col-md-4">
+                <option value="" class="form-control" disabled selected>Select your table</option>
+                {% for table in tables %}
+                    <option value="{{table.id}}" class="form-control">{{table.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col py-2">
+            {% if cart %}
+                {% if logged_in %}
+                <button id="sendDataButton" class="btn btn-success"  style="width: 50%;"><h4 style="padding-top:3%;">Set Order</h4></button>
+                <form id="orderForm" action="{% url 'orders:set_order' %}" method="post">
+                    {% csrf_token %}
+                </form>
+                {% endif %}
             {% endif %}
         </div>
-            <div class="col py-2">
-                {% if cart %}
-                    {% if logged_in %}
-                    <form method="post" action="{% url 'orders:set_order' %}">
-                        {% csrf_token %}
-                        <!-- <div class="d-flex px-5 mx-5 py-3"> -->
-                            <button type="submit" name="food" value="{{ food.id }}" class="btn btn-success"  style="width: 45%;"><h4 style="padding-top:3%;">Set Order</h4></button>
-                        <!-- </div> -->
-                    </form>
-                    {% else %}
-                    <!-- <h2 class="text-center">Please fill out the form below to continue</h2> -->
-                    {% endif %}
-                {% else %}
-                    <!-- ... -->
-                {% endif %}
-
-            </div>
-</div>
+    </div>
+    {% endif %}
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            Item added to cart!
+        </div>
+    </div>
 </section>
+
+
+<script src="{% static 'js/cart.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        calculateCart()
+    });
+</script>
+
 {% endblock %}
 

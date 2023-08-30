@@ -25,13 +25,26 @@ function flattenNestedObject(obj, prefix = '', depth = 0, maxDepth = 3) {
 
 
 // set up the config for comparative charts
-function _getComparativeChartConfig(labels, data, other_data=null){
+function _getChartConfig(fulltype, labels, data, other_data=null){
+    let duration_units = {
+        month: "day",
+        week: "day",
+        day: "hour",
+        year: "month",
+    }
+    let x_label;
+    if (duration_units.hasOwnProperty(fulltype.split(":")[2])) {
+        x_label = duration_units[fulltype.split(":")[2]]+"s"
+    } else {
+        x_label = ""
+    }
+
     let config = {
         data: {
             labels: labels,
             datasets: [
                 {
-                    label: 'This',
+                    label: 'Current',
                     data: data,
                     backgroundColor: 'rgba(190,140,75, 0.6)',
                     borderColor: "#bc8c4c",
@@ -42,8 +55,27 @@ function _getComparativeChartConfig(labels, data, other_data=null){
         options: {
             responsive: true,
             scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: x_label,
+                        font: {
+                            size: 16
+                        }
+                    },
+                    ticks: {
+                        maxRotation: 0,
+                        autoSkip: false
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    title: {
+                        display: true,
+                        text: fulltype.split(":")[0]
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }
             }
         }
@@ -126,7 +158,7 @@ function _getValues(duration_data){
 function getChartConfig(duration, fulltype, data) {
     let labels =  _getDurationLabels(duration, fulltype, data)
     let [newData,oldData] =  _getValues(data)
-    let chartConfig = _getComparativeChartConfig(labels, newData, oldData)
+    let chartConfig = _getChartConfig(fulltype, labels, newData, oldData)
     return chartConfig
 }
 
@@ -152,3 +184,29 @@ fetchDataFromAPI().then(data => {
         createChartWithData(duration_name, fulltype, data);
     }
 });
+
+
+
+
+
+
+document.querySelectorAll('.download-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        let chartId = button.getAttribute('data-chart-id');
+        let canvas = document.getElementById(chartId);
+        downloadChartAsImage(canvas, chartId);
+    });
+});
+
+function downloadChartAsImage(canvas, chartId) {
+    console.log("here");
+    let imageBase64 = canvas.toDataURL('image/png');
+    let currentDate = new Date();
+    let formattedDate = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+    let formattedTime = currentDate.toLocaleTimeString().replace(/:/g, '-'); // HH-MM-SS format
+    let filename = chartId.replace(":", "-") + '-' + formattedDate + '-' + formattedTime + '.png';
+    let link = document.createElement('a');
+    link.href = imageBase64;
+    link.download = filename;
+    link.click();
+}

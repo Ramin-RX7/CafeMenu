@@ -13,7 +13,7 @@ class OrderToDayFilter(admin.SimpleListFilter):
         return[('today','today')]
 
     def queryset(self, request, queryset: QuerySet):
-        if self.value() == 'todaye':
+        if self.value() == 'today':
             return queryset.filter(created_at = datetime.today())
 
 class OrderStatusFilter(admin.SimpleListFilter):
@@ -23,7 +23,7 @@ class OrderStatusFilter(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return[('not_paid','not_paid')]
 
-    def queryset(self, request, queryset: QuerySet):
+    def queryset(self, request, queryset: QuerySet): 
         if self.value() == 'not_paid':
             return queryset.filter(~Q(status = 'Paid'))
 

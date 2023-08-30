@@ -5,31 +5,56 @@
 
 {% block extra_style %}
     <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
-{% endblock extra_style %}
+
+    <style>
+    .background-image {
+        background-image: url({% static 'images/style-4.png' %});/* Replace with your image path */
+        background-size: auto;
+        height: 100vh;
+        position: fixed;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .transparent-card {
+        background-color: rgba(255, 255, 255, 0.6); /* Example value, rgba includes opacity */
+    }
+    button {
+        margin-top: 3%;
+
+    }
+    </style>
+    {% endblock extra_style %}
 
 
 
 
 {% block dashboard_content %}
 
-
-<div class="col-md-9 mt-4">
+<div class="background-image"></div>
+<div class="col-md-9 pt-5">
     <div class="text-center mb-3">
         <button id="allOrdersBtn" class="btn btn-primary mx-1">All Orders</button>
         <button id="pendingOrdersBtn" class="btn btn-primary mx-1">By Table</button>
         <button id="byDateBtn" class="btn btn-primary mx-1">By Date</button>
         <button id="currentUserOrdersBtn" class="btn btn-primary mx-1">User's</button>
+        <button id="bitweendateBtn" class="btn btn-primary mx-1">Filter by date</button>
     </div>
 
-    <div id="allOrders" class="order-section">
+    <div id="allOrders" class="order-section my-5" {% if orders_between != None %}style="display:none;"{% endif %}>
         {% for order in orders %}
         <div class="col-md-12">
-            <div class="order-dsh rounded mx-lg-5 px-lg-3">
-                {% if order.table %} {{order.table.name}}<br> {% endif %}
-                Phone: {{order.customer}}
-                <br>
-                Total Price {{order.final_price}}
-                <div class="col">
+            <div class="order-dsh rounded mx-lg-5 px-lg-3 transparent-card">
+                <div class="col-7">
+                    {% if order.table %}
+                    <div class="text-secondary">Table: <span class="ml-2 text-primary">{{order.table.name}}</span></div>
+                    {% endif %}
+                    <div class="text-secondary">Phone: <span class="ml-2 text-primary">{{order.customer}}</span></div>
+                    <div class="text-secondary">Total Price: <span class="ml-2 text-primary">{{order.final_price}}</span></div>
+                    <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
+                </div>
+                <div class="col-5">
+                {% if perms.orders.change_order %}
                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                     {% if order.status == 'Pending' %}
                         <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
@@ -43,13 +68,14 @@
                     {% elif order.status == 'Delivered' %}
                         <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <div id="pendingOrders" class="order-section" style="display: none;">
+    <div id="pendingOrders" class="order-section my-5" style="display: none;">
         {% for table in tables %}
         <h3 class="mb-3 mt-5 mx-lg-3 px-lg-3">{{table.name}}</h3>
         <div class="row mt-3">
@@ -61,16 +87,12 @@
                     <br>
                     Total Price {{order.final_price}}
                     <div class="col">
+                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                         {% if order.status == 'Pending' %}
                             <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
                             <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
                         {% endif %}
-                        {% if order.status == 'Pending' or order.status == 'Approved' %}
-                            <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
-                        {% endif %}
                         {% if order.status == 'Approved' %}
-                            <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
-                        {% elif order.status == 'Rejected' %}
                             <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
                         {% elif order.status == 'Delivered' %}
                             <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
@@ -88,15 +110,20 @@
         {% endfor %}
     </div>
 
-    <div id="byDateOrders" class="order-section" style="display: none;">
+    <div id="byDateOrders" class="order-section my-5" style="display: none;">
         {% for order in orders_by_date %}
         <div class="col-md-12">
-            <div class="order-dsh rounded mx-lg-5 px-lg-3">
-                {% if order.table %} {{order.table.name}}<br> {% endif %}
-                Phone: {{order.customer}}
-                <br>
-                Total Price {{order.final_price}}
-                <div class="col">
+            <div class="order-dsh transparent-card rounded mx-lg-5 px-lg-3">
+                <div class="col-7">
+                    {% if order.table %}
+                    <div class="text-secondary">Table: <span class="ml-2 text-primary">{{order.table.name}}</span></div>
+                    {% endif %}
+                    <div class="text-secondary">Phone: <span class="ml-2 text-primary">{{order.customer}}</span></div>
+                    <div class="text-secondary">Total Price: <span class="ml-2 text-primary">{{order.final_price}}</span></div>
+                    <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
+                </div>
+                <div class="col-5">
+                {% if perms.orders.change_order %}
                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                     {% if order.status == 'Pending' %}
                         <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
@@ -110,21 +137,27 @@
                     {% elif order.status == 'Delivered' %}
                         <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <div id="currentUserOrders" class="order-section" style="display: none;">
+    <div id="currentUserOrders" class="order-section my-5" style="display: none;">
         {% for order in orders_user %}
         <div class="col-md-12">
-            <div class="order-dsh rounded mx-lg-5 px-lg-3">
-                {% if order.table %} {{order.table.name}}<br> {% endif %}
-                Phone: {{order.customer}}
-                <br>
-                Total Price {{order.final_price}}
-                <div class="col">
+            <div class="order-dsh transparent-card rounded mx-lg-5 px-lg-3">
+                <div class="col-7">
+                    {% if order.table %}
+                    <div class="text-secondary">Table: <span class="ml-2 text-primary">{{order.table.name}}</span></div>
+                    {% endif %}
+                    <div class="text-secondary">Phone: <span class="ml-2 text-primary">{{order.customer}}</span></div>
+                    <div class="text-secondary">Total Price: <span class="ml-2 text-primary">{{order.final_price}}</span></div>
+                    <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
+                </div>
+                <div class="col-5">
+                {% if perms.orders.change_order %}
                     <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
                     {% if order.status == 'Pending' %}
                         <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
@@ -138,10 +171,73 @@
                     {% elif order.status == 'Delivered' %}
                         <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
+    </div>
+
+    <div id="bitweendateSrch" class="order-section my-5" {% if not orders_between != None %}style="display:none;"{% endif %}>
+        <!-- <h3 class="text-center mt-3">Order between date</h3> -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center">
+                {{date_form.errors}}
+            </div>
+            <div class="row d-flex justify-content-center mt-3">
+              <div class="mx-4 col-lg-5 col-sm-12">
+                <div class="text-center">
+                    {{date_form.start_date.label_tag}}
+                </div>
+                <div>
+                    {{date_form.start_date}}
+                </div>
+              </div>
+              <div class="mx-4 col-lg-5 col-sm-12">
+                <div class="text-center">
+                    {{date_form.end_date.label_tag}}
+                </div>
+                <div>
+                    {{date_form.end_date}}
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+                <button id="search" type="submit" value="search" class="btn btn-secondary mt-3 mb-5">Show orders</button>
+            </div>
+        </form>
+        <div>
+            {% for order in orders_between %}
+            <div class="col-md-12">
+                <div class="order-dsh rounded mx-lg-5 px-lg-3 transparent-card">
+                    <div class="col-7">
+                        {% if order.table %}
+                        <div class="text-secondary">Table: <span class="ml-2 text-primary">{{order.table.name}}</span></div>
+                        {% endif %}
+                        <div class="text-secondary">Phone: <span class="ml-2 text-primary">{{order.customer}}</span></div>
+                        <div class="text-secondary">Total Price: <span class="ml-2 text-primary">{{order.final_price}}</span></div>
+                        <div class="text-secondary">Date: <span class="ml-2 text-primary">{{order.created_at.month}}/{{order.created_at.day}} - {{order.created_at.hour}}:{{order.created_at.minute}}</span></div>
+                    </div>
+                    <div class="col-5">
+                        <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                        {% if order.status == 'Pending' %}
+                            <a href="{% url 'panel:approve_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success"  name="{{ order.id }}">Approve</button></a>
+                            <a href="{% url 'panel:reject_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-danger" name="{{ order.id }}">Reject</button></a>
+                        {% endif %}
+                        {% comment %}{ if order.status == 'Pending' or order.status == 'Approved' %}
+                            <a href="{% url 'panel:edit_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-warning" name="{{ order.id }}" >Show/Edit</button></a>
+                        {% endif %}{% endcomment %}
+                        {% if order.status == 'Approved' %}
+                            <a href="{% url 'panel:deliver_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Deliver</button></a>
+                        {% elif order.status == 'Delivered' %}
+                            <a href="{% url 'panel:pay_order' order_id=order.id %}"><button style="float:right" type="button" class="mx-1 btn btn-success" name="{{ order.id }}">Pay</button></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
@@ -170,6 +266,10 @@
         $("#currentUserOrdersBtn").click(function() {
             $(".order-section").hide();
             $("#currentUserOrders").show();
+        });
+        $("#bitweendateBtn").click(function() {
+            $(".order-section").hide();
+            $("#bitweendateSrch").show();
         });
     });
 </script>

@@ -52,6 +52,6 @@ class MenuListView(ListView):
         queryset = super().get_queryset()
         queryset = queryset.annotate(
             num_foods=Count('food')
-        ).filter(num_foods__gt=0).prefetch_related('food_set')
+        ).filter(num_foods__gt=0).prefetch_related('food_set').order_by('pk')
         return queryset
 
