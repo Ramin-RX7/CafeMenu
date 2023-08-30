@@ -14,7 +14,7 @@ For example this test about url test:
 
 Command for running test:
 
-```python manage.py test panel.test```
+```python manage.py test (appname.test)```
 
 Tip 1: for linux user, you should use (python3) alternative (python) at first of command
 
