@@ -80,6 +80,10 @@ class TestViews(TestCase):
         response = self.client.get(self.cart_url)
         self.assertTemplateUsed(response, 'orders/cart.html')
       
+    def test_valid_login_customer_login_view(self):
+        valid_form_data = {'phone': '9176877108'}
+        response = self.client.post(reverse('orders:customer_login'), data=valid_form_data)
+        
         
            
     # def test_get_object_order_detail_view(self):
