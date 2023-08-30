@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>src &#8212; Cafe Menu 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css?v=79c92029" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#modules" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="Cafe Menu 1.0.0 documentation"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Cafe Menu 1.0.0 documentation</span>
+          <span class="md-header-nav__topic"> src </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Cafe Menu 1.0.0 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="Cafe Menu 1.0.0 documentation" class="md-nav__button md-logo">
+      
+        <img src="_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="index.html"
+       title="Cafe Menu 1.0.0 documentation">Cafe Menu 1.0.0 documentation</a>
+  </label>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/modules.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="src">
+<h1 id="modules--page-root">src<a class="headerlink" href="#modules--page-root" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">config package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#module-config.asgi">config.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#module-config.settings">config.settings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#module-config.urls">config.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#module-config.wsgi">config.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#module-config">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.migrations.html">core.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.templatetags.html">core.templatetags package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.templatetags.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.templatetags.html#module-core.templatetags.filters">core.templatetags.filters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.templatetags.html#module-core.templatetags">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.admin">core.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.apps">core.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.apps.CoreConfig"><code class="docutils literal notranslate"><span class="pre">CoreConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">CoreConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.name"><code class="docutils literal notranslate"><span class="pre">CoreConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.forms">core.forms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.models">core.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.Meta"><code class="docutils literal notranslate"><span class="pre">BaseModel.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.created_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.updated_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.SingletonModel"><code class="docutils literal notranslate"><span class="pre">SingletonModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.SingletonModel.Meta"><code class="docutils literal notranslate"><span class="pre">SingletonModel.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.SingletonModel.delete"><code class="docutils literal notranslate"><span class="pre">SingletonModel.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.SingletonModel.save"><code class="docutils literal notranslate"><span class="pre">SingletonModel.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.tests">core.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.urls">core.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.utils">core.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.utils.EditableContexts"><code class="docutils literal notranslate"><span class="pre">EditableContexts</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.utils.EditableContexts.form_login_error"><code class="docutils literal notranslate"><span class="pre">EditableContexts.form_login_error</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.utils.context_handler"><code class="docutils literal notranslate"><span class="pre">context_handler()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.utils.dynamic_menu_context"><code class="docutils literal notranslate"><span class="pre">dynamic_menu_context()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.utils.reset_edited_context"><code class="docutils literal notranslate"><span class="pre">reset_edited_context()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.validators">core.validators module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.validators.phone_validator"><code class="docutils literal notranslate"><span class="pre">phone_validator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.views">core.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.AboutUsTemplateView"><code class="docutils literal notranslate"><span class="pre">AboutUsTemplateView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AboutUsTemplateView.template_name"><code class="docutils literal notranslate"><span class="pre">AboutUsTemplateView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.IndexTemplateView"><code class="docutils literal notranslate"><span class="pre">IndexTemplateView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.IndexTemplateView.template_name"><code class="docutils literal notranslate"><span class="pre">IndexTemplateView.template_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_menu.html">dynamic_menu package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_menu.migrations.html">dynamic_menu.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.migrations.html#module-dynamic_menu.migrations.0001_initial">dynamic_menu.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.migrations.html#module-dynamic_menu.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.admin">dynamic_menu.admin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.MainInfoAdmin"><code class="docutils literal notranslate"><span class="pre">MainInfoAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.MainInfoAdmin.exclude"><code class="docutils literal notranslate"><span class="pre">MainInfoAdmin.exclude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.MainInfoAdmin.list_display"><code class="docutils literal notranslate"><span class="pre">MainInfoAdmin.list_display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.MainInfoAdmin.media"><code class="docutils literal notranslate"><span class="pre">MainInfoAdmin.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.SocialAdmin"><code class="docutils literal notranslate"><span class="pre">SocialAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.SocialAdmin.exclude"><code class="docutils literal notranslate"><span class="pre">SocialAdmin.exclude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.admin.SocialAdmin.media"><code class="docutils literal notranslate"><span class="pre">SocialAdmin.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.apps">dynamic_menu.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.apps.DynamicMenuConfig"><code class="docutils literal notranslate"><span class="pre">DynamicMenuConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.apps.DynamicMenuConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">DynamicMenuConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.apps.DynamicMenuConfig.name"><code class="docutils literal notranslate"><span class="pre">DynamicMenuConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.forms">dynamic_menu.forms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.models">dynamic_menu.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo"><code class="docutils literal notranslate"><span class="pre">MainInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">MainInfo.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">MainInfo.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.about_us"><code class="docutils literal notranslate"><span class="pre">MainInfo.about_us</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.created_at"><code class="docutils literal notranslate"><span class="pre">MainInfo.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.email"><code class="docutils literal notranslate"><span class="pre">MainInfo.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">MainInfo.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">MainInfo.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">MainInfo.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">MainInfo.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.icon"><code class="docutils literal notranslate"><span class="pre">MainInfo.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.id"><code class="docutils literal notranslate"><span class="pre">MainInfo.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.logo"><code class="docutils literal notranslate"><span class="pre">MainInfo.logo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.motto"><code class="docutils literal notranslate"><span class="pre">MainInfo.motto</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.objects"><code class="docutils literal notranslate"><span class="pre">MainInfo.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.phone"><code class="docutils literal notranslate"><span class="pre">MainInfo.phone</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.short_description"><code class="docutils literal notranslate"><span class="pre">MainInfo.short_description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.title"><code class="docutils literal notranslate"><span class="pre">MainInfo.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.MainInfo.updated_at"><code class="docutils literal notranslate"><span class="pre">MainInfo.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social"><code class="docutils literal notranslate"><span class="pre">Social</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Social.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Social.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.created_at"><code class="docutils literal notranslate"><span class="pre">Social.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.facebook"><code class="docutils literal notranslate"><span class="pre">Social.facebook</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Social.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Social.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Social.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Social.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.id"><code class="docutils literal notranslate"><span class="pre">Social.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.instagram"><code class="docutils literal notranslate"><span class="pre">Social.instagram</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.objects"><code class="docutils literal notranslate"><span class="pre">Social.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.telegram"><code class="docutils literal notranslate"><span class="pre">Social.telegram</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.tweeter"><code class="docutils literal notranslate"><span class="pre">Social.tweeter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.updated_at"><code class="docutils literal notranslate"><span class="pre">Social.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.whatsapp"><code class="docutils literal notranslate"><span class="pre">Social.whatsapp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_menu.html#dynamic_menu.models.Social.youtube"><code class="docutils literal notranslate"><span class="pre">Social.youtube</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.tests">dynamic_menu.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.urls">dynamic_menu.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu.views">dynamic_menu.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_menu.html#module-dynamic_menu">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="foods.html">foods package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="foods.migrations.html">foods.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.migrations.html#module-foods.migrations.0001_initial">foods.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.migrations.html#module-foods.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.admin">foods.admin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.form"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.form</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.get_fieldsets"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.get_fieldsets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.list_display"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.list_display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.list_filter"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.list_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.media"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.ordering"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.ordering</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.readonly_fields"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.readonly_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.save_model"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.save_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.search_fields"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.search_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryAdmin.view_foods"><code class="docutils literal notranslate"><span class="pre">CategoryAdmin.view_foods()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.admin.CategoryFilter"><code class="docutils literal notranslate"><span class="pre">CategoryFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryFilter.lookups"><code class="docutils literal notranslate"><span class="pre">CategoryFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">CategoryFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryFilter.queryset"><code class="docutils literal notranslate"><span class="pre">CategoryFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.CategoryFilter.title"><code class="docutils literal notranslate"><span class="pre">CategoryFilter.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin"><code class="docutils literal notranslate"><span class="pre">FoodAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.autocomplete_fields"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.autocomplete_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.form"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.form</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.list_display"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.list_display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.list_editable"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.list_editable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.list_filter"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.list_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.list_per_page"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.list_per_page</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.media"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.ordering"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.ordering</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.save_model"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.save_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodAdmin.search_fields"><code class="docutils literal notranslate"><span class="pre">FoodAdmin.search_fields</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.admin.FoodFilter"><code class="docutils literal notranslate"><span class="pre">FoodFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodFilter.lookups"><code class="docutils literal notranslate"><span class="pre">FoodFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">FoodFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodFilter.queryset"><code class="docutils literal notranslate"><span class="pre">FoodFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.admin.FoodFilter.title"><code class="docutils literal notranslate"><span class="pre">FoodFilter.title</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.apps">foods.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.apps.FoodsConfig"><code class="docutils literal notranslate"><span class="pre">FoodsConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.apps.FoodsConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">FoodsConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.apps.FoodsConfig.name"><code class="docutils literal notranslate"><span class="pre">FoodsConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.forms">foods.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.forms.CategoryForm"><code class="docutils literal notranslate"><span class="pre">CategoryForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.CategoryForm.Meta"><code class="docutils literal notranslate"><span class="pre">CategoryForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.CategoryForm.base_fields"><code class="docutils literal notranslate"><span class="pre">CategoryForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.CategoryForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">CategoryForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.CategoryForm.media"><code class="docutils literal notranslate"><span class="pre">CategoryForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.forms.FoodForm"><code class="docutils literal notranslate"><span class="pre">FoodForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.FoodForm.Meta"><code class="docutils literal notranslate"><span class="pre">FoodForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.FoodForm.base_fields"><code class="docutils literal notranslate"><span class="pre">FoodForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.FoodForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">FoodForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.forms.FoodForm.media"><code class="docutils literal notranslate"><span class="pre">FoodForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.models">foods.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.models.Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Category.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Category.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.created_at"><code class="docutils literal notranslate"><span class="pre">Category.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.description"><code class="docutils literal notranslate"><span class="pre">Category.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.food_set"><code class="docutils literal notranslate"><span class="pre">Category.food_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Category.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Category.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Category.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Category.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.id"><code class="docutils literal notranslate"><span class="pre">Category.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.image"><code class="docutils literal notranslate"><span class="pre">Category.image</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.objects"><code class="docutils literal notranslate"><span class="pre">Category.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.title"><code class="docutils literal notranslate"><span class="pre">Category.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Category.updated_at"><code class="docutils literal notranslate"><span class="pre">Category.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.models.Food"><code class="docutils literal notranslate"><span class="pre">Food</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Food.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Food.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.category"><code class="docutils literal notranslate"><span class="pre">Food.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.category_id"><code class="docutils literal notranslate"><span class="pre">Food.category_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.created_at"><code class="docutils literal notranslate"><span class="pre">Food.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.description"><code class="docutils literal notranslate"><span class="pre">Food.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.discount"><code class="docutils literal notranslate"><span class="pre">Food.discount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Food.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Food.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Food.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Food.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.id"><code class="docutils literal notranslate"><span class="pre">Food.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.image"><code class="docutils literal notranslate"><span class="pre">Food.image</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.is_active"><code class="docutils literal notranslate"><span class="pre">Food.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.objects"><code class="docutils literal notranslate"><span class="pre">Food.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.orderitem_set"><code class="docutils literal notranslate"><span class="pre">Food.orderitem_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.price"><code class="docutils literal notranslate"><span class="pre">Food.price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.title"><code class="docutils literal notranslate"><span class="pre">Food.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.models.Food.updated_at"><code class="docutils literal notranslate"><span class="pre">Food.updated_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.tests">foods.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.urls">foods.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods.views">foods.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.views.CategoryDetailView"><code class="docutils literal notranslate"><span class="pre">CategoryDetailView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryDetailView.context_object_name"><code class="docutils literal notranslate"><span class="pre">CategoryDetailView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryDetailView.get_context_data"><code class="docutils literal notranslate"><span class="pre">CategoryDetailView.get_context_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryDetailView.model"><code class="docutils literal notranslate"><span class="pre">CategoryDetailView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryDetailView.pk_url_kwarg"><code class="docutils literal notranslate"><span class="pre">CategoryDetailView.pk_url_kwarg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryDetailView.template_name"><code class="docutils literal notranslate"><span class="pre">CategoryDetailView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.views.CategoryListView"><code class="docutils literal notranslate"><span class="pre">CategoryListView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryListView.context_object_name"><code class="docutils literal notranslate"><span class="pre">CategoryListView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryListView.model"><code class="docutils literal notranslate"><span class="pre">CategoryListView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.CategoryListView.template_name"><code class="docutils literal notranslate"><span class="pre">CategoryListView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.views.FoodDetailView"><code class="docutils literal notranslate"><span class="pre">FoodDetailView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.FoodDetailView.context_object_name"><code class="docutils literal notranslate"><span class="pre">FoodDetailView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.FoodDetailView.model"><code class="docutils literal notranslate"><span class="pre">FoodDetailView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.FoodDetailView.pk_url_kwarg"><code class="docutils literal notranslate"><span class="pre">FoodDetailView.pk_url_kwarg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.FoodDetailView.template_name"><code class="docutils literal notranslate"><span class="pre">FoodDetailView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.views.MenuListView"><code class="docutils literal notranslate"><span class="pre">MenuListView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.MenuListView.context_object_name"><code class="docutils literal notranslate"><span class="pre">MenuListView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.MenuListView.get_queryset"><code class="docutils literal notranslate"><span class="pre">MenuListView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.MenuListView.model"><code class="docutils literal notranslate"><span class="pre">MenuListView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.MenuListView.template_name"><code class="docutils literal notranslate"><span class="pre">MenuListView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="foods.html#foods.views.SearchView"><code class="docutils literal notranslate"><span class="pre">SearchView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="foods.html#foods.views.SearchView.get"><code class="docutils literal notranslate"><span class="pre">SearchView.get()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="foods.html#module-foods">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manage.html">manage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage.html#manage.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="orders.html">orders package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.migrations.html">orders.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.migrations.html#module-orders.migrations.0001_initial">orders.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.migrations.html#module-orders.migrations.0002_order_responsible_staff">orders.migrations.0002_order_responsible_staff module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.migrations.html#module-orders.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.admin">orders.admin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin"><code class="docutils literal notranslate"><span class="pre">OrderAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin.list_display"><code class="docutils literal notranslate"><span class="pre">OrderAdmin.list_display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin.list_filter"><code class="docutils literal notranslate"><span class="pre">OrderAdmin.list_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin.list_per_page"><code class="docutils literal notranslate"><span class="pre">OrderAdmin.list_per_page</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin.media"><code class="docutils literal notranslate"><span class="pre">OrderAdmin.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin.ordering"><code class="docutils literal notranslate"><span class="pre">OrderAdmin.ordering</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderAdmin.readonly_fields"><code class="docutils literal notranslate"><span class="pre">OrderAdmin.readonly_fields</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.admin.OrderStatusFilter"><code class="docutils literal notranslate"><span class="pre">OrderStatusFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderStatusFilter.lookups"><code class="docutils literal notranslate"><span class="pre">OrderStatusFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderStatusFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">OrderStatusFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderStatusFilter.queryset"><code class="docutils literal notranslate"><span class="pre">OrderStatusFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderStatusFilter.title"><code class="docutils literal notranslate"><span class="pre">OrderStatusFilter.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.admin.OrderToDayFilter"><code class="docutils literal notranslate"><span class="pre">OrderToDayFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderToDayFilter.lookups"><code class="docutils literal notranslate"><span class="pre">OrderToDayFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderToDayFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">OrderToDayFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderToDayFilter.queryset"><code class="docutils literal notranslate"><span class="pre">OrderToDayFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.OrderToDayFilter.title"><code class="docutils literal notranslate"><span class="pre">OrderToDayFilter.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.admin.TableAdmin"><code class="docutils literal notranslate"><span class="pre">TableAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.TableAdmin.list_display"><code class="docutils literal notranslate"><span class="pre">TableAdmin.list_display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.admin.TableAdmin.media"><code class="docutils literal notranslate"><span class="pre">TableAdmin.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.apps">orders.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.apps.OrdersConfig"><code class="docutils literal notranslate"><span class="pre">OrdersConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.apps.OrdersConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">OrdersConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.apps.OrdersConfig.name"><code class="docutils literal notranslate"><span class="pre">OrdersConfig.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.apps.OrdersConfig.ready"><code class="docutils literal notranslate"><span class="pre">OrdersConfig.ready()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.forms">orders.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.forms.CustomerLoginForm"><code class="docutils literal notranslate"><span class="pre">CustomerLoginForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.forms.CustomerLoginForm.base_fields"><code class="docutils literal notranslate"><span class="pre">CustomerLoginForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.forms.CustomerLoginForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">CustomerLoginForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.forms.CustomerLoginForm.media"><code class="docutils literal notranslate"><span class="pre">CustomerLoginForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.forms.PhoneInput"><code class="docutils literal notranslate"><span class="pre">PhoneInput</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.forms.PhoneInput.media"><code class="docutils literal notranslate"><span class="pre">PhoneInput.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.models">orders.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.models.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Order.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Order.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.approve"><code class="docutils literal notranslate"><span class="pre">Order.approve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.created_at"><code class="docutils literal notranslate"><span class="pre">Order.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.customer"><code class="docutils literal notranslate"><span class="pre">Order.customer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.deliver"><code class="docutils literal notranslate"><span class="pre">Order.deliver()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.discount"><code class="docutils literal notranslate"><span class="pre">Order.discount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.final_price"><code class="docutils literal notranslate"><span class="pre">Order.final_price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Order.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Order.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Order.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Order.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.get_status_display"><code class="docutils literal notranslate"><span class="pre">Order.get_status_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.id"><code class="docutils literal notranslate"><span class="pre">Order.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.objects"><code class="docutils literal notranslate"><span class="pre">Order.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.orderitem_set"><code class="docutils literal notranslate"><span class="pre">Order.orderitem_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.pay"><code class="docutils literal notranslate"><span class="pre">Order.pay()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.price"><code class="docutils literal notranslate"><span class="pre">Order.price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.reject"><code class="docutils literal notranslate"><span class="pre">Order.reject()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.responsible_staff"><code class="docutils literal notranslate"><span class="pre">Order.responsible_staff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.responsible_staff_id"><code class="docutils literal notranslate"><span class="pre">Order.responsible_staff_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.save"><code class="docutils literal notranslate"><span class="pre">Order.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.status"><code class="docutils literal notranslate"><span class="pre">Order.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.status_field"><code class="docutils literal notranslate"><span class="pre">Order.status_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.table"><code class="docutils literal notranslate"><span class="pre">Order.table</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.table_id"><code class="docutils literal notranslate"><span class="pre">Order.table_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.take_responsibility"><code class="docutils literal notranslate"><span class="pre">Order.take_responsibility()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Order.updated_at"><code class="docutils literal notranslate"><span class="pre">Order.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.models.OrderItem"><code class="docutils literal notranslate"><span class="pre">OrderItem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">OrderItem.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">OrderItem.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.created_at"><code class="docutils literal notranslate"><span class="pre">OrderItem.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.discount"><code class="docutils literal notranslate"><span class="pre">OrderItem.discount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.food"><code class="docutils literal notranslate"><span class="pre">OrderItem.food</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.food_id"><code class="docutils literal notranslate"><span class="pre">OrderItem.food_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">OrderItem.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">OrderItem.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">OrderItem.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">OrderItem.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.id"><code class="docutils literal notranslate"><span class="pre">OrderItem.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.objects"><code class="docutils literal notranslate"><span class="pre">OrderItem.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.order"><code class="docutils literal notranslate"><span class="pre">OrderItem.order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.order_id"><code class="docutils literal notranslate"><span class="pre">OrderItem.order_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.quantity"><code class="docutils literal notranslate"><span class="pre">OrderItem.quantity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.save"><code class="docutils literal notranslate"><span class="pre">OrderItem.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.unit_price"><code class="docutils literal notranslate"><span class="pre">OrderItem.unit_price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.OrderItem.updated_at"><code class="docutils literal notranslate"><span class="pre">OrderItem.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.models.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Table.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Table.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.created_at"><code class="docutils literal notranslate"><span class="pre">Table.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.get_available_table"><code class="docutils literal notranslate"><span class="pre">Table.get_available_table()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Table.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Table.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Table.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Table.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.id"><code class="docutils literal notranslate"><span class="pre">Table.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.is_reserved"><code class="docutils literal notranslate"><span class="pre">Table.is_reserved</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.name"><code class="docutils literal notranslate"><span class="pre">Table.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.objects"><code class="docutils literal notranslate"><span class="pre">Table.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.order_set"><code class="docutils literal notranslate"><span class="pre">Table.order_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.models.Table.updated_at"><code class="docutils literal notranslate"><span class="pre">Table.updated_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.signals">orders.signals module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.signals.handle_orderItem_save"><code class="docutils literal notranslate"><span class="pre">handle_orderItem_save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.tests">orders.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.urls">orders.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders.views">orders.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.CartAddView"><code class="docutils literal notranslate"><span class="pre">CartAddView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.CartAddView.post"><code class="docutils literal notranslate"><span class="pre">CartAddView.post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.CartDeleteView"><code class="docutils literal notranslate"><span class="pre">CartDeleteView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.CartDeleteView.pattern_name"><code class="docutils literal notranslate"><span class="pre">CartDeleteView.pattern_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.CartDeleteView.post"><code class="docutils literal notranslate"><span class="pre">CartDeleteView.post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.CustomerLoginView"><code class="docutils literal notranslate"><span class="pre">CustomerLoginView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.CustomerLoginView.post"><code class="docutils literal notranslate"><span class="pre">CustomerLoginView.post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.IndexView"><code class="docutils literal notranslate"><span class="pre">IndexView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.IndexView.get_context_data"><code class="docutils literal notranslate"><span class="pre">IndexView.get_context_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.IndexView.model"><code class="docutils literal notranslate"><span class="pre">IndexView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.IndexView.template_name"><code class="docutils literal notranslate"><span class="pre">IndexView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.OrderDetailView"><code class="docutils literal notranslate"><span class="pre">OrderDetailView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.OrderDetailView.context_object_name"><code class="docutils literal notranslate"><span class="pre">OrderDetailView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.OrderDetailView.get_object"><code class="docutils literal notranslate"><span class="pre">OrderDetailView.get_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.OrderDetailView.model"><code class="docutils literal notranslate"><span class="pre">OrderDetailView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.OrderDetailView.template_name"><code class="docutils literal notranslate"><span class="pre">OrderDetailView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.OrderListView"><code class="docutils literal notranslate"><span class="pre">OrderListView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.OrderListView.pattern_name"><code class="docutils literal notranslate"><span class="pre">OrderListView.pattern_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.SetOrderView"><code class="docutils literal notranslate"><span class="pre">SetOrderView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orders.html#orders.views.SetOrderView.post"><code class="docutils literal notranslate"><span class="pre">SetOrderView.post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orders.html#orders.views.cart"><code class="docutils literal notranslate"><span class="pre">cart()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orders.html#module-orders">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="panel.html">panel package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="panel.analytics.html">panel.analytics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.archives">panel.analytics.archives module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.categories">panel.analytics.categories module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.count_orders">panel.analytics.count_orders module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.customer_sales">panel.analytics.customer_sales module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.food_items">panel.analytics.food_items module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.lib">panel.analytics.lib module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.others">panel.analytics.others module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.peak_hours">panel.analytics.peak_hours module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.sales">panel.analytics.sales module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics.unique_customers">panel.analytics.unique_customers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.analytics.html#module-panel.analytics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.migrations.html">panel.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.migrations.html#module-panel.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.admin">panel.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.apps">panel.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.apps.PanelConfig"><code class="docutils literal notranslate"><span class="pre">PanelConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.apps.PanelConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">PanelConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.apps.PanelConfig.name"><code class="docutils literal notranslate"><span class="pre">PanelConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.forms">panel.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.forms.AddOrderItemForm"><code class="docutils literal notranslate"><span class="pre">AddOrderItemForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.AddOrderItemForm.Meta"><code class="docutils literal notranslate"><span class="pre">AddOrderItemForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.AddOrderItemForm.base_fields"><code class="docutils literal notranslate"><span class="pre">AddOrderItemForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.AddOrderItemForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">AddOrderItemForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.AddOrderItemForm.media"><code class="docutils literal notranslate"><span class="pre">AddOrderItemForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.forms.EditOrderForm"><code class="docutils literal notranslate"><span class="pre">EditOrderForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderForm.Meta"><code class="docutils literal notranslate"><span class="pre">EditOrderForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderForm.base_fields"><code class="docutils literal notranslate"><span class="pre">EditOrderForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">EditOrderForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderForm.media"><code class="docutils literal notranslate"><span class="pre">EditOrderForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.forms.EditOrderItemForm"><code class="docutils literal notranslate"><span class="pre">EditOrderItemForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderItemForm.Meta"><code class="docutils literal notranslate"><span class="pre">EditOrderItemForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderItemForm.base_fields"><code class="docutils literal notranslate"><span class="pre">EditOrderItemForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderItemForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">EditOrderItemForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.EditOrderItemForm.media"><code class="docutils literal notranslate"><span class="pre">EditOrderItemForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.forms.UserLogInForm"><code class="docutils literal notranslate"><span class="pre">UserLogInForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.UserLogInForm.base_fields"><code class="docutils literal notranslate"><span class="pre">UserLogInForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.UserLogInForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">UserLogInForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.UserLogInForm.media"><code class="docutils literal notranslate"><span class="pre">UserLogInForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.forms.UserVerifyForm"><code class="docutils literal notranslate"><span class="pre">UserVerifyForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.UserVerifyForm.base_fields"><code class="docutils literal notranslate"><span class="pre">UserVerifyForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.UserVerifyForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">UserVerifyForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.forms.UserVerifyForm.media"><code class="docutils literal notranslate"><span class="pre">UserVerifyForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.models">panel.models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.tests">panel.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.urls">panel.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.views">panel.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.EditOrders"><code class="docutils literal notranslate"><span class="pre">EditOrders</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.EditOrders.dispatch"><code class="docutils literal notranslate"><span class="pre">EditOrders.dispatch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.EditOrders.get"><code class="docutils literal notranslate"><span class="pre">EditOrders.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.EditOrders.post"><code class="docutils literal notranslate"><span class="pre">EditOrders.post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.LoginView"><code class="docutils literal notranslate"><span class="pre">LoginView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.LoginView.dispatch"><code class="docutils literal notranslate"><span class="pre">LoginView.dispatch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.LoginView.form_class"><code class="docutils literal notranslate"><span class="pre">LoginView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.LoginView.form_valid"><code class="docutils literal notranslate"><span class="pre">LoginView.form_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.LoginView.success_url"><code class="docutils literal notranslate"><span class="pre">LoginView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.LoginView.template_name"><code class="docutils literal notranslate"><span class="pre">LoginView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.UserVerifyView"><code class="docutils literal notranslate"><span class="pre">UserVerifyView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.dispatch"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.dispatch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.form_class"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.form_valid"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.form_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.get"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.post"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.success_url"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="panel.html#panel.views.UserVerifyView.template_name"><code class="docutils literal notranslate"><span class="pre">UserVerifyView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.approve_order"><code class="docutils literal notranslate"><span class="pre">approve_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.dashboard_staff"><code class="docutils literal notranslate"><span class="pre">dashboard_staff()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.deliver_order"><code class="docutils literal notranslate"><span class="pre">deliver_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.generate_2fa"><code class="docutils literal notranslate"><span class="pre">generate_2fa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.pay_order"><code class="docutils literal notranslate"><span class="pre">pay_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.reject_order"><code class="docutils literal notranslate"><span class="pre">reject_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.simple_action"><code class="docutils literal notranslate"><span class="pre">simple_action()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views.take_responsibility"><code class="docutils literal notranslate"><span class="pre">take_responsibility()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel.views_manager">panel.views_manager module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views_manager.analytics"><code class="docutils literal notranslate"><span class="pre">analytics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="panel.html#panel.views_manager.json_api"><code class="docutils literal notranslate"><span class="pre">json_api()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="panel.html#module-panel">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="users.html">users package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="users.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.migrations.html">users.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.migrations.html#module-users.migrations.0001_initial">users.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.migrations.html#module-users.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.admin">users.admin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.admin.SuperUserFilter"><code class="docutils literal notranslate"><span class="pre">SuperUserFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.SuperUserFilter.lookups"><code class="docutils literal notranslate"><span class="pre">SuperUserFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.SuperUserFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">SuperUserFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.SuperUserFilter.queryset"><code class="docutils literal notranslate"><span class="pre">SuperUserFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.SuperUserFilter.title"><code class="docutils literal notranslate"><span class="pre">SuperUserFilter.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.admin.UserActiveFilter"><code class="docutils literal notranslate"><span class="pre">UserActiveFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserActiveFilter.lookups"><code class="docutils literal notranslate"><span class="pre">UserActiveFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserActiveFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">UserActiveFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserActiveFilter.queryset"><code class="docutils literal notranslate"><span class="pre">UserActiveFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserActiveFilter.title"><code class="docutils literal notranslate"><span class="pre">UserActiveFilter.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.admin.UserAdmin"><code class="docutils literal notranslate"><span class="pre">UserAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserAdmin.get_form"><code class="docutils literal notranslate"><span class="pre">UserAdmin.get_form()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserAdmin.list_filter"><code class="docutils literal notranslate"><span class="pre">UserAdmin.list_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserAdmin.media"><code class="docutils literal notranslate"><span class="pre">UserAdmin.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserAdmin.search_fields"><code class="docutils literal notranslate"><span class="pre">UserAdmin.search_fields</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.admin.UserStaffFilter"><code class="docutils literal notranslate"><span class="pre">UserStaffFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserStaffFilter.lookups"><code class="docutils literal notranslate"><span class="pre">UserStaffFilter.lookups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserStaffFilter.parameter_name"><code class="docutils literal notranslate"><span class="pre">UserStaffFilter.parameter_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserStaffFilter.queryset"><code class="docutils literal notranslate"><span class="pre">UserStaffFilter.queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.admin.UserStaffFilter.title"><code class="docutils literal notranslate"><span class="pre">UserStaffFilter.title</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.apps">users.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.apps.UsersConfig"><code class="docutils literal notranslate"><span class="pre">UsersConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.apps.UsersConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">UsersConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.apps.UsersConfig.name"><code class="docutils literal notranslate"><span class="pre">UsersConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.auth">users.auth module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.auth.UserAuthBackend"><code class="docutils literal notranslate"><span class="pre">UserAuthBackend</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.auth.UserAuthBackend.authenticate"><code class="docutils literal notranslate"><span class="pre">UserAuthBackend.authenticate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.auth.UserAuthBackend.get_user"><code class="docutils literal notranslate"><span class="pre">UserAuthBackend.get_user()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.forms">users.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.forms.UserAddForm"><code class="docutils literal notranslate"><span class="pre">UserAddForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserAddForm.Meta"><code class="docutils literal notranslate"><span class="pre">UserAddForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserAddForm.base_fields"><code class="docutils literal notranslate"><span class="pre">UserAddForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserAddForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">UserAddForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserAddForm.media"><code class="docutils literal notranslate"><span class="pre">UserAddForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.forms.UserChangeForm"><code class="docutils literal notranslate"><span class="pre">UserChangeForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserChangeForm.Meta"><code class="docutils literal notranslate"><span class="pre">UserChangeForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserChangeForm.base_fields"><code class="docutils literal notranslate"><span class="pre">UserChangeForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserChangeForm.clean_password"><code class="docutils literal notranslate"><span class="pre">UserChangeForm.clean_password()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserChangeForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">UserChangeForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.forms.UserChangeForm.media"><code class="docutils literal notranslate"><span class="pre">UserChangeForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.models">users.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.models.PhoneNumberField"><code class="docutils literal notranslate"><span class="pre">PhoneNumberField</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.PhoneNumberField.get_prep_value"><code class="docutils literal notranslate"><span class="pre">PhoneNumberField.get_prep_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">User.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">User.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.REQUIRED_FIELDS"><code class="docutils literal notranslate"><span class="pre">User.REQUIRED_FIELDS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.USERNAME_FIELD"><code class="docutils literal notranslate"><span class="pre">User.USERNAME_FIELD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.created_at"><code class="docutils literal notranslate"><span class="pre">User.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.first_name"><code class="docutils literal notranslate"><span class="pre">User.first_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">User.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">User.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">User.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">User.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.groups"><code class="docutils literal notranslate"><span class="pre">User.groups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_active"><code class="docutils literal notranslate"><span class="pre">User.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_staff"><code class="docutils literal notranslate"><span class="pre">User.is_staff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_superuser"><code class="docutils literal notranslate"><span class="pre">User.is_superuser</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.last_login"><code class="docutils literal notranslate"><span class="pre">User.last_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.last_name"><code class="docutils literal notranslate"><span class="pre">User.last_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.logentry_set"><code class="docutils literal notranslate"><span class="pre">User.logentry_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.objects"><code class="docutils literal notranslate"><span class="pre">User.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.order_set"><code class="docutils literal notranslate"><span class="pre">User.order_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.phone"><code class="docutils literal notranslate"><span class="pre">User.phone</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.updated_at"><code class="docutils literal notranslate"><span class="pre">User.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.user_permissions"><code class="docutils literal notranslate"><span class="pre">User.user_permissions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.models.UserManager"><code class="docutils literal notranslate"><span class="pre">UserManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.UserManager.create_superuser"><code class="docutils literal notranslate"><span class="pre">UserManager.create_superuser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.UserManager.create_user"><code class="docutils literal notranslate"><span class="pre">UserManager.create_user()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.tests">users.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.urls">users.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.views">users.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Hossein.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>
