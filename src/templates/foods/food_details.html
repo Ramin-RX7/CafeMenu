@@ -26,8 +26,13 @@
                 <form id="form-{{ food.id }}" class="mt-3 mb-4" style="display: flex;">
                     {% csrf_token %}
                     <button type="submit" name="food" value="{{ food.id }}" data-id="{{ food.id }}" class="add-button btn btn-primary btn-block" style="align-items: center;margin-right: 1rem;display: grid;">Add to Cart</button>
-                    <input type="number" name="quantity" id="" class="quantity-input form-control" value="1" min="1" max="50" style="width: 20%;">
-                </form>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-secondary h-100 decreaseBtn" id="" data-food-id="{{food.id}}">-</button>
+                    </span>
+                    <input type="number" name="quantity" id="input-food-{{food.id}}" class="quantity-input form-control" value="1" min="1" max="50" style="width: 20%;">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-secondary h-100 increaseBtn" id="" data-food-id="{{food.id}}">+</button>
+                    </span>                </form>
                 {% else %}
                 <div class="mt-3 text-secondary"><i>Unfortunately this food is not available for now</i></div>
                 {% endif %}
