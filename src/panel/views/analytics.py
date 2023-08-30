@@ -104,7 +104,7 @@ class JsonAPI(PermissionRequiredMixin, View):
 
 
     def get(self, request):
-        if self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now():
+        if (not self.current_data)  or  (self.last_update + timedelta(hours=self.configurations.analytics_refresh)  <  datetime.now()):
             self.current_data = get_analytics_data()
             self.last_update = datetime.now()
         return self.current_data
