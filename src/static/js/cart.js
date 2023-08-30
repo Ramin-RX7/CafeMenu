@@ -37,6 +37,7 @@ document.querySelectorAll('.del-button').forEach(function(button) {
         let foodSection = document.getElementById(`food-${itemId}`)
         foodSection.remove()
 
+        calculateCart();
         showPopup("Item deleted")
     });
 });
