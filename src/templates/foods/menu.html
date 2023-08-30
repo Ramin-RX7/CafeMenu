@@ -8,10 +8,23 @@
 
 {% block content %}
 
+<div class="sticky-top bg-light">
+    <div class="nav d-flex justify-content-center pl-4 flex-nowrap overflow-auto">
+        {% for category in categories %}
+            <a href="#{{ category.id }}" class="nav-item text-center mx-3 my-2">
+                <img src="{{category.image.url}}" alt="" class="sticky-category-image">
+                <div href="">{{category.title}}</div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+
+
 <section id="about2" style="background-image: url({% static 'images/style-4.png' %});">
     <h3 class="section-title pb-3 text-center">Menu</h3>
     {% for category in categories %}
-    <div class="container position-relative ">
+    <div class="container position-relative category-section" id="{{category.id}}">
 
         <div class="section-devider my-4 transparent"></div>
         <div class="row align-items-center mb-4">
