@@ -14,35 +14,30 @@
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded shadow py-2 mb-4 col-lg-9">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow py-2 col-md-9">
     <a class="navbar-brand ml-4" href="/">
         <img src="{{ maininfo.icon.url }}" alt="" class="navbar-brand" width="50px">
     </a>
     <a class="navbar-brand" href="/">{{ maininfo.title }}</a>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-2 mt-2">
-                <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
-            </li>
-            <li class="nav-item mx-2 mt-2">
+            <li class="nav-item mx-4 mt-2">
                 <a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a>
             </li>
-            <li class="nav-item mx-2 mt-2">
+            <li class="nav-item mx-4 mt-2">
                 <a class="nav-link" href="{% url 'foods:menu' %}">Menu</a>
             </li>
-            <li class="nav-item mx-2 mt-2">
+            {% if perms.analytics %}
+            <li class="nav-item mx-3 mt-2">
                 <a class="nav-link" href="{% url 'panel:analytics' %}">Analytics</a>
             </li>
-            <li class="nav-item mx-2 mt-2">
+            {%endif%}
+            <li class="nav-item ml-2 mr-5 mt-2">
                 <a href="{% url 'panel:logout' %}" class="ml-4 mt-1 btn btn-primary btn-sm w-100">Logout</a>
-            </li>
-            <li class="nav-item mx-2">
-            <form action="{% url 'foods:search' %}" method="get" class="ml-5">
-                <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
-            </form>
             </li>
         </ul>
     </div>
@@ -58,7 +53,7 @@
             top: 0;
             right: 0;
             height: 100vh;
-            background-color: #f5f5f5;
+            border-left: 1px;
         }
     }
 
@@ -67,15 +62,29 @@
             position: static;
             width: 100%;
             margin-top: 20px;
-            background-color: #f5f5f5;
         }
     }
+
+    select {
+        display: block;
+        width: 100%;
+        padding: 25px 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+}
+
 </style>
 
 
 
 
-<div class="my-5">
+<div class="">
     <div class="container-fluid">
         <div class="row">
 
@@ -83,14 +92,16 @@
             {% endblock dashboard_content %}
 
 
-            <div class="col-md-3 sidebar py-4 d-flex flex-column justify-content-center">
+            <div class="col-md-3 sidebar border-left border-top bg-light py-4 d-flex flex-column justify-content-center">
                 <!-- Sidebar content -->
-                <p class="d-flex justify-content-center h4">Welcome "{{name}}"</p>
+                <p class="d-flex justify-content-center h5">Welcome {% if name %}"{{name}}"{% endif %}</p>
                 <hr>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:dashboard' %}">Dashboard</a></li>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:category_list' %}">Categories</a></li>
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'foods:menu' %}">Menu</a></li>
+                {% if perms.analytics %}
                 <li class="list-group-item px-1 text-center"><a class="nav-link" href="{% url 'panel:analytics' %}">Analytics</a></li>
+                {%endif%}
                 <li class="list-group-item px-3">
                     <form action="{% url 'foods:search' %}" method="get">
                         <input type="search" name="searched" placeholder="search in foods..." class="form-control me-2">
@@ -111,25 +122,26 @@
 
 {% block footer %}
 {% endblock footer %}
-<div class="py-0 border border-lighter border-bottom-0 border-left-0 border-right-0 bg-dark col-lg-9">
+<div class="py-3 bg-light col-md-9 border-top">
     <div class="container">
         <div class="row justify-content-between align-items-center text-center">
             <div class="col-md-3 text-md-left mb-3 mb-md-0">
                 <img src="{{ maininfo.icon.url }}" width="100" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Pigga Landing page" class="mb-0">
             </div>
             <div class="col-md-9 text-md-right">
-                <a href="{% url 'panel:analytics' %}" class="pr-5"><small class="font-weight-bold">Analytics</small></a>
-                <a href="{% url 'orders:cart' %}" class="pr-5"><small class="font-weight-bold">Cart</small></a>
-                <a href="{% url 'orders:index' %}" class="pr-4"><small class="font-weight-bold">Orders</small></a>
-                <a href="{% url 'foods:menu' %}" class="px-3"><small class="font-weight-bold">Menu</small></a>
-                <a href="{% url 'foods:category_list' %}" class="px-3"><small class="font-weight-bold">Categories</small></a>
-                <a href="{% url 'about_us' %}" class="px-3"><small class="font-weight-bold">About Us</small></a>
+                {% if perms.analytics %}
+                <a href="{% url 'panel:analytics' %}" class="link text-primary pr-5"><small class="font-weight-bold">Analytics</small></a>
+                {%endif%}
+                <a href="{% url 'orders:cart' %}" class="link text-primary pr-5"><small class="font-weight-bold">Cart</small></a>
+                <a href="{% url 'orders:index' %}" class="link text-primary pr-4"><small class="font-weight-bold">Orders</small></a>
+                <a href="{% url 'foods:menu' %}" class="link text-primary px-3"><small class="font-weight-bold">Menu</small></a>
+                <a href="{% url 'foods:category_list' %}" class="link text-primary px-3"><small class="font-weight-bold">Categories</small></a>
             </div>
         </div>
     </div>
 </div>
 
-<footer class="border border-dark border-left-0 border-right-0 border-bottom-0 p-4 bg-dark col-lg-9">
+<footer class="border border-dark border-left-0 border-right-0 border-bottom-0 py-2 bg-dark col-md-9">
     <div class="container">
         <div class="row align-items-center text-center text-md-left">
             <div class="col">

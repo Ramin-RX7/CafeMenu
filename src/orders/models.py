@@ -68,7 +68,7 @@ class Order(BaseModel):
 
 class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.PROTECT)
     quantity = models.IntegerField()
     unit_price = models.DecimalField(decimal_places=2, max_digits=5)
     discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
