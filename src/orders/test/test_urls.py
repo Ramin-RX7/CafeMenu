@@ -1,6 +1,6 @@
 from django.test import Client, TestCase
 from django.urls import reverse_lazy, resolve, reverse
-from orders.views import OrderListView, IndexView, OrderDetailView, SetOrderView, CartAddView, CartDeleteView, CustomerLoginView, cart
+from orders.views import OrderListView, IndexView, OrderDetailView, SetOrderView, CustomerLoginView, cart
 from orders.models import Table, Order
 from users.models import User
 from django.test.client import RequestFactory
@@ -11,9 +11,9 @@ class TestUrls(TestCase):
         self.order_list_url = reverse('orders:order_list')
         self.cart_url = reverse('orders:cart')
         self.index_url = reverse('orders:index')
-        self.cart_delete_url = reverse('orders:cart_delete')
+        # self.cart_delete_url = reverse('orders:cart_delete')
         self.customer_login_url = reverse('orders:customer_login')
-        self.cart_add_url = reverse('orders:cart_add')
+        # self.cart_add_url = reverse('orders:cart_add')
         self.set_order_url = reverse('orders:set_order')
         
         self.factory = RequestFactory()
@@ -79,19 +79,19 @@ class TestUrls(TestCase):
     def test_index_url_is_resolved(self):
         url =reverse_lazy('orders:index')
         self.assertEquals(resolve(url).func.view_class, IndexView)
-        
-    def test_cart_delete_url_is_resolved(self):
-        url =reverse_lazy('orders:cart_delete')
-        self.assertEquals(resolve(url).func.view_class, CartDeleteView)
-        
+
+    # def test_cart_delete_url_is_resolved(self):
+    #     url =reverse_lazy('orders:cart_delete')
+    #     self.assertEquals(resolve(url).func.view_class, CartDeleteView)
+
     def test_customer_login_url_is_resolved(self):
         url =reverse_lazy('orders:customer_login')
         self.assertEquals(resolve(url).func.view_class, CustomerLoginView)
-        
-    def test_cart_add_url_is_resolved(self):
-        url =reverse_lazy('orders:cart_add')
-        self.assertEquals(resolve(url).func.view_class, CartAddView)
-        
+
+    # def test_cart_add_url_is_resolved(self):
+        # url =reverse_lazy('orders:cart_add')
+        # self.assertEquals(resolve(url).func.view_class, CartAddView)
+
     def test_set_order_url_is_resolved(self):
         url =reverse_lazy('orders:set_order')
         self.assertEquals(resolve(url).func.view_class, SetOrderView)

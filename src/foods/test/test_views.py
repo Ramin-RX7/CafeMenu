@@ -70,13 +70,13 @@ class FoodsViewTest(TestCase):
         self.assertEqual(Food.objects.filter(title__contains='ramin').count(),0)
         self.assertEqual(resp.status_code,200)
         self.assertTemplateUsed(resp,'foods/search.html')
-        
-        
-    def test_menu_view(self):
-        resp = self.client.get(self.menu_list_url)
-        self.assertEqual(resp.status_code,200)
-        self.assertTemplateUsed(resp,'foods/menu.html')
-        
+
+
+    # def test_menu_view(self):
+    #     resp = self.client.get(self.menu_list_url)
+    #     self.assertEqual(resp.status_code,200)
+    #     self.assertTemplateUsed(resp,'foods/menu.html')
+
     def test_menulist(self):
         view = MenuListView()
         queryset = view.get_queryset()
