@@ -110,6 +110,14 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 302)
     
+    def test_set_order_view_no_data(self):
+        url = reverse("orders:set_order")  
+        request = self.factory.post(url)
+        response = SetOrderView.as_view()(request)
+        self.assertEqual(response.status_code, 302) 
+        self.assertEqual(response.url, reverse("orders:cart"))
+        # self.assertRedirects(response.url, reverse("orders:cart"))
+    
     def test_cart_item_add_to_cart_view(self):
         initial_cart_data = {'food_1': 'quantity_1', 'food_2': 'quantity_2'}
         request = HttpRequest()
