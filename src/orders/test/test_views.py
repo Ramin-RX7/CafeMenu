@@ -118,6 +118,11 @@ class TestViews(TestCase):
         self.assertEqual(response.url, reverse("orders:cart"))
         # self.assertRedirects(response.url, reverse("orders:cart"))
     
+    def test_customer_not_logged_in(self):
+        url = reverse('orders:cart')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+    
     def test_post_set_order_view_no_customer_data(self):
         url = reverse("orders:set_order")  
         request = self.factory.post(url, data={"phone": "9176877108"}, COOKIES={"cart": "cart_data"})
