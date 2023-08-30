@@ -88,29 +88,30 @@
     </div>
 
 
-{% if cart %}
-<div class="container text-center head clearfix py-5" >
+    {% if cart %}
+    <div class="container text-center head clearfix py-5" >
         <div class="col">
             <h4 class="py-2">Total orders price : <span class="text-primary" id="total-price"></span> </h4>
+        </div>
+        <div class="col py-2">
+            {% if cart %}
+                {% if logged_in %}
+                <button id="sendDataButton" class="btn btn-success"  style="width: 50%;"><h4 style="padding-top:3%;">Set Order</h4></button>
+                <form id="orderForm" action="{% url 'orders:set_order' %}" method="post">
+                    {% csrf_token %}
+                </form>
+                {% endif %}
             {% endif %}
         </div>
-            <div class="col py-2">
-                {% if cart %}
-                    {% if logged_in %}
-                    <button id="sendDataButton" class="btn btn-success"  style="width: 50%;"><h4 style="padding-top:3%;">Set Order</h4></button>
-                    <form id="orderForm" action="{% url 'orders:set_order' %}" method="post">
-                        {% csrf_token %}
-                    </form>
-                    {% endif %}
-                {% endif %}
-            </div>
-</div>
-<div id="popup" class="popup">
-    <div class="popup-content">
-        Item added to cart!
     </div>
-</div>
+    {% endif %}
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            Item added to cart!
+        </div>
+    </div>
 </section>
+
 
 <script src="{% static 'js/cart.js' %}"></script>
 
