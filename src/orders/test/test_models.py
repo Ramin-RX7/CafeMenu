@@ -3,6 +3,7 @@ from orders.models import Order, Table, OrderItem
 from foods.models import Food, Category
 from users.models import User
 from unittest.mock import Mock
+import unittest
 
 class TestModels(TestCase):
     def setUp(self): 
@@ -22,7 +23,7 @@ class TestModels(TestCase):
         
         self.food1 = Food.objects.create(
             title='Kabab',
-            price=22,
+            price=10,
             category=self.category1
         )
         
@@ -78,6 +79,60 @@ class TestModels(TestCase):
         expected_price = self.order_item1.unit_price*self.order_item1.quantity + self.order_item2.unit_price*self.order_item2.quantity
         
         self.assertEqual(calculated_price, expected_price)
+    
+    # def test_save_order(self):
+    #     order_item = OrderItem.objects.create(order=self.order1,
+    #                                             food=self.food1,
+    #                                             unit_price=self.food1.price,
+    #                                             quantity=0,
+    #                                             discount=0.0,
+    #                                             )
+    #     order_item.save()
+    #     self.assertEqual(self.order1.price, 0)
+    
+    # def test_save_with_price(self):
+    #     self.food = Food.objects.create(
+    #         title='Koofteh',
+    #         price=0,
+    #         category=self.category1
+    #     )
+        
+    #     self.food3 = Food.objects.create(
+    #         title='omlet',
+    #         price=0,
+    #         category=self.category1
+    #     )
+        
+    #     order = Order(
+    #         customer='9176877108',
+    #         table=self.table1,
+    #         discount=2,
+    #         responsible_staff=self.user1,
+    #     )
+    #     order.save(check_items=True)
+        
+    #     order_item = OrderItem.objects.create(order=self.order,
+    #                                             food=self.food,
+    #                                             unit_price=self.food.price,
+    #                                             quantity=0,
+    #                                             discount=0.0,
+    #                                             )
+        
+    #     order_item.save()
+        
+    #     self.assertTrue(order_item.save(), "Order should be marked as saved")
+    
+    
+    # def test_save_without_price(self):
+    #     order_item = OrderItem.objects.create(order=self.order1,
+    #                                             food=self.food1,
+    #                                             unit_price=self.food1.price,
+    #                                             quantity=3,
+    #                                             discount=0.0,
+    #                                             )
+    #     with self.assertRaises(SystemError):
+    #         order_item.save()
+
         
     def test_final_price_order(self):
         expected_price = self.order1.price / 100 * (self.order1.discount or 100)
@@ -128,11 +183,14 @@ class TestModels(TestCase):
             customer='9173523613',
             table=self.table2,
             discount=2,
-            responsible_staff=self.user1,
+            responsible_staff=self.user1, 
         )
-        order2.save(check_items=False)
+        order2.save(check_items=False) 
         
         related_order_item_1 = OrderItem.objects.create(order=order2, unit_price=self.food1.price, food=self.food1, quantity=2, discount=0.0)
         related_order_item_2 = OrderItem.objects.create(order=order2, food=self.food1, unit_price=self.food1.price, quantity=3, discount=0.0)
         
         self.assertEquals(related_order_item_2.quantity, 5) 
+        
+        
+    
