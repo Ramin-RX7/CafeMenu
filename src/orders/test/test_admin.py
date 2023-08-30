@@ -135,3 +135,50 @@ class TestAdmin(TestCase):
         for order in orders:
             if order.created_at.date() != today.date():
                 self.assertNotIn(order, filtered_queryset)
+                
+    def test_queryset_order_status_filter(self):
+        mock_request = Mock()
+        mock_model_admin = Mock()
+        
+        orders = [
+            Order(
+            customer='9176877108',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+            status='Not Paid',
+                ),
+            Order(
+            customer='9176877107',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+            status='Pending',
+                ),
+            Order(
+            customer='9176877109',
+            table=self.table1,
+            discount=2,
+            responsible_staff=self.user1,
+            status='Paid',
+                ),
+        ]
+        
+        queryset = QuerySet(model=Order, query=None, using='default')
+        queryset._result_cache = orders  
+
+        filter_instance = OrderStatusFilter(
+            request=mock_request,
+            params={'not paid': 'not_paid'},
+            model=Order,
+            model_admin=mock_model_admin
+        )
+        
+        filtered_queryset = filter_instance.queryset(mock_request, queryset)
+        print(queryset)
+        print(orders)
+        # for order in orders:
+        #     if order.status == 'Not Paid':
+        #         self.assertIn(order, filtered_queryset)
+            # else:
+            #     self.assertNotIn(order, filtered_queryset)
