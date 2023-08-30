@@ -18,7 +18,7 @@
             <div class="card mb-3" style="max-width:90%;" id="food-{{food.id}}">
                 <div class="row g-0">
                     <div class="col-md-6">
-                        <img src="{{ food.image.url }}" class="img-fluid img-thumbnail" alt="{{ food.title }}" style="height: 100%; width: 100%;">
+                        <img src="{{ food.image.url }}" class="img-fluid img-thumbnail p-3" alt="{{ food.title }}" style="height: 100%; width: 100%;">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body" style="padding-right:2% ;padding-right:3%;">
@@ -32,11 +32,17 @@
                                     <div class="head clearfix">
                                         <div class="title float-left" style="font-size: 16px;">Quantity</div>
                                         <div id="item-quantity-{{food.id}}" class="float-right" style="font-size: 16px;">{{ quantity }}</div>
-                                </div>
-                                <div class="head clearfix">
-                                    <div class="title float-left " style="font-size: 16px;">Total</div>
-                                    <div class="float-right" style="font-size: 16px;"><span class="item-total-price" id="total-price-{{food.id}}">{{ food.price|mul:quantity }}</span>$</div>
-                                </div>
+                                    </div>
+                                    {% if food.discount %}
+                                    <div class="head clearfix">
+                                        <div class="title float-left " style="font-size: 16px;">Discount</div>
+                                        <div class="float-right" style="font-size: 16px;"><span class="item-discount" id="discount-{{food.id}}">{{ food.discount }}</span>%</div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="head clearfix">
+                                        <div class="title float-left " style="font-size: 16px;">Total</div>
+                                        <div class="float-right" style="font-size: 16px;"><span class="item-total-price" id="total-price-{{food.id}}">{{ food.final_price|mul:quantity }}</span> $</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
