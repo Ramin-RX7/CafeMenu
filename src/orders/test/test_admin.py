@@ -1,4 +1,5 @@
-from django.test import TestCase, RequestFactory
+from django.contrib import admin
+from django.test import TestCase, RequestFactory, Client
 from orders.admin import OrderToDayFilter, OrderStatusFilter, OrderAdmin, TableAdmin
 from orders.models import Order
 from unittest.mock import Mock
@@ -8,7 +9,8 @@ from django.contrib.admin.sites import AdminSite
 from django.contrib.admin import ModelAdmin
 from orders.models import Table, Order, OrderItem
 from users.models import User 
-
+from django.urls import reverse
+from django.db.models.query import QuerySet
 
 class TestAdmin(TestCase):
     def setUp(self):
@@ -18,13 +20,28 @@ class TestAdmin(TestCase):
         self.table_admin = TableAdmin(Table, self.site)
         self.filter = OrderToDayFilter(None, {'Date': 'todaye'}, self.model_admin, self.site)
         self.factory = RequestFactory()
+        self.client = Client()
+        
+        self.table1 = Table.objects.create(
+            name='table 1',
+            is_reserved=False,
+        )
+        
+        self.user1 = User.objects.create(
+            phone="9176877108",
+            first_name = 'Ali',
+            last_name= 'Afzal',
+            is_active=True,
+            is_staff=False,
+        )
+        
         
     def test_lookups_order_detail_filter(self):
             filter_instance = OrderToDayFilter(
                 request=None,
                 params={},
                 model=Order,
-                model_admin=None
+                model_admin=None 
             )
             
             expected_lookups = [('today', 'today')]
@@ -68,46 +85,3 @@ class TestAdmin(TestCase):
             self.table_admin.list_display,
             ['name', 'is_reserved']
         )
-
-    # def test_queryset(self):
-    #     qs = self.filter.queryset(None, Order.objects.all())
-    #     self.assertQuerysetEqual(qs, [repr(self.order1)], transform=repr)
-    
-    # def test_queryset_not_paid_order_staus_filter(self):
-    #     mock_model_admin = Mock()
-    #     filter_instance = OrderStatusFilter(
-    #         request=None,
-    #         params={'not_paid': 'not_paid'},
-    #         model=Order,
-    #         model_admin=mock_model_admin
-    #     )
-
-        # paid_order =  Order(
-        #     customer='9176877108',
-        #     table=self.table1,
-        #     discount=2,
-        #     status='Paid',
-        #     responsible_staff=self.user1,
-        # )
-        # paid_order.save(check_items=False)
-
-        # other_status_order = Order(
-        #     customer='9176877108',
-        #     table=self.table1,
-        #     discount=2,
-        #     status='Pending',
-        #     responsible_staff=self.user1,
-        # )
-        # paid_order.save(check_items=False)
-        
-    #     qs = self.filter.queryset(None, Order.objects.all())
-    #     self.assertQuerysetEqual(qs, [repr(other_status_order)], transform=repr)
-    
-    
-    # def test_has_add_permission(self):
-    #     request = self.factory.get('/')
-    #     self.assertFalse(self.order_admin.has_add_permission(request))
-
-    # def test_has_change_permission(self):
-        # request = self.factory.get('/')
-        # self.assertTrue(self.order_admin.has_change_permission(request))
