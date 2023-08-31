@@ -74,9 +74,11 @@ class SetOrderView(View):
             session_orders = request.session.get("orders", [])
             session_orders.append(order.id)
             request.session["orders"] = session_orders
-
-        response = redirect("orders:index")
-        response.delete_cookie("cart")
+        if len(request.session.get("orders", [])):
+            response = redirect("orders:order_details", len(request.session.get("orders", [])))
+            response.delete_cookie("cart")
+        else:
+            response = redirect("order:cart")
         return response
 
 
