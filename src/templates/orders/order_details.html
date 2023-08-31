@@ -55,10 +55,36 @@
                         <div class="title text-center" style="font-size: 25px;">Total Price : <h class="text-primary" style="font-size: 25px;"> {{order.price}}$</h></div>
                     </div>
                     <div class="body">
-                        <div class="title text-center" style="font-size: 20px; color: #000;"> Order submitted at : {{order.date_submit}}</div>
+                        <div class="title text-center" style="font-size: 20px; color: #000;"> Order submitted at : {{order.created_at}}</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    {% endblock %}
+
+<script>
+    function checkForUpdate() {
+        var currentUrl = window.location.href;
+        $.ajax({
+            url: currentUrl,
+            method: 'GET',
+            success: function(response) {
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = response;
+                var elementToCheck = tempDiv.querySelector('#status');
+                console.log(elementToCheck)
+                if (elementToCheck.textContent != document.getElementById("status").textContent) {
+                    // location.reload();
+                    document.getElementById("status").textContent = elementToCheck.textContent
+                }
+            },
+            error: function(error) {
+                console.error('Error checking for update:', error);
+            }
+        });
+    }
+    setInterval(checkForUpdate, 15000);
+</script>
+
+
+{% endblock %}
