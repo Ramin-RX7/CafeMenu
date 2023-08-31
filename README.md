@@ -31,12 +31,40 @@ Navigate to the project directory
     $ cd ./src/
 
 
-Make/Apply migrations
+Apply migrations
 
-    $ python manage.py makemigrations
     $ python manage.py migrate
+
+
+Setup Configs (Before First Run)
+
+    $ python manage.py setupconf
 
 
 Run the server
 
     $ python manage.py runserver
+
+
+
+## Tests
+
+Project tests cover about 90% of the code
+
+Run tests:
+
+    $ python manage.py test
+
+
+
+## Licence
+
+This project uses MIT License. Read the full licence in [MIT Licence](/LICENSE)
+
+
+
+## Docs
+
+The ERD files are located in [docs/erd](/docs/)
+
+You can read more about the project in docs in the same directory using `sphinx`
