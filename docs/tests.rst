@@ -1,7 +1,7 @@
 Tests
 =====
 
-We have many test for our project and you can see all of them in test folders in every apps.
+We have many tests for our project and you can see all of them in test folders in every apps.
 
 For example this test about url test:
 
