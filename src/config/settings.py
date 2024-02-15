@@ -145,3 +145,5 @@ AUTHENTICATION_BACKENDS = [
     'users.auth.UserAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+DEFAULT_FROM_EMAIL = env("EMAIL")
