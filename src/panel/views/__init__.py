@@ -1,6 +1,6 @@
 from .analytics import JsonAPI,download_dataset,analytics
 
-from .authentication import LoginView,logout,UserVerifyView
+from .authentication import LoginView,logout,SendOTPView
 
 from .dashboard import (
     dashboard,
