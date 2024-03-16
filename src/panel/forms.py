@@ -10,21 +10,8 @@ last_30days_past = (datetime.datetime.now()-datetime.timedelta(30)).date()
 
 
 class UserLogInForm(forms.Form):
-    phone=forms.CharField(
-        validators = [phone_validator],
-        widget = forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': "Phone"
-        }))
-
-
-class UserVerifyForm(forms.Form):
-    otp=forms.CharField(
-        min_length=4, max_length=4,
-        widget = forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': "Code"
-        }))
+    phone = forms.CharField()
+    otp_code = forms.IntegerField()
 
 
 

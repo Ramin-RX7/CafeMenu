@@ -2,14 +2,17 @@ import json
 
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import transaction
-from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView,DetailView,RedirectView
+from django.core.cache import caches
 
 from foods.models import Food
 from users.models import User
 from .models import Order,Table,OrderItem
-from .forms import CustomerLoginForm
+
+
+
+AUTH_CACHE = caches["default"]
 
 
 class IndexView(ListView):
@@ -99,15 +102,3 @@ def cart(request):
     response = render(request, 'orders/cart.html', context)
     response.delete_cookie('cart')
     return response
-
-
-class CustomerLoginView(View):
-    def post(self,request):
-        form = CustomerLoginForm(request.POST)
-        if form.is_valid():
-            phone = form.cleaned_data['phone']
-            request.session['phone'] = phone
-        else:
-            import core.utils
-            core.utils.EditableContexts.form_login_error = "Invalid phone number"
-        return redirect(request.META.get('HTTP_REFERER', reverse('index')))

@@ -10,6 +10,5 @@ urlpatterns = [
     path("<int:id>/", OrderDetailView.as_view(), name="order_details"),
     path("cart/", cart, name="cart"),
     path("", IndexView.as_view(), name="index"),
-    path("customer_login/", CustomerLoginView.as_view(),name="customer_login"),
     path("set/", SetOrderView.as_view(), name="set_order"),
 ]
