@@ -23,12 +23,12 @@ class Table(BaseModel):
 
 
 class Order(BaseModel):
-    customer = models.CharField(max_length=15, validators=[phone_validator])
+    customer = models.ForeignKey(User, models.PROTECT)
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
     discount = models.DecimalField(decimal_places=1, max_digits=3, default=0.0)
     status_field = models.TextChoices("Status","Pending Rejected Approved Delivered Paid")
     status = models.CharField(choices=status_field.choices, max_length=10,default="Pending")
-    responsible_staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    responsible_staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="assigned_orders")
 
     @property
     def price(self):
