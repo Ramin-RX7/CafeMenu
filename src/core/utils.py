@@ -1,4 +1,4 @@
-from orders.forms import CustomerLoginForm
+from panel.forms import UserLogInForm
 from users.models import User
 
 class EditableContexts:
@@ -33,7 +33,7 @@ def context_handler(request):
 
     context["logged_in"] = request.session.get("phone") or isinstance(request.user, User)
 
-    context["login_form"] = CustomerLoginForm()
+    context["login_form"] = UserLogInForm()
 
 
     attribute_names = [attr for attr in vars(EditableContexts).keys() if not attr.startswith('__')]
