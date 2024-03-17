@@ -1,7 +1,6 @@
 from django.db import models
 
 from core.models import BaseModel
-from core.validators import phone_validator
 from foods.models import Food
 from users.models import User
 
@@ -17,7 +16,7 @@ class Table(BaseModel):
     def get_available_table(cls):
         tables = cls.objects.all()
         for table in tables:
-            if table.is_reserved == False:
+            if table.is_reserved is False:
                 return table
 
 
@@ -40,6 +39,10 @@ class Order(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.customer}"
+
+    @property
+    def get_url_id(self):
+        return self.created_at.strftime("%Y%m%d%H%M%S")
 
 
     def approve(self):
@@ -75,7 +78,7 @@ class OrderItem(BaseModel):
 
     @property
     def final_price(self):
-        return round((self.quantity*self.unit_price) / 100 * (self.discount or 100), 2)
+        return round(((100-self.discount)/100*self.unit_price)*self.quantity, 2)
 
     def __str__(self) -> str:
         return f"{self.quantity}"
