@@ -23,7 +23,7 @@ class Food(BaseModel):
 
     @property
     def final_price(self):
-        return round(self.price / 100 * (self.discount or 100), 2)
+        return round(self.price * (100-self.discount) / 100 , 2)
 
     def __str__(self) -> str:
         return self.title

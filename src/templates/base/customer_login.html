@@ -4,16 +4,20 @@
     <div class="container">
         <h3 class="section-title mb-4 text-center">Want to Order? Enter your phone number</h3>
         <div class="row justify-content-center align-items-center">
-            <form class="col-12 col-md-6 mb-4" action="{% url 'orders:customer_login' %}" method="POST">
+            <form id="loginForm" method="post" action="{% url 'panel:login' %}" class="col-12 col-md-6 mb-4">
+                {{form.errors}}
                 {% csrf_token %}
-                <div class="form-group">
-                    {% if form_login_error %}
-                        <h4 class="text-danger">Invalid phone number</h4>
-                    {% endif %}
-                    {{ login_form.phone.errors }}
-                    {{ login_form.phone }}
-                </div>
-                <button type="submit" class="btn btn-primary btn-block btn-lg">Create user</button>
+                <label for="phone">Phone Number:</label>
+                <input class="form-control" type="text" id="phone" name="phone" placeholder="09***" required>
+                <button id="sendCodeBtn" type="button" class="btn btn-primary btn-block my-4 pt-2 pb-1 btn-lg">
+                    <div class="h4" id="sendCodeBtn-text">Send OTP</div>
+                </button>
+
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="OTP-INPUT-BOX" name="otp_code" class="form-control" placeholder="" required disabled>
+                <button type="submit" id="OTP-ENTER-BUTTON" class="btn btn-primary btn-block my-4 pt-2 pb-1 btn-lg" disabled>
+                    <div class="h4">Login</div>
+                </button>
             </form>
             <div class="col-12 col-md-6">
                 <img src="{% static 'images/phone2.jpeg' %}" alt=" " class="w-100 rounded shadow">
@@ -22,3 +26,34 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.getElementById('sendCodeBtn').addEventListener('click', function() {
+        var phoneNumber = document.getElementById('phone').value;
+        var phoneRegex = /^0?9\d{9}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+        var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'panel:send-otp' %}",
+            contentType: 'application/json',
+            headers: { "X-CSRFToken": csrftoken },
+            data: JSON.stringify({ phone: phoneNumber }),
+            success: function() {
+                document.getElementById('OTP-INPUT-BOX').removeAttribute('disabled');
+                document.getElementById('OTP-ENTER-BUTTON').removeAttribute('disabled');
+                document.getElementById('sendCodeBtn-text').textContent = "Resend code";
+             },
+            error: function() {
+                alert('Failed to send OTP. Please try again.');
+            }
+        });
+    });
+
+    document.getElementById('OTP-INPUT-BOX').setAttribute('disabled', 'disabled');
+    document.getElementById('OTP-ENTER-BUTTON').setAttribute('disabled', 'disabled');
+</script>
+

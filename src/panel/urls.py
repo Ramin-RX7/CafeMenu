@@ -10,7 +10,7 @@ app_name = "panel"
 
 authentication_urls = [
     path('login/', LoginView.as_view(), name='login'),
-    path('verify/', UserVerifyView.as_view(), name='user_verify'),
+    path('send-otp/', SendOTPView.as_view(), name="send-otp"),
     path('logout/', logout, name="logout"),
 ]
 
