@@ -1,6 +1,8 @@
 import json
+from datetime import datetime, timedelta
+from django.http import JsonResponse
 
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect
 from django.db import transaction
 from django.views import View
 from django.views.generic import ListView,DetailView,RedirectView
@@ -21,8 +23,7 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
-        current_session_orders_ids=self.request.session.get('orders',[])
-        context['orders'] = Order.objects.filter(id__in=current_session_orders_ids)
+        context['orders'] = Order.objects.filter(customer=self.request.user).order_by("-created_at")
         return context
 
 
@@ -36,25 +37,29 @@ class OrderDetailView(DetailView):
     context_object_name = 'order'
 
     def get_object(self, queryset=None):
-        session_id = self.request.session.get('orders')
-        order_id = int(self.kwargs.get('id')) - 1
-        order = get_object_or_404(Order, id=session_id[order_id])
-        return order
+        user = self.request.user
+        if not user.is_authenticated:
+            return redirect("orders:index")
+        t = self.kwargs.get("datetime")
+        interval = timedelta(seconds=1)
+        orders = Order.objects.filter(
+            customer = user,
+            created_at__lte = datetime.strptime(t, "%Y%m%d%H%M%S") + interval,
+            created_at__gte = datetime.strptime(t, "%Y%m%d%H%M%S") - interval,
+        )
+        if orders.exists():
+            return orders.get()
+
 
 
 class SetOrderView(View):
     def post(self, request):
-        data = request.COOKIES.get("cart")
-        table_id = request.COOKIES.get("table")
-        if not all([data,table_id]):
+        body = json.loads(request.body)
+        data = body.get("cart")
+        table_id = body.get("table")
+        customer:User = request.user
+        if not all([customer.is_authenticated,data,table_id]):
             return redirect("orders:cart")
-
-        customer = request.session.get("phone")
-        if not customer:
-            if isinstance(request.user, User):
-                customer = request.user.phone
-            else:
-                redirect("orders:cart")
 
         data = json.loads(data)
         discount = 0.0
@@ -77,14 +82,7 @@ class SetOrderView(View):
             session_orders = request.session.get("orders", [])
             session_orders.append(order.id)
             request.session["orders"] = session_orders
-        if len(request.session.get("orders", [])):
-            response = redirect("orders:order_details", len(request.session.get("orders", [])))
-            response.delete_cookie("cart")
-        else:
-            response = redirect("order:cart")
-        return response
-
-
+        return JsonResponse({}, status=200)
 
 
 def cart(request):
