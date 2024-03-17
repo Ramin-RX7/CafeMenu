@@ -17,8 +17,13 @@ document.querySelectorAll('.add-button').forEach(function(button) {
         quantityElement.textContent = quantity;
 
         let unit_price = document.getElementById(`unit-price-${itemId}`).textContent;
-        let discount = document.getElementById(`discount-${itemId}`).textContent;
-        document.getElementById(`total-price-${itemId}`).textContent = (quantity*unit_price) * (discount/100);
+
+        let discount_element = document.getElementById(`discount-${itemId}`)
+        let discount = 0
+        if (discount_element){
+            discount = discount_element.textContent;
+        }
+        document.getElementById(`total-price-${itemId}`).textContent = (quantity*unit_price) * ((100-discount)/100);
         calculateCart();
         showPopup("Item quantity changed")
     });
@@ -79,12 +84,34 @@ document.getElementById('sendDataButton').addEventListener('click', function() {
     let cartDataString = JSON.stringify(cart);
 
     let selected_table = document.getElementById("selected-table")
-    console.log(selected_table.value);
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
     if (selected_table.value){
-        setCookie('table', selected_table.value);
-        setCookie('cart', cartDataString, 0.01);
-        localStorage.removeItem('cart');
-        orderForm.submit();
+        fetch('/orders/set/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+                table: selected_table.value,
+                cart: cartDataString
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to send data.');
+            }
+            return response;
+        })
+        .then(data => {
+            localStorage.removeItem('cart');
+            window.location.href = '/orders/';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showPopup('Failed to send data. Please try again.');
+        });
     } else {
         showPopup("Please select your table")
     }
