@@ -11,10 +11,11 @@ class EmailNotification(BaseNotification):
     Email Notfication (Base) class.
     """
 
-    def send(self, user, **kwargs) -> dict:
+    def send(self, user, body=None) -> dict:
         data = self.get_notification_data()
+        body = body or self.get_message(user)
         email = EmailMessage(
-            subject=data["subject"], body=self.get_message(user), to=[user]
+            subject=data["subject"], body=body, to=[user]
         )
         email.send()
 
@@ -24,15 +25,16 @@ class EmailNotification(BaseNotification):
             {self.get_notification_data()}
         """
 
-    def send_bulk(self, users: list[User] = None):
+    def send_bulk(self, users: list[User] = None, body=None):
         """This function can be resource heavy specially when message is too long"""
         users = users or self.users
         data = self.get_notification_data()
         emails = []
         for user in users:
+            body = body or self.get_message(user)
             emails.append((
                 data["subject"],
-                self.get_message(user),
+                body,
                 DEFAULT_FROM_EMAIL,
                 [user.email],
             ))
